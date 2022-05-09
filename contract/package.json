@@ -1,0 +1,15 @@
+{
+  "name": "contract",
+  "version": "1.0.0",
+  "description": "",
+  "main": "truffle-config.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "remixd":"remixd -s D:/codestates/section5/project3/beb-03-Kameleon/contract -u https://ide.klaytn.com",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}
