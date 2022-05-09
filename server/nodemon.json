@@ -1,0 +1,7 @@
+{ 
+    "verbose": true,
+    "watch": ["**/*.ts"], 
+    "ext": "ts js json",
+    "ignore": ["**/*.spec.ts"],
+    "exec": "ts-node --files --project tsconfig.json index.ts"
+}
