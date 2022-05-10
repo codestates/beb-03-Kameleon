@@ -1,25 +1,34 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import styled from 'styled-components';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { GlobalStyle } from './GlobalStyle';
+import Header from './components/common/Header';
+import Footer from './components/common/Footer';
+import HomePage from './page/HomePage';
+
+const AppStyle = styled.main`
+  min-height: 100vh;
+  background-color: #41a58d;
+`;
+
+const MainStyle = styled.main`
+  min-height: calc(100vh - 80px);
+`;
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <AppStyle>
+      <GlobalStyle />
+      <BrowserRouter>
+        <Header />
+        <MainStyle className="layout">
+          <Routes>
+            <Route path="/" element={<HomePage />}></Route>
+          </Routes>
+        </MainStyle>
+        <Footer />
+      </BrowserRouter>
+    </AppStyle>
   );
 }
 
