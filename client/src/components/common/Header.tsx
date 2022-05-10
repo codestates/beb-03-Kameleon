@@ -53,7 +53,20 @@ const NavStyle = styled.nav`
 `;
 
 const Header = () => {
-  const [isLogin, setIsLogin] = useState(true);
+  const [isLogin, setIsLogin] = useState(false);
+
+  const onConnectWallet = async () => {
+    if (typeof window.klaytn !== 'undefined') {
+      if (window.klaytn.isKaikas) {
+        const accounts = await window.klaytn.enable();
+        const account = accounts[0];
+
+        setIsLogin(true);
+      }
+    } else {
+      alert('Kaikas 설치하시기 바랍니다.');
+    }
+  };
 
   return (
     <HeaderStyle>
@@ -80,8 +93,10 @@ const Header = () => {
           </ul>
         </NavStyle>
         <span className="utils">
-          {isLogin ? (
-            <button type="button">Connect</button>
+          {!isLogin ? (
+            <button type="button" onClick={onConnectWallet}>
+              Connect
+            </button>
           ) : (
             <button type="button">MyPage</button>
           )}
