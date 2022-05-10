@@ -12,7 +12,6 @@ const Server = async () => {
       console.log(`> Ready on localhost:${port} - env ${process.env.NODE_ENV}`);
     });
   } catch (e) {
-    connection.close();
     console.error(e);
     process.exit(1);
   }
