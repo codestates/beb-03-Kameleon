@@ -12,7 +12,7 @@ const AppStyle = styled.main`
 `;
 
 const MainStyle = styled.main`
-  min-height: calc(100vh - 80px);
+  min-height: calc(100vh - 123px);
 `;
 
 function App() {

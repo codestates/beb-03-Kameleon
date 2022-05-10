@@ -22,9 +22,10 @@ export const GlobalStyle = createGlobalStyle`
   a { cursor: pointer; text-decoration: none; }
   h1, h2, h3, ol, ul { margin: 0; padding: 0; }
   ol, ul { list-style: none; }
-  
+
   .layout {
     max-width: 1440px;
     padding: 0 24px;
+    margin: auto;
   }
 `;
