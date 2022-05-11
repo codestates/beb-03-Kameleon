@@ -54,12 +54,13 @@ const NavStyle = styled.nav`
 
 const Header = () => {
   const [isLogin, setIsLogin] = useState(false);
+  const [account, setAccount] = useState('');
 
   const onConnectWallet = async () => {
     if (typeof window.klaytn !== 'undefined') {
       if (window.klaytn.isKaikas) {
         const accounts = await window.klaytn.enable();
-        const account = accounts[0];
+        setAccount(accounts[0]);
 
         setIsLogin(true);
       }
@@ -90,6 +91,13 @@ const Header = () => {
             <li>
               <Link to="/govern">Govern</Link>
             </li>
+            {isLogin ? (
+              <li>
+                <Link to="/mypage">MyPage</Link>
+              </li>
+            ) : (
+              ''
+            )}
           </ul>
         </NavStyle>
         <span className="utils">
@@ -98,7 +106,7 @@ const Header = () => {
               Connect
             </button>
           ) : (
-            <button type="button">MyPage</button>
+            <button type="button">{account.slice(0, 5)}...</button>
           )}
         </span>
       </div>
