@@ -109,7 +109,7 @@ const sendContract = async ({
 
 const multiMint = () => {
   const CronJob = require("cron").CronJob;
-  const job = new CronJob("10 * * * * *", function () {
+  const job = new CronJob("0 0 */1 * * *", function () {
     sendContract({
       contractName: "MyKIP7",
       contractAddress: "",
