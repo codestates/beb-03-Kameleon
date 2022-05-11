@@ -22,6 +22,11 @@ contract Exchange is KIP7 {
     address public tokenAddress;
     address public factoryAddress;
 
+    // address list에 추가
+    mapping (address => bool) private _isAddrExist;
+    mapping (uint256 => address) private _addrList;
+    uint256 private _addrCount = 0;
+
     constructor(address _token) KIP7() public {
         require(_token != address(0), "invalid token address");
 
@@ -29,7 +34,35 @@ contract Exchange is KIP7 {
         factoryAddress = msg.sender;
     }
 
-    function addLiquidity(uint256 _tokenAmount)
+    // address 탐색을 쉽게 하기 위해 LP에 한번이상 참여한 address를 기록
+    modifier checkAddr {
+        if (_isAddrExist[msg.sender]) {
+            _;
+        } else {
+            _addrList[_addrCount] = msg.sender;
+            _addrCount++;
+            _;
+        }
+    }
+
+    // 전체 등록된 addr 수
+    function getAddrCount() public view returns (uint256) {
+        return _addrCount;
+    }
+
+    // 각 index의 address
+    function getAddr(uint256 index) public view returns (address) {
+        require (index < _addrCount, "Exchange getAddr(index): exceeded index");
+        return _addrList[index];
+    }
+
+    function getAddrAndBalance(uint256 index) public view returns (address, uint256) {
+        require (index < _addrCount, "Exchange getAddrAndBalance(index): exceeded index");
+        return (_addrList[index], balanceOf(_addrList[index]));
+    }
+
+    // checkAddr modifier 추가
+    function addLiquidity(uint256 _tokenAmount) checkAddr
         public
         payable
         returns (uint256)
@@ -180,5 +213,11 @@ contract Exchange is KIP7 {
         uint256 denominator = (inputReserve * 100) + inputAmountWithFee;
 
         return numerator / denominator;
+    }
+
+    // LP당 유동성
+    // 제곱근하면 좋은데 일단 진행
+    function getLiquidityPerToken () public view returns (uint256) {
+        return address(this).balance * KIP7(tokenAddress).balanceOf(address(this)) / totalSupply();
     }
 }
