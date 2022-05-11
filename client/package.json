@@ -41,6 +41,8 @@
     ]
   },
   "devDependencies": {
+    "@fortawesome/free-brands-svg-icons": "^6.1.1",
+    "@fortawesome/react-fontawesome": "^0.1.18",
     "@reduxjs/toolkit": "^1.8.1",
     "@types/prettier": "^2.6.0",
     "@types/styled-components": "^5.1.25",

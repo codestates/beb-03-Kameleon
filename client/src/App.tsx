@@ -1,16 +1,34 @@
 import React from 'react';
-import './App.css';
+import styled from 'styled-components';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { GlobalStyle } from './GlobalStyle';
+import Header from './components/common/Header';
+import Footer from './components/common/Footer';
 import MainPage from './pages/MainPage';
-import MyPage from './pages/MyPage';
-import PoolPage from './pages/PoolPage';
+
+const AppStyle = styled.main`
+  min-height: 100vh;
+  background-color: #41a58d;
+`;
+
+const MainStyle = styled.main`
+  min-height: calc(100vh - 123px);
+`;
 
 function App() {
   return (
-    <div className="App">
-      <MainPage />
-      <PoolPage />
-      <MyPage />
-    </div>
+    <AppStyle>
+      <GlobalStyle />
+      <BrowserRouter>
+        <Header />
+        <MainStyle className="layout">
+          <Routes>
+            <Route path="/" element={<MainPage />}></Route>
+          </Routes>
+        </MainStyle>
+        <Footer />
+      </BrowserRouter>
+    </AppStyle>
   );
 }
 
