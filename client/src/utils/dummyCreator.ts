@@ -38,6 +38,24 @@ export const createPoolList = (len: number) => {
   return poolList;
 };
 
+export const createGovernList = (len: number) => {
+  const poolList = new Array(len);
+
+  for (let i = 0; i < len; i++) {
+    const agree = getRandomInt(0, 30);
+    const pool = {
+      id: i,
+      name: 'Govern ' + getRandomInt(1, 2000),
+      yes: agree,
+      no: getRandomInt(0, 30 - agree),
+    };
+
+    poolList[i] = pool;
+  }
+
+  return poolList;
+};
+
 export const createMyList = (len: number) => {
   const poolList = new Array(len);
 

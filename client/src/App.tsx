@@ -10,6 +10,7 @@ import MainPage from './pages/MainPage';
 import PoolPage from './pages/PoolPage';
 import MintPage from './pages/MintPage';
 import MyPage from './pages/MyPage';
+import GovernPage from './pages/GovernPage';
 
 const AppStyle = styled.main`
   min-height: 100vh;
@@ -34,6 +35,7 @@ function App() {
               <Route path="/pool" element={<PoolPage />} />
               <Route path="/mint" element={<MintPage />} />
               <Route path="/mypage" element={<MyPage />} />
+              <Route path="/govern" element={<GovernPage />} />
             </Routes>
           </MainStyle>
           <Footer />
