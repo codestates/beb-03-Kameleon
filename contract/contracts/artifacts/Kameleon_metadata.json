@@ -25,6 +25,25 @@
 				"type": "function"
 			},
 			{
+				"constant": true,
+				"inputs": [
+					{
+						"name": "_tokenAddress",
+						"type": "address"
+					}
+				],
+				"name": "getExchange",
+				"outputs": [
+					{
+						"name": "",
+						"type": "address"
+					}
+				],
+				"payable": false,
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
 				"constant": false,
 				"inputs": [
 					{
@@ -41,6 +60,25 @@
 					{
 						"name": "",
 						"type": "bool"
+					}
+				],
+				"payable": false,
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"constant": false,
+				"inputs": [
+					{
+						"name": "_tokenAddress",
+						"type": "address"
+					}
+				],
+				"name": "createExchange",
+				"outputs": [
+					{
+						"name": "",
+						"type": "address"
 					}
 				],
 				"payable": false,
@@ -92,24 +130,6 @@
 				"constant": false,
 				"inputs": [
 					{
-						"name": "_minTokens",
-						"type": "uint256"
-					},
-					{
-						"name": "_recipient",
-						"type": "address"
-					}
-				],
-				"name": "ethToTokenTransfer",
-				"outputs": [],
-				"payable": true,
-				"stateMutability": "payable",
-				"type": "function"
-			},
-			{
-				"constant": false,
-				"inputs": [
-					{
 						"name": "recipient",
 						"type": "address"
 					},
@@ -147,28 +167,9 @@
 				"type": "function"
 			},
 			{
-				"constant": false,
-				"inputs": [
-					{
-						"name": "_tokenAmount",
-						"type": "uint256"
-					}
-				],
-				"name": "addLiquidity",
-				"outputs": [
-					{
-						"name": "",
-						"type": "uint256"
-					}
-				],
-				"payable": true,
-				"stateMutability": "payable",
-				"type": "function"
-			},
-			{
 				"constant": true,
 				"inputs": [],
-				"name": "getReserve",
+				"name": "exchangeCount",
 				"outputs": [
 					{
 						"name": "",
@@ -199,28 +200,18 @@
 				"type": "function"
 			},
 			{
-				"constant": true,
-				"inputs": [
-					{
-						"name": "_tokenSold",
-						"type": "uint256"
-					}
-				],
-				"name": "getEthAmount",
-				"outputs": [
-					{
-						"name": "",
-						"type": "uint256"
-					}
-				],
+				"constant": false,
+				"inputs": [],
+				"name": "renounceOwnership",
+				"outputs": [],
 				"payable": false,
-				"stateMutability": "view",
+				"stateMutability": "nonpayable",
 				"type": "function"
 			},
 			{
 				"constant": true,
 				"inputs": [],
-				"name": "factoryAddress",
+				"name": "owner",
 				"outputs": [
 					{
 						"name": "",
@@ -233,39 +224,11 @@
 			},
 			{
 				"constant": false,
-				"inputs": [
-					{
-						"name": "_amount",
-						"type": "uint256"
-					}
-				],
-				"name": "removeLiquidity",
-				"outputs": [
-					{
-						"name": "",
-						"type": "uint256"
-					},
-					{
-						"name": "",
-						"type": "uint256"
-					}
-				],
+				"inputs": [],
+				"name": "testMintToLPs",
+				"outputs": [],
 				"payable": false,
 				"stateMutability": "nonpayable",
-				"type": "function"
-			},
-			{
-				"constant": true,
-				"inputs": [],
-				"name": "tokenAddress",
-				"outputs": [
-					{
-						"name": "",
-						"type": "address"
-					}
-				],
-				"payable": false,
-				"stateMutability": "view",
 				"type": "function"
 			},
 			{
@@ -321,15 +284,15 @@
 				"constant": true,
 				"inputs": [
 					{
-						"name": "_ethSold",
-						"type": "uint256"
+						"name": "",
+						"type": "address"
 					}
 				],
-				"name": "getTokenAmount",
+				"name": "tokenToExchange",
 				"outputs": [
 					{
 						"name": "",
-						"type": "uint256"
+						"type": "address"
 					}
 				],
 				"payable": false,
@@ -363,24 +326,6 @@
 				"constant": false,
 				"inputs": [
 					{
-						"name": "_tokensSold",
-						"type": "uint256"
-					},
-					{
-						"name": "_minEth",
-						"type": "uint256"
-					}
-				],
-				"name": "tokenToEthSwap",
-				"outputs": [],
-				"payable": false,
-				"stateMutability": "nonpayable",
-				"type": "function"
-			},
-			{
-				"constant": false,
-				"inputs": [
-					{
 						"name": "recipient",
 						"type": "address"
 					},
@@ -400,51 +345,54 @@
 				"type": "function"
 			},
 			{
-				"constant": false,
+				"constant": true,
 				"inputs": [
 					{
-						"name": "_tokensSold",
+						"name": "",
 						"type": "uint256"
-					},
+					}
+				],
+				"name": "exchangeList",
+				"outputs": [
 					{
-						"name": "_minTokensBought",
-						"type": "uint256"
-					},
-					{
-						"name": "_tokenAddress",
+						"name": "",
 						"type": "address"
 					}
 				],
-				"name": "tokenToTokenSwap",
-				"outputs": [],
 				"payable": false,
-				"stateMutability": "nonpayable",
+				"stateMutability": "view",
 				"type": "function"
 			},
 			{
 				"constant": false,
 				"inputs": [
 					{
-						"name": "_minTokens",
-						"type": "uint256"
-					}
-				],
-				"name": "ethToTokenSwap",
-				"outputs": [],
-				"payable": true,
-				"stateMutability": "payable",
-				"type": "function"
-			},
-			{
-				"inputs": [
-					{
-						"name": "_token",
+						"name": "newOwner",
 						"type": "address"
 					}
 				],
+				"name": "transferOwnership",
+				"outputs": [],
 				"payable": false,
 				"stateMutability": "nonpayable",
-				"type": "constructor"
+				"type": "function"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"name": "previousOwner",
+						"type": "address"
+					},
+					{
+						"indexed": true,
+						"name": "newOwner",
+						"type": "address"
+					}
+				],
+				"name": "OwnershipTransferred",
+				"type": "event"
 			},
 			{
 				"anonymous": false,
@@ -494,49 +442,62 @@
 		"devdoc": {
 			"methods": {
 				"allowance(address,address)": {
-					"details": "See `IKIP7.allowance`.\r"
+					"details": "See `IKIP7.allowance`."
 				},
 				"approve(address,uint256)": {
-					"details": "See `IKIP7.approve`.\r      * Requirements:\r      * - `spender` cannot be the zero address.\r"
+					"details": "See `IKIP7.approve`.     * Requirements:     * - `spender` cannot be the zero address."
 				},
 				"balanceOf(address)": {
-					"details": "See `IKIP7.balanceOf`.\r"
+					"details": "See `IKIP7.balanceOf`."
+				},
+				"owner()": {
+					"details": "Returns the address of the current owner."
+				},
+				"renounceOwnership()": {
+					"details": "Leaves the contract without owner. It will not be possible to call `onlyOwner` functions anymore. Can only be called by the current owner.     * NOTE: Renouncing ownership will leave the contract without an owner, thereby removing any functionality that is only available to the owner."
 				},
 				"safeTransfer(address,uint256)": {
-					"details": "Moves `amount` tokens from the caller's account to `recipient`.\r"
+					"details": "Moves `amount` tokens from the caller's account to `recipient`."
 				},
 				"safeTransfer(address,uint256,bytes)": {
-					"details": "Moves `amount` tokens from the caller's account to `recipient`.\r"
+					"details": "Moves `amount` tokens from the caller's account to `recipient`."
 				},
 				"safeTransferFrom(address,address,uint256)": {
-					"details": "Moves `amount` tokens from `sender` to `recipient` using the allowance mechanism.\r `amount` is then deducted from the caller's allowance.\r"
+					"details": "Moves `amount` tokens from `sender` to `recipient` using the allowance mechanism. `amount` is then deducted from the caller's allowance."
 				},
 				"safeTransferFrom(address,address,uint256,bytes)": {
-					"details": "Moves `amount` tokens from `sender` to `recipient` using the allowance mechanism.\r `amount` is then deducted from the caller's allowance.\r"
+					"details": "Moves `amount` tokens from `sender` to `recipient` using the allowance mechanism. `amount` is then deducted from the caller's allowance."
 				},
 				"supportsInterface(bytes4)": {
-					"details": "See `IKIP13.supportsInterface`.\r      * Time complexity O(1), guaranteed to always use less than 30 000 gas.\r"
+					"details": "See `IKIP13.supportsInterface`.     * Time complexity O(1), guaranteed to always use less than 30 000 gas."
 				},
 				"totalSupply()": {
-					"details": "See `IKIP7.totalSupply`.\r"
+					"details": "See `IKIP7.totalSupply`."
 				},
 				"transfer(address,uint256)": {
-					"details": "See `IKIP7.transfer`.\r      * Requirements:\r      * - `recipient` cannot be the zero address.\r - the caller must have a balance of at least `amount`.\r"
+					"details": "See `IKIP7.transfer`.     * Requirements:     * - `recipient` cannot be the zero address. - the caller must have a balance of at least `amount`."
 				},
 				"transferFrom(address,address,uint256)": {
-					"details": "See `IKIP7.transferFrom`.\r      * Emits an `Approval` event indicating the updated allowance. This is not\r required by the KIP. See the note at the beginning of `KIP7`;\r      * Requirements:\r - `sender` and `recipient` cannot be the zero address.\r - `sender` must have a balance of at least `value`.\r - the caller must have allowance for `sender`'s tokens of at least\r `amount`.\r"
+					"details": "See `IKIP7.transferFrom`.     * Emits an `Approval` event indicating the updated allowance. This is not required by the KIP. See the note at the beginning of `KIP7`;     * Requirements: - `sender` and `recipient` cannot be the zero address. - `sender` must have a balance of at least `value`. - the caller must have allowance for `sender`'s tokens of at least `amount`."
+				},
+				"transferOwnership(address)": {
+					"details": "Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner."
 				}
 			}
 		},
 		"userdoc": {
-			"methods": {}
+			"methods": {
+				"testMintToLPs()": {
+					"notice": "test: testMintToLPs(): 컨트랙트 내에 등록된 address에 민트"
+				}
+			}
 		}
 	},
 	"settings": {
 		"compilationTarget": {
-			"Exchange.sol": "Exchange"
+			"contracts/Kameleon.sol": "Kameleon"
 		},
-		"evmVersion": "byzantium",
+		"evmVersion": "petersburg",
 		"libraries": {},
 		"optimizer": {
 			"enabled": false,
@@ -545,52 +506,70 @@
 		"remappings": []
 	},
 	"sources": {
-		"Address.sol": {
-			"keccak256": "0x992bce8d5a6b643f20e352e55b07fe3affa771c8e921c4c1e5623c5d4ac3839b",
+		"contracts/Address.sol": {
+			"keccak256": "0xb32556016817a6b821827012e600f469e5ca68b1d6ce0ba1877f1dbe2743db9f",
 			"urls": [
-				"bzzr://de0253e9fe9c33071e5cde96818b6904992585a2f320cb6821069280a7e894d1"
+				"bzzr://9c91e4d8eeee62248b28520f7e2be3ee4d7d8c992d198ba49360f40897430acb"
 			]
 		},
-		"Exchange.sol": {
-			"keccak256": "0x85756d37a0dde47be6d96ecfd3fa6d4415fa00dd1431395c2320db75bb8380d4",
+		"contracts/Exchange.sol": {
+			"keccak256": "0xb81ab165655e86d4fa42b5955f044661d4890996636cbeacbd234ea261639804",
 			"urls": [
-				"bzzr://a03ec10a8486952748d448d47ea85e890b8e6641deb5432736e01b8abbf0e0d9"
+				"bzzr://09a4102c0d6d7f1cf4ca891bace9c6337cf21e3688271d4ae472731769242cf4"
 			]
 		},
-		"IKIP13.sol": {
-			"keccak256": "0x624e9e6220f1fff9952491658bdb41e79a944d8577eb76fcecde2352c6678b51",
+		"contracts/Factory.sol": {
+			"keccak256": "0x93fcb859a111d9c22363835738f74813eff3e6fa198cb624f0b295d3d6214e5a",
 			"urls": [
-				"bzzr://5f13484bb4220af06a02d5e683e0d5fa05804d6192cc8743c6e441728f964c6c"
+				"bzzr://e083b1ff14ec2be600edbf741f422e726ea2f6293de4164e4e6c88e049fc9996"
 			]
 		},
-		"IKIP7.sol": {
-			"keccak256": "0xfb6a22cff7b038ce2ffa091072bdd3af2c323349b866e6e370289b540ef49f90",
+		"contracts/IKIP13.sol": {
+			"keccak256": "0xa684be6ebc9e38a514dca1024c1385d95fd617d92120cbd245a7c1a72fb817d8",
 			"urls": [
-				"bzzr://6d44afffe1dc94f996db674bf9738fff161840a644d7818a0054738fc878a754"
+				"bzzr://71a41409d56a83fb2e4cacceba7733e736c7ad9b6f5668c3e1c53ae61e9d321d"
 			]
 		},
-		"IKIP7Receiver.sol": {
-			"keccak256": "0x39db8ccb5de15df30c59d7fa1691a2fd6b3e9ef27503936034f1ae2d41397d22",
+		"contracts/IKIP7.sol": {
+			"keccak256": "0xdebf16b2cc599a7b4cf01f62bddf3a97e37af6d7c89fbbcb89e77269481b91f8",
 			"urls": [
-				"bzzr://2514ee9bded2a034c07eba52881d1df7a965d673ba8a5bbae5fe847cf1e24a94"
+				"bzzr://e2d2889ebc0a3d8a04537a4cc90d468a5c772d57313ff798ea1aa0f9953eec03"
 			]
 		},
-		"KIP13.sol": {
-			"keccak256": "0xc755a6e2f73cd30628105cd7a93e7ba8ed75441a1d0d8cb790825fb7d3e540fb",
+		"contracts/IKIP7Receiver.sol": {
+			"keccak256": "0x5fd5f860063adec2597ef9d5ec9f6598baecf51967812c3aef508f29d0ced41a",
 			"urls": [
-				"bzzr://0cc34888252ef4267bc9672a1459fd8c3a82f04fd77303ab1c6bf8a61fd7af74"
+				"bzzr://5472c87e0bff18321f0b292e04d9f16cb812a6924d62c699aa14720370eb3d96"
 			]
 		},
-		"KIP7.sol": {
-			"keccak256": "0xd15f19173be7de00ce2257969846564a418e9fd1a9b6daa0df1698476eb96b26",
+		"contracts/KIP13.sol": {
+			"keccak256": "0xa37b50b4380f3bc15da06d64088a957c75e4a383a2fe4644927e3dc84b649bcd",
 			"urls": [
-				"bzzr://57d4da01b22677e6856f8df49885ae7a2b61911659ae0a15830c6211ca921010"
+				"bzzr://3013d5646f7600e25a8518c5676336213417f52203d13eefb73444e77db3cc74"
 			]
 		},
-		"SafeMath.sol": {
-			"keccak256": "0xf18f5f0027ba4abcc41d2b57fe6a2892b6ba44db0f9cc19c25bb483c9b9347b5",
+		"contracts/KIP7.sol": {
+			"keccak256": "0x77fb2391ddce0454186c9ac3d7463540f48c43d1308ffc2e6bcf835ef81403fb",
 			"urls": [
-				"bzzr://b26c54d5c430b0609253e22f4a08806e9e9cab2164ef7ae5c4c832f53504d2ef"
+				"bzzr://037dd155caeb944a2d768d329e95d320bedb4ca16fa864f4ba2dc4d08404c780"
+			]
+		},
+		"contracts/Kameleon.sol": {
+			"keccak256": "0x25fefbfe87b1889688bf4e494ee7a9f79c9f2096a94f242574311221d67975b7",
+			"urls": [
+				"bzzr://d0235ddb48340ce6f3600c183bf7f2e79fd836fc63b1b7c8dd64307b805aafaf"
+			]
+		},
+		"contracts/Ownable.sol": {
+			"keccak256": "0x38db741ff3763cb57d6c429ac3838ab63b7e70b4aabeb414dcb583770bc1d622",
+			"urls": [
+				"bzzr://1ef9f5c1534dbdb1be33549b65c2156c3671d65673eba3de2a470babfdbf81ee"
+			]
+		},
+		"contracts/SafeMath.sol": {
+			"keccak256": "0x440e126d35c767f263ad60029d68b9f1a946caedcc51ae10266f28e305fffe40",
+			"urls": [
+				"bzzr://6e9198cfe866eb522696ca75aede2ac3d1dee1c6c9b8390130a76e8344956c51"
 			]
 		}
 	},
