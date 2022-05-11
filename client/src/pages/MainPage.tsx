@@ -4,10 +4,15 @@ import {
   MainPageWrapper,
   MainPageSearch,
   MainPageList,
+  MainPageItem,
 } from './MainPage.styles';
+
+import { createTokenList } from '../utils/dummyCreator';
 
 const MainPage = () => {
   const [input, setInput] = useState('');
+
+  const tokenList = createTokenList(20);
 
   const changeInput = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
     setInput(e.target.value);
@@ -30,12 +35,19 @@ const MainPage = () => {
           <div className="main__usd">Price(USD)</div>
           <div>Change</div>
         </div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
+        {tokenList.map((el) => (
+          <MainPageItem key={el.id}>
+            <div>{el.name}</div>
+            <div className="main__oracle">
+              {el.oraclePrice.toLocaleString('ko-KR')}
+            </div>
+            <div>{el.usdPrice.toLocaleString('ko-KR')}</div>
+            <div className="main__usd">
+              {el.krwPrice.toLocaleString('ko-KR')}
+            </div>
+            <div>{el.change}%</div>
+          </MainPageItem>
+        ))}
       </MainPageList>
     </MainPageWrapper>
   );

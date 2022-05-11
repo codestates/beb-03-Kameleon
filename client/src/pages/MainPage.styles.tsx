@@ -1,68 +1,12 @@
 import styled from 'styled-components';
 
 export const MainPageWrapper = styled.div`
-  max-width: 1200px;
+  max-width: var(--width);
   margin: 0 auto;
-  color: #ffffff;
+  color: var(--white);
 
   & > h2 {
-    display: flex;
-
-    @media (max-width: 1200px) {
-      padding-left: 1rem;
-    }
-  }
-`;
-
-export const MainPageSearch = styled.div`
-  display: flex;
-  border-radius: 0.5rem;
-  margin-bottom: 1rem;
-  padding: 1rem;
-  background-color: #276955;
-
-  & > input {
-    width: 100%;
-    border: 1px solid #276955;
-    outline: none;
-    background-color: #276955;
-    color: white;
-    font-size: 1rem;
-  }
-
-  & > button {
-    width: 160px;
-    height: 2rem;
-    border: 0;
-    border-radius: 0.5rem;
-    background-color: #ffffff;
-    color: #276955;
-    font-size: 1rem;
-    font-weight: 600;
-
-    :hover {
-      cursor: pointer;
-    }
-  }
-`;
-
-export const MainPageList = styled.div`
-  border-radius: 0.5rem;
-  background-color: #276955;
-
-  & > div {
-    display: flex;
-    justify-content: space-between;
-    min-height: 1.5rem; // temp
-    padding: 1rem 0;
-    margin: 0 2rem;
-    font-size: 1.2rem;
-    font-weight: 600;
-    border-bottom: 1px solid #fff;
-
-    :last-of-type {
-      border: 0;
-    }
+    margin: 1rem;
   }
 
   .main__oracle {
@@ -75,5 +19,84 @@ export const MainPageList = styled.div`
     @media (max-width: 1023px) {
       display: none;
     }
+  }
+`;
+
+export const MainPageSearch = styled.div`
+  display: flex;
+  margin-bottom: 1rem;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  background-color: var(--dark-green);
+
+  & > input {
+    width: 100%;
+    border: 0;
+    font-size: 1rem;
+    color: white;
+    background-color: var(--dark-green);
+    outline: none;
+  }
+
+  & > button {
+    width: 120px;
+    height: 2rem;
+    border: 0;
+    border-radius: 0.5rem;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--dark-green);
+    background-color: var(--white);
+
+    :hover {
+      cursor: pointer;
+    }
+  }
+`;
+
+export const MainPageList = styled.ul`
+  border-radius: 0.5rem;
+  background-color: var(--dark-green);
+
+  & > div {
+    display: flex;
+    margin: 0 2rem;
+    padding: 1rem 0;
+    border-bottom: 1px solid var(--white);
+    font-size: 1.2rem;
+    font-weight: 600;
+  }
+
+  & > div > div {
+    flex: 1;
+    text-align: right;
+
+    :first-of-type {
+      flex: 1.5;
+      text-align: left;
+    }
+  }
+`;
+
+export const MainPageItem = styled.li`
+  display: flex;
+  margin: 0 2rem;
+  padding: 1rem 0;
+  border-bottom: 1px solid var(--white);
+  font-size: 1.2rem;
+  font-weight: 600;
+
+  & > div {
+    flex: 1;
+    text-align: right;
+
+    :first-of-type {
+      flex: 1.5;
+      text-align: left;
+    }
+  }
+
+  :last-of-type {
+    border: 0;
   }
 `;
