@@ -4,7 +4,10 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { GlobalStyle } from './GlobalStyle';
 import Header from './components/common/Header';
 import Footer from './components/common/Footer';
-import HomePage from './page/HomePage';
+
+import MainPage from './pages/MainPage';
+import PoolPage from './pages/PoolPage';
+import MyPage from './pages/MyPage';
 
 const AppStyle = styled.main`
   min-height: 100vh;
@@ -23,7 +26,9 @@ function App() {
         <Header />
         <MainStyle className="layout">
           <Routes>
-            <Route path="/" element={<HomePage />}></Route>
+            <Route path="/" element={<MainPage />} />
+            <Route path="/pool" element={<PoolPage />} />
+            <Route path="/mypage" element={<MyPage />} />
           </Routes>
         </MainStyle>
         <Footer />

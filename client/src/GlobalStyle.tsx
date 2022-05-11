@@ -1,6 +1,17 @@
 import { createGlobalStyle } from 'styled-components';
 
 export const GlobalStyle = createGlobalStyle`
+  :root {
+    --green: #41A58D;
+    --dark-green: #276955;
+    --black: #000000;
+    --white: #ffffff;
+    --blue: #6675FF;
+    --red: #FF6363;
+
+    --width: 1200px;
+  }
+
   html {
     box-sizing: border-box;
   }
