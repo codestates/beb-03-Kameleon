@@ -56,9 +56,10 @@ contract Exchange is KIP7 {
         return _addrList[index];
     }
 
-    function getAddrAndBalance(uint256 index) public view returns (address, uint256) {
+    // index에 있는 주소의 balance
+    function getIndexBalance(uint256 index) public view returns (uint256) {
         require (index < _addrCount, "Exchange getAddrAndBalance(index): exceeded index");
-        return (_addrList[index], balanceOf(_addrList[index]));
+        return balanceOf(_addrList[index]);
     }
 
     // checkAddr modifier 추가
@@ -215,9 +216,14 @@ contract Exchange is KIP7 {
         return numerator / denominator;
     }
 
-    // LP당 유동성
+    // LP당 유동성 공급된 유동성이 없을 경우 0
     // 제곱근하면 좋은데 일단 진행
     function getLiquidityPerToken () public view returns (uint256) {
-        return address(this).balance * KIP7(tokenAddress).balanceOf(address(this)) / totalSupply();
+        uint256 numerator = address(this).balance * KIP7(tokenAddress).balanceOf(address(this));
+        if (numerator != 0) {
+            return numerator / totalSupply();
+        } else {
+            return 0;
+        }
     }
 }
