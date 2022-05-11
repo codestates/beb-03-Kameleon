@@ -44,6 +44,20 @@
 				"type": "function"
 			},
 			{
+				"constant": true,
+				"inputs": [],
+				"name": "name",
+				"outputs": [
+					{
+						"name": "",
+						"type": "string"
+					}
+				],
+				"payable": false,
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
 				"constant": false,
 				"inputs": [
 					{
@@ -124,6 +138,20 @@
 				],
 				"payable": false,
 				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"constant": true,
+				"inputs": [],
+				"name": "decimals",
+				"outputs": [
+					{
+						"name": "",
+						"type": "uint8"
+					}
+				],
+				"payable": false,
+				"stateMutability": "pure",
 				"type": "function"
 			},
 			{
@@ -209,6 +237,20 @@
 				"type": "function"
 			},
 			{
+				"constant": false,
+				"inputs": [
+					{
+						"name": "amount",
+						"type": "uint256"
+					}
+				],
+				"name": "changeTotalMintAmountPerDay",
+				"outputs": [],
+				"payable": false,
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
 				"constant": true,
 				"inputs": [],
 				"name": "owner",
@@ -223,12 +265,17 @@
 				"type": "function"
 			},
 			{
-				"constant": false,
+				"constant": true,
 				"inputs": [],
-				"name": "testMintToLPs",
-				"outputs": [],
+				"name": "symbol",
+				"outputs": [
+					{
+						"name": "",
+						"type": "string"
+					}
+				],
 				"payable": false,
-				"stateMutability": "nonpayable",
+				"stateMutability": "view",
 				"type": "function"
 			},
 			{
@@ -297,6 +344,15 @@
 				],
 				"payable": false,
 				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"constant": false,
+				"inputs": [],
+				"name": "mintToLPs",
+				"outputs": [],
+				"payable": false,
+				"stateMutability": "nonpayable",
 				"type": "function"
 			},
 			{
@@ -376,6 +432,12 @@
 				"payable": false,
 				"stateMutability": "nonpayable",
 				"type": "function"
+			},
+			{
+				"inputs": [],
+				"payable": false,
+				"stateMutability": "nonpayable",
+				"type": "constructor"
 			},
 			{
 				"anonymous": false,
@@ -487,8 +549,11 @@
 		},
 		"userdoc": {
 			"methods": {
-				"testMintToLPs()": {
-					"notice": "test: testMintToLPs(): 컨트랙트 내에 등록된 address에 민트"
+				"createExchange(address)": {
+					"notice": "function testMintToLPs() public onlyOwner { require(exchangeCount > 0, \"testMintToLPs: no Exchange exists\"); // 전체 Exchange 탐색 for (uint256 i = 0; i < exchangeCount; i++) { // Exchange 하나 선택 Exchange exchange = Exchange(exchangeList[i]); for (uint256 j = 0; j < exchange.getAddrCount(); j++) { // Exchange 내의 address 하나 선택, 민팅 _mint(exchange.getAddr(j), _testAmount); } } }"
+				},
+				"mintToLPs()": {
+					"notice": "mintToLPs() : 하루 발행량을 계산, 각 Exchange에서 rewardamount를 가져와서 과거의 reward amount 변화율을 측정,  rewardamount 변화율을 통해 각 exchange에 airdrop할 토큰수 결정, 각 exchange에 등록된 총 address 측정 각 address의 balace를 탐색해 "
 				}
 			}
 		}
@@ -513,15 +578,15 @@
 			]
 		},
 		"contracts/Exchange.sol": {
-			"keccak256": "0xb81ab165655e86d4fa42b5955f044661d4890996636cbeacbd234ea261639804",
+			"keccak256": "0x5253e20babbb23f332373a1cad2f1a0ec22685d8085e276ce187334a25c8c6a3",
 			"urls": [
-				"bzzr://09a4102c0d6d7f1cf4ca891bace9c6337cf21e3688271d4ae472731769242cf4"
+				"bzzr://5f225916edd5524bc26cb8f013bd15dec6a81a6fb5df176e5d29c755ca1d1286"
 			]
 		},
 		"contracts/Factory.sol": {
-			"keccak256": "0x93fcb859a111d9c22363835738f74813eff3e6fa198cb624f0b295d3d6214e5a",
+			"keccak256": "0xcb0a1eaba4379a1f41080d471f6f38b0ecf1a1663e773bc7a65e65c98ae00ea7",
 			"urls": [
-				"bzzr://e083b1ff14ec2be600edbf741f422e726ea2f6293de4164e4e6c88e049fc9996"
+				"bzzr://b059a297a9770ae0f5dcb928031b570ed34c549b3797cd12e7e6a4f12b0ab9cd"
 			]
 		},
 		"contracts/IKIP13.sol": {
@@ -555,9 +620,9 @@
 			]
 		},
 		"contracts/Kameleon.sol": {
-			"keccak256": "0x25fefbfe87b1889688bf4e494ee7a9f79c9f2096a94f242574311221d67975b7",
+			"keccak256": "0x72480fe5ec5bf84b372a073e5f9c213d686eda6ae6bc98b26affd4e4c09ec705",
 			"urls": [
-				"bzzr://d0235ddb48340ce6f3600c183bf7f2e79fd836fc63b1b7c8dd64307b805aafaf"
+				"bzzr://820b55ed4d113bb4c88e40ff194524b826384bb9b6449d79c052e5ef4e4fbe30"
 			]
 		},
 		"contracts/Ownable.sol": {

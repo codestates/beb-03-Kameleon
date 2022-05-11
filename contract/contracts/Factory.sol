@@ -13,10 +13,10 @@ contract Factory {
     uint256 public exchangeCount = 0;
 
     function createExchange(address _tokenAddress) public returns (address) {
-        require(_tokenAddress != address(0), "invalid token address");
+        require(_tokenAddress != address(0), "Factory: invalid token address");
         require(
             tokenToExchange[_tokenAddress] == address(0),
-            "exchange already exists"
+            "Factory: exchange already exists"
         );
 
         // 해당 Exchange 컨트랙트 생성
