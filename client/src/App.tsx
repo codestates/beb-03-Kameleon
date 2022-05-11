@@ -8,6 +8,7 @@ import Footer from './components/common/Footer';
 import MainPage from './pages/MainPage';
 import PoolPage from './pages/PoolPage';
 import MyPage from './pages/MyPage';
+import GovernPage from './pages/GovernPage';
 
 const AppStyle = styled.main`
   min-height: 100vh;
@@ -29,6 +30,7 @@ function App() {
             <Route path="/" element={<MainPage />} />
             <Route path="/pool" element={<PoolPage />} />
             <Route path="/mypage" element={<MyPage />} />
+            <Route path="/govern" element={<GovernPage />} />
           </Routes>
         </MainStyle>
         <Footer />

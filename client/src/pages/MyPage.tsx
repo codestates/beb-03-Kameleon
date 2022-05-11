@@ -14,14 +14,9 @@ import {
 } from '../utils/dummyCreator';
 
 const MyPage = () => {
-  const yes = 50;
-  const no = 20;
-
   const myList = createMyList(5);
   const myPoolList = createMyPollList(5);
   const myGovernList = createMyGovernList(5);
-
-  console.log(myGovernList);
 
   return (
     <div>
@@ -32,7 +27,7 @@ const MyPage = () => {
             <div>Ticker ID</div>
             <div>Balance</div>
             <div>Value</div>
-            <div>total: 10KKT</div>
+            <div>Total</div>
           </div>
           {myList.map((el) => (
             <MyPageItem>
@@ -51,7 +46,7 @@ const MyPage = () => {
             <div>Pool ID</div>
             <div>Balance</div>
             <div>Value</div>
-            <div>total: 10KKT</div>
+            <div>Total</div>
           </div>
           {myPoolList.map((el) => (
             <MyPageItem>
@@ -80,15 +75,6 @@ const MyPage = () => {
               <div>2022-05-20</div>
             </MyPageItem>
           ))}
-          {/* <div>
-            <div>삼성전자 토큰 폐지</div>
-            <MyPageBar yes={yes} no={no}>
-              <div></div>
-              <div></div>
-            </MyPageBar>
-            <div>2022-05-20</div>
-          </div>
-          <div></div> */}
         </MyPageList>
       </MyPageWrapper>
     </div>

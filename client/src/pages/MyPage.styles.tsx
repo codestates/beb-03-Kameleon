@@ -64,12 +64,12 @@ export const MyPageBar = styled.div<{ yes: number; no: number }>`
 
   & > div {
     &:first-of-type {
-      width: ${(props) => `calc(600px / 100 * ${props.yes})`};
+      width: ${(props) => `calc(100% / 100 * ${props.yes})`};
       background-color: var(--blue);
     }
 
     &:last-of-type {
-      width: ${(props) => `calc(600px / 100 * ${props.no})`};
+      width: ${(props) => `calc(100% / 100 * ${props.no})`};
       background-color: var(--red);
     }
   }
