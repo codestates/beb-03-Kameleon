@@ -1,65 +1,17 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import styled from 'styled-components';
+import { HeaderStyle, LogoStyle, NavStyle } from './Layout.style';
 import logoImage from '../../assets/images/logo.png';
-
-const HeaderStyle = styled.header`
-  width: 100%;
-  background-color: #276955;
-
-  .layout {
-    display: flex;
-    align-items: center;
-    justify-content: left;
-    width: 100%;
-    height: 80px;
-  }
-
-  .utils {
-    display: block;
-    margin-right: auto;
-  }
-`;
-
-const LogoStyle = styled.h1`
-  width: 140px;
-  a {
-    display: block;
-    padding: 9px 0;
-  }
-  img {
-    display: block;
-    width: 100%;
-  }
-`;
-
-const NavStyle = styled.nav`
-  width: 80%;
-  height: 100%;
-  ul {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100%;
-  }
-  li {
-    padding: 0 15px;
-    a {
-      display: block;
-      color: #fff;
-      font-size: 1.3rem;
-    }
-  }
-`;
 
 const Header = () => {
   const [isLogin, setIsLogin] = useState(false);
+  const [account, setAccount] = useState('');
 
   const onConnectWallet = async () => {
     if (typeof window.klaytn !== 'undefined') {
       if (window.klaytn.isKaikas) {
         const accounts = await window.klaytn.enable();
-        const account = accounts[0];
+        setAccount(accounts[0]);
 
         setIsLogin(true);
       }
@@ -90,6 +42,13 @@ const Header = () => {
             <li>
               <Link to="/govern">Govern</Link>
             </li>
+            {isLogin ? (
+              <li>
+                <Link to="/mypage">MyPage</Link>
+              </li>
+            ) : (
+              ''
+            )}
           </ul>
         </NavStyle>
         <span className="utils">
@@ -98,7 +57,7 @@ const Header = () => {
               Connect
             </button>
           ) : (
-            <button type="button">MyPage</button>
+            <button type="button">{account.slice(0, 5)}...</button>
           )}
         </span>
       </div>

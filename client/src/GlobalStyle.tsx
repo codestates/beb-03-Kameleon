@@ -8,8 +8,10 @@ export const GlobalStyle = createGlobalStyle`
     --white: #ffffff;
     --blue: #6675FF;
     --red: #FF6363;
+    --gray: #999;
 
     --width: 1200px;
+    --s-width: 640px;
   }
 
   html {
@@ -18,6 +20,7 @@ export const GlobalStyle = createGlobalStyle`
 
   body {
     margin: 0;
+    min-width: 320px;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
       'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
       sans-serif;
@@ -31,7 +34,7 @@ export const GlobalStyle = createGlobalStyle`
   }
   * { font-family: 'Spoqa Han Sans', 'Spoqa Han Sans JP', 'Sans-serif';}
   a { cursor: pointer; text-decoration: none; }
-  h1, h2, h3, ol, ul { margin: 0; padding: 0; }
+  h1, h2, h3, ol, ul, dl, dt, dd { margin: 0; padding: 0; }
   ol, ul { list-style: none; }
 
   .layout {
