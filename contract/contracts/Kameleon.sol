@@ -66,14 +66,14 @@ contract Kameleon is KIP7, Ownable {
         _lastLPT[temp] = 0;
         return temp;
     }
-
     
     // Exchnage 에 LP 보유량만큼 airdrop -> 
     function mintToExchange(address exchangeAddress, uint256 amount) private {
         Exchange exchange = Exchange(exchangeAddress);
-        uint256 mul =  amount / exchange.totalSupply();
         for (uint256 i = 0; i < exchange.getAddrCount(); i++) {
-            _mint(exchange.getAddr(i), exchange.getIndexBalance(i) * mul);
+            if(exchange.getIndexBalance(i) != 0) {
+                _mint(exchange.getAddr(i), (exchange.getIndexBalance(i) * amount) /  exchange.totalSupply());
+            }
         }
     }
 
