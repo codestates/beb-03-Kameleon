@@ -1,10 +1,19 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { IconProp } from '@fortawesome/fontawesome-svg-core';
+import { faArrowDown } from '@fortawesome/free-solid-svg-icons';
+
 import {
   MintPageWrapper,
   TabStyle,
-  InputStyle,
   DetailInfoStyle,
+  IconWrapper,
 } from './styles/MintPage.styles';
+
+import SingleInput from '../components/Input/SingleInput';
+import MultipleInput from '../components/Input/MultipleInput';
+
+const arrowDown = faArrowDown as IconProp;
 
 const SwapPage = () => {
   const [tab, setTab] = useState('mint');
@@ -31,54 +40,30 @@ const SwapPage = () => {
       <form action="">
         {tab === 'mint' ? (
           <>
-            <div>
-              <InputStyle>
-                <div>
-                  <span>
-                    KLAY -&gt;
-                    <button type="button"> Token1</button>
-                  </span>
-                </div>
-                <div>
-                  <label htmlFor="mintInput">Input</label>
-                  <span>
-                    <input type="number" id="mintInput" placeholder="00000" />
-                  </span>
-                </div>
-                <dl>
-                  <dt>Output</dt>
-                  <dd>0000 kSAMSUMG</dd>
-                </dl>
-              </InputStyle>
-            </div>
+            <SingleInput>INPUT</SingleInput>
+            <IconWrapper>
+              <FontAwesomeIcon icon={arrowDown} className="icon" />
+            </IconWrapper>
+            <MultipleInput>OUTPUT</MultipleInput>
             <button type="button">발행하기</button>
           </>
         ) : (
           <>
-            <div>
-              <InputStyle>
-                <div>
-                  <label htmlFor="input">kSAMSUNG Token</label>
-                  <span>
-                    <input type="number" id="input" placeholder="00000" />
-                  </span>
-                </div>
-                <dl>
-                  <dt>Output</dt>
-                  <dd>0000 kSAMSUMG</dd>
-                </dl>
-              </InputStyle>
-              <DetailInfoStyle>
-                <div>
-                  <dt>Exchange Rate</dt>
-                  <dd>1 KLAY = 1000 KMT</dd>
-                </div>
-                <div>
-                  <dt>Fee</dt>
-                  <dd>0.001KLAY</dd>
-                </div>
-              </DetailInfoStyle>
-            </div>
+            <MultipleInput>INPUT</MultipleInput>
+            <IconWrapper>
+              <FontAwesomeIcon icon={arrowDown} className="icon" />
+            </IconWrapper>
+            <SingleInput>OUTPUT</SingleInput>
+            <DetailInfoStyle>
+              <div>
+                <dt>Exchange Rate</dt>
+                <dd>1 KLAY = 1000 KMT</dd>
+              </div>
+              <div>
+                <dt>Fee</dt>
+                <dd>0.001KLAY</dd>
+              </div>
+            </DetailInfoStyle>
             <button type="button">소각하기</button>
           </>
         )}
