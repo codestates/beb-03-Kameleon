@@ -10,6 +10,7 @@ import "./Exchange.sol";
 contract Kameleon is KIP7, Ownable {
     string private _name;
     string private _symbol;
+    address private _governAddress;
     IFactory factory;
 
     function name() public view returns (string memory) {
