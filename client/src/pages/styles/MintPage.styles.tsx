@@ -14,25 +14,6 @@ const MintPageWrapper = styled.div`
     padding: 1rem 2rem;
     background-color: var(--white);
     border-radius: 1rem;
-
-    & > button {
-      display: block;
-      padding: 1rem 2rem;
-      margin: auto;
-      margin-top: 1.5rem;
-      width: 100%;
-      color: var(--white);
-      font-weight: 700;
-      font-size: 1rem;
-      background-color: var(--dark-green);
-      border-radius: 1rem;
-      border: 0;
-
-      :hover {
-        cursor: pointer;
-        opacity: 0.8;
-      }
-    }
   }
 `;
 
@@ -53,6 +34,10 @@ const TabStyle = styled.span`
 
     &.on {
       background-color: var(--dark-green);
+    }
+
+    :hover {
+      cursor: pointer;
     }
   }
 `;
@@ -85,6 +70,33 @@ export const IconWrapper = styled.div`
   justify-content: center;
   padding: 1rem 0;
   color: var(--blue);
+`;
+
+export const ButtonWrapper = styled.button<{
+  numberA: number;
+  numberB: number;
+  isErrorA: boolean;
+  isErrorB: boolean;
+}>`
+  display: block;
+  padding: 1rem 2rem;
+  margin: auto;
+  margin-top: 1.5rem;
+  width: 100%;
+  color: var(--white);
+  font-weight: 700;
+  font-size: 1rem;
+  background-color: var(--dark-green);
+  border-radius: 1rem;
+  border: 0;
+  opacity: ${(props) =>
+    props.numberA > 0 && props.numberB > 0 && !props.isErrorA && !props.isErrorB
+      ? ''
+      : '0.7'};
+
+  :hover {
+    cursor: pointer;
+  }
 `;
 
 export { MintPageWrapper, DetailInfoStyle, TabStyle };

@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
 import { faAngleDown, faAngleUp } from '@fortawesome/free-solid-svg-icons';
@@ -19,34 +19,62 @@ const angleDown = faAngleDown as IconProp;
 
 interface LayoutProps {
   children: React.ReactNode;
+  liftState: (value: string, name: string, isDecimalError: boolean) => void;
 }
 
-const MultipleInput = ({ children }: LayoutProps) => {
-  const [isOpen, setIsOpen] = useState(false);
-  const { inputValue, isFocus, isError, setInputKey, setIsFocus, changeInput } =
-    useInput();
+interface TokenListProps {
+  id: number;
+  name: string;
+}
 
-  const tokenList = createTokenList(20);
+// interface TokenListProps extends Array<TokenListItemProps> {
+//   test: string;
+// }
+
+const MultipleInput = ({ children, liftState }: LayoutProps) => {
+  const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [tokenList, setTokenList] = useState<Array<TokenListProps>>([]);
+  const [name, setName] = useState<string>('kSAMSUNG');
+  const {
+    inputValue,
+    isFocus,
+    isError,
+    isDecimalError,
+    setInputKey,
+    setIsFocus,
+    changeInput,
+  } = useInput(6);
+
+  useEffect(() => {
+    setTokenList(createTokenList(20));
+  }, []);
+
+  useEffect(() => {
+    liftState(inputValue, name, isDecimalError);
+  }, [liftState, inputValue, name, isDecimalError]);
 
   const clickDownIcon = useCallback(() => {
     setIsOpen(true);
     setIsFocus(true);
-  }, [setIsOpen, setIsFocus]);
+  }, [setIsFocus]);
 
   const clickUpIcon = useCallback(() => {
     setIsOpen(false);
     setIsFocus(false);
-  }, [setIsOpen, setIsFocus]);
+  }, [setIsFocus]);
 
   return (
-    <MultipleInputContainer isFocus={isFocus} isError={isError}>
+    <MultipleInputContainer
+      isFocus={isFocus}
+      isError={isError || isDecimalError}
+    >
       <div>
         <label htmlFor="input">{children}</label>
         <MultipleInputWrapper>
           <section>
             {/* temp */}
             {/* <img /> */}
-            <div>kSAMSUNG</div>
+            <div>{name}</div>
             {isOpen ? (
               <FontAwesomeIcon
                 icon={angleUp}
@@ -77,12 +105,18 @@ const MultipleInput = ({ children }: LayoutProps) => {
             <MultipleInputBlank />
             <MultipleInputList>
               {tokenList.map((el) => (
-                <li key={el.id}>{el.name}</li>
+                <li key={el.id} onClick={() => setName(el.name)}>
+                  {el.name}
+                </li>
               ))}
             </MultipleInputList>
           </>
         )}
       </div>
+      {/* error */}
+      {isDecimalError && (
+        <section>Amount must be within 6 decimal points</section>
+      )}
       {isError && <section>Required</section>}
     </MultipleInputContainer>
   );

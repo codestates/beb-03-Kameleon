@@ -49,7 +49,7 @@ const MyPage = () => {
             <div>ROI</div>
           </div>
           {myPoolList.map((el) => (
-            <MyPageItem>
+            <MyPageItem key={el.id}>
               <div>{el.name}</div>
               <div className="main__oracle">
                 1KLY + {el.balance.toLocaleString('ko-KR')}KSE
