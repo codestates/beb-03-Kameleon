@@ -4,11 +4,11 @@ const caver = new Caver(process.env.BAOBAB_NETWORK);
 
 import { abiList, byteCodeList } from "./contractData";
 
-const deployerKeyring = caver.wallet.keyring.create(
-  process.env.feeAddress,
-  process.env.feePrivateKey
-);
-caver.wallet.add(deployerKeyring);
+// const deployerKeyring = caver.wallet.keyring.create(
+//   process.env.feeAddress,
+//   process.env.feePrivateKey
+// );
+// caver.wallet.add(deployerKeyring);
 
 const deployContract = async ({
   contractName,
