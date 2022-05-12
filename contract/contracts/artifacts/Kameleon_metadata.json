@@ -622,9 +622,9 @@
 			]
 		},
 		"contracts/Kameleon.sol": {
-			"keccak256": "0x73cb7785176392713295f534dcaa06298665d2c6bfeb6dcf13228ab52f3c7207",
+			"keccak256": "0x02091cb01d5f765ff2b4db2e4a37b89019623b90db6a769d13d566cd77689a65",
 			"urls": [
-				"bzzr://a1ece1afed9d0562fbe75475c19164413193ef4cde0a20d6c8fe011e9ceada4b"
+				"bzzr://dd30a39d556b268a73d51163c777913b05934ed4a87f56677e9f879769bbdec5"
 			]
 		},
 		"contracts/Ownable.sol": {
