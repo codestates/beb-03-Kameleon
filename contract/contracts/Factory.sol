@@ -12,6 +12,14 @@ contract Factory {
     mapping (uint256 => address) public exchangeList;
     uint256 public exchangeCount = 0;
 
+    function getExchangeCount() public view returns (uint256) {
+        return exchangeCount;
+    }
+
+    function getExchangeList(uint256 index) public view returns (address) {
+        return exchangeList[index];
+    }
+
     function createExchange(address _tokenAddress) public returns (address) {
         require(_tokenAddress != address(0), "Factory: invalid token address");
         require(

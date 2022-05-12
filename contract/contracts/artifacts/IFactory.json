@@ -52,12 +52,18 @@
 		},
 		"gasEstimates": null,
 		"methodIdentifiers": {
-			"getExchange(address)": "06f2bf62"
+			"createExchange(address)": "1648f38e",
+			"exchangeCount()": "68972e50",
+			"exchangeList(uint256)": "efb5adcc",
+			"getExchange(address)": "06f2bf62",
+			"getExchangeCount()": "4c4523a6",
+			"getExchangeList(uint256)": "f40a39a7",
+			"tokenToExchange(address)": "c3c49a63"
 		}
 	},
 	"abi": [
 		{
-			"constant": false,
+			"constant": true,
 			"inputs": [
 				{
 					"name": "_tokenAddress",
@@ -72,7 +78,111 @@
 				}
 			],
 			"payable": false,
+			"stateMutability": "view",
+			"type": "function"
+		},
+		{
+			"constant": false,
+			"inputs": [
+				{
+					"name": "_tokenAddress",
+					"type": "address"
+				}
+			],
+			"name": "createExchange",
+			"outputs": [
+				{
+					"name": "",
+					"type": "address"
+				}
+			],
+			"payable": false,
 			"stateMutability": "nonpayable",
+			"type": "function"
+		},
+		{
+			"constant": true,
+			"inputs": [],
+			"name": "getExchangeCount",
+			"outputs": [
+				{
+					"name": "",
+					"type": "uint256"
+				}
+			],
+			"payable": false,
+			"stateMutability": "view",
+			"type": "function"
+		},
+		{
+			"constant": true,
+			"inputs": [],
+			"name": "exchangeCount",
+			"outputs": [
+				{
+					"name": "",
+					"type": "uint256"
+				}
+			],
+			"payable": false,
+			"stateMutability": "view",
+			"type": "function"
+		},
+		{
+			"constant": true,
+			"inputs": [
+				{
+					"name": "",
+					"type": "address"
+				}
+			],
+			"name": "tokenToExchange",
+			"outputs": [
+				{
+					"name": "",
+					"type": "address"
+				}
+			],
+			"payable": false,
+			"stateMutability": "view",
+			"type": "function"
+		},
+		{
+			"constant": true,
+			"inputs": [
+				{
+					"name": "",
+					"type": "uint256"
+				}
+			],
+			"name": "exchangeList",
+			"outputs": [
+				{
+					"name": "",
+					"type": "address"
+				}
+			],
+			"payable": false,
+			"stateMutability": "view",
+			"type": "function"
+		},
+		{
+			"constant": true,
+			"inputs": [
+				{
+					"name": "index",
+					"type": "uint256"
+				}
+			],
+			"name": "getExchangeList",
+			"outputs": [
+				{
+					"name": "",
+					"type": "address"
+				}
+			],
+			"payable": false,
+			"stateMutability": "view",
 			"type": "function"
 		}
 	]

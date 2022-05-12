@@ -25,6 +25,20 @@
 				"type": "function"
 			},
 			{
+				"constant": true,
+				"inputs": [],
+				"name": "name",
+				"outputs": [
+					{
+						"name": "",
+						"type": "string"
+					}
+				],
+				"payable": false,
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
 				"constant": false,
 				"inputs": [
 					{
@@ -148,6 +162,20 @@
 				"type": "function"
 			},
 			{
+				"constant": true,
+				"inputs": [],
+				"name": "symbol",
+				"outputs": [
+					{
+						"name": "",
+						"type": "string"
+					}
+				],
+				"payable": false,
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
 				"constant": false,
 				"inputs": [
 					{
@@ -242,7 +270,16 @@
 				"type": "function"
 			},
 			{
-				"inputs": [],
+				"inputs": [
+					{
+						"name": "name_",
+						"type": "string"
+					},
+					{
+						"name": "symbol_",
+						"type": "string"
+					}
+				],
 				"payable": false,
 				"stateMutability": "nonpayable",
 				"type": "constructor"
@@ -383,9 +420,9 @@
 			]
 		},
 		"contracts/MyKIP7.sol": {
-			"keccak256": "0x5984eed2cba2d16bd187db289188ac3ccd7404354fe493d6c7bda869e33ed5b1",
+			"keccak256": "0x5e153c515fac1777022af2a70137df8ae4c7b92e01db72aeb033fadebda178b5",
 			"urls": [
-				"bzzr://d352677e14f7d793a31dd2973498f380b4a584a299bcfe22403539c4063f3dcc"
+				"bzzr://6d40edc06c3541330e7b3ae2740e04c6bc31b707fde0f221136132fedddce585"
 			]
 		},
 		"contracts/SafeMath.sol": {
