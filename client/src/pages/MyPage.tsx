@@ -35,8 +35,8 @@ const MyPage = () => {
               <div className="main__oracle">
                 {el.balance.toLocaleString('ko-KR')}
               </div>
-              <div>{el.value.toLocaleString('ko-KR')}</div>
-              <div>{(el.balance * el.value).toLocaleString('ko-KR')}</div>
+              <div>{el.value.toLocaleString('ko-KR')} KLY</div>
+              <div>{(el.balance * el.value).toLocaleString('ko-KR')} KLY</div>
             </MyPageItem>
           ))}
         </MyPageList>
@@ -46,16 +46,16 @@ const MyPage = () => {
             <div>Pool ID</div>
             <div>Balance</div>
             <div>Value</div>
-            <div>Total</div>
+            <div>ROI</div>
           </div>
           {myPoolList.map((el) => (
             <MyPageItem>
               <div>{el.name}</div>
               <div className="main__oracle">
-                {el.balance.toLocaleString('ko-KR')}
+                1KLY + {el.balance.toLocaleString('ko-KR')}KSE
               </div>
-              <div>{el.value.toLocaleString('ko-KR')}</div>
-              <div>{(el.balance * el.value).toLocaleString('ko-KR')}</div>
+              <div>{el.value.toLocaleString('ko-KR')} KLY</div>
+              <div>12.34%</div>
             </MyPageItem>
           ))}
         </MyPageList>
