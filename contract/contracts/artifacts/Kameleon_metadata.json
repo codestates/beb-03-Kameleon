@@ -26,25 +26,6 @@
 			},
 			{
 				"constant": true,
-				"inputs": [
-					{
-						"name": "_tokenAddress",
-						"type": "address"
-					}
-				],
-				"name": "getExchange",
-				"outputs": [
-					{
-						"name": "",
-						"type": "address"
-					}
-				],
-				"payable": false,
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"constant": true,
 				"inputs": [],
 				"name": "name",
 				"outputs": [
@@ -103,6 +84,25 @@
 				"constant": true,
 				"inputs": [],
 				"name": "totalSupply",
+				"outputs": [
+					{
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"payable": false,
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"constant": true,
+				"inputs": [
+					{
+						"name": "addr",
+						"type": "address"
+					}
+				],
+				"name": "getIncreasedLPT",
 				"outputs": [
 					{
 						"name": "",
@@ -196,20 +196,6 @@
 			},
 			{
 				"constant": true,
-				"inputs": [],
-				"name": "exchangeCount",
-				"outputs": [
-					{
-						"name": "",
-						"type": "uint256"
-					}
-				],
-				"payable": false,
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"constant": true,
 				"inputs": [
 					{
 						"name": "account",
@@ -248,6 +234,39 @@
 				"outputs": [],
 				"payable": false,
 				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"constant": false,
+				"inputs": [
+					{
+						"name": "factoryAddress",
+						"type": "address"
+					}
+				],
+				"name": "setFactoryAddress",
+				"outputs": [],
+				"payable": false,
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"constant": true,
+				"inputs": [
+					{
+						"name": "addr",
+						"type": "address"
+					}
+				],
+				"name": "getCurrentLPT",
+				"outputs": [
+					{
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"payable": false,
+				"stateMutability": "view",
 				"type": "function"
 			},
 			{
@@ -302,6 +321,25 @@
 				"type": "function"
 			},
 			{
+				"constant": true,
+				"inputs": [
+					{
+						"name": "addr",
+						"type": "address"
+					}
+				],
+				"name": "getLastLPT",
+				"outputs": [
+					{
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"payable": false,
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
 				"constant": false,
 				"inputs": [
 					{
@@ -328,29 +366,15 @@
 				"type": "function"
 			},
 			{
-				"constant": true,
-				"inputs": [
-					{
-						"name": "",
-						"type": "address"
-					}
-				],
-				"name": "tokenToExchange",
-				"outputs": [
-					{
-						"name": "",
-						"type": "address"
-					}
-				],
-				"payable": false,
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
 				"constant": false,
 				"inputs": [],
 				"name": "mintToLPs",
-				"outputs": [],
+				"outputs": [
+					{
+						"name": "",
+						"type": "uint8"
+					}
+				],
 				"payable": false,
 				"stateMutability": "nonpayable",
 				"type": "function"
@@ -398,25 +422,6 @@
 				"outputs": [],
 				"payable": false,
 				"stateMutability": "nonpayable",
-				"type": "function"
-			},
-			{
-				"constant": true,
-				"inputs": [
-					{
-						"name": "",
-						"type": "uint256"
-					}
-				],
-				"name": "exchangeList",
-				"outputs": [
-					{
-						"name": "",
-						"type": "address"
-					}
-				],
-				"payable": false,
-				"stateMutability": "view",
 				"type": "function"
 			},
 			{
@@ -549,9 +554,6 @@
 		},
 		"userdoc": {
 			"methods": {
-				"createExchange(address)": {
-					"notice": "function testMintToLPs() public onlyOwner { require(exchangeCount > 0, \"testMintToLPs: no Exchange exists\"); // 전체 Exchange 탐색 for (uint256 i = 0; i < exchangeCount; i++) { // Exchange 하나 선택 Exchange exchange = Exchange(exchangeList[i]); for (uint256 j = 0; j < exchange.getAddrCount(); j++) { // Exchange 내의 address 하나 선택, 민팅 _mint(exchange.getAddr(j), _testAmount); } } }"
-				},
 				"mintToLPs()": {
 					"notice": "mintToLPs() : 하루 발행량을 계산, 각 Exchange에서 rewardamount를 가져와서 과거의 reward amount 변화율을 측정,  rewardamount 변화율을 통해 각 exchange에 airdrop할 토큰수 결정, 각 exchange에 등록된 총 address 측정 각 address의 balace를 탐색해 "
 				}
@@ -578,15 +580,15 @@
 			]
 		},
 		"contracts/Exchange.sol": {
-			"keccak256": "0x5253e20babbb23f332373a1cad2f1a0ec22685d8085e276ce187334a25c8c6a3",
+			"keccak256": "0x18f5f5183f71704c81d8267ee377cd90a8dec738eb0742f8e28d486debb7396f",
 			"urls": [
-				"bzzr://5f225916edd5524bc26cb8f013bd15dec6a81a6fb5df176e5d29c755ca1d1286"
+				"bzzr://23d842d52cb36108896354ace5473d4f415eb35be9b8fd5065571be168803eaa"
 			]
 		},
-		"contracts/Factory.sol": {
-			"keccak256": "0xcb0a1eaba4379a1f41080d471f6f38b0ecf1a1663e773bc7a65e65c98ae00ea7",
+		"contracts/IFactory.sol": {
+			"keccak256": "0xbb61320ed7e91365e3068e465b15efc09a4de76780e9cb742eae813ab550ba29",
 			"urls": [
-				"bzzr://b059a297a9770ae0f5dcb928031b570ed34c549b3797cd12e7e6a4f12b0ab9cd"
+				"bzzr://0639982cdaed53960ce39fc330ee480781617e7f2537ffd9ebd5baa5796f1a0b"
 			]
 		},
 		"contracts/IKIP13.sol": {
@@ -620,9 +622,9 @@
 			]
 		},
 		"contracts/Kameleon.sol": {
-			"keccak256": "0x72480fe5ec5bf84b372a073e5f9c213d686eda6ae6bc98b26affd4e4c09ec705",
+			"keccak256": "0x73cb7785176392713295f534dcaa06298665d2c6bfeb6dcf13228ab52f3c7207",
 			"urls": [
-				"bzzr://820b55ed4d113bb4c88e40ff194524b826384bb9b6449d79c052e5ef4e4fbe30"
+				"bzzr://a1ece1afed9d0562fbe75475c19164413193ef4cde0a20d6c8fe011e9ceada4b"
 			]
 		},
 		"contracts/Ownable.sol": {
