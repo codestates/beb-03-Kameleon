@@ -65,9 +65,15 @@
 			]
 		},
 		"contracts/Exchange.sol": {
-			"keccak256": "0xb81ab165655e86d4fa42b5955f044661d4890996636cbeacbd234ea261639804",
+			"keccak256": "0xd70936411cd0df8653b12901904ea672b81cfeef91c2253493af9d44ed1fb55d",
 			"urls": [
-				"bzzr://09a4102c0d6d7f1cf4ca891bace9c6337cf21e3688271d4ae472731769242cf4"
+				"bzzr://bdbb05041d6ca44f8dfde2343e6d7a42d3c3ee063d24e8e9330d3d1ddb31b611"
+			]
+		},
+		"contracts/IFactory.sol": {
+			"keccak256": "0xbb61320ed7e91365e3068e465b15efc09a4de76780e9cb742eae813ab550ba29",
+			"urls": [
+				"bzzr://0639982cdaed53960ce39fc330ee480781617e7f2537ffd9ebd5baa5796f1a0b"
 			]
 		},
 		"contracts/IKIP13.sol": {

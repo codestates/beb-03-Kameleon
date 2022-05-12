@@ -434,9 +434,15 @@
 			]
 		},
 		"contracts/MyKIP7.sol": {
+<<<<<<< HEAD
 			"keccak256": "0xe71d1c727946fce466e8dfd51be4d92c2405f2923564ee47ffdc1f046bc3b0e4",
 			"urls": [
 				"bzzr://fc6492f40676227689651b43cb9f4899e9267249eb218dbc1e4d016be321c6be"
+=======
+			"keccak256": "0x5e153c515fac1777022af2a70137df8ae4c7b92e01db72aeb033fadebda178b5",
+			"urls": [
+				"bzzr://6d40edc06c3541330e7b3ae2740e04c6bc31b707fde0f221136132fedddce585"
+>>>>>>> be0c2d2bcd9f9a1a1336f387c03a0b2afc123326
 			]
 		},
 		"contracts/SafeMath.sol": {
