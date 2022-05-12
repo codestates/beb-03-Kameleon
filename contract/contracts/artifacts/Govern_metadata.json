@@ -1,18 +1,51 @@
 {
 	"compiler": {
-		"version": "0.5.6+commit.b259423e"
+		"version": "0.5.17+commit.d19bba13"
 	},
 	"language": "Solidity",
 	"output": {
 		"abi": [
 			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "KameleonTokenAddress",
+						"type": "address"
+					}
+				],
+				"payable": false,
+				"stateMutability": "nonpayable",
+				"type": "constructor"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "previousOwner",
+						"type": "address"
+					},
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "newOwner",
+						"type": "address"
+					}
+				],
+				"name": "OwnershipTransferred",
+				"type": "event"
+			},
+			{
 				"constant": false,
 				"inputs": [
 					{
+						"internalType": "string",
 						"name": "title_",
 						"type": "string"
 					},
 					{
+						"internalType": "string",
 						"name": "content_",
 						"type": "string"
 					}
@@ -24,35 +57,12 @@
 				"type": "function"
 			},
 			{
-				"constant": false,
-				"inputs": [
-					{
-						"name": "KameleonTokenAddress",
-						"type": "address"
-					}
-				],
-				"name": "setToken",
-				"outputs": [
-					{
-						"name": "",
-						"type": "bool"
-					}
-				],
-				"payable": false,
-				"stateMutability": "nonpayable",
-				"type": "function"
-			},
-			{
 				"constant": true,
-				"inputs": [
-					{
-						"name": "pollIndex_",
-						"type": "uint256"
-					}
-				],
-				"name": "withdrawableBalance",
+				"inputs": [],
+				"name": "getLastPollIndex",
 				"outputs": [
 					{
+						"internalType": "uint256",
 						"name": "",
 						"type": "uint256"
 					}
@@ -62,40 +72,14 @@
 				"type": "function"
 			},
 			{
-				"constant": false,
-				"inputs": [
-					{
-						"name": "pollIndex_",
-						"type": "uint256"
-					},
-					{
-						"name": "value_",
-						"type": "uint256"
-					},
-					{
-						"name": "isAgree",
-						"type": "bool"
-					}
-				],
-				"name": "vote",
-				"outputs": [
-					{
-						"name": "",
-						"type": "uint256"
-					}
-				],
-				"payable": false,
-				"stateMutability": "nonpayable",
-				"type": "function"
-			},
-			{
 				"constant": true,
 				"inputs": [],
-				"name": "getLastPollIndex",
+				"name": "owner",
 				"outputs": [
 					{
+						"internalType": "address",
 						"name": "",
-						"type": "uint256"
+						"type": "address"
 					}
 				],
 				"payable": false,
@@ -112,13 +96,159 @@
 				"type": "function"
 			},
 			{
-				"constant": true,
-				"inputs": [],
-				"name": "owner",
+				"constant": false,
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "KameleonTokenAddress",
+						"type": "address"
+					}
+				],
+				"name": "setToken",
 				"outputs": [
 					{
+						"internalType": "bool",
 						"name": "",
+						"type": "bool"
+					}
+				],
+				"payable": false,
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"constant": false,
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "newOwner",
 						"type": "address"
+					}
+				],
+				"name": "transferOwnership",
+				"outputs": [],
+				"payable": false,
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"constant": false,
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "pollIndex_",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "value_",
+						"type": "uint256"
+					},
+					{
+						"internalType": "bool",
+						"name": "isAgree",
+						"type": "bool"
+					}
+				],
+				"name": "vote",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"payable": false,
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"constant": true,
+				"inputs": [],
+				"name": "voteList",
+				"outputs": [
+					{
+						"components": [
+							{
+								"internalType": "string",
+								"name": "title",
+								"type": "string"
+							},
+							{
+								"internalType": "string",
+								"name": "content",
+								"type": "string"
+							},
+							{
+								"internalType": "uint256",
+								"name": "agree",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "disagree",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "createdTime",
+								"type": "uint256"
+							},
+							{
+								"internalType": "bool",
+								"name": "expired",
+								"type": "bool"
+							}
+						],
+						"internalType": "struct Govern.returnPoll[]",
+						"name": "",
+						"type": "tuple[]"
+					}
+				],
+				"payable": false,
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"constant": true,
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "pollIndex_",
+						"type": "uint256"
+					}
+				],
+				"name": "voteState",
+				"outputs": [
+					{
+						"internalType": "string",
+						"name": "",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "",
+						"type": "string"
+					},
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					},
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
 					}
 				],
 				"payable": false,
@@ -129,6 +259,7 @@
 				"constant": false,
 				"inputs": [
 					{
+						"internalType": "uint256",
 						"name": "pollIndex_",
 						"type": "uint256"
 					}
@@ -141,110 +272,36 @@
 			},
 			{
 				"constant": true,
-				"inputs": [],
-				"name": "voteList",
-				"outputs": [
-					{
-						"name": "",
-						"type": "uint256[]"
-					}
-				],
-				"payable": false,
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"constant": false,
 				"inputs": [
 					{
-						"name": "newOwner",
-						"type": "address"
-					}
-				],
-				"name": "transferOwnership",
-				"outputs": [],
-				"payable": false,
-				"stateMutability": "nonpayable",
-				"type": "function"
-			},
-			{
-				"constant": true,
-				"inputs": [
-					{
+						"internalType": "uint256",
 						"name": "pollIndex_",
 						"type": "uint256"
 					}
 				],
-				"name": "voteState",
+				"name": "withdrawableBalance",
 				"outputs": [
 					{
-						"name": "",
-						"type": "string"
-					},
-					{
-						"name": "",
-						"type": "string"
-					},
-					{
+						"internalType": "uint256",
 						"name": "",
 						"type": "uint256"
-					},
-					{
-						"name": "",
-						"type": "uint256"
-					},
-					{
-						"name": "",
-						"type": "uint256"
-					},
-					{
-						"name": "",
-						"type": "bool"
 					}
 				],
 				"payable": false,
 				"stateMutability": "view",
 				"type": "function"
-			},
-			{
-				"inputs": [
-					{
-						"name": "KameleonTokenAddress",
-						"type": "address"
-					}
-				],
-				"payable": false,
-				"stateMutability": "nonpayable",
-				"type": "constructor"
-			},
-			{
-				"anonymous": false,
-				"inputs": [
-					{
-						"indexed": true,
-						"name": "previousOwner",
-						"type": "address"
-					},
-					{
-						"indexed": true,
-						"name": "newOwner",
-						"type": "address"
-					}
-				],
-				"name": "OwnershipTransferred",
-				"type": "event"
 			}
 		],
 		"devdoc": {
 			"methods": {
 				"owner()": {
-					"details": "Returns the address of the current owner.\r"
+					"details": "Returns the address of the current owner."
 				},
 				"renounceOwnership()": {
-					"details": "Leaves the contract without owner. It will not be possible to call\r `onlyOwner` functions anymore. Can only be called by the current owner.\r      * NOTE: Renouncing ownership will leave the contract without an owner,\r thereby removing any functionality that is only available to the owner.\r"
+					"details": "Leaves the contract without owner. It will not be possible to call `onlyOwner` functions anymore. Can only be called by the current owner.      * NOTE: Renouncing ownership will leave the contract without an owner, thereby removing any functionality that is only available to the owner."
 				},
 				"transferOwnership(address)": {
-					"details": "Transfers ownership of the contract to a new account (`newOwner`).\r Can only be called by the current owner.\r"
+					"details": "Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner."
 				}
 			}
 		},
@@ -266,27 +323,31 @@
 	},
 	"sources": {
 		"contracts/Govern.sol": {
-			"keccak256": "0xc8093344fe2a4d73030b623f2378737e1e3a9564dda256cc07e71f393e292e9d",
+			"keccak256": "0xd3c18331da31eff5cd6a817557f160f6fbf503b45bff6d84d91b8fe255c171b1",
 			"urls": [
-				"bzzr://187c70781b383b6c560672714776566f164cc7f0a2ad649cee90e911407c2943"
+				"bzz-raw://4eca30d51df4011c3596287afacf69e44155d4af73721614570d962943c9b502",
+				"dweb:/ipfs/QmPCYexrUGfwRsetcX8wWXuzzf8yiTybo8dkwGeRPStVJY"
 			]
 		},
 		"contracts/IKIP13.sol": {
 			"keccak256": "0x624e9e6220f1fff9952491658bdb41e79a944d8577eb76fcecde2352c6678b51",
 			"urls": [
-				"bzzr://5f13484bb4220af06a02d5e683e0d5fa05804d6192cc8743c6e441728f964c6c"
+				"bzz-raw://08188539adf48ed42456d1233e75ee16d17426d52f09a9cc4119945900e72e5f",
+				"dweb:/ipfs/QmV8SptYz5ks1UtHSwxwczGpEX7FeB7RfqEqMoYrqRav7W"
 			]
 		},
 		"contracts/IKIP7.sol": {
 			"keccak256": "0xfb6a22cff7b038ce2ffa091072bdd3af2c323349b866e6e370289b540ef49f90",
 			"urls": [
-				"bzzr://6d44afffe1dc94f996db674bf9738fff161840a644d7818a0054738fc878a754"
+				"bzz-raw://59b905859835f8f4ed36e63616f98bbbf58ed8b48614157c6ff8465300384120",
+				"dweb:/ipfs/Qmc2pRjdLZ2WZr1XVF8bJ9rhRjL2QMHUcboLEjcYGtGFQw"
 			]
 		},
 		"contracts/Ownable.sol": {
 			"keccak256": "0xf32a8f0d7542c0a05f19b49cbb0817124ab1b014a40e5816d71acb3523f77eeb",
 			"urls": [
-				"bzzr://94e9bdf06243f0c1893c1819fb6192c6b5446ec787e14da951667af790608315"
+				"bzz-raw://1def319519b394fad581edaf324545fe6bef90a7698c7d05321297152ef24409",
+				"dweb:/ipfs/QmTsKwoU5f68NYJjFzdSwSGiwYPLAZsSGFfkDEYRoELw28"
 			]
 		}
 	},

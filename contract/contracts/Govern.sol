@@ -1,4 +1,6 @@
 pragma solidity ^0.5.0;
+pragma experimental ABIEncoderV2;
+
 
 import "./IKIP7.sol";
 import "./Ownable.sol";
@@ -6,6 +8,16 @@ import "./Ownable.sol";
 
 contract Govern is Ownable {
     IKIP7 KameleonToken;
+
+    struct returnPoll{
+        string title;
+        string content;
+        uint agree;
+        uint disagree;
+        uint createdTime;
+        bool expired;
+    }
+
     struct Poll {
         string title;
         string content;
@@ -86,24 +98,33 @@ contract Govern is Ownable {
           );
     }
 
-    function voteList() public view returns(uint[] memory){
-    //   Poll[] memory pollList;
-      uint[] memory pollList = new uint[](pollIndex);
+    function voteList() public view returns(returnPoll[] memory){
+      Poll[] memory pollList = new Poll[](pollIndex);
+    //   uint[] memory pollList = new uint[](pollIndex);
       uint newPollIndex = 0;
       for(uint i = pollIndex-1; i >= 0; i--){
           if(now < polls[i].createdTime + (60*60*24*3)){
-              //   pollList.push(polls[i]);
-              pollList[newPollIndex] = i;
-              newPollIndex++;
+              if(polls[i].expired == false){
+                // pollList[newPollIndex] = i;
+                pollList[newPollIndex] = polls[i];
+                newPollIndex++;
+              }
           }
           else{
               break;
           }
       }
 
-      uint[] memory returnPollList = new uint[](newPollIndex);
+      uint[] memory returnPollList2 = new uint[](newPollIndex);
+      returnPoll[] memory returnPollList = new returnPoll[](newPollIndex);
       for(uint i = 0 ; i < newPollIndex; i++){
-          returnPollList[i] = pollList[i];
+          returnPollList[i].title = pollList[i].title;
+          returnPollList[i].content = pollList[i].content;
+          returnPollList[i].agree = pollList[i].agree;
+          returnPollList[i].disagree = pollList[i].disagree;
+          returnPollList[i].createdTime = pollList[i].createdTime;
+          returnPollList[i].expired = pollList[i].expired;
+          returnPollList2[i] = i;
       }
       return returnPollList;
     }
