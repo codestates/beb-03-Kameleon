@@ -30,12 +30,18 @@ contract Govern is Ownable {
         mapping(address => uint) holdingBalance;
     }
     mapping(uint => Poll) private polls;
+
     uint pollIndex = 0;
+    uint period = (60*60*24*3);
 
     constructor(address KameleonTokenAddress, uint pollCreationFee_) public {
         require(KameleonTokenAddress != address(0x0)); 
         KameleonToken = IKIP7(KameleonTokenAddress);
         _pollCreationFee = pollCreationFee_;
+    }
+
+    function setPeriod( uint periodMin_) public onlyOwner returns (bool){
+        period = (60*periodMin_);
     }
 
     function setToken(address KameleonTokenAddress) public onlyOwner returns (bool) {
@@ -49,7 +55,7 @@ contract Govern is Ownable {
         _;
     }
     function createPoll(string memory title_, string memory content_) public _enoughTokenForCreatePoll {
-        KameleonToken.safeTransfer(msg.sender,_pollCreationFee);
+        KameleonToken.transferFrom(msg.sender,address(this),_pollCreationFee);
         polls[pollIndex] = Poll({
             title:title_,
             content:content_,

@@ -27,6 +27,25 @@
 				"constant": false,
 				"inputs": [
 					{
+						"name": "periodMin_",
+						"type": "uint256"
+					}
+				],
+				"name": "setPeriod",
+				"outputs": [
+					{
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"payable": false,
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"constant": false,
+				"inputs": [
+					{
 						"name": "KameleonTokenAddress",
 						"type": "address"
 					}
@@ -362,9 +381,9 @@
 	},
 	"sources": {
 		"contracts/Govern.sol": {
-			"keccak256": "0x8b0e6d5a07ca079a91d9f345fd5f787d5a175bcfd49866f7877e181843619024",
+			"keccak256": "0x5ae92d699efce21d58de01c163485d7f15e68797d9778cc87308f63a7fe1e6f3",
 			"urls": [
-				"bzzr://11dff4f46ccf612780b04dd1898dea8f49c65b7c9b497f889113a06791dafd72"
+				"bzzr://0cdc55a75bb67fb03395c79648c0dd221fddcdc68e388038d5478ac406c3ba38"
 			]
 		},
 		"contracts/IKIP13.sol": {

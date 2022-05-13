@@ -14,7 +14,6 @@ contract MyKIP7 is KIP7 {
         return _symbol;
     }
 
-    fuction decimals() 
      constructor(string memory name_, string memory symbol_) KIP7() public {
         _name = name_;
         _symbol = symbol_;
