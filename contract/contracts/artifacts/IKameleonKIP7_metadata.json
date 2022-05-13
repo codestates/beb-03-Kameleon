@@ -32,7 +32,7 @@
 						"type": "address"
 					},
 					{
-						"name": "value",
+						"name": "amount",
 						"type": "uint256"
 					}
 				],
@@ -151,6 +151,28 @@
 				"constant": false,
 				"inputs": [
 					{
+						"name": "from",
+						"type": "address"
+					},
+					{
+						"name": "to",
+						"type": "address"
+					},
+					{
+						"name": "amount",
+						"type": "uint256"
+					}
+				],
+				"name": "governTransfer",
+				"outputs": [],
+				"payable": false,
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"constant": false,
+				"inputs": [
+					{
 						"name": "recipient",
 						"type": "address"
 					},
@@ -242,12 +264,6 @@
 				"type": "function"
 			},
 			{
-				"inputs": [],
-				"payable": false,
-				"stateMutability": "nonpayable",
-				"type": "constructor"
-			},
-			{
 				"anonymous": false,
 				"inputs": [
 					{
@@ -293,40 +309,39 @@
 			}
 		],
 		"devdoc": {
-			"details": "Implementation of the `IKIP7` interface.\r  * This implementation is agnostic to the way tokens are created. This means\r that a supply mechanism has to be added in a derived contract using `_mint`.\r For a generic mechanism see `KIP7Mintable`.\r  * We have followed general OpenZeppelin guidelines: functions revert instead\r of returning `false` on failure. This behavior is nonetheless conventional\r and does not conflict with the expectations of KIP7 applications.\r  * Additionally, an `Approval` event is emitted on calls to `transferFrom`.\r This allows applications to reconstruct the allowance for all accounts just\r by listening to said events. Other implementations of the KIP may not emit\r these events, as it isn't required by the specification.\r  * See http://kips.klaytn.com/KIPs/kip-7-fungible_token\r",
 			"methods": {
 				"allowance(address,address)": {
-					"details": "See `IKIP7.allowance`.\r"
+					"details": "Returns the remaining number of tokens that `spender` will be allowed to spend on behalf of `owner` through `transferFrom`. This is zero by default.     * This value changes when `approve` or `transferFrom` are called."
 				},
 				"approve(address,uint256)": {
-					"details": "See `IKIP7.approve`.\r      * Requirements:\r      * - `spender` cannot be the zero address.\r"
+					"details": "Sets `amount` as the allowance of `spender` over the caller's tokens.     * Returns a boolean value indicating whether the operation succeeded.     * > Beware that changing an allowance with this method brings the risk that someone may use both the old and the new allowance by unfortunate transaction ordering. One possible solution to mitigate this race condition is to first reduce the spender's allowance to 0 and set the desired value afterwards: https://github.com/ethereum/EIPs/issues/20#issuecomment-263524729     * Emits an `Approval` event."
 				},
 				"balanceOf(address)": {
-					"details": "See `IKIP7.balanceOf`.\r"
+					"details": "Returns the amount of tokens owned by `account`."
 				},
 				"safeTransfer(address,uint256)": {
-					"details": "Moves `amount` tokens from the caller's account to `recipient`.\r"
+					"details": "Moves `amount` tokens from the caller's account to `recipient`."
 				},
 				"safeTransfer(address,uint256,bytes)": {
-					"details": "Moves `amount` tokens from the caller's account to `recipient`.\r"
+					"details": "Moves `amount` tokens from the caller's account to `recipient`."
 				},
 				"safeTransferFrom(address,address,uint256)": {
-					"details": "Moves `amount` tokens from `sender` to `recipient` using the allowance mechanism.\r `amount` is then deducted from the caller's allowance.\r"
+					"details": "Moves `amount` tokens from `sender` to `recipient` using the allowance mechanism. `amount` is then deducted from the caller's allowance."
 				},
 				"safeTransferFrom(address,address,uint256,bytes)": {
-					"details": "Moves `amount` tokens from `sender` to `recipient` using the allowance mechanism.\r `amount` is then deducted from the caller's allowance.\r"
+					"details": "Moves `amount` tokens from `sender` to `recipient` using the allowance mechanism. `amount` is then deducted from the caller's allowance."
 				},
 				"supportsInterface(bytes4)": {
-					"details": "See `IKIP13.supportsInterface`.\r      * Time complexity O(1), guaranteed to always use less than 30 000 gas.\r"
+					"details": "Returns true if this contract implements the interface defined by `interfaceId`. See the corresponding [KIP-13 section](http://kips.klaytn.com/KIPs/kip-13-interface_query_standard#how-interface-identifiers-are-defined) to learn more about how these ids are created.     * This function call must use less than 30 000 gas."
 				},
 				"totalSupply()": {
-					"details": "See `IKIP7.totalSupply`.\r"
+					"details": "Returns the amount of tokens in existence."
 				},
 				"transfer(address,uint256)": {
-					"details": "See `IKIP7.transfer`.\r      * Requirements:\r      * - `recipient` cannot be the zero address.\r - the caller must have a balance of at least `amount`.\r"
+					"details": "Moves `amount` tokens from the caller's account to `recipient`.     * Returns a boolean value indicating whether the operation succeeded.     * Emits a `Transfer` event."
 				},
 				"transferFrom(address,address,uint256)": {
-					"details": "See `IKIP7.transferFrom`.\r      * Emits an `Approval` event indicating the updated allowance. This is not\r required by the KIP. See the note at the beginning of `KIP7`;\r      * Requirements:\r - `sender` and `recipient` cannot be the zero address.\r - `sender` must have a balance of at least `value`.\r - the caller must have allowance for `sender`'s tokens of at least\r `amount`.\r"
+					"details": "Moves `amount` tokens from `sender` to `recipient` using the allowance mechanism. `amount` is then deducted from the caller's allowance.     * Returns a boolean value indicating whether the operation succeeded.     * Emits a `Transfer` event."
 				}
 			}
 		},
@@ -336,9 +351,9 @@
 	},
 	"settings": {
 		"compilationTarget": {
-			"contracts/KIP7.sol": "KIP7"
+			"contracts/Govern.sol": "IKameleonKIP7"
 		},
-		"evmVersion": "byzantium",
+		"evmVersion": "petersburg",
 		"libraries": {},
 		"optimizer": {
 			"enabled": false,
@@ -347,46 +362,28 @@
 		"remappings": []
 	},
 	"sources": {
-		"contracts/Address.sol": {
-			"keccak256": "0x992bce8d5a6b643f20e352e55b07fe3affa771c8e921c4c1e5623c5d4ac3839b",
+		"contracts/Govern.sol": {
+			"keccak256": "0x6dae4c506c9ee29b890c77f5762b72171668a0593ff845e86b44792fd10b7ba8",
 			"urls": [
-				"bzzr://de0253e9fe9c33071e5cde96818b6904992585a2f320cb6821069280a7e894d1"
+				"bzzr://f978e9602ca0cf1e66b161257f3a304a2d97db4d385855a49ce00dbf2d8e4588"
 			]
 		},
 		"contracts/IKIP13.sol": {
-			"keccak256": "0x624e9e6220f1fff9952491658bdb41e79a944d8577eb76fcecde2352c6678b51",
+			"keccak256": "0xa684be6ebc9e38a514dca1024c1385d95fd617d92120cbd245a7c1a72fb817d8",
 			"urls": [
-				"bzzr://5f13484bb4220af06a02d5e683e0d5fa05804d6192cc8743c6e441728f964c6c"
+				"bzzr://71a41409d56a83fb2e4cacceba7733e736c7ad9b6f5668c3e1c53ae61e9d321d"
 			]
 		},
 		"contracts/IKIP7.sol": {
-			"keccak256": "0xfb6a22cff7b038ce2ffa091072bdd3af2c323349b866e6e370289b540ef49f90",
+			"keccak256": "0xdebf16b2cc599a7b4cf01f62bddf3a97e37af6d7c89fbbcb89e77269481b91f8",
 			"urls": [
-				"bzzr://6d44afffe1dc94f996db674bf9738fff161840a644d7818a0054738fc878a754"
+				"bzzr://e2d2889ebc0a3d8a04537a4cc90d468a5c772d57313ff798ea1aa0f9953eec03"
 			]
 		},
-		"contracts/IKIP7Receiver.sol": {
-			"keccak256": "0x39db8ccb5de15df30c59d7fa1691a2fd6b3e9ef27503936034f1ae2d41397d22",
+		"contracts/Ownable.sol": {
+			"keccak256": "0x38db741ff3763cb57d6c429ac3838ab63b7e70b4aabeb414dcb583770bc1d622",
 			"urls": [
-				"bzzr://2514ee9bded2a034c07eba52881d1df7a965d673ba8a5bbae5fe847cf1e24a94"
-			]
-		},
-		"contracts/KIP13.sol": {
-			"keccak256": "0xc755a6e2f73cd30628105cd7a93e7ba8ed75441a1d0d8cb790825fb7d3e540fb",
-			"urls": [
-				"bzzr://0cc34888252ef4267bc9672a1459fd8c3a82f04fd77303ab1c6bf8a61fd7af74"
-			]
-		},
-		"contracts/KIP7.sol": {
-			"keccak256": "0xd15f19173be7de00ce2257969846564a418e9fd1a9b6daa0df1698476eb96b26",
-			"urls": [
-				"bzzr://57d4da01b22677e6856f8df49885ae7a2b61911659ae0a15830c6211ca921010"
-			]
-		},
-		"contracts/SafeMath.sol": {
-			"keccak256": "0xf18f5f0027ba4abcc41d2b57fe6a2892b6ba44db0f9cc19c25bb483c9b9347b5",
-			"urls": [
-				"bzzr://b26c54d5c430b0609253e22f4a08806e9e9cab2164ef7ae5c4c832f53504d2ef"
+				"bzzr://1ef9f5c1534dbdb1be33549b65c2156c3671d65673eba3de2a470babfdbf81ee"
 			]
 		}
 	},
