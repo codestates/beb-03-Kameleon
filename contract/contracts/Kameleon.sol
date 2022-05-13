@@ -47,8 +47,6 @@ contract Kameleon is KIP7, Ownable {
         _;
     }
     
-    
-
     function governTransfer(address from, address to, uint256 amount) public onlyGovern {
         _transfer(from, to, amount);
     }

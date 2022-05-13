@@ -158,6 +158,20 @@
 				"constant": false,
 				"inputs": [
 					{
+						"name": "governAddress",
+						"type": "address"
+					}
+				],
+				"name": "setGovernAddress",
+				"outputs": [],
+				"payable": false,
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"constant": false,
+				"inputs": [
+					{
 						"name": "recipient",
 						"type": "address"
 					},
@@ -295,6 +309,28 @@
 				],
 				"payable": false,
 				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"constant": false,
+				"inputs": [
+					{
+						"name": "from",
+						"type": "address"
+					},
+					{
+						"name": "to",
+						"type": "address"
+					},
+					{
+						"name": "amount",
+						"type": "uint256"
+					}
+				],
+				"name": "governTransfer",
+				"outputs": [],
+				"payable": false,
+				"stateMutability": "nonpayable",
 				"type": "function"
 			},
 			{
@@ -439,7 +475,12 @@
 				"type": "function"
 			},
 			{
-				"inputs": [],
+				"inputs": [
+					{
+						"name": "factoryAddress",
+						"type": "address"
+					}
+				],
 				"payable": false,
 				"stateMutability": "nonpayable",
 				"type": "constructor"
@@ -622,9 +663,9 @@
 			]
 		},
 		"contracts/Kameleon.sol": {
-			"keccak256": "0x02091cb01d5f765ff2b4db2e4a37b89019623b90db6a769d13d566cd77689a65",
+			"keccak256": "0xacb2851db52219776e098884a7e8ad1c7bb94900f244f3fa4170ae6a87cfa8b2",
 			"urls": [
-				"bzzr://dd30a39d556b268a73d51163c777913b05934ed4a87f56677e9f879769bbdec5"
+				"bzzr://eb2188a39958215a9c9f38edfc3e3d2b0fca44c8852f0cd87015a437daf75480"
 			]
 		},
 		"contracts/Ownable.sol": {
