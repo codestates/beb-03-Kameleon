@@ -1,5 +1,5 @@
 import { Timestamp } from 'typeorm';
-import { User } from '../../typeorm/entity/User';
+import { User } from '../../typeorm/entity/Stock';
 import { role } from "../enum";
 import { returnApi } from "./Model/InterfaceReturnApiModel"
 type Omit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>
