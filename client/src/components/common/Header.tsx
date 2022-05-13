@@ -2,10 +2,13 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { HeaderStyle, LogoStyle, NavStyle } from './Layout.style';
 import logoImage from '../../assets/images/logo.png';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faBars, faXmark, faWallet } from '@fortawesome/free-solid-svg-icons';
 
 const Header = () => {
-  const [isLogin, setIsLogin] = useState(false);
-  const [account, setAccount] = useState('');
+  const [isLogin, setIsLogin] = useState<boolean>(false);
+  const [account, setAccount] = useState<string>('');
+  const [isNav, setIsNav] = useState<boolean>(false);
 
   const onConnectWallet = async () => {
     if (typeof window.klaytn !== 'undefined') {
@@ -29,37 +32,48 @@ const Header = () => {
           </Link>
         </LogoStyle>
         <NavStyle>
-          <ul>
-            <li>
-              <Link to="/swap">Swap</Link>
-            </li>
-            <li>
-              <Link to="/pool">Pool</Link>
-            </li>
-            <li>
-              <Link to="/mint">Mint&Burn</Link>
-            </li>
-            <li>
-              <Link to="/govern">Govern</Link>
-            </li>
-            {isLogin ? (
+          <span className="m-menu" onClick={() => setIsNav(true)}>
+            <FontAwesomeIcon icon={faBars} />
+          </span>
+          <div className={`menu-list ${isNav ? 'on' : ''}`}>
+            <ul>
               <li>
-                <Link to="/mypage">MyPage</Link>
+                <Link to="/swap">Swap</Link>
               </li>
-            ) : (
-              ''
-            )}
-          </ul>
+              <li>
+                <Link to="/pool">Pool</Link>
+              </li>
+              <li>
+                <Link to="/mint">Mint&Burn</Link>
+              </li>
+              <li>
+                <Link to="/govern">Govern</Link>
+              </li>
+              {isLogin ? (
+                <li>
+                  <Link to="/mypage">MyPage</Link>
+                </li>
+              ) : (
+                ''
+              )}
+            </ul>
+            <span className="btn-close" onClick={() => setIsNav(false)}>
+              <FontAwesomeIcon icon={faXmark} />
+            </span>
+            <span className="utils">
+              {!isLogin ? (
+                <button type="button" onClick={onConnectWallet}>
+                  <em>
+                    <FontAwesomeIcon icon={faWallet} />
+                  </em>
+                  Connect
+                </button>
+              ) : (
+                <button type="button">{account.slice(0, 5)}...</button>
+              )}
+            </span>
+          </div>
         </NavStyle>
-        <span className="utils">
-          {!isLogin ? (
-            <button type="button" onClick={onConnectWallet}>
-              Connect
-            </button>
-          ) : (
-            <button type="button">{account.slice(0, 5)}...</button>
-          )}
-        </span>
       </div>
     </HeaderStyle>
   );
