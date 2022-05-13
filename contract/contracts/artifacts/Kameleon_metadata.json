@@ -26,17 +26,12 @@
 			},
 			{
 				"constant": true,
-				"inputs": [
-					{
-						"name": "_tokenAddress",
-						"type": "address"
-					}
-				],
-				"name": "getExchange",
+				"inputs": [],
+				"name": "name",
 				"outputs": [
 					{
 						"name": "",
-						"type": "address"
+						"type": "string"
 					}
 				],
 				"payable": false,
@@ -100,6 +95,25 @@
 				"type": "function"
 			},
 			{
+				"constant": true,
+				"inputs": [
+					{
+						"name": "addr",
+						"type": "address"
+					}
+				],
+				"name": "getIncreasedLPT",
+				"outputs": [
+					{
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"payable": false,
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
 				"constant": false,
 				"inputs": [
 					{
@@ -124,6 +138,20 @@
 				],
 				"payable": false,
 				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"constant": true,
+				"inputs": [],
+				"name": "decimals",
+				"outputs": [
+					{
+						"name": "",
+						"type": "uint8"
+					}
+				],
+				"payable": false,
+				"stateMutability": "pure",
 				"type": "function"
 			},
 			{
@@ -168,20 +196,6 @@
 			},
 			{
 				"constant": true,
-				"inputs": [],
-				"name": "exchangeCount",
-				"outputs": [
-					{
-						"name": "",
-						"type": "uint256"
-					}
-				],
-				"payable": false,
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"constant": true,
 				"inputs": [
 					{
 						"name": "account",
@@ -209,6 +223,53 @@
 				"type": "function"
 			},
 			{
+				"constant": false,
+				"inputs": [
+					{
+						"name": "amount",
+						"type": "uint256"
+					}
+				],
+				"name": "changeTotalMintAmountPerDay",
+				"outputs": [],
+				"payable": false,
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"constant": false,
+				"inputs": [
+					{
+						"name": "factoryAddress",
+						"type": "address"
+					}
+				],
+				"name": "setFactoryAddress",
+				"outputs": [],
+				"payable": false,
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"constant": true,
+				"inputs": [
+					{
+						"name": "addr",
+						"type": "address"
+					}
+				],
+				"name": "getCurrentLPT",
+				"outputs": [
+					{
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"payable": false,
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
 				"constant": true,
 				"inputs": [],
 				"name": "owner",
@@ -223,12 +284,17 @@
 				"type": "function"
 			},
 			{
-				"constant": false,
+				"constant": true,
 				"inputs": [],
-				"name": "testMintToLPs",
-				"outputs": [],
+				"name": "symbol",
+				"outputs": [
+					{
+						"name": "",
+						"type": "string"
+					}
+				],
 				"payable": false,
-				"stateMutability": "nonpayable",
+				"stateMutability": "view",
 				"type": "function"
 			},
 			{
@@ -252,6 +318,25 @@
 				],
 				"payable": false,
 				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"constant": true,
+				"inputs": [
+					{
+						"name": "addr",
+						"type": "address"
+					}
+				],
+				"name": "getLastLPT",
+				"outputs": [
+					{
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"payable": false,
+				"stateMutability": "view",
 				"type": "function"
 			},
 			{
@@ -281,22 +366,26 @@
 				"type": "function"
 			},
 			{
-				"constant": true,
-				"inputs": [
-					{
-						"name": "",
-						"type": "address"
-					}
-				],
-				"name": "tokenToExchange",
+				"constant": false,
+				"inputs": [],
+				"name": "mintToLPs",
 				"outputs": [
 					{
 						"name": "",
-						"type": "address"
+						"type": "uint8"
 					}
 				],
 				"payable": false,
-				"stateMutability": "view",
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"constant": false,
+				"inputs": [],
+				"name": "mintToLPs",
+				"outputs": [],
+				"payable": false,
+				"stateMutability": "nonpayable",
 				"type": "function"
 			},
 			{
@@ -345,25 +434,6 @@
 				"type": "function"
 			},
 			{
-				"constant": true,
-				"inputs": [
-					{
-						"name": "",
-						"type": "uint256"
-					}
-				],
-				"name": "exchangeList",
-				"outputs": [
-					{
-						"name": "",
-						"type": "address"
-					}
-				],
-				"payable": false,
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
 				"constant": false,
 				"inputs": [
 					{
@@ -376,6 +446,12 @@
 				"payable": false,
 				"stateMutability": "nonpayable",
 				"type": "function"
+			},
+			{
+				"inputs": [],
+				"payable": false,
+				"stateMutability": "nonpayable",
+				"type": "constructor"
 			},
 			{
 				"anonymous": false,
@@ -442,53 +518,60 @@
 		"devdoc": {
 			"methods": {
 				"allowance(address,address)": {
-					"details": "See `IKIP7.allowance`."
+					"details": "See `IKIP7.allowance`.\r"
 				},
 				"approve(address,uint256)": {
-					"details": "See `IKIP7.approve`.     * Requirements:     * - `spender` cannot be the zero address."
+					"details": "See `IKIP7.approve`.\r      * Requirements:\r      * - `spender` cannot be the zero address.\r"
 				},
 				"balanceOf(address)": {
-					"details": "See `IKIP7.balanceOf`."
+					"details": "See `IKIP7.balanceOf`.\r"
 				},
 				"owner()": {
-					"details": "Returns the address of the current owner."
+					"details": "Returns the address of the current owner.\r"
 				},
 				"renounceOwnership()": {
-					"details": "Leaves the contract without owner. It will not be possible to call `onlyOwner` functions anymore. Can only be called by the current owner.     * NOTE: Renouncing ownership will leave the contract without an owner, thereby removing any functionality that is only available to the owner."
+					"details": "Leaves the contract without owner. It will not be possible to call\r `onlyOwner` functions anymore. Can only be called by the current owner.\r      * NOTE: Renouncing ownership will leave the contract without an owner,\r thereby removing any functionality that is only available to the owner.\r"
 				},
 				"safeTransfer(address,uint256)": {
-					"details": "Moves `amount` tokens from the caller's account to `recipient`."
+					"details": "Moves `amount` tokens from the caller's account to `recipient`.\r"
 				},
 				"safeTransfer(address,uint256,bytes)": {
-					"details": "Moves `amount` tokens from the caller's account to `recipient`."
+					"details": "Moves `amount` tokens from the caller's account to `recipient`.\r"
 				},
 				"safeTransferFrom(address,address,uint256)": {
-					"details": "Moves `amount` tokens from `sender` to `recipient` using the allowance mechanism. `amount` is then deducted from the caller's allowance."
+					"details": "Moves `amount` tokens from `sender` to `recipient` using the allowance mechanism.\r `amount` is then deducted from the caller's allowance.\r"
 				},
 				"safeTransferFrom(address,address,uint256,bytes)": {
-					"details": "Moves `amount` tokens from `sender` to `recipient` using the allowance mechanism. `amount` is then deducted from the caller's allowance."
+					"details": "Moves `amount` tokens from `sender` to `recipient` using the allowance mechanism.\r `amount` is then deducted from the caller's allowance.\r"
 				},
 				"supportsInterface(bytes4)": {
-					"details": "See `IKIP13.supportsInterface`.     * Time complexity O(1), guaranteed to always use less than 30 000 gas."
+					"details": "See `IKIP13.supportsInterface`.\r      * Time complexity O(1), guaranteed to always use less than 30 000 gas.\r"
 				},
 				"totalSupply()": {
-					"details": "See `IKIP7.totalSupply`."
+					"details": "See `IKIP7.totalSupply`.\r"
 				},
 				"transfer(address,uint256)": {
-					"details": "See `IKIP7.transfer`.     * Requirements:     * - `recipient` cannot be the zero address. - the caller must have a balance of at least `amount`."
+					"details": "See `IKIP7.transfer`.\r      * Requirements:\r      * - `recipient` cannot be the zero address.\r - the caller must have a balance of at least `amount`.\r"
 				},
 				"transferFrom(address,address,uint256)": {
-					"details": "See `IKIP7.transferFrom`.     * Emits an `Approval` event indicating the updated allowance. This is not required by the KIP. See the note at the beginning of `KIP7`;     * Requirements: - `sender` and `recipient` cannot be the zero address. - `sender` must have a balance of at least `value`. - the caller must have allowance for `sender`'s tokens of at least `amount`."
+					"details": "See `IKIP7.transferFrom`.\r      * Emits an `Approval` event indicating the updated allowance. This is not\r required by the KIP. See the note at the beginning of `KIP7`;\r      * Requirements:\r - `sender` and `recipient` cannot be the zero address.\r - `sender` must have a balance of at least `value`.\r - the caller must have allowance for `sender`'s tokens of at least\r `amount`.\r"
 				},
 				"transferOwnership(address)": {
-					"details": "Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner."
+					"details": "Transfers ownership of the contract to a new account (`newOwner`).\r Can only be called by the current owner.\r"
 				}
 			}
 		},
 		"userdoc": {
 			"methods": {
+				"mintToLPs()": {
+<<<<<<< HEAD
+					"notice": "mintToLPs() : 하루 발행량을 계산, 각 Exchange에서 rewardamount를 가져와서 과거의 reward amount 변화율을 측정, \r rewardamount 변화율을 통해 각 exchange에 airdrop할 토큰수 결정,\r 각 exchange에 등록된 총 address 측정\r 각 address의 balace를 탐색해 \r"
+				},
 				"testMintToLPs()": {
-					"notice": "test: testMintToLPs(): 컨트랙트 내에 등록된 address에 민트"
+					"notice": "test: testMintToLPs(): 컨트랙트 내에 등록된 address에 민트\r"
+=======
+					"notice": "mintToLPs() : 하루 발행량을 계산, 각 Exchange에서 rewardamount를 가져와서 과거의 reward amount 변화율을 측정,  rewardamount 변화율을 통해 각 exchange에 airdrop할 토큰수 결정, 각 exchange에 등록된 총 address 측정 각 address의 balace를 탐색해 "
+>>>>>>> be0c2d2bcd9f9a1a1336f387c03a0b2afc123326
 				}
 			}
 		}
@@ -497,7 +580,7 @@
 		"compilationTarget": {
 			"contracts/Kameleon.sol": "Kameleon"
 		},
-		"evmVersion": "petersburg",
+		"evmVersion": "byzantium",
 		"libraries": {},
 		"optimizer": {
 			"enabled": false,
@@ -507,69 +590,87 @@
 	},
 	"sources": {
 		"contracts/Address.sol": {
-			"keccak256": "0xb32556016817a6b821827012e600f469e5ca68b1d6ce0ba1877f1dbe2743db9f",
+			"keccak256": "0x992bce8d5a6b643f20e352e55b07fe3affa771c8e921c4c1e5623c5d4ac3839b",
 			"urls": [
-				"bzzr://9c91e4d8eeee62248b28520f7e2be3ee4d7d8c992d198ba49360f40897430acb"
+				"bzzr://de0253e9fe9c33071e5cde96818b6904992585a2f320cb6821069280a7e894d1"
 			]
 		},
 		"contracts/Exchange.sol": {
-			"keccak256": "0xb81ab165655e86d4fa42b5955f044661d4890996636cbeacbd234ea261639804",
+<<<<<<< HEAD
+			"keccak256": "0x40c812d2de8478ef21d74b9408b19074fa0d0b1c463bb4a3a6216728dcb77ed7",
 			"urls": [
-				"bzzr://09a4102c0d6d7f1cf4ca891bace9c6337cf21e3688271d4ae472731769242cf4"
+				"bzzr://b815b65c31dc07142c3b90206b41772021ae5566fa7c6a79efabaa16d68fbf23"
 			]
 		},
 		"contracts/Factory.sol": {
-			"keccak256": "0x93fcb859a111d9c22363835738f74813eff3e6fa198cb624f0b295d3d6214e5a",
+			"keccak256": "0x39dcfb2f32028bc778f4d15caf5fee9d566ff292476d2abacc94df487fb3e5b9",
 			"urls": [
-				"bzzr://e083b1ff14ec2be600edbf741f422e726ea2f6293de4164e4e6c88e049fc9996"
+				"bzzr://cd6e179377abead6e48644d10945e7e29c87d7e08e82ae2980ee7d7bbb8758fe"
+=======
+			"keccak256": "0x18f5f5183f71704c81d8267ee377cd90a8dec738eb0742f8e28d486debb7396f",
+			"urls": [
+				"bzzr://23d842d52cb36108896354ace5473d4f415eb35be9b8fd5065571be168803eaa"
+			]
+		},
+		"contracts/IFactory.sol": {
+			"keccak256": "0xbb61320ed7e91365e3068e465b15efc09a4de76780e9cb742eae813ab550ba29",
+			"urls": [
+				"bzzr://0639982cdaed53960ce39fc330ee480781617e7f2537ffd9ebd5baa5796f1a0b"
+>>>>>>> be0c2d2bcd9f9a1a1336f387c03a0b2afc123326
 			]
 		},
 		"contracts/IKIP13.sol": {
-			"keccak256": "0xa684be6ebc9e38a514dca1024c1385d95fd617d92120cbd245a7c1a72fb817d8",
+			"keccak256": "0x624e9e6220f1fff9952491658bdb41e79a944d8577eb76fcecde2352c6678b51",
 			"urls": [
-				"bzzr://71a41409d56a83fb2e4cacceba7733e736c7ad9b6f5668c3e1c53ae61e9d321d"
+				"bzzr://5f13484bb4220af06a02d5e683e0d5fa05804d6192cc8743c6e441728f964c6c"
 			]
 		},
 		"contracts/IKIP7.sol": {
-			"keccak256": "0xdebf16b2cc599a7b4cf01f62bddf3a97e37af6d7c89fbbcb89e77269481b91f8",
+			"keccak256": "0xfb6a22cff7b038ce2ffa091072bdd3af2c323349b866e6e370289b540ef49f90",
 			"urls": [
-				"bzzr://e2d2889ebc0a3d8a04537a4cc90d468a5c772d57313ff798ea1aa0f9953eec03"
+				"bzzr://6d44afffe1dc94f996db674bf9738fff161840a644d7818a0054738fc878a754"
 			]
 		},
 		"contracts/IKIP7Receiver.sol": {
-			"keccak256": "0x5fd5f860063adec2597ef9d5ec9f6598baecf51967812c3aef508f29d0ced41a",
+			"keccak256": "0x39db8ccb5de15df30c59d7fa1691a2fd6b3e9ef27503936034f1ae2d41397d22",
 			"urls": [
-				"bzzr://5472c87e0bff18321f0b292e04d9f16cb812a6924d62c699aa14720370eb3d96"
+				"bzzr://2514ee9bded2a034c07eba52881d1df7a965d673ba8a5bbae5fe847cf1e24a94"
 			]
 		},
 		"contracts/KIP13.sol": {
-			"keccak256": "0xa37b50b4380f3bc15da06d64088a957c75e4a383a2fe4644927e3dc84b649bcd",
+			"keccak256": "0xc755a6e2f73cd30628105cd7a93e7ba8ed75441a1d0d8cb790825fb7d3e540fb",
 			"urls": [
-				"bzzr://3013d5646f7600e25a8518c5676336213417f52203d13eefb73444e77db3cc74"
+				"bzzr://0cc34888252ef4267bc9672a1459fd8c3a82f04fd77303ab1c6bf8a61fd7af74"
 			]
 		},
 		"contracts/KIP7.sol": {
-			"keccak256": "0x77fb2391ddce0454186c9ac3d7463540f48c43d1308ffc2e6bcf835ef81403fb",
+			"keccak256": "0xd15f19173be7de00ce2257969846564a418e9fd1a9b6daa0df1698476eb96b26",
 			"urls": [
-				"bzzr://037dd155caeb944a2d768d329e95d320bedb4ca16fa864f4ba2dc4d08404c780"
+				"bzzr://57d4da01b22677e6856f8df49885ae7a2b61911659ae0a15830c6211ca921010"
 			]
 		},
 		"contracts/Kameleon.sol": {
-			"keccak256": "0x25fefbfe87b1889688bf4e494ee7a9f79c9f2096a94f242574311221d67975b7",
+<<<<<<< HEAD
+			"keccak256": "0xe8ddc45f79468830aa8c0f4ec0b972f97eb3a2f04fb00bd55df00299ff10b21f",
 			"urls": [
-				"bzzr://d0235ddb48340ce6f3600c183bf7f2e79fd836fc63b1b7c8dd64307b805aafaf"
+				"bzzr://032c263d20afa626b9cdd64e9c69b26512df3d193693d9d6daa9c137589c5f01"
+=======
+			"keccak256": "0x73cb7785176392713295f534dcaa06298665d2c6bfeb6dcf13228ab52f3c7207",
+			"urls": [
+				"bzzr://a1ece1afed9d0562fbe75475c19164413193ef4cde0a20d6c8fe011e9ceada4b"
+>>>>>>> be0c2d2bcd9f9a1a1336f387c03a0b2afc123326
 			]
 		},
 		"contracts/Ownable.sol": {
-			"keccak256": "0x38db741ff3763cb57d6c429ac3838ab63b7e70b4aabeb414dcb583770bc1d622",
+			"keccak256": "0xf32a8f0d7542c0a05f19b49cbb0817124ab1b014a40e5816d71acb3523f77eeb",
 			"urls": [
-				"bzzr://1ef9f5c1534dbdb1be33549b65c2156c3671d65673eba3de2a470babfdbf81ee"
+				"bzzr://94e9bdf06243f0c1893c1819fb6192c6b5446ec787e14da951667af790608315"
 			]
 		},
 		"contracts/SafeMath.sol": {
-			"keccak256": "0x440e126d35c767f263ad60029d68b9f1a946caedcc51ae10266f28e305fffe40",
+			"keccak256": "0xf18f5f0027ba4abcc41d2b57fe6a2892b6ba44db0f9cc19c25bb483c9b9347b5",
 			"urls": [
-				"bzzr://6e9198cfe866eb522696ca75aede2ac3d1dee1c6c9b8390130a76e8344956c51"
+				"bzzr://b26c54d5c430b0609253e22f4a08806e9e9cab2164ef7ae5c4c832f53504d2ef"
 			]
 		}
 	},

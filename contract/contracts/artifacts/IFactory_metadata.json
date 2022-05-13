@@ -6,7 +6,7 @@
 	"output": {
 		"abi": [
 			{
-				"constant": false,
+				"constant": true,
 				"inputs": [
 					{
 						"name": "_tokenAddress",
@@ -21,7 +21,111 @@
 					}
 				],
 				"payable": false,
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"constant": false,
+				"inputs": [
+					{
+						"name": "_tokenAddress",
+						"type": "address"
+					}
+				],
+				"name": "createExchange",
+				"outputs": [
+					{
+						"name": "",
+						"type": "address"
+					}
+				],
+				"payable": false,
 				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"constant": true,
+				"inputs": [],
+				"name": "getExchangeCount",
+				"outputs": [
+					{
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"payable": false,
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"constant": true,
+				"inputs": [],
+				"name": "exchangeCount",
+				"outputs": [
+					{
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"payable": false,
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"constant": true,
+				"inputs": [
+					{
+						"name": "",
+						"type": "address"
+					}
+				],
+				"name": "tokenToExchange",
+				"outputs": [
+					{
+						"name": "",
+						"type": "address"
+					}
+				],
+				"payable": false,
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"constant": true,
+				"inputs": [
+					{
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"name": "exchangeList",
+				"outputs": [
+					{
+						"name": "",
+						"type": "address"
+					}
+				],
+				"payable": false,
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"constant": true,
+				"inputs": [
+					{
+						"name": "index",
+						"type": "uint256"
+					}
+				],
+				"name": "getExchangeList",
+				"outputs": [
+					{
+						"name": "",
+						"type": "address"
+					}
+				],
+				"payable": false,
+				"stateMutability": "view",
 				"type": "function"
 			}
 		],
@@ -34,7 +138,7 @@
 	},
 	"settings": {
 		"compilationTarget": {
-			"contracts/Exchange.sol": "IFactory"
+			"contracts/IFactory.sol": "IFactory"
 		},
 		"evmVersion": "petersburg",
 		"libraries": {},
@@ -45,52 +149,10 @@
 		"remappings": []
 	},
 	"sources": {
-		"contracts/Address.sol": {
-			"keccak256": "0xb32556016817a6b821827012e600f469e5ca68b1d6ce0ba1877f1dbe2743db9f",
+		"contracts/IFactory.sol": {
+			"keccak256": "0xbb61320ed7e91365e3068e465b15efc09a4de76780e9cb742eae813ab550ba29",
 			"urls": [
-				"bzzr://9c91e4d8eeee62248b28520f7e2be3ee4d7d8c992d198ba49360f40897430acb"
-			]
-		},
-		"contracts/Exchange.sol": {
-			"keccak256": "0xb81ab165655e86d4fa42b5955f044661d4890996636cbeacbd234ea261639804",
-			"urls": [
-				"bzzr://09a4102c0d6d7f1cf4ca891bace9c6337cf21e3688271d4ae472731769242cf4"
-			]
-		},
-		"contracts/IKIP13.sol": {
-			"keccak256": "0xa684be6ebc9e38a514dca1024c1385d95fd617d92120cbd245a7c1a72fb817d8",
-			"urls": [
-				"bzzr://71a41409d56a83fb2e4cacceba7733e736c7ad9b6f5668c3e1c53ae61e9d321d"
-			]
-		},
-		"contracts/IKIP7.sol": {
-			"keccak256": "0xdebf16b2cc599a7b4cf01f62bddf3a97e37af6d7c89fbbcb89e77269481b91f8",
-			"urls": [
-				"bzzr://e2d2889ebc0a3d8a04537a4cc90d468a5c772d57313ff798ea1aa0f9953eec03"
-			]
-		},
-		"contracts/IKIP7Receiver.sol": {
-			"keccak256": "0x5fd5f860063adec2597ef9d5ec9f6598baecf51967812c3aef508f29d0ced41a",
-			"urls": [
-				"bzzr://5472c87e0bff18321f0b292e04d9f16cb812a6924d62c699aa14720370eb3d96"
-			]
-		},
-		"contracts/KIP13.sol": {
-			"keccak256": "0xa37b50b4380f3bc15da06d64088a957c75e4a383a2fe4644927e3dc84b649bcd",
-			"urls": [
-				"bzzr://3013d5646f7600e25a8518c5676336213417f52203d13eefb73444e77db3cc74"
-			]
-		},
-		"contracts/KIP7.sol": {
-			"keccak256": "0x77fb2391ddce0454186c9ac3d7463540f48c43d1308ffc2e6bcf835ef81403fb",
-			"urls": [
-				"bzzr://037dd155caeb944a2d768d329e95d320bedb4ca16fa864f4ba2dc4d08404c780"
-			]
-		},
-		"contracts/SafeMath.sol": {
-			"keccak256": "0x440e126d35c767f263ad60029d68b9f1a946caedcc51ae10266f28e305fffe40",
-			"urls": [
-				"bzzr://6e9198cfe866eb522696ca75aede2ac3d1dee1c6c9b8390130a76e8344956c51"
+				"bzzr://0639982cdaed53960ce39fc330ee480781617e7f2537ffd9ebd5baa5796f1a0b"
 			]
 		}
 	},
