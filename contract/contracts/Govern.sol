@@ -5,9 +5,17 @@ pragma experimental ABIEncoderV2;
 import "./IKIP7.sol";
 import "./Ownable.sol";
 
+interface IKameleon {
+    function governTransfer(address from, address to, uint256 amount) external;
+}
+
+contract IKameleonKIP7 is IKameleon, IKIP7{
+    
+}
+
 
 contract Govern is Ownable {
-    IKIP7 KameleonToken;
+    IKameleonKIP7 KameleonToken;
     uint _pollCreationFee;
 
     struct returnPoll{
@@ -36,7 +44,7 @@ contract Govern is Ownable {
 
     constructor(address KameleonTokenAddress, uint pollCreationFee_) public {
         require(KameleonTokenAddress != address(0x0)); 
-        KameleonToken = IKIP7(KameleonTokenAddress);
+        KameleonToken = IKameleonKIP7(KameleonTokenAddress);
         _pollCreationFee = pollCreationFee_;
     }
 
@@ -46,7 +54,7 @@ contract Govern is Ownable {
 
     function setToken(address KameleonTokenAddress) public onlyOwner returns (bool) {
         require(KameleonTokenAddress != address(0x0)); 
-        KameleonToken = IKIP7(KameleonTokenAddress);
+        KameleonToken = IKameleonKIP7(KameleonTokenAddress);
         return true;
     }
 
@@ -55,7 +63,7 @@ contract Govern is Ownable {
         _;
     }
     function createPoll(string memory title_, string memory content_) public _enoughTokenForCreatePoll {
-        KameleonToken.transferFrom(msg.sender,address(this),_pollCreationFee);
+        KameleonToken.governTransfer(msg.sender,address(this),_pollCreationFee);
         polls[pollIndex] = Poll({
             title:title_,
             content:content_,
@@ -69,7 +77,7 @@ contract Govern is Ownable {
     }
     function vote(uint pollIndex_, uint value_ ,bool isAgree) public returns(uint){
         // owner 주소로 송금
-        KameleonToken.transferFrom(msg.sender,address(this),value_);
+        KameleonToken.governTransfer(msg.sender,address(this),value_);
 
         if(isAgree == true){
             // 찬성표 증가
