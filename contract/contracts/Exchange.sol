@@ -42,7 +42,6 @@ contract Exchange is KIP7 {
         } else {
             _addrList[_addrCount] = msg.sender;
             _addrCount++;
-            // 여러번 등록되는 현상 방지
             _isAddrExist[msg.sender] = true;
             _;
         }
@@ -65,6 +64,18 @@ contract Exchange is KIP7 {
         return balanceOf(_addrList[index]);
     }
 
+    // addLiquidity 하기 위해 필요한 클레이 대비 필요한 토큰 수
+    function getMinimumTokenAmountToAddLiquidity(uint256 _ethAmount) public view returns (uint256) {
+        if (getReserve() == 0) {
+            return 0;
+        } else {
+            uint256 ethReserve = address(this).balance - _ethAmount;
+            uint256 tokenReserve = getReserve();
+            uint256 tokenAmount = (_ethAmount * tokenReserve) / ethReserve;
+            return tokenAmount;
+        }
+    }
+
     // checkAddr modifier 추가
     function addLiquidity(uint256 _tokenAmount) checkAddr
         public
@@ -73,6 +84,7 @@ contract Exchange is KIP7 {
     {
         if (getReserve() == 0) {
             KIP7 token = KIP7(tokenAddress);
+            require(_tokenAmount > 0, "Exchange: invalid token amount");
             token.transferFrom(msg.sender, address(this), _tokenAmount);
 
             uint256 liquidity = address(this).balance;
