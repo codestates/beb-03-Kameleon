@@ -25,6 +25,20 @@
 				"type": "function"
 			},
 			{
+				"constant": true,
+				"inputs": [],
+				"name": "name",
+				"outputs": [
+					{
+						"name": "",
+						"type": "string"
+					}
+				],
+				"payable": false,
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
 				"constant": false,
 				"inputs": [
 					{
@@ -89,21 +103,35 @@
 				"type": "function"
 			},
 			{
+				"constant": true,
+				"inputs": [],
+				"name": "decimals",
+				"outputs": [
+					{
+						"name": "",
+						"type": "uint8"
+					}
+				],
+				"payable": false,
+				"stateMutability": "pure",
+				"type": "function"
+			},
+			{
 				"constant": false,
 				"inputs": [
 					{
-						"name": "_minTokens",
-						"type": "uint256"
+						"name": "recipient",
+						"type": "address"
 					},
 					{
-						"name": "_recipient",
-						"type": "address"
+						"name": "amount",
+						"type": "uint256"
 					}
 				],
-				"name": "ethToTokenTransfer",
+				"name": "mint",
 				"outputs": [],
-				"payable": true,
-				"stateMutability": "payable",
+				"payable": false,
+				"stateMutability": "nonpayable",
 				"type": "function"
 			},
 			{
@@ -147,39 +175,6 @@
 				"type": "function"
 			},
 			{
-				"constant": false,
-				"inputs": [
-					{
-						"name": "_tokenAmount",
-						"type": "uint256"
-					}
-				],
-				"name": "addLiquidity",
-				"outputs": [
-					{
-						"name": "",
-						"type": "uint256"
-					}
-				],
-				"payable": true,
-				"stateMutability": "payable",
-				"type": "function"
-			},
-			{
-				"constant": true,
-				"inputs": [],
-				"name": "getReserve",
-				"outputs": [
-					{
-						"name": "",
-						"type": "uint256"
-					}
-				],
-				"payable": false,
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
 				"constant": true,
 				"inputs": [
 					{
@@ -199,18 +194,22 @@
 				"type": "function"
 			},
 			{
+				"constant": false,
+				"inputs": [],
+				"name": "renounceOwnership",
+				"outputs": [],
+				"payable": false,
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
 				"constant": true,
-				"inputs": [
-					{
-						"name": "_tokenSold",
-						"type": "uint256"
-					}
-				],
-				"name": "getEthAmount",
+				"inputs": [],
+				"name": "owner",
 				"outputs": [
 					{
 						"name": "",
-						"type": "uint256"
+						"type": "address"
 					}
 				],
 				"payable": false,
@@ -220,11 +219,11 @@
 			{
 				"constant": true,
 				"inputs": [],
-				"name": "factoryAddress",
+				"name": "symbol",
 				"outputs": [
 					{
 						"name": "",
-						"type": "address"
+						"type": "string"
 					}
 				],
 				"payable": false,
@@ -235,51 +234,18 @@
 				"constant": false,
 				"inputs": [
 					{
-						"name": "_amount",
-						"type": "uint256"
-					}
-				],
-				"name": "removeLiquidity",
-				"outputs": [
-					{
-						"name": "",
-						"type": "uint256"
+						"name": "recipient",
+						"type": "address"
 					},
 					{
-						"name": "",
+						"name": "amount",
 						"type": "uint256"
 					}
 				],
+				"name": "burn",
+				"outputs": [],
 				"payable": false,
 				"stateMutability": "nonpayable",
-				"type": "function"
-			},
-			{
-				"constant": true,
-				"inputs": [],
-				"name": "tokenAddress",
-				"outputs": [
-					{
-						"name": "",
-						"type": "address"
-					}
-				],
-				"payable": false,
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"constant": true,
-				"inputs": [],
-				"name": "getAddrCount",
-				"outputs": [
-					{
-						"name": "",
-						"type": "uint256"
-					}
-				],
-				"payable": false,
-				"stateMutability": "view",
 				"type": "function"
 			},
 			{
@@ -335,44 +301,6 @@
 				"constant": true,
 				"inputs": [
 					{
-						"name": "_ethSold",
-						"type": "uint256"
-					}
-				],
-				"name": "getTokenAmount",
-				"outputs": [
-					{
-						"name": "",
-						"type": "uint256"
-					}
-				],
-				"payable": false,
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"constant": true,
-				"inputs": [
-					{
-						"name": "index",
-						"type": "uint256"
-					}
-				],
-				"name": "getAddr",
-				"outputs": [
-					{
-						"name": "",
-						"type": "address"
-					}
-				],
-				"payable": false,
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"constant": true,
-				"inputs": [
-					{
 						"name": "owner",
 						"type": "address"
 					},
@@ -390,43 +318,6 @@
 				],
 				"payable": false,
 				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"constant": true,
-				"inputs": [
-					{
-						"name": "index",
-						"type": "uint256"
-					}
-				],
-				"name": "getIndexBalance",
-				"outputs": [
-					{
-						"name": "",
-						"type": "uint256"
-					}
-				],
-				"payable": false,
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"constant": false,
-				"inputs": [
-					{
-						"name": "_tokensSold",
-						"type": "uint256"
-					},
-					{
-						"name": "_minEth",
-						"type": "uint256"
-					}
-				],
-				"name": "tokenToEthSwap",
-				"outputs": [],
-				"payable": false,
-				"stateMutability": "nonpayable",
 				"type": "function"
 			},
 			{
@@ -455,62 +346,47 @@
 				"constant": false,
 				"inputs": [
 					{
-						"name": "_tokensSold",
-						"type": "uint256"
-					},
-					{
-						"name": "_minTokensBought",
-						"type": "uint256"
-					},
-					{
-						"name": "_tokenAddress",
+						"name": "newOwner",
 						"type": "address"
 					}
 				],
-				"name": "tokenToTokenSwap",
+				"name": "transferOwnership",
 				"outputs": [],
 				"payable": false,
 				"stateMutability": "nonpayable",
 				"type": "function"
 			},
 			{
-				"constant": false,
 				"inputs": [
 					{
-						"name": "_minTokens",
-						"type": "uint256"
-					}
-				],
-				"name": "ethToTokenSwap",
-				"outputs": [],
-				"payable": true,
-				"stateMutability": "payable",
-				"type": "function"
-			},
-			{
-				"constant": true,
-				"inputs": [],
-				"name": "getLiquidityPerToken",
-				"outputs": [
+						"name": "name_",
+						"type": "string"
+					},
 					{
-						"name": "",
-						"type": "uint256"
-					}
-				],
-				"payable": false,
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [
-					{
-						"name": "_token",
-						"type": "address"
+						"name": "symbol_",
+						"type": "string"
 					}
 				],
 				"payable": false,
 				"stateMutability": "nonpayable",
 				"type": "constructor"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"name": "previousOwner",
+						"type": "address"
+					},
+					{
+						"indexed": true,
+						"name": "newOwner",
+						"type": "address"
+					}
+				],
+				"name": "OwnershipTransferred",
+				"type": "event"
 			},
 			{
 				"anonymous": false,
@@ -568,6 +444,12 @@
 				"balanceOf(address)": {
 					"details": "See `IKIP7.balanceOf`."
 				},
+				"owner()": {
+					"details": "Returns the address of the current owner."
+				},
+				"renounceOwnership()": {
+					"details": "Leaves the contract without owner. It will not be possible to call `onlyOwner` functions anymore. Can only be called by the current owner.     * NOTE: Renouncing ownership will leave the contract without an owner, thereby removing any functionality that is only available to the owner."
+				},
 				"safeTransfer(address,uint256)": {
 					"details": "Moves `amount` tokens from the caller's account to `recipient`."
 				},
@@ -591,6 +473,9 @@
 				},
 				"transferFrom(address,address,uint256)": {
 					"details": "See `IKIP7.transferFrom`.     * Emits an `Approval` event indicating the updated allowance. This is not required by the KIP. See the note at the beginning of `KIP7`;     * Requirements: - `sender` and `recipient` cannot be the zero address. - `sender` must have a balance of at least `value`. - the caller must have allowance for `sender`'s tokens of at least `amount`."
+				},
+				"transferOwnership(address)": {
+					"details": "Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner."
 				}
 			}
 		},
@@ -600,7 +485,7 @@
 	},
 	"settings": {
 		"compilationTarget": {
-			"contracts/Exchange.sol": "Exchange"
+			"contracts/KStockToken.sol": "KStockToken"
 		},
 		"evmVersion": "petersburg",
 		"libraries": {},
@@ -615,18 +500,6 @@
 			"keccak256": "0xb32556016817a6b821827012e600f469e5ca68b1d6ce0ba1877f1dbe2743db9f",
 			"urls": [
 				"bzzr://9c91e4d8eeee62248b28520f7e2be3ee4d7d8c992d198ba49360f40897430acb"
-			]
-		},
-		"contracts/Exchange.sol": {
-			"keccak256": "0x6b4cdec73e7613146333e3c7c3b9dc28eef8a27fb775e48c88466a5228ebdb2c",
-			"urls": [
-				"bzzr://2c8cb4f123ecabe33f2d6823bc95fde9c4d8b44d5374c15c854b8c4a835d8879"
-			]
-		},
-		"contracts/IFactory.sol": {
-			"keccak256": "0xbb61320ed7e91365e3068e465b15efc09a4de76780e9cb742eae813ab550ba29",
-			"urls": [
-				"bzzr://0639982cdaed53960ce39fc330ee480781617e7f2537ffd9ebd5baa5796f1a0b"
 			]
 		},
 		"contracts/IKIP13.sol": {
@@ -657,6 +530,18 @@
 			"keccak256": "0x77fb2391ddce0454186c9ac3d7463540f48c43d1308ffc2e6bcf835ef81403fb",
 			"urls": [
 				"bzzr://037dd155caeb944a2d768d329e95d320bedb4ca16fa864f4ba2dc4d08404c780"
+			]
+		},
+		"contracts/KStockToken.sol": {
+			"keccak256": "0xc29be3bc63df2e892d941356b05ada98858966d2ef492221b44762b0e878771f",
+			"urls": [
+				"bzzr://9975078b8babbb231e6af34873b3c4862fa58aa61939641c02eba9819e086db1"
+			]
+		},
+		"contracts/Ownable.sol": {
+			"keccak256": "0x38db741ff3763cb57d6c429ac3838ab63b7e70b4aabeb414dcb583770bc1d622",
+			"urls": [
+				"bzzr://1ef9f5c1534dbdb1be33549b65c2156c3671d65673eba3de2a470babfdbf81ee"
 			]
 		},
 		"contracts/SafeMath.sol": {

@@ -1,0 +1,77 @@
+{
+	"compiler": {
+		"version": "0.5.6+commit.b259423e"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [
+			{
+				"constant": false,
+				"inputs": [
+					{
+						"name": "from",
+						"type": "address"
+					},
+					{
+						"name": "to",
+						"type": "address"
+					},
+					{
+						"name": "amount",
+						"type": "uint256"
+					}
+				],
+				"name": "governTransfer",
+				"outputs": [],
+				"payable": false,
+				"stateMutability": "nonpayable",
+				"type": "function"
+			}
+		],
+		"devdoc": {
+			"methods": {}
+		},
+		"userdoc": {
+			"methods": {}
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"contracts/Govern.sol": "IKameleon"
+		},
+		"evmVersion": "petersburg",
+		"libraries": {},
+		"optimizer": {
+			"enabled": false,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"contracts/Govern.sol": {
+			"keccak256": "0x6dae4c506c9ee29b890c77f5762b72171668a0593ff845e86b44792fd10b7ba8",
+			"urls": [
+				"bzzr://f978e9602ca0cf1e66b161257f3a304a2d97db4d385855a49ce00dbf2d8e4588"
+			]
+		},
+		"contracts/IKIP13.sol": {
+			"keccak256": "0xa684be6ebc9e38a514dca1024c1385d95fd617d92120cbd245a7c1a72fb817d8",
+			"urls": [
+				"bzzr://71a41409d56a83fb2e4cacceba7733e736c7ad9b6f5668c3e1c53ae61e9d321d"
+			]
+		},
+		"contracts/IKIP7.sol": {
+			"keccak256": "0xdebf16b2cc599a7b4cf01f62bddf3a97e37af6d7c89fbbcb89e77269481b91f8",
+			"urls": [
+				"bzzr://e2d2889ebc0a3d8a04537a4cc90d468a5c772d57313ff798ea1aa0f9953eec03"
+			]
+		},
+		"contracts/Ownable.sol": {
+			"keccak256": "0x38db741ff3763cb57d6c429ac3838ab63b7e70b4aabeb414dcb583770bc1d622",
+			"urls": [
+				"bzzr://1ef9f5c1534dbdb1be33549b65c2156c3671d65673eba3de2a470babfdbf81ee"
+			]
+		}
+	},
+	"version": 1
+}
