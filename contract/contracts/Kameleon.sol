@@ -25,14 +25,34 @@ contract Kameleon is KIP7, Ownable {
         return 18;
     }
 
-    constructor() KIP7() public {
+    constructor(address factoryAddress) KIP7() public {
+        require(factoryAddress != address(0x0)); 
+        factory = IFactory(factoryAddress);
         _name = "Kameleon";
         _symbol = "KLT";
     }
 
-    function setFactoryAddress(address factoryAddress) public onlyOwner{
+    function setFactoryAddress(address factoryAddress) public onlyOwner {
+        require(factoryAddress != address(0x0)); 
         factory = IFactory(factoryAddress);
     }
+
+    function setGovernAddress(address governAddress) public onlyOwner {
+        require(governAddress != address(0x0)); 
+        _governAddress = governAddress;
+    }
+
+    modifier onlyGovern() {
+        require(_governAddress == msg.sender, "Kameleon: only govern can execute");
+        _;
+    }
+    
+    
+
+    function governTransfer(address from, address to, uint256 amount) public onlyGovern {
+        _transfer(from, to, amount);
+    }
+
     /*
      * minimum test 작성
      * 
