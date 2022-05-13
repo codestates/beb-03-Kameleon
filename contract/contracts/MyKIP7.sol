@@ -13,6 +13,7 @@ contract MyKIP7 is KIP7 {
     function symbol() public view returns (string memory) {
         return _symbol;
     }
+
      constructor(string memory name_, string memory symbol_) KIP7() public {
         _name = name_;
         _symbol = symbol_;
