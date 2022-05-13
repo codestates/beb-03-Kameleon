@@ -1,13 +1,59 @@
-import React, { useState } from 'react';
+import { useState, useCallback } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { IconProp } from '@fortawesome/fontawesome-svg-core';
+import { faArrowDown } from '@fortawesome/free-solid-svg-icons';
+
 import {
   MintPageWrapper,
   TabStyle,
-  InputStyle,
   DetailInfoStyle,
+  IconWrapper,
+  ButtonWrapper,
 } from './styles/MintPage.styles';
 
-const SwapPage = () => {
-  const [tab, setTab] = useState('mint');
+import SingleInput from '../components/Input/SingleInput';
+import MultipleInput from '../components/Input/MultipleInput';
+
+const arrowDown = faArrowDown as IconProp;
+
+const MintPage = () => {
+  const [tab, setTab] = useState<string>('mint');
+  const [valueA, setValueA] = useState<string>('');
+  const [valueB, setValueB] = useState<string>('');
+  const [nameA, setNameA] = useState<string>('');
+  const [nameB, setNameB] = useState<string>('');
+  const [isDecimalErrorA, setIsDecimalErrorA] = useState<boolean>(false);
+  const [isDecimalErrorB, setIsDecimalErrorB] = useState<boolean>(false);
+
+  const clickButton = useCallback(() => {
+    console.log('button click');
+  }, []);
+
+  const liftStateA = useCallback(
+    (value: string, name: string, isDecimalError: boolean) => {
+      console.log('1');
+      setValueA(value);
+      setNameA(name);
+      setIsDecimalErrorA(isDecimalError);
+    },
+    []
+  );
+
+  const liftStateB = useCallback(
+    (value: string, name: string, isDecimalError: boolean) => {
+      setValueB(value);
+      setNameB(name);
+      setIsDecimalErrorB(isDecimalError);
+    },
+    []
+  );
+
+  console.log('mintA', Number(valueA), nameA, isDecimalErrorA);
+  console.log('mintB', Number(valueB), nameB, isDecimalErrorB);
+
+  // Number로 형식 변환
+  // 0 보다 클때
+  // 소수점 확인 알아서해줌 ex) 4. => 4
 
   return (
     <MintPageWrapper>
@@ -31,55 +77,48 @@ const SwapPage = () => {
       <form action="">
         {tab === 'mint' ? (
           <>
-            <div>
-              <InputStyle>
-                <div>
-                  <span>
-                    KLAY -&gt;
-                    <button type="button"> Token1</button>
-                  </span>
-                </div>
-                <div>
-                  <label htmlFor="mintInput">Input</label>
-                  <span>
-                    <input type="number" id="mintInput" placeholder="00000" />
-                  </span>
-                </div>
-                <dl>
-                  <dt>Output</dt>
-                  <dd>0000 kSAMSUMG</dd>
-                </dl>
-              </InputStyle>
-            </div>
-            <button type="button">발행하기</button>
+            <SingleInput liftState={liftStateA}>INPUT</SingleInput>
+            <IconWrapper>
+              <FontAwesomeIcon icon={arrowDown} className="icon" />
+            </IconWrapper>
+            <MultipleInput liftState={liftStateB}>OUTPUT</MultipleInput>
+            <ButtonWrapper
+              numberA={Number(valueA)}
+              numberB={Number(valueB)}
+              isErrorA={isDecimalErrorA}
+              isErrorB={isDecimalErrorB}
+              type="button"
+            >
+              발행하기
+            </ButtonWrapper>
           </>
         ) : (
           <>
-            <div>
-              <InputStyle>
-                <div>
-                  <label htmlFor="input">kSAMSUNG Token</label>
-                  <span>
-                    <input type="number" id="input" placeholder="00000" />
-                  </span>
-                </div>
-                <dl>
-                  <dt>Output</dt>
-                  <dd>0000 kSAMSUMG</dd>
-                </dl>
-              </InputStyle>
-              <DetailInfoStyle>
-                <div>
-                  <dt>Exchange Rate</dt>
-                  <dd>1 KLAY = 1000 KMT</dd>
-                </div>
-                <div>
-                  <dt>Fee</dt>
-                  <dd>0.001KLAY</dd>
-                </div>
-              </DetailInfoStyle>
-            </div>
-            <button type="button">소각하기</button>
+            <MultipleInput liftState={liftStateB}>INPUT</MultipleInput>
+            <IconWrapper>
+              <FontAwesomeIcon icon={arrowDown} className="icon" />
+            </IconWrapper>
+            <SingleInput liftState={liftStateA}>OUTPUT</SingleInput>
+            <DetailInfoStyle>
+              <div>
+                <dt>Exchange Rate</dt>
+                <dd>1 KLAY = 1000 KMT</dd>
+              </div>
+              <div>
+                <dt>Fee</dt>
+                <dd>0.001KLAY</dd>
+              </div>
+            </DetailInfoStyle>
+            <ButtonWrapper
+              numberA={Number(valueA)}
+              numberB={Number(valueB)}
+              isErrorA={isDecimalErrorA}
+              isErrorB={isDecimalErrorB}
+              type="button"
+              onClick={clickButton}
+            >
+              소각하기
+            </ButtonWrapper>
           </>
         )}
       </form>
@@ -87,4 +126,4 @@ const SwapPage = () => {
   );
 };
 
-export default SwapPage;
+export default MintPage;

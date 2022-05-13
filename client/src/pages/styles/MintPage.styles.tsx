@@ -14,20 +14,6 @@ const MintPageWrapper = styled.div`
     padding: 1rem 2rem;
     background-color: var(--white);
     border-radius: 1rem;
-
-    & > button {
-      display: block;
-      padding: 1rem 2rem;
-      margin: auto;
-      margin-top: 1.5rem;
-      width: 100%;
-      color: var(--white);
-      font-weight: 700;
-      font-size: 1rem;
-      background-color: var(--dark-green);
-      border-radius: 1rem;
-      border: 0;
-    }
   }
 `;
 
@@ -36,7 +22,7 @@ const TabStyle = styled.span`
   top: 0;
   right: 0;
   background-color: var(--gray);
-  border-radius: 4rem;
+  border-radius: 0.25rem;
   overflow: hidden;
 
   & > button {
@@ -44,65 +30,14 @@ const TabStyle = styled.span`
     color: var(--white);
     font-size: 0.7rem;
     border: 0;
-    border-radius: 4rem;
     background-color: transparent;
 
     &.on {
       background-color: var(--dark-green);
     }
-  }
-`;
 
-const InputStyle = styled.div`
-  padding: 0.8rem 1.6rem;
-  background-color: var(--green);
-  border-radius: 0.5rem;
-
-  & > div {
-    position: relative;
-    width: 100%;
-    padding: 0.5rem;
-    margin-top: 0.5rem;
-    background-color: var(--white);
-
-    & > label {
-      display: block;
-      width: 100%;
-      color: var(--gray);
-      font-size: 0.8rem;
-      font-weight: 700;
-    }
-
-    & > span {
-      display: flex;
-
-      & em {
-        font-style: normal;
-        font-size: 0.8rem;
-        font-weight: 700;
-        color: var(--green);
-      }
-
-      & input {
-        width: 100%;
-        border: 0;
-        margin-top: 0.3rem;
-      }
-    }
-  }
-  & > dl {
-    padding: 0.5rem;
-    margin-top: 2rem;
-    background-color: var(--white);
-    font-size: 0.8rem;
-    font-weight: 700;
-
-    & > dt {
-      color: var(--gray);
-    }
-    & > dd {
-      margin-top: 0.3rem;
-      color: var(--green);
+    :hover {
+      cursor: pointer;
     }
   }
 `;
@@ -130,4 +65,38 @@ const DetailInfoStyle = styled.dl`
   }
 `;
 
-export { MintPageWrapper, InputStyle, DetailInfoStyle, TabStyle };
+export const IconWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  padding: 1rem 0;
+  color: var(--blue);
+`;
+
+export const ButtonWrapper = styled.button<{
+  numberA: number;
+  numberB: number;
+  isErrorA: boolean;
+  isErrorB: boolean;
+}>`
+  display: block;
+  padding: 1rem 2rem;
+  margin: auto;
+  margin-top: 1.5rem;
+  width: 100%;
+  color: var(--white);
+  font-weight: 700;
+  font-size: 1rem;
+  background-color: var(--dark-green);
+  border-radius: 1rem;
+  border: 0;
+  opacity: ${(props) =>
+    props.numberA > 0 && props.numberB > 0 && !props.isErrorA && !props.isErrorB
+      ? ''
+      : '0.7'};
+
+  :hover {
+    cursor: pointer;
+  }
+`;
+
+export { MintPageWrapper, DetailInfoStyle, TabStyle };

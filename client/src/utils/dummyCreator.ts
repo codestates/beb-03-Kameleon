@@ -8,7 +8,7 @@ export const createTokenList = (len: number) => {
   for (let i = 0; i < len; i++) {
     const token = {
       id: i,
-      name: '(주) ' + getRandomInt(1, 2000),
+      name: '(주)' + getRandomInt(1, 2000),
       oraclePrice: getRandomInt(0, 100000),
       usdPrice: getRandomInt(0, 100000),
       krwPrice: getRandomInt(0, 100000),

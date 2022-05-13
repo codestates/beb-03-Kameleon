@@ -1,0 +1,678 @@
+{
+	"compiler": {
+		"version": "0.5.6+commit.b259423e"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [
+			{
+				"constant": true,
+				"inputs": [
+					{
+						"name": "interfaceId",
+						"type": "bytes4"
+					}
+				],
+				"name": "supportsInterface",
+				"outputs": [
+					{
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"payable": false,
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"constant": true,
+				"inputs": [],
+				"name": "name",
+				"outputs": [
+					{
+						"name": "",
+						"type": "string"
+					}
+				],
+				"payable": false,
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"constant": false,
+				"inputs": [
+					{
+						"name": "spender",
+						"type": "address"
+					},
+					{
+						"name": "value",
+						"type": "uint256"
+					}
+				],
+				"name": "approve",
+				"outputs": [
+					{
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"payable": false,
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"constant": false,
+				"inputs": [
+					{
+						"name": "_tokenAddress",
+						"type": "address"
+					}
+				],
+				"name": "createExchange",
+				"outputs": [
+					{
+						"name": "",
+						"type": "address"
+					}
+				],
+				"payable": false,
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"constant": true,
+				"inputs": [],
+				"name": "totalSupply",
+				"outputs": [
+					{
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"payable": false,
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"constant": true,
+				"inputs": [
+					{
+						"name": "addr",
+						"type": "address"
+					}
+				],
+				"name": "getIncreasedLPT",
+				"outputs": [
+					{
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"payable": false,
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"constant": false,
+				"inputs": [
+					{
+						"name": "sender",
+						"type": "address"
+					},
+					{
+						"name": "recipient",
+						"type": "address"
+					},
+					{
+						"name": "amount",
+						"type": "uint256"
+					}
+				],
+				"name": "transferFrom",
+				"outputs": [
+					{
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"payable": false,
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"constant": true,
+				"inputs": [],
+				"name": "decimals",
+				"outputs": [
+					{
+						"name": "",
+						"type": "uint8"
+					}
+				],
+				"payable": false,
+				"stateMutability": "pure",
+				"type": "function"
+			},
+			{
+				"constant": false,
+				"inputs": [
+					{
+						"name": "recipient",
+						"type": "address"
+					},
+					{
+						"name": "amount",
+						"type": "uint256"
+					}
+				],
+				"name": "safeTransfer",
+				"outputs": [],
+				"payable": false,
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"constant": false,
+				"inputs": [
+					{
+						"name": "sender",
+						"type": "address"
+					},
+					{
+						"name": "recipient",
+						"type": "address"
+					},
+					{
+						"name": "amount",
+						"type": "uint256"
+					}
+				],
+				"name": "safeTransferFrom",
+				"outputs": [],
+				"payable": false,
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"constant": true,
+				"inputs": [
+					{
+						"name": "account",
+						"type": "address"
+					}
+				],
+				"name": "balanceOf",
+				"outputs": [
+					{
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"payable": false,
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"constant": false,
+				"inputs": [],
+				"name": "renounceOwnership",
+				"outputs": [],
+				"payable": false,
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"constant": false,
+				"inputs": [
+					{
+						"name": "amount",
+						"type": "uint256"
+					}
+				],
+				"name": "changeTotalMintAmountPerDay",
+				"outputs": [],
+				"payable": false,
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"constant": false,
+				"inputs": [
+					{
+						"name": "factoryAddress",
+						"type": "address"
+					}
+				],
+				"name": "setFactoryAddress",
+				"outputs": [],
+				"payable": false,
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"constant": true,
+				"inputs": [
+					{
+						"name": "addr",
+						"type": "address"
+					}
+				],
+				"name": "getCurrentLPT",
+				"outputs": [
+					{
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"payable": false,
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"constant": true,
+				"inputs": [],
+				"name": "owner",
+				"outputs": [
+					{
+						"name": "",
+						"type": "address"
+					}
+				],
+				"payable": false,
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"constant": true,
+				"inputs": [],
+				"name": "symbol",
+				"outputs": [
+					{
+						"name": "",
+						"type": "string"
+					}
+				],
+				"payable": false,
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"constant": false,
+				"inputs": [
+					{
+						"name": "recipient",
+						"type": "address"
+					},
+					{
+						"name": "amount",
+						"type": "uint256"
+					}
+				],
+				"name": "transfer",
+				"outputs": [
+					{
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"payable": false,
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"constant": true,
+				"inputs": [
+					{
+						"name": "addr",
+						"type": "address"
+					}
+				],
+				"name": "getLastLPT",
+				"outputs": [
+					{
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"payable": false,
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"constant": false,
+				"inputs": [
+					{
+						"name": "sender",
+						"type": "address"
+					},
+					{
+						"name": "recipient",
+						"type": "address"
+					},
+					{
+						"name": "amount",
+						"type": "uint256"
+					},
+					{
+						"name": "data",
+						"type": "bytes"
+					}
+				],
+				"name": "safeTransferFrom",
+				"outputs": [],
+				"payable": false,
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"constant": false,
+				"inputs": [],
+				"name": "mintToLPs",
+				"outputs": [
+					{
+						"name": "",
+						"type": "uint8"
+					}
+				],
+				"payable": false,
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"constant": false,
+				"inputs": [],
+				"name": "mintToLPs",
+				"outputs": [],
+				"payable": false,
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"constant": true,
+				"inputs": [
+					{
+						"name": "owner",
+						"type": "address"
+					},
+					{
+						"name": "spender",
+						"type": "address"
+					}
+				],
+				"name": "allowance",
+				"outputs": [
+					{
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"payable": false,
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"constant": false,
+				"inputs": [
+					{
+						"name": "recipient",
+						"type": "address"
+					},
+					{
+						"name": "amount",
+						"type": "uint256"
+					},
+					{
+						"name": "data",
+						"type": "bytes"
+					}
+				],
+				"name": "safeTransfer",
+				"outputs": [],
+				"payable": false,
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"constant": false,
+				"inputs": [
+					{
+						"name": "newOwner",
+						"type": "address"
+					}
+				],
+				"name": "transferOwnership",
+				"outputs": [],
+				"payable": false,
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"payable": false,
+				"stateMutability": "nonpayable",
+				"type": "constructor"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"name": "previousOwner",
+						"type": "address"
+					},
+					{
+						"indexed": true,
+						"name": "newOwner",
+						"type": "address"
+					}
+				],
+				"name": "OwnershipTransferred",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"name": "from",
+						"type": "address"
+					},
+					{
+						"indexed": true,
+						"name": "to",
+						"type": "address"
+					},
+					{
+						"indexed": false,
+						"name": "value",
+						"type": "uint256"
+					}
+				],
+				"name": "Transfer",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"name": "owner",
+						"type": "address"
+					},
+					{
+						"indexed": true,
+						"name": "spender",
+						"type": "address"
+					},
+					{
+						"indexed": false,
+						"name": "value",
+						"type": "uint256"
+					}
+				],
+				"name": "Approval",
+				"type": "event"
+			}
+		],
+		"devdoc": {
+			"methods": {
+				"allowance(address,address)": {
+					"details": "See `IKIP7.allowance`.\r"
+				},
+				"approve(address,uint256)": {
+					"details": "See `IKIP7.approve`.\r      * Requirements:\r      * - `spender` cannot be the zero address.\r"
+				},
+				"balanceOf(address)": {
+					"details": "See `IKIP7.balanceOf`.\r"
+				},
+				"owner()": {
+					"details": "Returns the address of the current owner.\r"
+				},
+				"renounceOwnership()": {
+					"details": "Leaves the contract without owner. It will not be possible to call\r `onlyOwner` functions anymore. Can only be called by the current owner.\r      * NOTE: Renouncing ownership will leave the contract without an owner,\r thereby removing any functionality that is only available to the owner.\r"
+				},
+				"safeTransfer(address,uint256)": {
+					"details": "Moves `amount` tokens from the caller's account to `recipient`.\r"
+				},
+				"safeTransfer(address,uint256,bytes)": {
+					"details": "Moves `amount` tokens from the caller's account to `recipient`.\r"
+				},
+				"safeTransferFrom(address,address,uint256)": {
+					"details": "Moves `amount` tokens from `sender` to `recipient` using the allowance mechanism.\r `amount` is then deducted from the caller's allowance.\r"
+				},
+				"safeTransferFrom(address,address,uint256,bytes)": {
+					"details": "Moves `amount` tokens from `sender` to `recipient` using the allowance mechanism.\r `amount` is then deducted from the caller's allowance.\r"
+				},
+				"supportsInterface(bytes4)": {
+					"details": "See `IKIP13.supportsInterface`.\r      * Time complexity O(1), guaranteed to always use less than 30 000 gas.\r"
+				},
+				"totalSupply()": {
+					"details": "See `IKIP7.totalSupply`.\r"
+				},
+				"transfer(address,uint256)": {
+					"details": "See `IKIP7.transfer`.\r      * Requirements:\r      * - `recipient` cannot be the zero address.\r - the caller must have a balance of at least `amount`.\r"
+				},
+				"transferFrom(address,address,uint256)": {
+					"details": "See `IKIP7.transferFrom`.\r      * Emits an `Approval` event indicating the updated allowance. This is not\r required by the KIP. See the note at the beginning of `KIP7`;\r      * Requirements:\r - `sender` and `recipient` cannot be the zero address.\r - `sender` must have a balance of at least `value`.\r - the caller must have allowance for `sender`'s tokens of at least\r `amount`.\r"
+				},
+				"transferOwnership(address)": {
+					"details": "Transfers ownership of the contract to a new account (`newOwner`).\r Can only be called by the current owner.\r"
+				}
+			}
+		},
+		"userdoc": {
+			"methods": {
+				"mintToLPs()": {
+<<<<<<< HEAD
+					"notice": "mintToLPs() : 하루 발행량을 계산, 각 Exchange에서 rewardamount를 가져와서 과거의 reward amount 변화율을 측정, \r rewardamount 변화율을 통해 각 exchange에 airdrop할 토큰수 결정,\r 각 exchange에 등록된 총 address 측정\r 각 address의 balace를 탐색해 \r"
+				},
+				"testMintToLPs()": {
+					"notice": "test: testMintToLPs(): 컨트랙트 내에 등록된 address에 민트\r"
+=======
+					"notice": "mintToLPs() : 하루 발행량을 계산, 각 Exchange에서 rewardamount를 가져와서 과거의 reward amount 변화율을 측정,  rewardamount 변화율을 통해 각 exchange에 airdrop할 토큰수 결정, 각 exchange에 등록된 총 address 측정 각 address의 balace를 탐색해 "
+>>>>>>> be0c2d2bcd9f9a1a1336f387c03a0b2afc123326
+				}
+			}
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"contracts/Kameleon.sol": "Kameleon"
+		},
+		"evmVersion": "byzantium",
+		"libraries": {},
+		"optimizer": {
+			"enabled": false,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"contracts/Address.sol": {
+			"keccak256": "0x992bce8d5a6b643f20e352e55b07fe3affa771c8e921c4c1e5623c5d4ac3839b",
+			"urls": [
+				"bzzr://de0253e9fe9c33071e5cde96818b6904992585a2f320cb6821069280a7e894d1"
+			]
+		},
+		"contracts/Exchange.sol": {
+<<<<<<< HEAD
+			"keccak256": "0x40c812d2de8478ef21d74b9408b19074fa0d0b1c463bb4a3a6216728dcb77ed7",
+			"urls": [
+				"bzzr://b815b65c31dc07142c3b90206b41772021ae5566fa7c6a79efabaa16d68fbf23"
+			]
+		},
+		"contracts/Factory.sol": {
+			"keccak256": "0x39dcfb2f32028bc778f4d15caf5fee9d566ff292476d2abacc94df487fb3e5b9",
+			"urls": [
+				"bzzr://cd6e179377abead6e48644d10945e7e29c87d7e08e82ae2980ee7d7bbb8758fe"
+=======
+			"keccak256": "0x18f5f5183f71704c81d8267ee377cd90a8dec738eb0742f8e28d486debb7396f",
+			"urls": [
+				"bzzr://23d842d52cb36108896354ace5473d4f415eb35be9b8fd5065571be168803eaa"
+			]
+		},
+		"contracts/IFactory.sol": {
+			"keccak256": "0xbb61320ed7e91365e3068e465b15efc09a4de76780e9cb742eae813ab550ba29",
+			"urls": [
+				"bzzr://0639982cdaed53960ce39fc330ee480781617e7f2537ffd9ebd5baa5796f1a0b"
+>>>>>>> be0c2d2bcd9f9a1a1336f387c03a0b2afc123326
+			]
+		},
+		"contracts/IKIP13.sol": {
+			"keccak256": "0x624e9e6220f1fff9952491658bdb41e79a944d8577eb76fcecde2352c6678b51",
+			"urls": [
+				"bzzr://5f13484bb4220af06a02d5e683e0d5fa05804d6192cc8743c6e441728f964c6c"
+			]
+		},
+		"contracts/IKIP7.sol": {
+			"keccak256": "0xfb6a22cff7b038ce2ffa091072bdd3af2c323349b866e6e370289b540ef49f90",
+			"urls": [
+				"bzzr://6d44afffe1dc94f996db674bf9738fff161840a644d7818a0054738fc878a754"
+			]
+		},
+		"contracts/IKIP7Receiver.sol": {
+			"keccak256": "0x39db8ccb5de15df30c59d7fa1691a2fd6b3e9ef27503936034f1ae2d41397d22",
+			"urls": [
+				"bzzr://2514ee9bded2a034c07eba52881d1df7a965d673ba8a5bbae5fe847cf1e24a94"
+			]
+		},
+		"contracts/KIP13.sol": {
+			"keccak256": "0xc755a6e2f73cd30628105cd7a93e7ba8ed75441a1d0d8cb790825fb7d3e540fb",
+			"urls": [
+				"bzzr://0cc34888252ef4267bc9672a1459fd8c3a82f04fd77303ab1c6bf8a61fd7af74"
+			]
+		},
+		"contracts/KIP7.sol": {
+			"keccak256": "0xd15f19173be7de00ce2257969846564a418e9fd1a9b6daa0df1698476eb96b26",
+			"urls": [
+				"bzzr://57d4da01b22677e6856f8df49885ae7a2b61911659ae0a15830c6211ca921010"
+			]
+		},
+		"contracts/Kameleon.sol": {
+<<<<<<< HEAD
+			"keccak256": "0xe8ddc45f79468830aa8c0f4ec0b972f97eb3a2f04fb00bd55df00299ff10b21f",
+			"urls": [
+				"bzzr://032c263d20afa626b9cdd64e9c69b26512df3d193693d9d6daa9c137589c5f01"
+=======
+			"keccak256": "0x73cb7785176392713295f534dcaa06298665d2c6bfeb6dcf13228ab52f3c7207",
+			"urls": [
+				"bzzr://a1ece1afed9d0562fbe75475c19164413193ef4cde0a20d6c8fe011e9ceada4b"
+>>>>>>> be0c2d2bcd9f9a1a1336f387c03a0b2afc123326
+			]
+		},
+		"contracts/Ownable.sol": {
+			"keccak256": "0xf32a8f0d7542c0a05f19b49cbb0817124ab1b014a40e5816d71acb3523f77eeb",
+			"urls": [
+				"bzzr://94e9bdf06243f0c1893c1819fb6192c6b5446ec787e14da951667af790608315"
+			]
+		},
+		"contracts/SafeMath.sol": {
+			"keccak256": "0xf18f5f0027ba4abcc41d2b57fe6a2892b6ba44db0f9cc19c25bb483c9b9347b5",
+			"urls": [
+				"bzzr://b26c54d5c430b0609253e22f4a08806e9e9cab2164ef7ae5c4c832f53504d2ef"
+			]
+		}
+	},
+	"version": 1
+}
