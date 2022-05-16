@@ -62,6 +62,15 @@
 				"type": "function"
 			},
 			{
+				"constant": false,
+				"inputs": [],
+				"name": "mint",
+				"outputs": [],
+				"payable": true,
+				"stateMutability": "payable",
+				"type": "function"
+			},
+			{
 				"constant": true,
 				"inputs": [],
 				"name": "totalSupply",
@@ -104,6 +113,25 @@
 			},
 			{
 				"constant": true,
+				"inputs": [
+					{
+						"name": "kStockAmount",
+						"type": "uint256"
+					}
+				],
+				"name": "getBurnAmount",
+				"outputs": [
+					{
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"payable": false,
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"constant": true,
 				"inputs": [],
 				"name": "decimals",
 				"outputs": [
@@ -114,24 +142,6 @@
 				],
 				"payable": false,
 				"stateMutability": "pure",
-				"type": "function"
-			},
-			{
-				"constant": false,
-				"inputs": [
-					{
-						"name": "recipient",
-						"type": "address"
-					},
-					{
-						"name": "amount",
-						"type": "uint256"
-					}
-				],
-				"name": "mint",
-				"outputs": [],
-				"payable": false,
-				"stateMutability": "nonpayable",
 				"type": "function"
 			},
 			{
@@ -169,6 +179,34 @@
 					}
 				],
 				"name": "safeTransferFrom",
+				"outputs": [],
+				"payable": false,
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"constant": false,
+				"inputs": [
+					{
+						"name": "burnAmount",
+						"type": "uint256"
+					}
+				],
+				"name": "burn",
+				"outputs": [],
+				"payable": false,
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"constant": false,
+				"inputs": [
+					{
+						"name": "amount",
+						"type": "uint256"
+					}
+				],
+				"name": "claimKlay",
 				"outputs": [],
 				"payable": false,
 				"stateMutability": "nonpayable",
@@ -231,21 +269,22 @@
 				"type": "function"
 			},
 			{
-				"constant": false,
+				"constant": true,
 				"inputs": [
 					{
-						"name": "recipient",
-						"type": "address"
-					},
-					{
-						"name": "amount",
+						"name": "klayAmount",
 						"type": "uint256"
 					}
 				],
-				"name": "burn",
-				"outputs": [],
+				"name": "getMintAmount",
+				"outputs": [
+					{
+						"name": "",
+						"type": "uint256"
+					}
+				],
 				"payable": false,
-				"stateMutability": "nonpayable",
+				"stateMutability": "view",
 				"type": "function"
 			},
 			{
@@ -354,6 +393,15 @@
 				"outputs": [],
 				"payable": false,
 				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"constant": false,
+				"inputs": [],
+				"name": "addKlay",
+				"outputs": [],
+				"payable": true,
+				"stateMutability": "payable",
 				"type": "function"
 			},
 			{
@@ -533,9 +581,9 @@
 			]
 		},
 		"contracts/KStockToken.sol": {
-			"keccak256": "0xc29be3bc63df2e892d941356b05ada98858966d2ef492221b44762b0e878771f",
+			"keccak256": "0x8c678ed9d488debcf9ca32423ab1f87aaeca8b6f1197c7343a5bb2bf0c2ead3f",
 			"urls": [
-				"bzzr://9975078b8babbb231e6af34873b3c4862fa58aa61939641c02eba9819e086db1"
+				"bzzr://6074f6318dc6414146f7e35ef855f805ae2288bbf5c582704fa57b32d0fe157a"
 			]
 		},
 		"contracts/Ownable.sol": {

@@ -224,9 +224,10 @@ contract Exchange is KIP7 {
     ) private pure returns (uint256) {
         require(inputReserve > 0 && outputReserve > 0, "invalid reserves");
 
-        uint256 inputAmountWithFee = inputAmount * 99;
+        // 수수료 0.3%
+        uint256 inputAmountWithFee = inputAmount * 997;
         uint256 numerator = inputAmountWithFee * outputReserve;
-        uint256 denominator = (inputReserve * 100) + inputAmountWithFee;
+        uint256 denominator = (inputReserve * 1000) + inputAmountWithFee;
 
         return numerator / denominator;
     }
