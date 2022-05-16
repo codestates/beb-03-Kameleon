@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: GPL-3.0
 
 pragma solidity 0.5.6;
+pragma experimental ABIEncoderV2;
 
 import "./KStockToken.sol";
 import "./Ownable.sol";
@@ -33,6 +34,7 @@ contract Oracle is Ownable {
         // kStock list 에 추가
         _kStockIndex[address(kStockToken)] = _kStockCount;
         _kStockList[_kStockCount].kStockAddress = address(kStockToken);
+        _kStockList[_kStockCount].kStockPrice = 2000e18;
         _kStockCount++;
 
         return address(kStockToken);
@@ -54,20 +56,32 @@ contract Oracle is Ownable {
     }
 
     // StockList 출력
-    function getStockList() public view {
-
+    function getStockList() public view returns (string[] memory){
+        string[] memory stockList = new string[](_kStockCount);
+        for(uint256 i = 0; i < _kStockCount; i++) {
+            stockList[i] = KStockToken(_kStockList[i].kStockAddress).name();
+        }
+        return stockList;
     }
 
     function getKStockCount() public view returns (uint256) {
         return _kStockCount;
     }
 
-    // Oracle 가격 설정하는 함수
+    // Oracle 가격 설정하는 함수 1kStock 이 몇 peb인지 설정 (string으로 보낼것)
     function setOraclePrice(uint256[] memory priceArr) public onlyOwner {
         require (_kStockCount == priceArr.length, "Oracle: number of price is wrong");
         for(uint256 i = 0; i < _kStockCount; i++) {
             _kStockList[i].kStockPrice = priceArr[i];
         }
+    }
+
+    function getOraclePrice() public view returns (uint256[] memory) {
+        uint256[] memory priceArr = new uint256[](_kStockCount);
+        for(uint256 i = 0; i < _kStockCount; i++) {
+            priceArr[i] = _kStockList[i].kStockPrice;
+        }
+        return priceArr;
     }
 
     // function getExchange(address _tokenAddress) public view returns (address) {

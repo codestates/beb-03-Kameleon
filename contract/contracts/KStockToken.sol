@@ -43,15 +43,15 @@ contract KStockToken is KIP7, Ownable {
     // 오라클에서 가격을 확인하고 mint 가격 책정
     function getMintAmount(uint256 klayAmount) public view returns (uint256) {
         uint256 price = IOracle(_oracleAddress).getPriceByAddress(address(this));
-        // ( klayAmount * 99 / 100 ) * (10e18 / price);
-        return ((klayAmount * (100 - _mintFee) ) * 10e16 ) / price;
+        // ( klayAmount * 99 / 100 ) * ( 1/ price);
+        return (klayAmount * (100 - _mintFee) ) * 1e16 / (price );
     }
 
     // 오라클에서 가격을 확인하고 burn 가격 책정
     function getBurnAmount(uint256 kStockAmount) public view returns (uint256) {
         uint256 price = IOracle(_oracleAddress).getPriceByAddress(address(this));
-        // (kStockAmount * 99 / 100 )* price / 10e18
-        return (kStockAmount * (100 - _mintFee) * price) / 10e20;
+        // (kStockAmount * 99 / 100 )* price
+        return (kStockAmount * (100 - _mintFee) * price) / 1e20;
     }
 
 
