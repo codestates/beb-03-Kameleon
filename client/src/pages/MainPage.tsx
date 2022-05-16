@@ -41,9 +41,9 @@ const MainPage = () => {
             <div className="main__oracle">
               {el.oraclePrice.toLocaleString('ko-KR')}
             </div>
-            <div>{el.usdPrice.toLocaleString('ko-KR')}</div>
+            <div>{el.krwPrice.toLocaleString('ko-KR')}</div>
             <div className="main__usd">
-              {el.krwPrice.toLocaleString('ko-KR')}
+              {el.usdPrice.toLocaleString('ko-KR')}
             </div>
             <div>{el.change}%</div>
           </MainPageItem>

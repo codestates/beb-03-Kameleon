@@ -6,12 +6,13 @@ export const createTokenList = (len: number) => {
   const tokenList = new Array(len);
 
   for (let i = 0; i < len; i++) {
+    const value = getRandomInt(1, 100000);
     const token = {
       id: i,
-      name: '(주)' + getRandomInt(1, 2000),
+      name: 'k' + value,
       oraclePrice: getRandomInt(0, 100000),
       usdPrice: getRandomInt(0, 100000),
-      krwPrice: getRandomInt(0, 100000),
+      krwPrice: value,
       change: getRandomInt(-100, 100),
     };
 

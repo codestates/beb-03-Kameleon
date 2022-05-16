@@ -6,26 +6,75 @@ import useInput from '../../hooks/useInput';
 
 interface LayoutProps {
   children: React.ReactNode;
-  liftState: (value: string, name: string, isDecimalError: boolean) => void;
+  liftState: (
+    value: string,
+    price: number,
+    name: string,
+    isChange: boolean,
+    isDecimalError: boolean
+  ) => void;
+  otherBalance: number;
+  otherPrice: number;
+  otherChange: boolean;
 }
 
-const SingleInput = ({ children, liftState }: LayoutProps) => {
+const SingleInput = ({
+  children,
+  liftState,
+  otherBalance,
+  otherPrice,
+  otherChange,
+}: LayoutProps) => {
+  const tokenPrice = 500;
+  const tokenName = 'KLY';
+  const numberOfDecimal = 2;
   const {
-    inputValue,
+    tokenBalance,
     isFocus,
-    isError,
+    isBlankError,
     isDecimalError,
-    setInputKey,
+    isChange,
+    setIsChange,
+    setTokenBalance,
+    setKey,
     setIsFocus,
     changeInput,
-  } = useInput(2);
+  } = useInput(numberOfDecimal);
 
   useEffect(() => {
-    liftState(inputValue, 'KLY', isDecimalError);
-  }, [liftState, inputValue, isDecimalError]);
+    liftState(tokenBalance, tokenPrice, tokenName, isChange, isDecimalError);
+  }, [liftState, tokenBalance, isChange, isDecimalError]);
+
+  useEffect(() => {
+    if (otherChange && (otherBalance * otherPrice) / tokenPrice !== 0) {
+      const [, decimal] = String(
+        (otherBalance * otherPrice) / tokenPrice
+      ).split('.');
+      if (decimal && decimal.length > numberOfDecimal) {
+        setTokenBalance(
+          String(
+            ((otherBalance * otherPrice) / tokenPrice).toFixed(numberOfDecimal)
+          )
+        );
+      } else {
+        setTokenBalance(String((otherBalance * otherPrice) / tokenPrice));
+      }
+      setIsChange(false);
+    }
+  }, [
+    otherChange,
+    otherBalance,
+    otherPrice,
+    tokenPrice,
+    setTokenBalance,
+    setIsChange,
+  ]);
 
   return (
-    <SingleInputContainer isFocus={isFocus} isError={isError || isDecimalError}>
+    <SingleInputContainer
+      isFocus={isFocus}
+      isError={isBlankError || isDecimalError}
+    >
       <div>
         <label htmlFor="input">{children}</label>
         <SingleInputWrapper>
@@ -38,19 +87,21 @@ const SingleInput = ({ children, liftState }: LayoutProps) => {
             placeholder="0.00"
             id="input"
             autoComplete="off"
-            value={inputValue || ''}
-            onKeyDown={(e) => setInputKey(e.key)}
-            onChange={changeInput}
+            value={tokenBalance}
+            onKeyDown={(e) => setKey(e.key)}
+            onChange={(e) => changeInput(e)}
             onFocus={() => setIsFocus(true)}
             onBlur={() => setIsFocus(false)}
           />
         </SingleInputWrapper>
       </div>
-      {/* error */}
+      {/* 에러 메세지 */}
       {isDecimalError && (
-        <section>Amount must be within 6 decimal points</section>
+        <section>
+          Amount must be within {numberOfDecimal} decimal points
+        </section>
       )}
-      {isError && <section>Required</section>}
+      {isBlankError && <section>Required</section>}
     </SingleInputContainer>
   );
 };
