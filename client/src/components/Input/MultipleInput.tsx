@@ -8,7 +8,7 @@ import {
   MultipleInputWrapper,
   MultipleInputBlank,
   MultipleInputList,
-} from './MultipleInput.styles';
+} from './styles/MultipleInput.styles';
 
 import useInput from '../../hooks/useInput';
 

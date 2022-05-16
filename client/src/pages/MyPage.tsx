@@ -5,7 +5,7 @@ import {
   MyPageList,
   MyPageItem,
   MyPageBar,
-} from './MyPage.styles';
+} from './styles/MyPage.styles';
 
 import {
   createMyList,

@@ -1,6 +1,10 @@
 import React from 'react';
 
-import { PoolPageWrapper, PoolPageList, PoolPageItem } from './PoolPage.styles';
+import {
+  PoolPageWrapper,
+  PoolPageList,
+  PoolPageItem,
+} from './styles/PoolPage.styles';
 
 import { createPoolList } from '../utils/dummyCreator';
 
