@@ -1,0 +1,494 @@
+{
+  "contractName": "IKIP7Receiver",
+  "abi": [
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "_operator",
+          "type": "address"
+        },
+        {
+          "name": "_from",
+          "type": "address"
+        },
+        {
+          "name": "_amount",
+          "type": "uint256"
+        },
+        {
+          "name": "_data",
+          "type": "bytes"
+        }
+      ],
+      "name": "onKIP7Received",
+      "outputs": [
+        {
+          "name": "",
+          "type": "bytes4"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    }
+  ],
+  "metadata": "{\"compiler\":{\"version\":\"0.5.6+commit.b259423e\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"constant\":false,\"inputs\":[{\"name\":\"_operator\",\"type\":\"address\"},{\"name\":\"_from\",\"type\":\"address\"},{\"name\":\"_amount\",\"type\":\"uint256\"},{\"name\":\"_data\",\"type\":\"bytes\"}],\"name\":\"onKIP7Received\",\"outputs\":[{\"name\":\"\",\"type\":\"bytes4\"}],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"}],\"devdoc\":{\"details\":\"Note: the KIP-13 identifier for this interface is 0x9d188c22.\\r see http://kips.klaytn.com/KIPs/kip-7-fungible_token\\r\",\"methods\":{\"onKIP7Received(address,address,uint256,bytes)\":{\"details\":\"The KIP-7 smart contract calls this function on the recipient\\r after a `safeTransfer`. This function MAY throw to revert and reject the\\r transfer. Return of other than the magic value MUST result in the\\r transaction being reverted.\\r Note: the contract address is always the message sender.\\r\",\"params\":{\"_amount\":\"The token amount which is being transferred.\\r\",\"_data\":\"Additional data with no specified format\\r\",\"_from\":\"The address which previously owned the token\\r\",\"_operator\":\"The address which called `safeTransferFrom` function\\r\"},\"return\":\"`bytes4(keccak256(\\\"onKIP7Received(address,address,uint256,bytes)\\\"))`\\r unless throwing\\r\"}},\"title\":\"KIP-7 Fungible Token Standard, optional wallet interface\\r\"},\"userdoc\":{\"methods\":{\"onKIP7Received(address,address,uint256,bytes)\":{\"notice\":\"Handle the receipt of KIP-7 token\\r\"}}}},\"settings\":{\"compilationTarget\":{\"project:/contracts/IKIP7Receiver.sol\":\"IKIP7Receiver\"},\"evmVersion\":\"byzantium\",\"libraries\":{},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"project:/contracts/IKIP7Receiver.sol\":{\"keccak256\":\"0x39db8ccb5de15df30c59d7fa1691a2fd6b3e9ef27503936034f1ae2d41397d22\",\"urls\":[\"bzzr://2514ee9bded2a034c07eba52881d1df7a965d673ba8a5bbae5fe847cf1e24a94\"]}},\"version\":1}",
+  "bytecode": "0x",
+  "deployedBytecode": "0x",
+  "sourceMap": "",
+  "deployedSourceMap": "",
+  "source": "pragma solidity ^0.5.0;\r\n\r\n/**\r\n * @title KIP-7 Fungible Token Standard, optional wallet interface\r\n * @dev Note: the KIP-13 identifier for this interface is 0x9d188c22.\r\n * see http://kips.klaytn.com/KIPs/kip-7-fungible_token\r\n */\r\ncontract IKIP7Receiver {\r\n    /**\r\n     * @notice Handle the receipt of KIP-7 token\r\n     * @dev The KIP-7 smart contract calls this function on the recipient\r\n     *  after a `safeTransfer`. This function MAY throw to revert and reject the\r\n     *  transfer. Return of other than the magic value MUST result in the\r\n     *  transaction being reverted.\r\n     *  Note: the contract address is always the message sender.\r\n     * @param _operator The address which called `safeTransferFrom` function\r\n     * @param _from The address which previously owned the token\r\n     * @param _amount The token amount which is being transferred.\r\n     * @param _data Additional data with no specified format\r\n     * @return `bytes4(keccak256(\"onKIP7Received(address,address,uint256,bytes)\"))`\r\n     *  unless throwing\r\n     */\r\n    function onKIP7Received(address _operator, address _from, uint256 _amount, bytes memory _data) public returns (bytes4);\r\n}",
+  "sourcePath": "D:\\codestates\\section5\\project3\\beb-03-Kameleon\\contract\\contracts\\IKIP7Receiver.sol",
+  "ast": {
+    "absolutePath": "project:/contracts/IKIP7Receiver.sol",
+    "exportedSymbols": {
+      "IKIP7Receiver": [
+        1681
+      ]
+    },
+    "id": 1682,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 1667,
+        "literals": [
+          "solidity",
+          "^",
+          "0.5",
+          ".0"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:23:7"
+      },
+      {
+        "baseContracts": [],
+        "contractDependencies": [],
+        "contractKind": "contract",
+        "documentation": "@title KIP-7 Fungible Token Standard, optional wallet interface\r\n@dev Note: the KIP-13 identifier for this interface is 0x9d188c22.\r\nsee http://kips.klaytn.com/KIPs/kip-7-fungible_token\r",
+        "fullyImplemented": false,
+        "id": 1681,
+        "linearizedBaseContracts": [
+          1681
+        ],
+        "name": "IKIP7Receiver",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "body": null,
+            "documentation": "@notice Handle the receipt of KIP-7 token\r\n@dev The KIP-7 smart contract calls this function on the recipient\r\n after a `safeTransfer`. This function MAY throw to revert and reject the\r\n transfer. Return of other than the magic value MUST result in the\r\n transaction being reverted.\r\n Note: the contract address is always the message sender.\r\n@param _operator The address which called `safeTransferFrom` function\r\n@param _from The address which previously owned the token\r\n@param _amount The token amount which is being transferred.\r\n@param _data Additional data with no specified format\r\n@return `bytes4(keccak256(\"onKIP7Received(address,address,uint256,bytes)\"))`\r\n unless throwing\r",
+            "id": 1680,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "onKIP7Received",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 1676,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1669,
+                  "name": "_operator",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1680,
+                  "src": "1074:17:7",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 1668,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1074:7:7",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 1671,
+                  "name": "_from",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1680,
+                  "src": "1093:13:7",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 1670,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1093:7:7",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 1673,
+                  "name": "_amount",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1680,
+                  "src": "1108:15:7",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 1672,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1108:7:7",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 1675,
+                  "name": "_data",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1680,
+                  "src": "1125:18:7",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes_memory_ptr",
+                    "typeString": "bytes"
+                  },
+                  "typeName": {
+                    "id": 1674,
+                    "name": "bytes",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1125:5:7",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes_storage_ptr",
+                      "typeString": "bytes"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1073:71:7"
+            },
+            "returnParameters": {
+              "id": 1679,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1678,
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1680,
+                  "src": "1161:6:7",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes4",
+                    "typeString": "bytes4"
+                  },
+                  "typeName": {
+                    "id": 1677,
+                    "name": "bytes4",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1161:6:7",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes4",
+                      "typeString": "bytes4"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1160:8:7"
+            },
+            "scope": 1681,
+            "src": "1050:119:7",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "public"
+          }
+        ],
+        "scope": 1682,
+        "src": "233:939:7"
+      }
+    ],
+    "src": "0:1172:7"
+  },
+  "legacyAST": {
+    "attributes": {
+      "absolutePath": "project:/contracts/IKIP7Receiver.sol",
+      "exportedSymbols": {
+        "IKIP7Receiver": [
+          1681
+        ]
+      }
+    },
+    "children": [
+      {
+        "attributes": {
+          "literals": [
+            "solidity",
+            "^",
+            "0.5",
+            ".0"
+          ]
+        },
+        "id": 1667,
+        "name": "PragmaDirective",
+        "src": "0:23:7"
+      },
+      {
+        "attributes": {
+          "baseContracts": [
+            null
+          ],
+          "contractDependencies": [
+            null
+          ],
+          "contractKind": "contract",
+          "documentation": "@title KIP-7 Fungible Token Standard, optional wallet interface\r\n@dev Note: the KIP-13 identifier for this interface is 0x9d188c22.\r\nsee http://kips.klaytn.com/KIPs/kip-7-fungible_token\r",
+          "fullyImplemented": false,
+          "linearizedBaseContracts": [
+            1681
+          ],
+          "name": "IKIP7Receiver",
+          "scope": 1682
+        },
+        "children": [
+          {
+            "attributes": {
+              "body": null,
+              "documentation": "@notice Handle the receipt of KIP-7 token\r\n@dev The KIP-7 smart contract calls this function on the recipient\r\n after a `safeTransfer`. This function MAY throw to revert and reject the\r\n transfer. Return of other than the magic value MUST result in the\r\n transaction being reverted.\r\n Note: the contract address is always the message sender.\r\n@param _operator The address which called `safeTransferFrom` function\r\n@param _from The address which previously owned the token\r\n@param _amount The token amount which is being transferred.\r\n@param _data Additional data with no specified format\r\n@return `bytes4(keccak256(\"onKIP7Received(address,address,uint256,bytes)\"))`\r\n unless throwing\r",
+              "implemented": false,
+              "isConstructor": false,
+              "kind": "function",
+              "modifiers": [
+                null
+              ],
+              "name": "onKIP7Received",
+              "scope": 1681,
+              "stateMutability": "nonpayable",
+              "superFunction": null,
+              "visibility": "public"
+            },
+            "children": [
+              {
+                "children": [
+                  {
+                    "attributes": {
+                      "constant": false,
+                      "name": "_operator",
+                      "scope": 1680,
+                      "stateVariable": false,
+                      "storageLocation": "default",
+                      "type": "address",
+                      "value": null,
+                      "visibility": "internal"
+                    },
+                    "children": [
+                      {
+                        "attributes": {
+                          "name": "address",
+                          "stateMutability": "nonpayable",
+                          "type": "address"
+                        },
+                        "id": 1668,
+                        "name": "ElementaryTypeName",
+                        "src": "1074:7:7"
+                      }
+                    ],
+                    "id": 1669,
+                    "name": "VariableDeclaration",
+                    "src": "1074:17:7"
+                  },
+                  {
+                    "attributes": {
+                      "constant": false,
+                      "name": "_from",
+                      "scope": 1680,
+                      "stateVariable": false,
+                      "storageLocation": "default",
+                      "type": "address",
+                      "value": null,
+                      "visibility": "internal"
+                    },
+                    "children": [
+                      {
+                        "attributes": {
+                          "name": "address",
+                          "stateMutability": "nonpayable",
+                          "type": "address"
+                        },
+                        "id": 1670,
+                        "name": "ElementaryTypeName",
+                        "src": "1093:7:7"
+                      }
+                    ],
+                    "id": 1671,
+                    "name": "VariableDeclaration",
+                    "src": "1093:13:7"
+                  },
+                  {
+                    "attributes": {
+                      "constant": false,
+                      "name": "_amount",
+                      "scope": 1680,
+                      "stateVariable": false,
+                      "storageLocation": "default",
+                      "type": "uint256",
+                      "value": null,
+                      "visibility": "internal"
+                    },
+                    "children": [
+                      {
+                        "attributes": {
+                          "name": "uint256",
+                          "type": "uint256"
+                        },
+                        "id": 1672,
+                        "name": "ElementaryTypeName",
+                        "src": "1108:7:7"
+                      }
+                    ],
+                    "id": 1673,
+                    "name": "VariableDeclaration",
+                    "src": "1108:15:7"
+                  },
+                  {
+                    "attributes": {
+                      "constant": false,
+                      "name": "_data",
+                      "scope": 1680,
+                      "stateVariable": false,
+                      "storageLocation": "memory",
+                      "type": "bytes",
+                      "value": null,
+                      "visibility": "internal"
+                    },
+                    "children": [
+                      {
+                        "attributes": {
+                          "name": "bytes",
+                          "type": "bytes"
+                        },
+                        "id": 1674,
+                        "name": "ElementaryTypeName",
+                        "src": "1125:5:7"
+                      }
+                    ],
+                    "id": 1675,
+                    "name": "VariableDeclaration",
+                    "src": "1125:18:7"
+                  }
+                ],
+                "id": 1676,
+                "name": "ParameterList",
+                "src": "1073:71:7"
+              },
+              {
+                "children": [
+                  {
+                    "attributes": {
+                      "constant": false,
+                      "name": "",
+                      "scope": 1680,
+                      "stateVariable": false,
+                      "storageLocation": "default",
+                      "type": "bytes4",
+                      "value": null,
+                      "visibility": "internal"
+                    },
+                    "children": [
+                      {
+                        "attributes": {
+                          "name": "bytes4",
+                          "type": "bytes4"
+                        },
+                        "id": 1677,
+                        "name": "ElementaryTypeName",
+                        "src": "1161:6:7"
+                      }
+                    ],
+                    "id": 1678,
+                    "name": "VariableDeclaration",
+                    "src": "1161:6:7"
+                  }
+                ],
+                "id": 1679,
+                "name": "ParameterList",
+                "src": "1160:8:7"
+              }
+            ],
+            "id": 1680,
+            "name": "FunctionDefinition",
+            "src": "1050:119:7"
+          }
+        ],
+        "id": 1681,
+        "name": "ContractDefinition",
+        "src": "233:939:7"
+      }
+    ],
+    "id": 1682,
+    "name": "SourceUnit",
+    "src": "0:1172:7"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.5.6+commit.b259423e.Emscripten.clang"
+  },
+  "networks": {},
+  "schemaVersion": "3.4.7",
+  "updatedAt": "2022-05-16T05:10:09.222Z",
+  "devdoc": {
+    "details": "Note: the KIP-13 identifier for this interface is 0x9d188c22.\r see http://kips.klaytn.com/KIPs/kip-7-fungible_token\r",
+    "methods": {
+      "onKIP7Received(address,address,uint256,bytes)": {
+        "details": "The KIP-7 smart contract calls this function on the recipient\r after a `safeTransfer`. This function MAY throw to revert and reject the\r transfer. Return of other than the magic value MUST result in the\r transaction being reverted.\r Note: the contract address is always the message sender.\r",
+        "params": {
+          "_amount": "The token amount which is being transferred.\r",
+          "_data": "Additional data with no specified format\r",
+          "_from": "The address which previously owned the token\r",
+          "_operator": "The address which called `safeTransferFrom` function\r"
+        },
+        "return": "`bytes4(keccak256(\"onKIP7Received(address,address,uint256,bytes)\"))`\r unless throwing\r"
+      }
+    },
+    "title": "KIP-7 Fungible Token Standard, optional wallet interface\r"
+  },
+  "userdoc": {
+    "methods": {
+      "onKIP7Received(address,address,uint256,bytes)": {
+        "notice": "Handle the receipt of KIP-7 token\r"
+      }
+    }
+  }
+}

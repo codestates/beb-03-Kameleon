@@ -140,7 +140,7 @@
 		"compilationTarget": {
 			"contracts/IFactory.sol": "IFactory"
 		},
-		"evmVersion": "petersburg",
+		"evmVersion": "byzantium",
 		"libraries": {},
 		"optimizer": {
 			"enabled": false,
@@ -150,9 +150,9 @@
 	},
 	"sources": {
 		"contracts/IFactory.sol": {
-			"keccak256": "0xbb61320ed7e91365e3068e465b15efc09a4de76780e9cb742eae813ab550ba29",
+			"keccak256": "0xa3e848dae3c851c8cedf5c7d0b05d05f9d2f61fd3c2230895101da103ffa96fc",
 			"urls": [
-				"bzzr://0639982cdaed53960ce39fc330ee480781617e7f2537ffd9ebd5baa5796f1a0b"
+				"bzzr://6458b9ef08315d5f35b22b1e87d3ca7124ad1b2b2c95fcb88ae8b75e804f6992"
 			]
 		}
 	},
