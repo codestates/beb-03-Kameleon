@@ -18,7 +18,6 @@ const useInput = (decimal: number) => {
         key === '0'
       ) {
         setTokenBalance(e.target.value);
-        console.log('value', e.target.value);
 
         // 소수점 갯수에 대한 조건
         // 소수점 에러 핸들링

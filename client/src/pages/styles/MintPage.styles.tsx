@@ -85,7 +85,7 @@ export const ButtonWrapper = styled.button<{
   width: 100%;
   color: var(--white);
   font-weight: 700;
-  font-size: 1rem;
+  font-size: 1.2rem;
   background-color: var(--dark-green);
   border-radius: 1rem;
   border: 0;

@@ -1,4 +1,4 @@
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
 import { faArrowDown } from '@fortawesome/free-solid-svg-icons';
@@ -28,6 +28,7 @@ const MintPage = () => {
   const [isChangeB, setIsChangeB] = useState<boolean>(false);
   const [isDecimalErrorA, setIsDecimalErrorA] = useState<boolean>(false);
   const [isDecimalErrorB, setIsDecimalErrorB] = useState<boolean>(false);
+  const [detailInfo, setDetailInfo] = useState<number>(0);
 
   const liftStateA = useCallback(
     (
@@ -67,9 +68,24 @@ const MintPage = () => {
     console.log('button click', nameA, nameB);
   }, [nameA, nameB]);
 
-  // Number로 형식 변환
-  // 0 보다 클때
-  // 소수점 확인 알아서해줌 ex) 4. => 4
+  useEffect(() => {
+    console.log(priceA / priceB);
+    if (priceA > 0 && priceB > 0 && tab === 'mint') {
+      const [, decimal] = String(priceA / priceB).split('.');
+      if (decimal && decimal.length > 6) {
+        setDetailInfo(Number((priceA / priceB).toFixed(6)));
+      } else {
+        setDetailInfo(priceA / priceB);
+      }
+    } else if (tab === 'burn') {
+      const [, decimal] = String(priceB / priceA).split('.');
+      if (decimal && decimal.length > 6) {
+        setDetailInfo(Number((priceB / priceA).toFixed(6)));
+      } else {
+        setDetailInfo(priceB / priceA);
+      }
+    }
+  }, [priceA, priceB]);
 
   return (
     <MintPageWrapper>
@@ -80,14 +96,14 @@ const MintPage = () => {
           onClick={() => setTab('mint')}
           className={tab === 'mint' ? 'on' : ''}
         >
-          발행
+          Mint
         </button>
         <button
           type="button"
           onClick={() => setTab('burn')}
           className={tab === 'burn' ? 'on' : ''}
         >
-          소각
+          Burn
         </button>
       </TabStyle>
       <form action="">
@@ -112,14 +128,29 @@ const MintPage = () => {
             >
               OUTPUT
             </MultipleInput>
+            {balanceA && balanceB && (
+              <DetailInfoStyle>
+                <div>
+                  <dt>Exchange Rate</dt>
+                  <dd>
+                    1 KLAY = {detailInfo} {nameB}
+                  </dd>
+                </div>
+                <div>
+                  <dt>Fee</dt>
+                  <dd>10KLAY</dd>
+                </div>
+              </DetailInfoStyle>
+            )}
             <ButtonWrapper
               numberA={Number(balanceA)}
               numberB={Number(balanceB)}
               isErrorA={isDecimalErrorA}
               isErrorB={isDecimalErrorB}
               type="button"
+              onClick={clickButton}
             >
-              발행하기
+              Mint
             </ButtonWrapper>
           </>
         ) : (
@@ -143,16 +174,20 @@ const MintPage = () => {
             >
               OUTPUT
             </SingleInput>
-            <DetailInfoStyle>
-              <div>
-                <dt>Exchange Rate</dt>
-                <dd>1 KLAY = 1000 KMT</dd>
-              </div>
-              <div>
-                <dt>Fee</dt>
-                <dd>0.001KLAY</dd>
-              </div>
-            </DetailInfoStyle>
+            {balanceA && balanceB && (
+              <DetailInfoStyle>
+                <div>
+                  <dt>Exchange Rate</dt>
+                  <dd>
+                    1 KLAY = {detailInfo} {nameA}
+                  </dd>
+                </div>
+                <div>
+                  <dt>Fee</dt>
+                  <dd>10KLAY</dd>
+                </div>
+              </DetailInfoStyle>
+            )}
             <ButtonWrapper
               numberA={Number(balanceA)}
               numberB={Number(balanceB)}
@@ -161,7 +196,7 @@ const MintPage = () => {
               type="button"
               onClick={clickButton}
             >
-              소각하기
+              Burn
             </ButtonWrapper>
           </>
         )}
