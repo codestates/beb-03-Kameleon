@@ -8,6 +8,7 @@ import Footer from './components/common/Footer';
 import SwapPage from './pages/SwapPage';
 import MainPage from './pages/MainPage';
 import PoolPage from './pages/PoolPage';
+import LiquidityPage from './pages/LiquidityPage';
 import MintPage from './pages/MintPage';
 import MyPage from './pages/MyPage';
 import GovernPage from './pages/GovernPage';
@@ -33,6 +34,7 @@ function App() {
               <Route path="/" element={<MainPage />} />
               <Route path="/swap" element={<SwapPage />} />
               <Route path="/pool" element={<PoolPage />} />
+              <Route path="/liquidity" element={<LiquidityPage />} />
               <Route path="/mint" element={<MintPage />} />
               <Route path="/mypage" element={<MyPage />} />
               <Route path="/govern" element={<GovernPage />} />
