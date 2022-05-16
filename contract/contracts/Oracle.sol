@@ -72,6 +72,7 @@ contract Oracle is Ownable {
     function setOraclePrice(uint256[] memory priceArr) public onlyOwner {
         require (_kStockCount == priceArr.length, "Oracle: number of price is wrong");
         for(uint256 i = 0; i < _kStockCount; i++) {
+            require(priceArr[i] > 0, "Oracle: price should be more than 0");
             _kStockList[i].kStockPrice = priceArr[i];
         }
     }
