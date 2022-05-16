@@ -4,11 +4,11 @@ const caver = new Caver(process.env.BAOBAB_NETWORK);
 
 import { abiList, byteCodeList } from "./contractData";
 
-// const deployerKeyring = caver.wallet.keyring.create(
-//   process.env.feeAddress,
-//   process.env.feePrivateKey
-// );
-// caver.wallet.add(deployerKeyring);
+const deployerKeyring = caver.wallet.keyring.create(
+  process.env.feeAddress,
+  process.env.feePrivateKey
+);
+caver.wallet.add(deployerKeyring);
 
 const deployContract = async ({
   contractName,
@@ -114,6 +114,19 @@ const multiMint = () => {
       contractName: "MyKIP7",
       contractAddress: "",
       methodName: "multiMint",
+    });
+  });
+  job.start();
+};
+
+const lpPoolTotalSupply = () => {
+  const CronJob = require("cron").CronJob;
+  const job = new CronJob("*/60 * * * * *", async () => {
+    const contractAddress = "0x9ae71CA5Babd51D1Cdda1785091Dab28866C54C9";
+    callContract({
+      contractName: "MyKIP7",
+      contractAddress,
+      methodName: "totalSupply",
     });
   });
   job.start();

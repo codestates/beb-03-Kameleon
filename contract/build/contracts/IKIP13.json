@@ -295,7 +295,7 @@
   },
   "networks": {},
   "schemaVersion": "3.4.7",
-  "updatedAt": "2022-05-16T05:10:09.219Z",
+  "updatedAt": "2022-05-16T06:35:26.996Z",
   "devdoc": {
     "details": "Interface of the KIP-13 standard, as defined in the\r [KIP-13](http://kips.klaytn.com/KIPs/kip-13-interface_query_standard).\r  * Implementers can declare support of contract interfaces, which can then be\r queried by others.\r  * For an implementation, see `KIP13`.\r",
     "methods": {
