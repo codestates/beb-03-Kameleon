@@ -82,9 +82,9 @@
 			]
 		},
 		"contracts/KStockToken.sol": {
-			"keccak256": "0x8c678ed9d488debcf9ca32423ab1f87aaeca8b6f1197c7343a5bb2bf0c2ead3f",
+			"keccak256": "0x2a5bad2d798f689a9169ece6c34d4595700b9f5b0605dc47f5dc0dad9ba5c0ba",
 			"urls": [
-				"bzzr://6074f6318dc6414146f7e35ef855f805ae2288bbf5c582704fa57b32d0fe157a"
+				"bzzr://b01834e7218f38d65ba9199f3d5e350974135294af94ac625111ba932afce358"
 			]
 		},
 		"contracts/Ownable.sol": {

@@ -20,6 +20,14 @@ contract Factory {
         return exchangeList[index];
     }
 
+    function getAllExchangeList() public view returns (address[] memory) {
+        address[] memory list = new address[](exchangeCount);
+        for(uint256 i = 0; i < exchangeCount; i++) {
+            list[i] = exchangeList[i];
+        }
+        return list;
+    }
+
     function createExchange(address _tokenAddress) public returns (address) {
         require(_tokenAddress != address(0), "Factory: invalid token address");
         require(
