@@ -18,38 +18,54 @@ const arrowDown = faArrowDown as IconProp;
 
 const MintPage = () => {
   const [tab, setTab] = useState<string>('mint');
-  const [valueA, setValueA] = useState<string>('');
-  const [valueB, setValueB] = useState<string>('');
+  const [balanceA, setBalanceA] = useState<string>('');
+  const [balanceB, setBalanceB] = useState<string>('');
+  const [priceA, setPriceA] = useState<number>(0);
+  const [priceB, setPriceB] = useState<number>(0);
   const [nameA, setNameA] = useState<string>('');
   const [nameB, setNameB] = useState<string>('');
+  const [isChangeA, setIsChangeA] = useState<boolean>(false);
+  const [isChangeB, setIsChangeB] = useState<boolean>(false);
   const [isDecimalErrorA, setIsDecimalErrorA] = useState<boolean>(false);
   const [isDecimalErrorB, setIsDecimalErrorB] = useState<boolean>(false);
 
-  const clickButton = useCallback(() => {
-    console.log('button click');
-  }, []);
-
   const liftStateA = useCallback(
-    (value: string, name: string, isDecimalError: boolean) => {
-      console.log('1');
-      setValueA(value);
+    (
+      balance: string,
+      price: number,
+      name: string,
+      isChange: boolean,
+      isDecimalError: boolean
+    ) => {
+      setBalanceA(balance);
+      setPriceA(price);
       setNameA(name);
+      setIsChangeA(isChange);
       setIsDecimalErrorA(isDecimalError);
     },
     []
   );
 
   const liftStateB = useCallback(
-    (value: string, name: string, isDecimalError: boolean) => {
-      setValueB(value);
+    (
+      balance: string,
+      price: number,
+      name: string,
+      isChange: boolean,
+      isDecimalError: boolean
+    ) => {
+      setBalanceB(balance);
+      setPriceB(price);
       setNameB(name);
+      setIsChangeB(isChange);
       setIsDecimalErrorB(isDecimalError);
     },
     []
   );
 
-  console.log('mintA', Number(valueA), nameA, isDecimalErrorA);
-  console.log('mintB', Number(valueB), nameB, isDecimalErrorB);
+  const clickButton = useCallback(() => {
+    console.log('button click', nameA, nameB);
+  }, [nameA, nameB]);
 
   // Number로 형식 변환
   // 0 보다 클때
@@ -77,14 +93,28 @@ const MintPage = () => {
       <form action="">
         {tab === 'mint' ? (
           <>
-            <SingleInput liftState={liftStateA}>INPUT</SingleInput>
+            <SingleInput
+              liftState={liftStateA}
+              otherBalance={Number(balanceB)}
+              otherPrice={priceB}
+              otherChange={isChangeB}
+            >
+              INPUT
+            </SingleInput>
             <IconWrapper>
               <FontAwesomeIcon icon={arrowDown} className="icon" />
             </IconWrapper>
-            <MultipleInput liftState={liftStateB}>OUTPUT</MultipleInput>
+            <MultipleInput
+              liftState={liftStateB}
+              otherBalance={Number(balanceA)}
+              otherPrice={priceA}
+              otherChange={isChangeA}
+            >
+              OUTPUT
+            </MultipleInput>
             <ButtonWrapper
-              numberA={Number(valueA)}
-              numberB={Number(valueB)}
+              numberA={Number(balanceA)}
+              numberB={Number(balanceB)}
               isErrorA={isDecimalErrorA}
               isErrorB={isDecimalErrorB}
               type="button"
@@ -94,11 +124,25 @@ const MintPage = () => {
           </>
         ) : (
           <>
-            <MultipleInput liftState={liftStateB}>INPUT</MultipleInput>
+            <MultipleInput
+              liftState={liftStateA}
+              otherBalance={Number(balanceB)}
+              otherPrice={priceB}
+              otherChange={isChangeB}
+            >
+              INPUT
+            </MultipleInput>
             <IconWrapper>
               <FontAwesomeIcon icon={arrowDown} className="icon" />
             </IconWrapper>
-            <SingleInput liftState={liftStateA}>OUTPUT</SingleInput>
+            <SingleInput
+              liftState={liftStateB}
+              otherBalance={Number(balanceA)}
+              otherPrice={priceA}
+              otherChange={isChangeA}
+            >
+              OUTPUT
+            </SingleInput>
             <DetailInfoStyle>
               <div>
                 <dt>Exchange Rate</dt>
@@ -110,8 +154,8 @@ const MintPage = () => {
               </div>
             </DetailInfoStyle>
             <ButtonWrapper
-              numberA={Number(valueA)}
-              numberB={Number(valueB)}
+              numberA={Number(balanceA)}
+              numberB={Number(balanceB)}
               isErrorA={isDecimalErrorA}
               isErrorB={isDecimalErrorB}
               type="button"

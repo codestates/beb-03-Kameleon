@@ -95,7 +95,13 @@ export const ButtonWrapper = styled.button<{
       : '0.7'};
 
   :hover {
-    cursor: pointer;
+    cursor: ${(props) =>
+      props.numberA > 0 &&
+      props.numberB > 0 &&
+      !props.isErrorA &&
+      !props.isErrorB
+        ? 'pointer'
+        : ''};
   }
 `;
 
