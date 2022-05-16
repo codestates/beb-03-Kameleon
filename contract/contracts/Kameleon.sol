@@ -10,6 +10,7 @@ import "./Exchange.sol";
 contract Kameleon is KIP7, Ownable {
     string private _name;
     string private _symbol;
+    address private _governAddress;
     IFactory factory;
 
     function name() public view returns (string memory) {
@@ -24,14 +25,32 @@ contract Kameleon is KIP7, Ownable {
         return 18;
     }
 
-    constructor() KIP7() public {
+    constructor(address factoryAddress) KIP7() public {
+        require(factoryAddress != address(0x0)); 
+        factory = IFactory(factoryAddress);
         _name = "Kameleon";
         _symbol = "KLT";
     }
 
-    function setFactoryAddress(address factoryAddress) public onlyOwner{
+    function setFactoryAddress(address factoryAddress) public onlyOwner {
+        require(factoryAddress != address(0x0)); 
         factory = IFactory(factoryAddress);
     }
+
+    function setGovernAddress(address governAddress) public onlyOwner {
+        require(governAddress != address(0x0)); 
+        _governAddress = governAddress;
+    }
+
+    modifier onlyGovern() {
+        require(_governAddress == msg.sender, "Kameleon: only govern can execute");
+        _;
+    }
+    
+    function governTransfer(address from, address to, uint256 amount) public onlyGovern {
+        _transfer(from, to, amount);
+    }
+
     /*
      * minimum test 작성
      * 
@@ -65,14 +84,14 @@ contract Kameleon is KIP7, Ownable {
         _lastLPT[temp] = 0;
         return temp;
     }
-
     
     // Exchnage 에 LP 보유량만큼 airdrop -> 
     function mintToExchange(address exchangeAddress, uint256 amount) private {
         Exchange exchange = Exchange(exchangeAddress);
-        uint256 mul =  amount / exchange.totalSupply();
         for (uint256 i = 0; i < exchange.getAddrCount(); i++) {
-            _mint(exchange.getAddr(i), exchange.getIndexBalance(i) * mul);
+            if(exchange.getIndexBalance(i) != 0) {
+                _mint(exchange.getAddr(i), (exchange.getIndexBalance(i) * amount) /  exchange.totalSupply());
+            }
         }
     }
 

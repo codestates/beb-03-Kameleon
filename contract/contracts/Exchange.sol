@@ -42,6 +42,8 @@ contract Exchange is KIP7 {
         } else {
             _addrList[_addrCount] = msg.sender;
             _addrCount++;
+            // 여러번 등록되는 현상 방지
+            _isAddrExist[msg.sender] = true;
             _;
         }
     }
