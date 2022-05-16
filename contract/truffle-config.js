@@ -23,6 +23,7 @@
 // const fs = require('fs');
 // const mnemonic = fs.readFileSync(".secret").toString().trim();
 
+require('dotenv').config();
 module.exports = {
   /**
    * Networks define how you connect to your ethereum client and let you set the
@@ -76,7 +77,19 @@ module.exports = {
       port: 7545,
       network_id: "*", // Match any network id
     },
-  },
+    // Klaytn: {
+    //   host: "127.0.0.1",
+    //   port: 7545,
+    //   network_id: "*", // Match any network id
+    // },
+    baobab: {
+      provider: () => {
+        return new HDWalletProvider(process.env.PRIVATE_KEY, "http://api.baobab.klaytn.net:8651");
+      },
+      network_id: "1001", //Klaytn baobab testnet's network id
+      gas: "8500000",
+      gasPrice: null,
+    },
 
   // Set default mocha options here, use special reporters etc.
   mocha: {

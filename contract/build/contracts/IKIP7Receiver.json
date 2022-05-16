@@ -44,14 +44,14 @@
     "absolutePath": "project:/contracts/IKIP7Receiver.sol",
     "exportedSymbols": {
       "IKIP7Receiver": [
-        1681
+        1730
       ]
     },
-    "id": 1682,
+    "id": 1731,
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 1667,
+        "id": 1716,
         "literals": [
           "solidity",
           "^",
@@ -67,9 +67,9 @@
         "contractKind": "contract",
         "documentation": "@title KIP-7 Fungible Token Standard, optional wallet interface\r\n@dev Note: the KIP-13 identifier for this interface is 0x9d188c22.\r\nsee http://kips.klaytn.com/KIPs/kip-7-fungible_token\r",
         "fullyImplemented": false,
-        "id": 1681,
+        "id": 1730,
         "linearizedBaseContracts": [
-          1681
+          1730
         ],
         "name": "IKIP7Receiver",
         "nodeType": "ContractDefinition",
@@ -77,22 +77,22 @@
           {
             "body": null,
             "documentation": "@notice Handle the receipt of KIP-7 token\r\n@dev The KIP-7 smart contract calls this function on the recipient\r\n after a `safeTransfer`. This function MAY throw to revert and reject the\r\n transfer. Return of other than the magic value MUST result in the\r\n transaction being reverted.\r\n Note: the contract address is always the message sender.\r\n@param _operator The address which called `safeTransferFrom` function\r\n@param _from The address which previously owned the token\r\n@param _amount The token amount which is being transferred.\r\n@param _data Additional data with no specified format\r\n@return `bytes4(keccak256(\"onKIP7Received(address,address,uint256,bytes)\"))`\r\n unless throwing\r",
-            "id": 1680,
+            "id": 1729,
             "implemented": false,
             "kind": "function",
             "modifiers": [],
             "name": "onKIP7Received",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 1676,
+              "id": 1725,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 1669,
+                  "id": 1718,
                   "name": "_operator",
                   "nodeType": "VariableDeclaration",
-                  "scope": 1680,
+                  "scope": 1729,
                   "src": "1074:17:7",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -101,7 +101,7 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 1668,
+                    "id": 1717,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
                     "src": "1074:7:7",
@@ -116,10 +116,10 @@
                 },
                 {
                   "constant": false,
-                  "id": 1671,
+                  "id": 1720,
                   "name": "_from",
                   "nodeType": "VariableDeclaration",
-                  "scope": 1680,
+                  "scope": 1729,
                   "src": "1093:13:7",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -128,7 +128,7 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 1670,
+                    "id": 1719,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
                     "src": "1093:7:7",
@@ -143,10 +143,10 @@
                 },
                 {
                   "constant": false,
-                  "id": 1673,
+                  "id": 1722,
                   "name": "_amount",
                   "nodeType": "VariableDeclaration",
-                  "scope": 1680,
+                  "scope": 1729,
                   "src": "1108:15:7",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -155,7 +155,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 1672,
+                    "id": 1721,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "1108:7:7",
@@ -169,10 +169,10 @@
                 },
                 {
                   "constant": false,
-                  "id": 1675,
+                  "id": 1724,
                   "name": "_data",
                   "nodeType": "VariableDeclaration",
-                  "scope": 1680,
+                  "scope": 1729,
                   "src": "1125:18:7",
                   "stateVariable": false,
                   "storageLocation": "memory",
@@ -181,7 +181,7 @@
                     "typeString": "bytes"
                   },
                   "typeName": {
-                    "id": 1674,
+                    "id": 1723,
                     "name": "bytes",
                     "nodeType": "ElementaryTypeName",
                     "src": "1125:5:7",
@@ -197,15 +197,15 @@
               "src": "1073:71:7"
             },
             "returnParameters": {
-              "id": 1679,
+              "id": 1728,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 1678,
+                  "id": 1727,
                   "name": "",
                   "nodeType": "VariableDeclaration",
-                  "scope": 1680,
+                  "scope": 1729,
                   "src": "1161:6:7",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -214,7 +214,7 @@
                     "typeString": "bytes4"
                   },
                   "typeName": {
-                    "id": 1677,
+                    "id": 1726,
                     "name": "bytes4",
                     "nodeType": "ElementaryTypeName",
                     "src": "1161:6:7",
@@ -229,14 +229,14 @@
               ],
               "src": "1160:8:7"
             },
-            "scope": 1681,
+            "scope": 1730,
             "src": "1050:119:7",
             "stateMutability": "nonpayable",
             "superFunction": null,
             "visibility": "public"
           }
         ],
-        "scope": 1682,
+        "scope": 1731,
         "src": "233:939:7"
       }
     ],
@@ -247,7 +247,7 @@
       "absolutePath": "project:/contracts/IKIP7Receiver.sol",
       "exportedSymbols": {
         "IKIP7Receiver": [
-          1681
+          1730
         ]
       }
     },
@@ -261,7 +261,7 @@
             ".0"
           ]
         },
-        "id": 1667,
+        "id": 1716,
         "name": "PragmaDirective",
         "src": "0:23:7"
       },
@@ -277,10 +277,10 @@
           "documentation": "@title KIP-7 Fungible Token Standard, optional wallet interface\r\n@dev Note: the KIP-13 identifier for this interface is 0x9d188c22.\r\nsee http://kips.klaytn.com/KIPs/kip-7-fungible_token\r",
           "fullyImplemented": false,
           "linearizedBaseContracts": [
-            1681
+            1730
           ],
           "name": "IKIP7Receiver",
-          "scope": 1682
+          "scope": 1731
         },
         "children": [
           {
@@ -294,7 +294,7 @@
                 null
               ],
               "name": "onKIP7Received",
-              "scope": 1681,
+              "scope": 1730,
               "stateMutability": "nonpayable",
               "superFunction": null,
               "visibility": "public"
@@ -306,7 +306,7 @@
                     "attributes": {
                       "constant": false,
                       "name": "_operator",
-                      "scope": 1680,
+                      "scope": 1729,
                       "stateVariable": false,
                       "storageLocation": "default",
                       "type": "address",
@@ -320,12 +320,12 @@
                           "stateMutability": "nonpayable",
                           "type": "address"
                         },
-                        "id": 1668,
+                        "id": 1717,
                         "name": "ElementaryTypeName",
                         "src": "1074:7:7"
                       }
                     ],
-                    "id": 1669,
+                    "id": 1718,
                     "name": "VariableDeclaration",
                     "src": "1074:17:7"
                   },
@@ -333,7 +333,7 @@
                     "attributes": {
                       "constant": false,
                       "name": "_from",
-                      "scope": 1680,
+                      "scope": 1729,
                       "stateVariable": false,
                       "storageLocation": "default",
                       "type": "address",
@@ -347,12 +347,12 @@
                           "stateMutability": "nonpayable",
                           "type": "address"
                         },
-                        "id": 1670,
+                        "id": 1719,
                         "name": "ElementaryTypeName",
                         "src": "1093:7:7"
                       }
                     ],
-                    "id": 1671,
+                    "id": 1720,
                     "name": "VariableDeclaration",
                     "src": "1093:13:7"
                   },
@@ -360,7 +360,7 @@
                     "attributes": {
                       "constant": false,
                       "name": "_amount",
-                      "scope": 1680,
+                      "scope": 1729,
                       "stateVariable": false,
                       "storageLocation": "default",
                       "type": "uint256",
@@ -373,12 +373,12 @@
                           "name": "uint256",
                           "type": "uint256"
                         },
-                        "id": 1672,
+                        "id": 1721,
                         "name": "ElementaryTypeName",
                         "src": "1108:7:7"
                       }
                     ],
-                    "id": 1673,
+                    "id": 1722,
                     "name": "VariableDeclaration",
                     "src": "1108:15:7"
                   },
@@ -386,7 +386,7 @@
                     "attributes": {
                       "constant": false,
                       "name": "_data",
-                      "scope": 1680,
+                      "scope": 1729,
                       "stateVariable": false,
                       "storageLocation": "memory",
                       "type": "bytes",
@@ -399,17 +399,17 @@
                           "name": "bytes",
                           "type": "bytes"
                         },
-                        "id": 1674,
+                        "id": 1723,
                         "name": "ElementaryTypeName",
                         "src": "1125:5:7"
                       }
                     ],
-                    "id": 1675,
+                    "id": 1724,
                     "name": "VariableDeclaration",
                     "src": "1125:18:7"
                   }
                 ],
-                "id": 1676,
+                "id": 1725,
                 "name": "ParameterList",
                 "src": "1073:71:7"
               },
@@ -419,7 +419,7 @@
                     "attributes": {
                       "constant": false,
                       "name": "",
-                      "scope": 1680,
+                      "scope": 1729,
                       "stateVariable": false,
                       "storageLocation": "default",
                       "type": "bytes4",
@@ -432,32 +432,32 @@
                           "name": "bytes4",
                           "type": "bytes4"
                         },
-                        "id": 1677,
+                        "id": 1726,
                         "name": "ElementaryTypeName",
                         "src": "1161:6:7"
                       }
                     ],
-                    "id": 1678,
+                    "id": 1727,
                     "name": "VariableDeclaration",
                     "src": "1161:6:7"
                   }
                 ],
-                "id": 1679,
+                "id": 1728,
                 "name": "ParameterList",
                 "src": "1160:8:7"
               }
             ],
-            "id": 1680,
+            "id": 1729,
             "name": "FunctionDefinition",
             "src": "1050:119:7"
           }
         ],
-        "id": 1681,
+        "id": 1730,
         "name": "ContractDefinition",
         "src": "233:939:7"
       }
     ],
-    "id": 1682,
+    "id": 1731,
     "name": "SourceUnit",
     "src": "0:1172:7"
   },
@@ -467,7 +467,7 @@
   },
   "networks": {},
   "schemaVersion": "3.4.7",
-  "updatedAt": "2022-05-16T06:35:27.000Z",
+  "updatedAt": "2022-05-16T06:57:47.973Z",
   "devdoc": {
     "details": "Note: the KIP-13 identifier for this interface is 0x9d188c22.\r see http://kips.klaytn.com/KIPs/kip-7-fungible_token\r",
     "methods": {
