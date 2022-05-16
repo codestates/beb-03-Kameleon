@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 
 import {
   GovernPageWrapper,
@@ -6,12 +6,16 @@ import {
   GovernPagePollList,
   GovernPagePollItem,
   GovernPageBar,
-} from './GovernPage.styles';
+} from './styles/GovernPage.styles';
 
 import { createGovernList } from '../utils/dummyCreator';
 
 const GovernPage = () => {
   const governList = createGovernList(10);
+
+  const createPool = useCallback(() => {
+    console.log('create');
+  }, []);
 
   return (
     <GovernPageWrapper>
@@ -23,6 +27,7 @@ const GovernPage = () => {
             <p>TOTAL STAKED</p>
             <div>47.45M KMT</div>
           </div>
+          <button onClick={createPool}>Create Pool</button>
         </div>
         <div>
           <div>

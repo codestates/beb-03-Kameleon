@@ -1,6 +1,9 @@
 import React, { useEffect } from 'react';
 
-import { SingleInputContainer, SingleInputWrapper } from './SingleInput.styles';
+import {
+  SingleInputContainer,
+  SingleInputWrapper,
+} from './styles/SingleInput.styles';
 
 import useInput from '../../hooks/useInput';
 

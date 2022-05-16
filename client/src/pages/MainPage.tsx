@@ -5,7 +5,7 @@ import {
   MainPageSearch,
   MainPageList,
   MainPageItem,
-} from './MainPage.styles';
+} from './styles/MainPage.styles';
 
 import { createTokenList } from '../utils/dummyCreator';
 

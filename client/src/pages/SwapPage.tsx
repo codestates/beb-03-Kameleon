@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
 import { faArrowDown } from '@fortawesome/free-solid-svg-icons';
@@ -25,6 +25,7 @@ const SwapPage = () => {
   const [isChangeB, setIsChangeB] = useState<boolean>(false);
   const [isDecimalErrorA, setIsDecimalErrorA] = useState<boolean>(false);
   const [isDecimalErrorB, setIsDecimalErrorB] = useState<boolean>(false);
+  const [detailInfo, setDetailInfo] = useState<number>(0);
 
   const liftStateA = useCallback(
     (
@@ -64,6 +65,14 @@ const SwapPage = () => {
     console.log('button click', nameA, nameB);
   }, [nameA, nameB]);
 
+  useEffect(() => {
+    setDetailInfo(Math.floor(priceA * Number(balanceA)));
+  }, [priceA, balanceA]);
+
+  useEffect(() => {
+    setDetailInfo(Math.floor(priceB * Number(balanceB)));
+  }, [priceB, balanceB]);
+
   return (
     <SwapPageWrapper>
       <h2>Swap</h2>
@@ -87,16 +96,19 @@ const SwapPage = () => {
         >
           OUTPUT
         </MultipleInput>
-        <DetailInfoStyle>
-          <div>
-            <dt>현재 가격</dt>
-            <dd>0000000 KRW</dd>
-          </div>
-          <div>
-            <dt>수수료</dt>
-            <dd>0.00 KKT</dd>
-          </div>
-        </DetailInfoStyle>
+        {balanceA && balanceB && (
+          <DetailInfoStyle>
+            <div>
+              <dt>현재 가격</dt>
+              <dd>{detailInfo.toLocaleString('ko-KR')} KRW</dd>
+            </div>
+            <div>
+              <dt>수수료</dt>
+              <dd>5 KLAY</dd>
+            </div>
+          </DetailInfoStyle>
+        )}
+
         <ButtonWrapper
           numberA={Number(balanceA)}
           numberB={Number(balanceB)}
