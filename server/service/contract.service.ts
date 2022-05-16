@@ -10,10 +10,9 @@ import bcrypt from "bcrypt";
 import { returnApi } from "../types/service/Model/InterfaceReturnApiModel";
 
 const recordPoolTotalSupply = async ({ data }: { data: any }): Promise<any> => {
-  const { id, email, password, emailToken, isVerified, privateKey, imageUri } =
-    data;
+  const {} = data;
   try {
-    const user = PoolTotalSupply.create({});
+    const poolTotalSupply = PoolTotalSupply.create({});
     return true;
   } catch (err) {
     return false;
