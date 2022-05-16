@@ -50,7 +50,7 @@ contract KStockToken is KIP7, Ownable {
     // 오라클에서 가격을 확인하고 burn 가격 책정
     function getBurnAmount(uint256 kStockAmount) public view returns (uint256) {
         uint256 price = IOracle(_oracleAddress).getPriceByAddress(address(this));
-        // (kStockAmount * (99) / 100 )* price / 10e18
+        // (kStockAmount * 99 / 100 )* price / 10e18
         return (kStockAmount * (100 - _mintFee) * price) / 10e20;
     }
 
@@ -63,6 +63,8 @@ contract KStockToken is KIP7, Ownable {
         _burn(msg.sender, burnAmount);
         msg.sender.transfer(getBurnAmount(burnAmount));
     }
+
+    // 관리자함수, 컨트랙트에 몇토큰이 있는지 확인 가능
 
     function addKlay() payable public onlyOwner {
     }
