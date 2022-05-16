@@ -14,6 +14,7 @@ contract KStockToken is KIP7, Ownable {
     string private _symbol;
     address private _oracleAddress;
     uint256 private _tokenPrice;
+    uint256 private _stockCode;
     uint256 private _mintFee = 1;
 
     function name() public view returns (string memory) {
@@ -28,9 +29,14 @@ contract KStockToken is KIP7, Ownable {
         return 18;
     }
 
-    constructor(string memory name_, string memory symbol_) KIP7() public {
+    function stockCode() public view returns (uint256) {
+        return _stockCode;
+    }    
+
+    constructor(string memory name_, string memory symbol_, uint256 stockCode_) KIP7() public {
         _name = name_;
         _symbol = symbol_;
+        _stockCode = stockCode_;
         _oracleAddress = msg.sender; // 오라클 주소 저장
         // _tokenPrice = 4000e18; // 초기값 4000클레이ㅣ(200만원이상)
     }
