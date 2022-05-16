@@ -7,6 +7,20 @@
 		"abi": [
 			{
 				"constant": true,
+				"inputs": [],
+				"name": "getStockCodeList",
+				"outputs": [
+					{
+						"name": "",
+						"type": "uint256[]"
+					}
+				],
+				"payable": false,
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"constant": true,
 				"inputs": [
 					{
 						"name": "kStockAddr",
@@ -18,20 +32,6 @@
 					{
 						"name": "",
 						"type": "uint256"
-					}
-				],
-				"payable": false,
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"constant": true,
-				"inputs": [],
-				"name": "getStockList",
-				"outputs": [
-					{
-						"name": "",
-						"type": "string[]"
 					}
 				],
 				"payable": false,
@@ -57,29 +57,6 @@
 				"inputs": [],
 				"name": "renounceOwnership",
 				"outputs": [],
-				"payable": false,
-				"stateMutability": "nonpayable",
-				"type": "function"
-			},
-			{
-				"constant": false,
-				"inputs": [
-					{
-						"name": "name_",
-						"type": "string"
-					},
-					{
-						"name": "symbol_",
-						"type": "string"
-					}
-				],
-				"name": "createKStock",
-				"outputs": [
-					{
-						"name": "",
-						"type": "address"
-					}
-				],
 				"payable": false,
 				"stateMutability": "nonpayable",
 				"type": "function"
@@ -148,6 +125,33 @@
 				],
 				"payable": false,
 				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"constant": false,
+				"inputs": [
+					{
+						"name": "name_",
+						"type": "string"
+					},
+					{
+						"name": "symbol_",
+						"type": "string"
+					},
+					{
+						"name": "stockCode_",
+						"type": "uint256"
+					}
+				],
+				"name": "createKStock",
+				"outputs": [
+					{
+						"name": "",
+						"type": "address"
+					}
+				],
+				"payable": false,
+				"stateMutability": "nonpayable",
 				"type": "function"
 			},
 			{
@@ -269,15 +273,15 @@
 			]
 		},
 		"contracts/KStockToken.sol": {
-			"keccak256": "0x8c678ed9d488debcf9ca32423ab1f87aaeca8b6f1197c7343a5bb2bf0c2ead3f",
+			"keccak256": "0x2a5bad2d798f689a9169ece6c34d4595700b9f5b0605dc47f5dc0dad9ba5c0ba",
 			"urls": [
-				"bzzr://6074f6318dc6414146f7e35ef855f805ae2288bbf5c582704fa57b32d0fe157a"
+				"bzzr://b01834e7218f38d65ba9199f3d5e350974135294af94ac625111ba932afce358"
 			]
 		},
 		"contracts/Oracle.sol": {
-			"keccak256": "0x351dc0778d51688e98e8096df020c2f02903042fd5d7c20684f85336fafb76ef",
+			"keccak256": "0x1156bd105cf838da8c30c481939070b7cc00e98c97ed6a4e57fff472a13116f9",
 			"urls": [
-				"bzzr://17a407de12a082aae40d2b84ce5088d1e4338ea7c1cfb56fc46ec57996c68dc1"
+				"bzzr://6e36450525812d44387416856bb26eabd99547082eaaa91b8bb711d3a0e25baa"
 			]
 		},
 		"contracts/Ownable.sol": {
