@@ -132,3 +132,43 @@ export const GovernPageBar = styled.div<{ yes: number; no: number }>`
     }
   }
 `;
+
+export const GovernPageModalContent = styled.div`
+  margin: 1rem 0;
+
+  & label {
+    display: block;
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+  }
+
+  & input {
+    width: 100%;
+    height: 2.5rem;
+    margin-bottom: 1rem;
+    padding: 0.5rem;
+    border: 0;
+    border-radius: 0.5rem;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--white);
+    background-color: var(--green);
+    outline: none;
+  }
+
+  & button {
+    width: 100%;
+    height: 3rem;
+    border: 0;
+    border-radius: 0.5rem;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--white);
+    background-color: var(--deep-green);
+
+    :hover {
+      cursor: pointer;
+    }
+  }
+`;

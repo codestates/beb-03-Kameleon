@@ -18,8 +18,6 @@ const MainPage = () => {
     setInput(e.target.value);
   }, []);
 
-  console.log(input);
-
   return (
     <MainPageWrapper>
       <h2>Stock List</h2>
