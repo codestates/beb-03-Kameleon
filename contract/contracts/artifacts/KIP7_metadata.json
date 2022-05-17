@@ -25,20 +25,6 @@
 				"type": "function"
 			},
 			{
-				"constant": true,
-				"inputs": [],
-				"name": "name",
-				"outputs": [
-					{
-						"name": "",
-						"type": "string"
-					}
-				],
-				"payable": false,
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
 				"constant": false,
 				"inputs": [
 					{
@@ -59,15 +45,6 @@
 				],
 				"payable": false,
 				"stateMutability": "nonpayable",
-				"type": "function"
-			},
-			{
-				"constant": false,
-				"inputs": [],
-				"name": "mint",
-				"outputs": [],
-				"payable": true,
-				"stateMutability": "payable",
 				"type": "function"
 			},
 			{
@@ -112,39 +89,6 @@
 				"type": "function"
 			},
 			{
-				"constant": true,
-				"inputs": [
-					{
-						"name": "kStockAmount",
-						"type": "uint256"
-					}
-				],
-				"name": "getBurnAmount",
-				"outputs": [
-					{
-						"name": "",
-						"type": "uint256"
-					}
-				],
-				"payable": false,
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"constant": true,
-				"inputs": [],
-				"name": "decimals",
-				"outputs": [
-					{
-						"name": "",
-						"type": "uint8"
-					}
-				],
-				"payable": false,
-				"stateMutability": "pure",
-				"type": "function"
-			},
-			{
 				"constant": false,
 				"inputs": [
 					{
@@ -185,48 +129,6 @@
 				"type": "function"
 			},
 			{
-				"constant": false,
-				"inputs": [
-					{
-						"name": "burnAmount",
-						"type": "uint256"
-					}
-				],
-				"name": "burn",
-				"outputs": [],
-				"payable": false,
-				"stateMutability": "nonpayable",
-				"type": "function"
-			},
-			{
-				"constant": false,
-				"inputs": [
-					{
-						"name": "amount",
-						"type": "uint256"
-					}
-				],
-				"name": "claimKlay",
-				"outputs": [],
-				"payable": false,
-				"stateMutability": "nonpayable",
-				"type": "function"
-			},
-			{
-				"constant": true,
-				"inputs": [],
-				"name": "stockCode",
-				"outputs": [
-					{
-						"name": "",
-						"type": "string"
-					}
-				],
-				"payable": false,
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
 				"constant": true,
 				"inputs": [
 					{
@@ -235,62 +137,6 @@
 					}
 				],
 				"name": "balanceOf",
-				"outputs": [
-					{
-						"name": "",
-						"type": "uint256"
-					}
-				],
-				"payable": false,
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"constant": false,
-				"inputs": [],
-				"name": "renounceOwnership",
-				"outputs": [],
-				"payable": false,
-				"stateMutability": "nonpayable",
-				"type": "function"
-			},
-			{
-				"constant": true,
-				"inputs": [],
-				"name": "owner",
-				"outputs": [
-					{
-						"name": "",
-						"type": "address"
-					}
-				],
-				"payable": false,
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"constant": true,
-				"inputs": [],
-				"name": "symbol",
-				"outputs": [
-					{
-						"name": "",
-						"type": "string"
-					}
-				],
-				"payable": false,
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"constant": true,
-				"inputs": [
-					{
-						"name": "klayAmount",
-						"type": "uint256"
-					}
-				],
-				"name": "getMintAmount",
 				"outputs": [
 					{
 						"name": "",
@@ -396,63 +242,10 @@
 				"type": "function"
 			},
 			{
-				"constant": false,
-				"inputs": [
-					{
-						"name": "newOwner",
-						"type": "address"
-					}
-				],
-				"name": "transferOwnership",
-				"outputs": [],
-				"payable": false,
-				"stateMutability": "nonpayable",
-				"type": "function"
-			},
-			{
-				"constant": false,
 				"inputs": [],
-				"name": "addKlay",
-				"outputs": [],
-				"payable": true,
-				"stateMutability": "payable",
-				"type": "function"
-			},
-			{
-				"inputs": [
-					{
-						"name": "name_",
-						"type": "string"
-					},
-					{
-						"name": "symbol_",
-						"type": "string"
-					},
-					{
-						"name": "stockCode_",
-						"type": "string"
-					}
-				],
 				"payable": false,
 				"stateMutability": "nonpayable",
 				"type": "constructor"
-			},
-			{
-				"anonymous": false,
-				"inputs": [
-					{
-						"indexed": true,
-						"name": "previousOwner",
-						"type": "address"
-					},
-					{
-						"indexed": true,
-						"name": "newOwner",
-						"type": "address"
-					}
-				],
-				"name": "OwnershipTransferred",
-				"type": "event"
 			},
 			{
 				"anonymous": false,
@@ -500,6 +293,7 @@
 			}
 		],
 		"devdoc": {
+			"details": "Implementation of the `IKIP7` interface.\r  * This implementation is agnostic to the way tokens are created. This means\r that a supply mechanism has to be added in a derived contract using `_mint`.\r For a generic mechanism see `KIP7Mintable`.\r  * We have followed general OpenZeppelin guidelines: functions revert instead\r of returning `false` on failure. This behavior is nonetheless conventional\r and does not conflict with the expectations of KIP7 applications.\r  * Additionally, an `Approval` event is emitted on calls to `transferFrom`.\r This allows applications to reconstruct the allowance for all accounts just\r by listening to said events. Other implementations of the KIP may not emit\r these events, as it isn't required by the specification.\r  * See http://kips.klaytn.com/KIPs/kip-7-fungible_token\r",
 			"methods": {
 				"allowance(address,address)": {
 					"details": "See `IKIP7.allowance`.\r"
@@ -509,12 +303,6 @@
 				},
 				"balanceOf(address)": {
 					"details": "See `IKIP7.balanceOf`.\r"
-				},
-				"owner()": {
-					"details": "Returns the address of the current owner.\r"
-				},
-				"renounceOwnership()": {
-					"details": "Leaves the contract without owner. It will not be possible to call\r `onlyOwner` functions anymore. Can only be called by the current owner.\r      * NOTE: Renouncing ownership will leave the contract without an owner,\r thereby removing any functionality that is only available to the owner.\r"
 				},
 				"safeTransfer(address,uint256)": {
 					"details": "Moves `amount` tokens from the caller's account to `recipient`.\r"
@@ -539,9 +327,6 @@
 				},
 				"transferFrom(address,address,uint256)": {
 					"details": "See `IKIP7.transferFrom`.\r      * Emits an `Approval` event indicating the updated allowance. This is not\r required by the KIP. See the note at the beginning of `KIP7`;\r      * Requirements:\r - `sender` and `recipient` cannot be the zero address.\r - `sender` must have a balance of at least `value`.\r - the caller must have allowance for `sender`'s tokens of at least\r `amount`.\r"
-				},
-				"transferOwnership(address)": {
-					"details": "Transfers ownership of the contract to a new account (`newOwner`).\r Can only be called by the current owner.\r"
 				}
 			}
 		},
@@ -551,7 +336,7 @@
 	},
 	"settings": {
 		"compilationTarget": {
-			"contracts/KStockToken.sol": "KStockToken"
+			"contracts/KIP7.sol": "KIP7"
 		},
 		"evmVersion": "petersburg",
 		"libraries": {},
@@ -596,18 +381,6 @@
 			"keccak256": "0xd15f19173be7de00ce2257969846564a418e9fd1a9b6daa0df1698476eb96b26",
 			"urls": [
 				"bzzr://57d4da01b22677e6856f8df49885ae7a2b61911659ae0a15830c6211ca921010"
-			]
-		},
-		"contracts/KStockToken.sol": {
-			"keccak256": "0xae9aee3214fda551868502f36daaa112fb5652e2ad9d1a3866b7534f88976d49",
-			"urls": [
-				"bzzr://3d59ac6991f576e31d17a5a96d0a81e304bcbe4e371e4c640b38b573c971790c"
-			]
-		},
-		"contracts/Ownable.sol": {
-			"keccak256": "0xf32a8f0d7542c0a05f19b49cbb0817124ab1b014a40e5816d71acb3523f77eeb",
-			"urls": [
-				"bzzr://94e9bdf06243f0c1893c1819fb6192c6b5446ec787e14da951667af790608315"
 			]
 		},
 		"contracts/SafeMath.sol": {

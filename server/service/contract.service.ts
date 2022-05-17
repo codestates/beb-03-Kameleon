@@ -5,7 +5,7 @@ import {
   IUser,
   returnUser,
 } from "../types/service/InterfaceUser";
-import { PoolTotalSupply } from "../typeorm/entity/PoolTotalSupply";
+import { PoolTotalSupply } from "../typeorm/entity/PoolLiquidity";
 import bcrypt from "bcrypt";
 import { returnApi } from "../types/service/Model/InterfaceReturnApiModel";
 

@@ -62,15 +62,6 @@
 				"type": "function"
 			},
 			{
-				"constant": false,
-				"inputs": [],
-				"name": "mint",
-				"outputs": [],
-				"payable": true,
-				"stateMutability": "payable",
-				"type": "function"
-			},
-			{
 				"constant": true,
 				"inputs": [],
 				"name": "totalSupply",
@@ -113,25 +104,6 @@
 			},
 			{
 				"constant": true,
-				"inputs": [
-					{
-						"name": "kStockAmount",
-						"type": "uint256"
-					}
-				],
-				"name": "getBurnAmount",
-				"outputs": [
-					{
-						"name": "",
-						"type": "uint256"
-					}
-				],
-				"payable": false,
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"constant": true,
 				"inputs": [],
 				"name": "decimals",
 				"outputs": [
@@ -142,6 +114,20 @@
 				],
 				"payable": false,
 				"stateMutability": "pure",
+				"type": "function"
+			},
+			{
+				"constant": false,
+				"inputs": [
+					{
+						"name": "governAddress",
+						"type": "address"
+					}
+				],
+				"name": "setGovernAddress",
+				"outputs": [],
+				"payable": false,
+				"stateMutability": "nonpayable",
 				"type": "function"
 			},
 			{
@@ -188,42 +174,19 @@
 				"constant": false,
 				"inputs": [
 					{
-						"name": "burnAmount",
+						"name": "oraclePrice_",
 						"type": "uint256"
 					}
 				],
-				"name": "burn",
-				"outputs": [],
-				"payable": false,
-				"stateMutability": "nonpayable",
-				"type": "function"
-			},
-			{
-				"constant": false,
-				"inputs": [
-					{
-						"name": "amount",
-						"type": "uint256"
-					}
-				],
-				"name": "claimKlay",
-				"outputs": [],
-				"payable": false,
-				"stateMutability": "nonpayable",
-				"type": "function"
-			},
-			{
-				"constant": true,
-				"inputs": [],
-				"name": "stockCode",
+				"name": "updateOraclePrice",
 				"outputs": [
 					{
 						"name": "",
-						"type": "string"
+						"type": "uint256"
 					}
 				],
 				"payable": false,
-				"stateMutability": "view",
+				"stateMutability": "nonpayable",
 				"type": "function"
 			},
 			{
@@ -283,22 +246,25 @@
 				"type": "function"
 			},
 			{
-				"constant": true,
+				"constant": false,
 				"inputs": [
 					{
-						"name": "klayAmount",
-						"type": "uint256"
-					}
-				],
-				"name": "getMintAmount",
-				"outputs": [
+						"name": "from",
+						"type": "address"
+					},
 					{
-						"name": "",
+						"name": "to",
+						"type": "address"
+					},
+					{
+						"name": "amount",
 						"type": "uint256"
 					}
 				],
+				"name": "governTransfer",
+				"outputs": [],
 				"payable": false,
-				"stateMutability": "view",
+				"stateMutability": "nonpayable",
 				"type": "function"
 			},
 			{
@@ -410,15 +376,6 @@
 				"type": "function"
 			},
 			{
-				"constant": false,
-				"inputs": [],
-				"name": "addKlay",
-				"outputs": [],
-				"payable": true,
-				"stateMutability": "payable",
-				"type": "function"
-			},
-			{
 				"inputs": [
 					{
 						"name": "name_",
@@ -429,8 +386,8 @@
 						"type": "string"
 					},
 					{
-						"name": "stockCode_",
-						"type": "string"
+						"name": "governAddress_",
+						"type": "address"
 					}
 				],
 				"payable": false,
@@ -551,7 +508,7 @@
 	},
 	"settings": {
 		"compilationTarget": {
-			"contracts/KStockToken.sol": "KStockToken"
+			"contracts/MyKIP7.sol": "MyKIP7"
 		},
 		"evmVersion": "petersburg",
 		"libraries": {},
@@ -598,10 +555,10 @@
 				"bzzr://57d4da01b22677e6856f8df49885ae7a2b61911659ae0a15830c6211ca921010"
 			]
 		},
-		"contracts/KStockToken.sol": {
-			"keccak256": "0xae9aee3214fda551868502f36daaa112fb5652e2ad9d1a3866b7534f88976d49",
+		"contracts/MyKIP7.sol": {
+			"keccak256": "0x528fdb2db5c1fcb4eaf587adec42fdceedf670990ab0fa2fadff241e5b35ff53",
 			"urls": [
-				"bzzr://3d59ac6991f576e31d17a5a96d0a81e304bcbe4e371e4c640b38b573c971790c"
+				"bzzr://fe1bb8f60482bcb3f44fae3b3f1aa424d1c86462fdb814b0cebafd38f25b8cb0"
 			]
 		},
 		"contracts/Ownable.sol": {

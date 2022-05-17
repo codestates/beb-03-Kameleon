@@ -7,31 +7,17 @@
 		"abi": [
 			{
 				"constant": true,
-				"inputs": [],
-				"name": "getStockCodeList",
-				"outputs": [
-					{
-						"name": "",
-						"type": "string[]"
-					}
-				],
-				"payable": false,
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"constant": true,
 				"inputs": [
 					{
-						"name": "kStockAddr",
+						"name": "_tokenAddress",
 						"type": "address"
 					}
 				],
-				"name": "getIndexByAddress",
+				"name": "getExchange",
 				"outputs": [
 					{
 						"name": "",
-						"type": "uint256"
+						"type": "address"
 					}
 				],
 				"payable": false,
@@ -42,48 +28,25 @@
 				"constant": false,
 				"inputs": [
 					{
-						"name": "priceArr",
-						"type": "uint256[]"
-					}
-				],
-				"name": "setOraclePrice",
-				"outputs": [],
-				"payable": false,
-				"stateMutability": "nonpayable",
-				"type": "function"
-			},
-			{
-				"constant": false,
-				"inputs": [],
-				"name": "renounceOwnership",
-				"outputs": [],
-				"payable": false,
-				"stateMutability": "nonpayable",
-				"type": "function"
-			},
-			{
-				"constant": true,
-				"inputs": [],
-				"name": "getOraclePrice",
-				"outputs": [
-					{
-						"name": "",
-						"type": "uint256[]"
-					}
-				],
-				"payable": false,
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"constant": true,
-				"inputs": [
-					{
-						"name": "kStockAddr",
+						"name": "_tokenAddress",
 						"type": "address"
 					}
 				],
-				"name": "getPriceByAddress",
+				"name": "createExchange",
+				"outputs": [
+					{
+						"name": "",
+						"type": "address"
+					}
+				],
+				"payable": false,
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"constant": true,
+				"inputs": [],
+				"name": "getExchangeCount",
 				"outputs": [
 					{
 						"name": "",
@@ -97,7 +60,59 @@
 			{
 				"constant": true,
 				"inputs": [],
-				"name": "owner",
+				"name": "exchangeCount",
+				"outputs": [
+					{
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"payable": false,
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"constant": true,
+				"inputs": [],
+				"name": "getAllExchangeList",
+				"outputs": [
+					{
+						"name": "",
+						"type": "address[]"
+					}
+				],
+				"payable": false,
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"constant": true,
+				"inputs": [
+					{
+						"name": "",
+						"type": "address"
+					}
+				],
+				"name": "tokenToExchange",
+				"outputs": [
+					{
+						"name": "",
+						"type": "address"
+					}
+				],
+				"payable": false,
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"constant": true,
+				"inputs": [
+					{
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"name": "exchangeList",
 				"outputs": [
 					{
 						"name": "",
@@ -116,7 +131,7 @@
 						"type": "uint256"
 					}
 				],
-				"name": "getKStockAddressByIndex",
+				"name": "getExchangeList",
 				"outputs": [
 					{
 						"name": "",
@@ -126,98 +141,10 @@
 				"payable": false,
 				"stateMutability": "view",
 				"type": "function"
-			},
-			{
-				"constant": true,
-				"inputs": [],
-				"name": "getKStockCount",
-				"outputs": [
-					{
-						"name": "",
-						"type": "uint256"
-					}
-				],
-				"payable": false,
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"constant": false,
-				"inputs": [
-					{
-						"name": "newOwner",
-						"type": "address"
-					}
-				],
-				"name": "transferOwnership",
-				"outputs": [],
-				"payable": false,
-				"stateMutability": "nonpayable",
-				"type": "function"
-			},
-			{
-				"constant": false,
-				"inputs": [
-					{
-						"name": "name_",
-						"type": "string"
-					},
-					{
-						"name": "symbol_",
-						"type": "string"
-					},
-					{
-						"name": "stockCode_",
-						"type": "string"
-					}
-				],
-				"name": "createKStock",
-				"outputs": [
-					{
-						"name": "",
-						"type": "address"
-					}
-				],
-				"payable": false,
-				"stateMutability": "nonpayable",
-				"type": "function"
-			},
-			{
-				"inputs": [],
-				"payable": false,
-				"stateMutability": "nonpayable",
-				"type": "constructor"
-			},
-			{
-				"anonymous": false,
-				"inputs": [
-					{
-						"indexed": true,
-						"name": "previousOwner",
-						"type": "address"
-					},
-					{
-						"indexed": true,
-						"name": "newOwner",
-						"type": "address"
-					}
-				],
-				"name": "OwnershipTransferred",
-				"type": "event"
 			}
 		],
 		"devdoc": {
-			"methods": {
-				"owner()": {
-					"details": "Returns the address of the current owner.\r"
-				},
-				"renounceOwnership()": {
-					"details": "Leaves the contract without owner. It will not be possible to call\r `onlyOwner` functions anymore. Can only be called by the current owner.\r      * NOTE: Renouncing ownership will leave the contract without an owner,\r thereby removing any functionality that is only available to the owner.\r"
-				},
-				"transferOwnership(address)": {
-					"details": "Transfers ownership of the contract to a new account (`newOwner`).\r Can only be called by the current owner.\r"
-				}
-			}
+			"methods": {}
 		},
 		"userdoc": {
 			"methods": {}
@@ -225,7 +152,7 @@
 	},
 	"settings": {
 		"compilationTarget": {
-			"contracts/Oracle.sol": "Oracle"
+			"contracts/Factory.sol": "Factory"
 		},
 		"evmVersion": "petersburg",
 		"libraries": {},
@@ -240,6 +167,24 @@
 			"keccak256": "0x992bce8d5a6b643f20e352e55b07fe3affa771c8e921c4c1e5623c5d4ac3839b",
 			"urls": [
 				"bzzr://de0253e9fe9c33071e5cde96818b6904992585a2f320cb6821069280a7e894d1"
+			]
+		},
+		"contracts/Exchange.sol": {
+			"keccak256": "0xa68ea5a96562599543f0d20cbccea45953a1cfaaad878ef551a68c06776bb61c",
+			"urls": [
+				"bzzr://8faeafda694fea1cb741dd00c23a8c32042b4b580bce1c304ab3d4b65146882e"
+			]
+		},
+		"contracts/Factory.sol": {
+			"keccak256": "0x2ad448cac9f3169bf80ec49ea1ae7952bb878383374b23fe2699727a32777e9c",
+			"urls": [
+				"bzzr://873f1769124395569672cc9282c81b50a450f8061f889a19f84da0ce16bc5a3d"
+			]
+		},
+		"contracts/IFactory.sol": {
+			"keccak256": "0xa3e848dae3c851c8cedf5c7d0b05d05f9d2f61fd3c2230895101da103ffa96fc",
+			"urls": [
+				"bzzr://6458b9ef08315d5f35b22b1e87d3ca7124ad1b2b2c95fcb88ae8b75e804f6992"
 			]
 		},
 		"contracts/IKIP13.sol": {
@@ -270,24 +215,6 @@
 			"keccak256": "0xd15f19173be7de00ce2257969846564a418e9fd1a9b6daa0df1698476eb96b26",
 			"urls": [
 				"bzzr://57d4da01b22677e6856f8df49885ae7a2b61911659ae0a15830c6211ca921010"
-			]
-		},
-		"contracts/KStockToken.sol": {
-			"keccak256": "0xae9aee3214fda551868502f36daaa112fb5652e2ad9d1a3866b7534f88976d49",
-			"urls": [
-				"bzzr://3d59ac6991f576e31d17a5a96d0a81e304bcbe4e371e4c640b38b573c971790c"
-			]
-		},
-		"contracts/Oracle.sol": {
-			"keccak256": "0x4bfb9838223af79a9200da93794d0b3b97a6b5ac72cac5d006cd8f4f48617ba9",
-			"urls": [
-				"bzzr://26c7d35afcef2032939a9e651fe8a395765705102063c2d32927fd23d8d1f8d5"
-			]
-		},
-		"contracts/Ownable.sol": {
-			"keccak256": "0xf32a8f0d7542c0a05f19b49cbb0817124ab1b014a40e5816d71acb3523f77eeb",
-			"urls": [
-				"bzzr://94e9bdf06243f0c1893c1819fb6192c6b5446ec787e14da951667af790608315"
 			]
 		},
 		"contracts/SafeMath.sol": {

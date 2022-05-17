@@ -1,6 +1,7 @@
 import server from "./config/express";
 import connection from "./typeorm/connection";
-import { stockPrice } from "./utilities/naverApi";
+import { startCron } from "./utilities/cron";
+import { checkPoolLiquidity } from "./utilities/interestCalculator";
 
 const port = process.env.PORT || 5000;
 
@@ -10,8 +11,10 @@ const Server = async () => {
     console.log("database 생성");
     await connection.create();
 
-    stockPrice();
-    console.log("erc721 거래용 토큰(erc20) 세팅");
+    // cron 시작
+    console.log("cron 시작");
+    startCron();
+    checkPoolLiquidity();
     // 프론트 서버 시작
     server.listen(port, (err?: any) => {
       if (err) throw err;
