@@ -1,1 +1,37 @@
-//https://polling.finance.naver.com/api/realtime?query=SERVICE_ITEM:102280|SERVICE_MYSTOCK_ITEM:003550,012330,011210,051600,052690,023530,021240,139480,030200,000660,009290,001740,253450,006280,015760&_callback=window.__jindo2_callback._2713
+//https://polling.finance.naver.com/api/realtime?query=SERVICE_ITEM:005930,051600
+
+import axios from "axios";
+import { callContract } from "./KAS";
+
+const stockPrice = async () => {
+  try {
+    const stocklist: Array<string> = await callContract({
+      contractName: "Oracle",
+      contractAddress: process.env.Oracle_CONTRACT_ADDRESS,
+      methodName: "getStockCodeList",
+    });
+    console.log(stocklist);
+    const res = await axios(
+      `https://polling.finance.naver.com/api/realtime?query=SERVICE_ITEM:${stocklist.join(
+        ","
+      )}`
+    );
+    const datas = res?.data?.result?.areas[0]?.datas;
+    if (datas !== undefined) {
+      const result = datas.map(
+        ({ cd: codeNumber, nv: nowValue }: { cd: string; nv: number }) => ({
+          codeNumber,
+          nowValue,
+        })
+      );
+      return result;
+    } else {
+      return [];
+    }
+  } catch (error) {
+    console.log(error);
+    return [];
+  }
+};
+
+export { stockPrice };
