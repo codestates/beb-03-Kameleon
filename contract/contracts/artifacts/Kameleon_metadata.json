@@ -621,9 +621,9 @@
 			]
 		},
 		"contracts/Exchange.sol": {
-			"keccak256": "0xd70936411cd0df8653b12901904ea672b81cfeef91c2253493af9d44ed1fb55d",
+			"keccak256": "0x971fb023f5253bc5086b3625bd9a1235f3a3ce3e7300af127f38e4328902d189",
 			"urls": [
-				"bzzr://bdbb05041d6ca44f8dfde2343e6d7a42d3c3ee063d24e8e9330d3d1ddb31b611"
+				"bzzr://5614b868bc3d0a7e3ee8296e4dbded3f5329c480c9dbbda46123af6553f57d5d"
 			]
 		},
 		"contracts/IFactory.sol": {
