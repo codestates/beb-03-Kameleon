@@ -1,25 +1,41 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-const initialUserInfo = {email: '', id: '', imageUri: '', isVerified: false, role: '',  uuid: '', tokenBalance: ''};
+const initialUserInfo = {
+  email: '',
+  id: '',
+  imageUri: '',
+  isVerified: false,
+  role: '',
+  uuid: '',
+  tokenBalance: '',
+};
 
 export const userSlice = createSlice({
-    name: "user",
-    initialState: { accessToken: undefined, userInfo: initialUserInfo},
-    reducers: {
-        login: (state, action) => {
-          state.accessToken = action.payload;
-          //console.log('⭐️⭐️⭐️---------------- dispatch: Login');
-        },
-        getUserInfo: (state, action) => {
-          state.userInfo = action.payload;
-          //console.log('⭐️⭐️⭐️---------------- dispatch: getUserInfo');
-        },
-        logout: (state) => {
-          state.accessToken = undefined;
-          state.userInfo = initialUserInfo;
-          //console.log('⭐️⭐️⭐️---------------- dispatch: Logout');
-        }
+  name: 'user',
+  initialState: {
+    accessToken: undefined,
+    userInfo: initialUserInfo,
+    klayPrice: undefined,
+  },
+  reducers: {
+    login: (state, action) => {
+      state.accessToken = action.payload;
+      //console.log('⭐️⭐️⭐️---------------- dispatch: Login');
     },
+    getUserInfo: (state, action) => {
+      state.userInfo = action.payload;
+      //console.log('⭐️⭐️⭐️---------------- dispatch: getUserInfo');
+    },
+    logout: (state) => {
+      state.accessToken = undefined;
+      state.userInfo = initialUserInfo;
+      //console.log('⭐️⭐️⭐️---------------- dispatch: Logout');
+    },
+    getKlayPrice: (state, action) => {
+      state.klayPrice = action.payload;
+      //console.log('⭐️⭐️⭐️---------------- dispatch: getKlayPrice');
+    },
+  },
 });
 
 export const { login } = userSlice.actions;

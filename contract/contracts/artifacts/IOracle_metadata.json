@@ -6,35 +6,22 @@
 	"output": {
 		"abi": [
 			{
-				"constant": false,
+				"constant": true,
 				"inputs": [
 					{
-						"name": "_minTokens",
-						"type": "uint256"
-					},
-					{
-						"name": "_recipient",
+						"name": "kStockAddr",
 						"type": "address"
 					}
 				],
-				"name": "ethToTokenTransfer",
-				"outputs": [],
-				"payable": true,
-				"stateMutability": "payable",
-				"type": "function"
-			},
-			{
-				"constant": false,
-				"inputs": [
+				"name": "getPriceByAddress",
+				"outputs": [
 					{
-						"name": "_minTokens",
+						"name": "",
 						"type": "uint256"
 					}
 				],
-				"name": "ethToTokenSwap",
-				"outputs": [],
-				"payable": true,
-				"stateMutability": "payable",
+				"payable": false,
+				"stateMutability": "view",
 				"type": "function"
 			}
 		],
@@ -47,7 +34,7 @@
 	},
 	"settings": {
 		"compilationTarget": {
-			"contracts/Exchange.sol": "IExchange"
+			"contracts/KStockToken.sol": "IOracle"
 		},
 		"evmVersion": "petersburg",
 		"libraries": {},
@@ -62,18 +49,6 @@
 			"keccak256": "0xb32556016817a6b821827012e600f469e5ca68b1d6ce0ba1877f1dbe2743db9f",
 			"urls": [
 				"bzzr://9c91e4d8eeee62248b28520f7e2be3ee4d7d8c992d198ba49360f40897430acb"
-			]
-		},
-		"contracts/Exchange.sol": {
-			"keccak256": "0x971fb023f5253bc5086b3625bd9a1235f3a3ce3e7300af127f38e4328902d189",
-			"urls": [
-				"bzzr://5614b868bc3d0a7e3ee8296e4dbded3f5329c480c9dbbda46123af6553f57d5d"
-			]
-		},
-		"contracts/IFactory.sol": {
-			"keccak256": "0xbb61320ed7e91365e3068e465b15efc09a4de76780e9cb742eae813ab550ba29",
-			"urls": [
-				"bzzr://0639982cdaed53960ce39fc330ee480781617e7f2537ffd9ebd5baa5796f1a0b"
 			]
 		},
 		"contracts/IKIP13.sol": {
@@ -104,6 +79,18 @@
 			"keccak256": "0x77fb2391ddce0454186c9ac3d7463540f48c43d1308ffc2e6bcf835ef81403fb",
 			"urls": [
 				"bzzr://037dd155caeb944a2d768d329e95d320bedb4ca16fa864f4ba2dc4d08404c780"
+			]
+		},
+		"contracts/KStockToken.sol": {
+			"keccak256": "0x2a5bad2d798f689a9169ece6c34d4595700b9f5b0605dc47f5dc0dad9ba5c0ba",
+			"urls": [
+				"bzzr://b01834e7218f38d65ba9199f3d5e350974135294af94ac625111ba932afce358"
+			]
+		},
+		"contracts/Ownable.sol": {
+			"keccak256": "0x38db741ff3763cb57d6c429ac3838ab63b7e70b4aabeb414dcb583770bc1d622",
+			"urls": [
+				"bzzr://1ef9f5c1534dbdb1be33549b65c2156c3671d65673eba3de2a470babfdbf81ee"
 			]
 		},
 		"contracts/SafeMath.sol": {
