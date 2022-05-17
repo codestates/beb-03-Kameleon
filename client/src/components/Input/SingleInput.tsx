@@ -29,7 +29,7 @@ const SingleInput = ({
   otherChange,
 }: LayoutProps) => {
   const tokenPrice = 500;
-  const tokenName = 'KLY';
+  const tokenName = 'KLAY';
   const numberOfDecimal = 2;
   const {
     tokenBalance,
