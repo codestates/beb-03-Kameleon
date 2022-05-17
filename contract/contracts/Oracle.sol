@@ -23,7 +23,7 @@ contract Oracle is Ownable {
         _owner = msg.sender;
     }
 
-    function createKStock(string memory name_, string memory symbol_, uint256 stockCode_) public onlyOwner returns (address) {
+    function createKStock(string memory name_, string memory symbol_, string memory stockCode_) public onlyOwner returns (address) {
         // require(_tokenAddress != address(0), "Factory: invalid token address");
 
         // 해당 KStock 컨트랙트 생성
@@ -56,8 +56,8 @@ contract Oracle is Ownable {
     }
 
     // StockList 출력
-    function getStockCodeList() public view returns (uint256[] memory){
-        uint256[] memory stockCodeList = new uint256[](_kStockCount);
+    function getStockCodeList() public view returns (string[] memory){
+        string[] memory stockCodeList = new string[](_kStockCount);
         for(uint256 i = 0; i < _kStockCount; i++) {
             stockCodeList[i] = KStockToken(_kStockList[i].kStockAddress).stockCode();
         }

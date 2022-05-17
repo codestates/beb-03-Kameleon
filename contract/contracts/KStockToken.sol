@@ -14,7 +14,7 @@ contract KStockToken is KIP7, Ownable {
     string private _symbol;
     address private _oracleAddress;
     uint256 private _tokenPrice;
-    uint256 private _stockCode;
+    string private _stockCode;
     uint256 private _mintFee = 1;
 
     function name() public view returns (string memory) {
@@ -29,11 +29,11 @@ contract KStockToken is KIP7, Ownable {
         return 18;
     }
 
-    function stockCode() public view returns (uint256) {
+    function stockCode() public view returns (string memory) {
         return _stockCode;
     }    
 
-    constructor(string memory name_, string memory symbol_, uint256 stockCode_) KIP7() public {
+    constructor(string memory name_, string memory symbol_, string memory stockCode_) KIP7() public {
         _name = name_;
         _symbol = symbol_;
         _stockCode = stockCode_;

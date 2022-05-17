@@ -1,14 +1,14 @@
 import Caver from "caver-js";
 require("dotenv").config();
-const caver = new Caver(process.env.BAOBAB_NETWORK);
+export const caver = new Caver(process.env.BAOBAB_NETWORK);
 
 import { abiList, byteCodeList } from "./contractData";
 
-// const deployerKeyring = caver.wallet.keyring.create(
-//   process.env.feeAddress,
-//   process.env.feePrivateKey
-// );
-// caver.wallet.add(deployerKeyring);
+const deployerKeyring = caver.wallet.keyring.create(
+  process.env.feeAddress,
+  process.env.feePrivateKey
+);
+caver.wallet.add(deployerKeyring);
 
 const deployContract = async ({
   contractName,
@@ -78,7 +78,7 @@ const sendContract = async ({
   contractName: string;
   contractAddress: string;
   methodName: string;
-  parameters?: Array<String>;
+  parameters?: Array<String | Number>;
 }) => {
   try {
     if (
@@ -99,7 +99,7 @@ const sendContract = async ({
       methodName,
       ...parameters
     );
-    console.log(receipt);
+    console.log(receipt?.blockHash);
     return receipt;
   } catch (error) {
     console.log(error);
@@ -117,6 +117,16 @@ const multiMint = () => {
     });
   });
   job.start();
+};
+
+const getBalance = async ({ address }: { address: string }) => {
+  try {
+    const balance = await caver.klay.getBalance(address);
+    return balance;
+  } catch (error) {
+    console.log(error);
+    return "";
+  }
 };
 
 // how to use
@@ -140,4 +150,4 @@ const multiMint = () => {
 
 // multiMint();
 
-export { deployContract, callContract, sendContract, multiMint };
+export { deployContract, callContract, sendContract, multiMint, getBalance };

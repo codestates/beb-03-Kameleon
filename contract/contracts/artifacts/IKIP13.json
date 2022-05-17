@@ -52,30 +52,27 @@
 		},
 		"gasEstimates": null,
 		"methodIdentifiers": {
-			"governTransfer(address,address,uint256)": "9acb2541"
+			"supportsInterface(bytes4)": "01ffc9a7"
 		}
 	},
 	"abi": [
 		{
-			"constant": false,
+			"constant": true,
 			"inputs": [
 				{
-					"name": "from",
-					"type": "address"
-				},
-				{
-					"name": "to",
-					"type": "address"
-				},
-				{
-					"name": "amount",
-					"type": "uint256"
+					"name": "interfaceId",
+					"type": "bytes4"
 				}
 			],
-			"name": "governTransfer",
-			"outputs": [],
+			"name": "supportsInterface",
+			"outputs": [
+				{
+					"name": "",
+					"type": "bool"
+				}
+			],
 			"payable": false,
-			"stateMutability": "nonpayable",
+			"stateMutability": "view",
 			"type": "function"
 		}
 	]

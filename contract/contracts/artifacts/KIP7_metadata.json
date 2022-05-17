@@ -338,7 +338,7 @@
 		"compilationTarget": {
 			"contracts/KIP7.sol": "KIP7"
 		},
-		"evmVersion": "byzantium",
+		"evmVersion": "petersburg",
 		"libraries": {},
 		"optimizer": {
 			"enabled": false,

@@ -120,6 +120,20 @@
 				"constant": false,
 				"inputs": [
 					{
+						"name": "governAddress",
+						"type": "address"
+					}
+				],
+				"name": "setGovernAddress",
+				"outputs": [],
+				"payable": false,
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"constant": false,
+				"inputs": [
+					{
 						"name": "recipient",
 						"type": "address"
 					},
@@ -157,6 +171,25 @@
 				"type": "function"
 			},
 			{
+				"constant": false,
+				"inputs": [
+					{
+						"name": "oraclePrice_",
+						"type": "uint256"
+					}
+				],
+				"name": "updateOraclePrice",
+				"outputs": [
+					{
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"payable": false,
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
 				"constant": true,
 				"inputs": [
 					{
@@ -176,6 +209,29 @@
 				"type": "function"
 			},
 			{
+				"constant": false,
+				"inputs": [],
+				"name": "renounceOwnership",
+				"outputs": [],
+				"payable": false,
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"constant": true,
+				"inputs": [],
+				"name": "owner",
+				"outputs": [
+					{
+						"name": "",
+						"type": "address"
+					}
+				],
+				"payable": false,
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
 				"constant": true,
 				"inputs": [],
 				"name": "symbol",
@@ -187,6 +243,28 @@
 				],
 				"payable": false,
 				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"constant": false,
+				"inputs": [
+					{
+						"name": "from",
+						"type": "address"
+					},
+					{
+						"name": "to",
+						"type": "address"
+					},
+					{
+						"name": "amount",
+						"type": "uint256"
+					}
+				],
+				"name": "governTransfer",
+				"outputs": [],
+				"payable": false,
+				"stateMutability": "nonpayable",
 				"type": "function"
 			},
 			{
@@ -284,6 +362,20 @@
 				"type": "function"
 			},
 			{
+				"constant": false,
+				"inputs": [
+					{
+						"name": "newOwner",
+						"type": "address"
+					}
+				],
+				"name": "transferOwnership",
+				"outputs": [],
+				"payable": false,
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
 				"inputs": [
 					{
 						"name": "name_",
@@ -292,11 +384,32 @@
 					{
 						"name": "symbol_",
 						"type": "string"
+					},
+					{
+						"name": "governAddress_",
+						"type": "address"
 					}
 				],
 				"payable": false,
 				"stateMutability": "nonpayable",
 				"type": "constructor"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"name": "previousOwner",
+						"type": "address"
+					},
+					{
+						"indexed": true,
+						"name": "newOwner",
+						"type": "address"
+					}
+				],
+				"name": "OwnershipTransferred",
+				"type": "event"
 			},
 			{
 				"anonymous": false,
@@ -354,6 +467,12 @@
 				"balanceOf(address)": {
 					"details": "See `IKIP7.balanceOf`.\r"
 				},
+				"owner()": {
+					"details": "Returns the address of the current owner.\r"
+				},
+				"renounceOwnership()": {
+					"details": "Leaves the contract without owner. It will not be possible to call\r `onlyOwner` functions anymore. Can only be called by the current owner.\r      * NOTE: Renouncing ownership will leave the contract without an owner,\r thereby removing any functionality that is only available to the owner.\r"
+				},
 				"safeTransfer(address,uint256)": {
 					"details": "Moves `amount` tokens from the caller's account to `recipient`.\r"
 				},
@@ -377,6 +496,9 @@
 				},
 				"transferFrom(address,address,uint256)": {
 					"details": "See `IKIP7.transferFrom`.\r      * Emits an `Approval` event indicating the updated allowance. This is not\r required by the KIP. See the note at the beginning of `KIP7`;\r      * Requirements:\r - `sender` and `recipient` cannot be the zero address.\r - `sender` must have a balance of at least `value`.\r - the caller must have allowance for `sender`'s tokens of at least\r `amount`.\r"
+				},
+				"transferOwnership(address)": {
+					"details": "Transfers ownership of the contract to a new account (`newOwner`).\r Can only be called by the current owner.\r"
 				}
 			}
 		},
@@ -388,7 +510,7 @@
 		"compilationTarget": {
 			"contracts/MyKIP7.sol": "MyKIP7"
 		},
-		"evmVersion": "byzantium",
+		"evmVersion": "petersburg",
 		"libraries": {},
 		"optimizer": {
 			"enabled": false,
@@ -434,15 +556,15 @@
 			]
 		},
 		"contracts/MyKIP7.sol": {
-<<<<<<< HEAD
-			"keccak256": "0xe71d1c727946fce466e8dfd51be4d92c2405f2923564ee47ffdc1f046bc3b0e4",
+			"keccak256": "0x528fdb2db5c1fcb4eaf587adec42fdceedf670990ab0fa2fadff241e5b35ff53",
 			"urls": [
-				"bzzr://fc6492f40676227689651b43cb9f4899e9267249eb218dbc1e4d016be321c6be"
-=======
-			"keccak256": "0x5e153c515fac1777022af2a70137df8ae4c7b92e01db72aeb033fadebda178b5",
+				"bzzr://fe1bb8f60482bcb3f44fae3b3f1aa424d1c86462fdb814b0cebafd38f25b8cb0"
+			]
+		},
+		"contracts/Ownable.sol": {
+			"keccak256": "0xf32a8f0d7542c0a05f19b49cbb0817124ab1b014a40e5816d71acb3523f77eeb",
 			"urls": [
-				"bzzr://6d40edc06c3541330e7b3ae2740e04c6bc31b707fde0f221136132fedddce585"
->>>>>>> be0c2d2bcd9f9a1a1336f387c03a0b2afc123326
+				"bzzr://94e9bdf06243f0c1893c1819fb6192c6b5446ec787e14da951667af790608315"
 			]
 		},
 		"contracts/SafeMath.sol": {

@@ -3,11 +3,9 @@ import { Entity, Column, OneToMany } from "typeorm";
 import { Model } from "./Models/Model";
 
 @Entity()
-export class Stock extends Model {
-  @Column({ unique: true })
-  stockCode!: string;
+export class PoolLiquidity extends Model {
   @Column({ unique: true })
   name!: string;
-  @Column()
-  price!: number;
+  @Column({ unique: true })
+  pool!: string;
 }
