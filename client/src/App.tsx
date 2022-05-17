@@ -1,25 +1,49 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import styled from 'styled-components';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { GlobalStyle } from './GlobalStyle';
+import Header from './components/common/Header';
+import Footer from './components/common/Footer';
+
+import SwapPage from './pages/SwapPage';
+import MainPage from './pages/MainPage';
+import PoolPage from './pages/PoolPage';
+import LiquidityPage from './pages/LiquidityPage';
+import MintPage from './pages/MintPage';
+import MyPage from './pages/MyPage';
+import GovernPage from './pages/GovernPage';
+
+const AppStyle = styled.main`
+  min-height: 100vh;
+  background-color: var(--green);
+`;
+
+const MainStyle = styled.main`
+  min-height: calc(100vh - 123px);
+`;
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <GlobalStyle />
+      <AppStyle>
+        <BrowserRouter>
+          <Header />
+          <MainStyle className="layout">
+            <Routes>
+              <Route path="/" element={<MainPage />} />
+              <Route path="/swap" element={<SwapPage />} />
+              <Route path="/pool" element={<PoolPage />} />
+              <Route path="/liquidity" element={<LiquidityPage />} />
+              <Route path="/mint" element={<MintPage />} />
+              <Route path="/mypage" element={<MyPage />} />
+              <Route path="/govern" element={<GovernPage />} />
+            </Routes>
+          </MainStyle>
+          <Footer />
+        </BrowserRouter>
+      </AppStyle>
+    </>
   );
 }
 
