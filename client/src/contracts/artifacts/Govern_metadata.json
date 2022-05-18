@@ -9,43 +9,6 @@
 				"constant": false,
 				"inputs": [
 					{
-						"name": "title_",
-						"type": "string"
-					},
-					{
-						"name": "content_",
-						"type": "string"
-					}
-				],
-				"name": "createPoll",
-				"outputs": [],
-				"payable": false,
-				"stateMutability": "nonpayable",
-				"type": "function"
-			},
-			{
-				"constant": false,
-				"inputs": [
-					{
-						"name": "periodMin_",
-						"type": "uint256"
-					}
-				],
-				"name": "setPeriod",
-				"outputs": [
-					{
-						"name": "",
-						"type": "bool"
-					}
-				],
-				"payable": false,
-				"stateMutability": "nonpayable",
-				"type": "function"
-			},
-			{
-				"constant": false,
-				"inputs": [
-					{
 						"name": "KameleonTokenAddress",
 						"type": "address"
 					}
@@ -84,6 +47,28 @@
 				"constant": false,
 				"inputs": [
 					{
+						"name": "title_",
+						"type": "string"
+					},
+					{
+						"name": "content_",
+						"type": "string"
+					},
+					{
+						"name": "day_",
+						"type": "uint256"
+					}
+				],
+				"name": "createPoll",
+				"outputs": [],
+				"payable": false,
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"constant": false,
+				"inputs": [
+					{
 						"name": "pollIndex_",
 						"type": "uint256"
 					},
@@ -108,26 +93,60 @@
 				"type": "function"
 			},
 			{
-				"constant": true,
-				"inputs": [],
-				"name": "getLastPollIndex",
-				"outputs": [
-					{
-						"name": "",
-						"type": "uint256"
-					}
-				],
-				"payable": false,
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
 				"constant": false,
 				"inputs": [],
 				"name": "renounceOwnership",
 				"outputs": [],
 				"payable": false,
 				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"constant": true,
+				"inputs": [],
+				"name": "pollList",
+				"outputs": [
+					{
+						"components": [
+							{
+								"name": "title",
+								"type": "string"
+							},
+							{
+								"name": "content",
+								"type": "string"
+							},
+							{
+								"name": "agree",
+								"type": "uint256"
+							},
+							{
+								"name": "disagree",
+								"type": "uint256"
+							},
+							{
+								"name": "creator",
+								"type": "address"
+							},
+							{
+								"name": "createdTime",
+								"type": "uint256"
+							},
+							{
+								"name": "endTime",
+								"type": "uint256"
+							},
+							{
+								"name": "expired",
+								"type": "bool"
+							}
+						],
+						"name": "",
+						"type": "tuple[]"
+					}
+				],
+				"payable": false,
+				"stateMutability": "view",
 				"type": "function"
 			},
 			{
@@ -165,8 +184,51 @@
 			},
 			{
 				"constant": true,
+				"inputs": [
+					{
+						"name": "pollIndex_",
+						"type": "uint256"
+					}
+				],
+				"name": "pollState",
+				"outputs": [
+					{
+						"name": "",
+						"type": "string"
+					},
+					{
+						"name": "",
+						"type": "string"
+					},
+					{
+						"name": "",
+						"type": "uint256"
+					},
+					{
+						"name": "",
+						"type": "uint256"
+					},
+					{
+						"name": "",
+						"type": "uint256"
+					},
+					{
+						"name": "",
+						"type": "uint256"
+					},
+					{
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"payable": false,
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"constant": true,
 				"inputs": [],
-				"name": "getTotalSupply",
+				"name": "getPollsLength",
 				"outputs": [
 					{
 						"name": "",
@@ -211,46 +273,6 @@
 				"type": "function"
 			},
 			{
-				"constant": true,
-				"inputs": [],
-				"name": "voteList",
-				"outputs": [
-					{
-						"components": [
-							{
-								"name": "title",
-								"type": "string"
-							},
-							{
-								"name": "content",
-								"type": "string"
-							},
-							{
-								"name": "agree",
-								"type": "uint256"
-							},
-							{
-								"name": "disagree",
-								"type": "uint256"
-							},
-							{
-								"name": "createdTime",
-								"type": "uint256"
-							},
-							{
-								"name": "expired",
-								"type": "bool"
-							}
-						],
-						"name": "",
-						"type": "tuple[]"
-					}
-				],
-				"payable": false,
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
 				"constant": false,
 				"inputs": [
 					{
@@ -265,6 +287,20 @@
 				"type": "function"
 			},
 			{
+				"constant": true,
+				"inputs": [],
+				"name": "getPollCreationFee",
+				"outputs": [
+					{
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"payable": false,
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
 				"constant": false,
 				"inputs": [
 					{
@@ -276,45 +312,6 @@
 				"outputs": [],
 				"payable": false,
 				"stateMutability": "nonpayable",
-				"type": "function"
-			},
-			{
-				"constant": true,
-				"inputs": [
-					{
-						"name": "pollIndex_",
-						"type": "uint256"
-					}
-				],
-				"name": "voteState",
-				"outputs": [
-					{
-						"name": "",
-						"type": "string"
-					},
-					{
-						"name": "",
-						"type": "string"
-					},
-					{
-						"name": "",
-						"type": "uint256"
-					},
-					{
-						"name": "",
-						"type": "uint256"
-					},
-					{
-						"name": "",
-						"type": "uint256"
-					},
-					{
-						"name": "",
-						"type": "bool"
-					}
-				],
-				"payable": false,
-				"stateMutability": "view",
 				"type": "function"
 			},
 			{
@@ -381,9 +378,9 @@
 	},
 	"sources": {
 		"contracts/Govern.sol": {
-			"keccak256": "0x6dae4c506c9ee29b890c77f5762b72171668a0593ff845e86b44792fd10b7ba8",
+			"keccak256": "0x3a1f792b242a8629b7cf37dc95894c8dcc1ef52072f2c429af411f09836cb69b",
 			"urls": [
-				"bzzr://f978e9602ca0cf1e66b161257f3a304a2d97db4d385855a49ce00dbf2d8e4588"
+				"bzzr://bc4cd9a202797e887a3680a70833e72492cf707fae9fe80b54ed7479928f991a"
 			]
 		},
 		"contracts/IKIP13.sol": {

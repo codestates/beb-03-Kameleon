@@ -49,9 +49,9 @@
 	},
 	"sources": {
 		"contracts/Govern.sol": {
-			"keccak256": "0x6dae4c506c9ee29b890c77f5762b72171668a0593ff845e86b44792fd10b7ba8",
+			"keccak256": "0x3a1f792b242a8629b7cf37dc95894c8dcc1ef52072f2c429af411f09836cb69b",
 			"urls": [
-				"bzzr://f978e9602ca0cf1e66b161257f3a304a2d97db4d385855a49ce00dbf2d8e4588"
+				"bzzr://bc4cd9a202797e887a3680a70833e72492cf707fae9fe80b54ed7479928f991a"
 			]
 		},
 		"contracts/IKIP13.sol": {

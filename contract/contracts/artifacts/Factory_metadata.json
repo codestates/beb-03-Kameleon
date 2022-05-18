@@ -46,8 +46,6 @@
 			{
 				"constant": true,
 				"inputs": [],
-<<<<<<< HEAD
-=======
 				"name": "getExchangeCount",
 				"outputs": [
 					{
@@ -62,12 +60,25 @@
 			{
 				"constant": true,
 				"inputs": [],
->>>>>>> be0c2d2bcd9f9a1a1336f387c03a0b2afc123326
 				"name": "exchangeCount",
 				"outputs": [
 					{
 						"name": "",
 						"type": "uint256"
+					}
+				],
+				"payable": false,
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"constant": true,
+				"inputs": [],
+				"name": "getAllExchangeList",
+				"outputs": [
+					{
+						"name": "",
+						"type": "address[]"
 					}
 				],
 				"payable": false,
@@ -111,8 +122,6 @@
 				"payable": false,
 				"stateMutability": "view",
 				"type": "function"
-<<<<<<< HEAD
-=======
 			},
 			{
 				"constant": true,
@@ -132,7 +141,6 @@
 				"payable": false,
 				"stateMutability": "view",
 				"type": "function"
->>>>>>> be0c2d2bcd9f9a1a1336f387c03a0b2afc123326
 			}
 		],
 		"devdoc": {
@@ -146,11 +154,7 @@
 		"compilationTarget": {
 			"contracts/Factory.sol": "Factory"
 		},
-<<<<<<< HEAD
-		"evmVersion": "byzantium",
-=======
 		"evmVersion": "petersburg",
->>>>>>> be0c2d2bcd9f9a1a1336f387c03a0b2afc123326
 		"libraries": {},
 		"optimizer": {
 			"enabled": false,
@@ -160,22 +164,27 @@
 	},
 	"sources": {
 		"contracts/Address.sol": {
-<<<<<<< HEAD
 			"keccak256": "0x992bce8d5a6b643f20e352e55b07fe3affa771c8e921c4c1e5623c5d4ac3839b",
 			"urls": [
 				"bzzr://de0253e9fe9c33071e5cde96818b6904992585a2f320cb6821069280a7e894d1"
 			]
 		},
 		"contracts/Exchange.sol": {
-			"keccak256": "0x40c812d2de8478ef21d74b9408b19074fa0d0b1c463bb4a3a6216728dcb77ed7",
+			"keccak256": "0xa68ea5a96562599543f0d20cbccea45953a1cfaaad878ef551a68c06776bb61c",
 			"urls": [
-				"bzzr://b815b65c31dc07142c3b90206b41772021ae5566fa7c6a79efabaa16d68fbf23"
+				"bzzr://8faeafda694fea1cb741dd00c23a8c32042b4b580bce1c304ab3d4b65146882e"
 			]
 		},
 		"contracts/Factory.sol": {
-			"keccak256": "0x39dcfb2f32028bc778f4d15caf5fee9d566ff292476d2abacc94df487fb3e5b9",
+			"keccak256": "0x2ad448cac9f3169bf80ec49ea1ae7952bb878383374b23fe2699727a32777e9c",
 			"urls": [
-				"bzzr://cd6e179377abead6e48644d10945e7e29c87d7e08e82ae2980ee7d7bbb8758fe"
+				"bzzr://873f1769124395569672cc9282c81b50a450f8061f889a19f84da0ce16bc5a3d"
+			]
+		},
+		"contracts/IFactory.sol": {
+			"keccak256": "0xa3e848dae3c851c8cedf5c7d0b05d05f9d2f61fd3c2230895101da103ffa96fc",
+			"urls": [
+				"bzzr://6458b9ef08315d5f35b22b1e87d3ca7124ad1b2b2c95fcb88ae8b75e804f6992"
 			]
 		},
 		"contracts/IKIP13.sol": {
@@ -212,65 +221,6 @@
 			"keccak256": "0xf18f5f0027ba4abcc41d2b57fe6a2892b6ba44db0f9cc19c25bb483c9b9347b5",
 			"urls": [
 				"bzzr://b26c54d5c430b0609253e22f4a08806e9e9cab2164ef7ae5c4c832f53504d2ef"
-=======
-			"keccak256": "0xb32556016817a6b821827012e600f469e5ca68b1d6ce0ba1877f1dbe2743db9f",
-			"urls": [
-				"bzzr://9c91e4d8eeee62248b28520f7e2be3ee4d7d8c992d198ba49360f40897430acb"
-			]
-		},
-		"contracts/Exchange.sol": {
-			"keccak256": "0xd70936411cd0df8653b12901904ea672b81cfeef91c2253493af9d44ed1fb55d",
-			"urls": [
-				"bzzr://bdbb05041d6ca44f8dfde2343e6d7a42d3c3ee063d24e8e9330d3d1ddb31b611"
-			]
-		},
-		"contracts/Factory.sol": {
-			"keccak256": "0x5f648abfb4582590c0dbb06c71cb26310711f599f7e973953ad8342a4ddc649c",
-			"urls": [
-				"bzzr://5555d2506a17089d23cb8eb8e42a00b81e2f0b5e6b207a995a2328dff1c289c0"
-			]
-		},
-		"contracts/IFactory.sol": {
-			"keccak256": "0xbb61320ed7e91365e3068e465b15efc09a4de76780e9cb742eae813ab550ba29",
-			"urls": [
-				"bzzr://0639982cdaed53960ce39fc330ee480781617e7f2537ffd9ebd5baa5796f1a0b"
-			]
-		},
-		"contracts/IKIP13.sol": {
-			"keccak256": "0xa684be6ebc9e38a514dca1024c1385d95fd617d92120cbd245a7c1a72fb817d8",
-			"urls": [
-				"bzzr://71a41409d56a83fb2e4cacceba7733e736c7ad9b6f5668c3e1c53ae61e9d321d"
-			]
-		},
-		"contracts/IKIP7.sol": {
-			"keccak256": "0xdebf16b2cc599a7b4cf01f62bddf3a97e37af6d7c89fbbcb89e77269481b91f8",
-			"urls": [
-				"bzzr://e2d2889ebc0a3d8a04537a4cc90d468a5c772d57313ff798ea1aa0f9953eec03"
-			]
-		},
-		"contracts/IKIP7Receiver.sol": {
-			"keccak256": "0x5fd5f860063adec2597ef9d5ec9f6598baecf51967812c3aef508f29d0ced41a",
-			"urls": [
-				"bzzr://5472c87e0bff18321f0b292e04d9f16cb812a6924d62c699aa14720370eb3d96"
-			]
-		},
-		"contracts/KIP13.sol": {
-			"keccak256": "0xa37b50b4380f3bc15da06d64088a957c75e4a383a2fe4644927e3dc84b649bcd",
-			"urls": [
-				"bzzr://3013d5646f7600e25a8518c5676336213417f52203d13eefb73444e77db3cc74"
-			]
-		},
-		"contracts/KIP7.sol": {
-			"keccak256": "0x77fb2391ddce0454186c9ac3d7463540f48c43d1308ffc2e6bcf835ef81403fb",
-			"urls": [
-				"bzzr://037dd155caeb944a2d768d329e95d320bedb4ca16fa864f4ba2dc4d08404c780"
-			]
-		},
-		"contracts/SafeMath.sol": {
-			"keccak256": "0x440e126d35c767f263ad60029d68b9f1a946caedcc51ae10266f28e305fffe40",
-			"urls": [
-				"bzzr://6e9198cfe866eb522696ca75aede2ac3d1dee1c6c9b8390130a76e8344956c51"
->>>>>>> be0c2d2bcd9f9a1a1336f387c03a0b2afc123326
 			]
 		}
 	},

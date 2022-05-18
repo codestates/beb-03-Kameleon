@@ -1,5 +1,6 @@
 import WebSocket from "ws";
 import axios from "axios";
+
 let ws = new WebSocket("wss://pubwss.bithumb.com/pub/ws");
 
 const getFirstTicker = async () => {
@@ -10,7 +11,7 @@ const getFirstTicker = async () => {
   return firstTicker?.data?.data?.closing_price;
 };
 
-let klayPrice = undefined;
+let klaytnPrice = undefined;
 ws.on("open", () => {
   const request = {
     type: "ticker",
@@ -23,7 +24,7 @@ ws.on("open", () => {
 
 ws.on("message", (e: { data: Iterable<number> }) => {
   const data = JSON.parse(e.toString());
-  klayPrice = data?.content?.closePrice;
-  console.log("받음", klayPrice);
+  klaytnPrice = data?.content?.closePrice;
+  console.log("받음", klaytnPrice);
 });
-export { getFirstTicker, klayPrice };
+export { getFirstTicker, klaytnPrice };
