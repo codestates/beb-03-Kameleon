@@ -1,4 +1,5 @@
 import React, { useState, useCallback } from 'react';
+import { Link } from 'react-router-dom';
 
 import {
   MainPageWrapper,
@@ -35,15 +36,17 @@ const MainPage = () => {
         </div>
         {tokenList.map((el) => (
           <MainPageItem key={el.id}>
+            {/* <Link to={`/swap:${el.id}`}> */}
             <div>{el.name}</div>
             <div className="main__oracle">
               {el.oraclePrice.toLocaleString('ko-KR')}
             </div>
-            <div>{el.krwPrice.toLocaleString('ko-KR')}</div>
+            <div>{el.usdPrice.toLocaleString('ko-KR')}</div>
             <div className="main__usd">
-              {el.usdPrice.toLocaleString('ko-KR')}
+              {el.krwPrice.toLocaleString('ko-KR')}
             </div>
             <div>{el.change}%</div>
+            {/* </Link> */}
           </MainPageItem>
         ))}
       </MainPageList>
