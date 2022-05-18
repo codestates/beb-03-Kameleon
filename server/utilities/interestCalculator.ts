@@ -1,24 +1,27 @@
 import {
-  ExchangeAddress,
+  IPoolLiquidity_ReturnType,
+  IPoolLiquidity,
+} from "./../types/utilities/interfaceInterestCalculator";
+import {
   FactoryAddress,
   kStockTokenAddress,
+  exchangeToKStockTokenAddressTable,
 } from "../constants/contractAddress";
 import { callContract, getBalance } from "./KAS";
 
-const checkPoolLiquidity = async () => {
+const getPoolLiquidity = async (): Promise<IPoolLiquidity_ReturnType> => {
   const allExchangeList = await callContract({
     contractName: "Factory",
     contractAddress: FactoryAddress,
     methodName: "getAllExchangeList",
   });
   console.log(allExchangeList);
-  let sumAllExchangeTotalSupply = 0;
   if (allExchangeList.length > 0) {
-    const result = await Promise.all(
+    const result: Array<IPoolLiquidity> = await Promise.all(
       allExchangeList.map(async (exchangeAddress: string) => {
         const res1 = await callContract({
           contractName: "KStockToken",
-          contractAddress: kStockTokenAddress,
+          contractAddress: exchangeToKStockTokenAddressTable[exchangeAddress],
           methodName: "balanceOf",
           parameters: [exchangeAddress],
         });
@@ -30,16 +33,13 @@ const checkPoolLiquidity = async () => {
         });
         console.log("checkPoolLiquidity totalSupply", totalSupply);
         const exchangeBalance = await getBalance({ address: exchangeAddress });
-        console.log(exchangeBalance);
-        const calcResult = +res1 + +exchangeBalance / totalSupply;
-        sumAllExchangeTotalSupply += +totalSupply;
-        return [exchangeAddress, calcResult];
+        const calcResult = +res1 + +exchangeBalance / +totalSupply || 0;
+        return { exchangeAddress, poolLiquidity: calcResult, totalSupply };
       })
     );
-    console.log(result, sumAllExchangeTotalSupply);
-    return { result, sumAllExchangeTotalSupply };
+    return { success: true, data: result };
   } else {
-    return [false, 0];
+    return { success: false, data: [] };
   }
 };
-export { checkPoolLiquidity };
+export { getPoolLiquidity };
