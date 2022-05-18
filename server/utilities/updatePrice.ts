@@ -26,16 +26,4 @@ const updateStockPrice = async () => {
   }
 };
 
-const updateKlayPrice = async () => {
-  if (klaytnPrice !== undefined) {
-    const price = +klaytnPrice;
-    await sendContract({
-      contractName: "Oracle",
-      contractAddress: process.env.Oracle_CONTRACT_ADDRESS,
-      methodName: "setKlaytnPrice",
-      parameters: [Math.floor(price)],
-    });
-  }
-};
-
-export { updateStockPrice, updateKlayPrice };
+export { updateStockPrice };

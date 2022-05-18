@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React from 'react';
 
 import {
   GovernPageWrapper,
@@ -6,16 +6,32 @@ import {
   GovernPagePollList,
   GovernPagePollItem,
   GovernPageBar,
+  GovernPageModalContent,
 } from './styles/GovernPage.styles';
+
+import Modal from '../components/modal/Modal';
+import useModal from '../hooks/useModal';
 
 import { createGovernList } from '../utils/dummyCreator';
 
 const GovernPage = () => {
+  const { isOpen, toggle } = useModal();
+
   const governList = createGovernList(10);
 
-  const createPool = useCallback(() => {
-    console.log('create');
-  }, []);
+  const modalContent = (
+    <GovernPageModalContent>
+      <div>
+        <label htmlFor="title">Title</label>
+        <input id="title" />
+      </div>
+      <div>
+        <label htmlFor="content">Content</label>
+        <input id="content" />
+      </div>
+      <button>Create</button>
+    </GovernPageModalContent>
+  );
 
   return (
     <GovernPageWrapper>
@@ -27,7 +43,7 @@ const GovernPage = () => {
             <p>TOTAL STAKED</p>
             <div>47.45M KMT</div>
           </div>
-          <button onClick={createPool}>Create Pool</button>
+          <button onClick={toggle}>Create Pool</button>
         </div>
         <div>
           <div>
@@ -63,6 +79,11 @@ const GovernPage = () => {
           </GovernPagePollItem>
         ))}
       </GovernPagePollList>
+      <Modal
+        isOpen={isOpen}
+        closeModal={toggle}
+        modalContent={modalContent}
+      ></Modal>
     </GovernPageWrapper>
   );
 };

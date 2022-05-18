@@ -2,10 +2,10 @@ import { IsEmail, IsEnum, Length } from "class-validator";
 import { Entity, Column, OneToMany } from "typeorm";
 import { Model } from "./Models/Model";
 
-@Entity()
+@Entity({ name: "pool_liquidity" })
 export class PoolLiquidity extends Model {
-  @Column({ unique: true })
-  name!: string;
-  @Column({ unique: true })
-  pool!: string;
+  @Column()
+  address!: string;
+  @Column()
+  poolSize!: number;
 }

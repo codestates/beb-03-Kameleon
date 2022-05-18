@@ -1,15 +1,8 @@
 const router = require("express").Router();
-import user from "./api/contract";
-import {
-  deployContract,
-  callContract,
-  sendContract,
-  multiMint,
-} from "./../utilities/KAS";
-import { getDataFromStockCode } from "./../utilities/stockApi";
+import contract from "./api/contract";
+import stock from "./api/stock";
 
-require("./../utilities/bithumbSocket");
-// router.use("/user", user);
+router.use("/contract", contract);
+router.use("/stock", stock);
 
-// multiMint();
 export default router;

@@ -15,7 +15,7 @@ const deployContract = async ({
   parameters = [],
 }: {
   contractName: string;
-  parameters?: Array<String>;
+  parameters?: Array<string>;
 }) => {
   try {
     if (contractName === undefined) throw "Not enough arguments";
@@ -47,7 +47,7 @@ const callContract = async ({
   contractName: string;
   contractAddress: string;
   methodName: string;
-  parameters?: Array<String>;
+  parameters?: Array<string>;
 }) => {
   try {
     if (
@@ -61,7 +61,7 @@ const callContract = async ({
       contractAddress
     );
     const callResult = await contract.call(methodName, ...parameters);
-    console.log(`Result of calling get function with key: ${callResult}`);
+    console.log(`Result of calling ${methodName} with key: ${callResult}`);
     return callResult;
   } catch (error) {
     console.log(error);
@@ -74,11 +74,13 @@ const sendContract = async ({
   contractAddress,
   methodName,
   parameters = [],
+  value = undefined,
 }: {
   contractName: string;
   contractAddress: string;
   methodName: string;
-  parameters?: Array<String | Number>;
+  parameters?: Array<string | number>;
+  value?: String | undefined;
 }) => {
   try {
     if (
@@ -95,6 +97,7 @@ const sendContract = async ({
       {
         from: deployerKeyring.address,
         gas: 3000000,
+        // value,
       },
       methodName,
       ...parameters
@@ -107,17 +110,17 @@ const sendContract = async ({
   }
 };
 
-const multiMint = () => {
-  const CronJob = require("cron").CronJob;
-  const job = new CronJob("0 0 */1 * * *", function () {
-    sendContract({
-      contractName: "MyKIP7",
-      contractAddress: "",
-      methodName: "multiMint",
-    });
-  });
-  job.start();
-};
+// const multiMint = () => {
+//   const CronJob = require("cron").CronJob;
+//   const job = new CronJob("0 0 */1 * * *", function () {
+//     sendContract({
+//       contractName: "MyKIP7",
+//       contractAddress: "",
+//       methodName: "multiMint",
+//     });
+//   });
+//   job.start();
+// };
 
 const getBalance = async ({ address }: { address: string }) => {
   try {
@@ -150,4 +153,4 @@ const getBalance = async ({ address }: { address: string }) => {
 
 // multiMint();
 
-export { deployContract, callContract, sendContract, multiMint, getBalance };
+export { deployContract, callContract, sendContract, getBalance };

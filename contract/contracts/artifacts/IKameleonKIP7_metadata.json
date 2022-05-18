@@ -311,6 +311,7 @@
 		"devdoc": {
 			"methods": {
 				"allowance(address,address)": {
+<<<<<<< HEAD
 					"details": "Returns the remaining number of tokens that `spender` will be allowed to spend on behalf of `owner` through `transferFrom`. This is zero by default.     * This value changes when `approve` or `transferFrom` are called."
 				},
 				"approve(address,uint256)": {
@@ -342,6 +343,39 @@
 				},
 				"transferFrom(address,address,uint256)": {
 					"details": "Moves `amount` tokens from `sender` to `recipient` using the allowance mechanism. `amount` is then deducted from the caller's allowance.     * Returns a boolean value indicating whether the operation succeeded.     * Emits a `Transfer` event."
+=======
+					"details": "Returns the remaining number of tokens that `spender` will be\r allowed to spend on behalf of `owner` through `transferFrom`. This is\r zero by default.\r      * This value changes when `approve` or `transferFrom` are called.\r"
+				},
+				"approve(address,uint256)": {
+					"details": "Sets `amount` as the allowance of `spender` over the caller's tokens.\r      * Returns a boolean value indicating whether the operation succeeded.\r      * > Beware that changing an allowance with this method brings the risk\r that someone may use both the old and the new allowance by unfortunate\r transaction ordering. One possible solution to mitigate this race\r condition is to first reduce the spender's allowance to 0 and set the\r desired value afterwards:\r https://github.com/ethereum/EIPs/issues/20#issuecomment-263524729\r      * Emits an `Approval` event.\r"
+				},
+				"balanceOf(address)": {
+					"details": "Returns the amount of tokens owned by `account`.\r"
+				},
+				"safeTransfer(address,uint256)": {
+					"details": "Moves `amount` tokens from the caller's account to `recipient`.\r"
+				},
+				"safeTransfer(address,uint256,bytes)": {
+					"details": "Moves `amount` tokens from the caller's account to `recipient`.\r"
+				},
+				"safeTransferFrom(address,address,uint256)": {
+					"details": "Moves `amount` tokens from `sender` to `recipient` using the allowance mechanism.\r `amount` is then deducted from the caller's allowance.\r"
+				},
+				"safeTransferFrom(address,address,uint256,bytes)": {
+					"details": "Moves `amount` tokens from `sender` to `recipient` using the allowance mechanism.\r `amount` is then deducted from the caller's allowance.\r"
+				},
+				"supportsInterface(bytes4)": {
+					"details": "Returns true if this contract implements the interface defined by\r `interfaceId`. See the corresponding\r [KIP-13 section](http://kips.klaytn.com/KIPs/kip-13-interface_query_standard#how-interface-identifiers-are-defined)\r to learn more about how these ids are created.\r      * This function call must use less than 30 000 gas.\r"
+				},
+				"totalSupply()": {
+					"details": "Returns the amount of tokens in existence.\r"
+				},
+				"transfer(address,uint256)": {
+					"details": "Moves `amount` tokens from the caller's account to `recipient`.\r      * Returns a boolean value indicating whether the operation succeeded.\r      * Emits a `Transfer` event.\r"
+				},
+				"transferFrom(address,address,uint256)": {
+					"details": "Moves `amount` tokens from `sender` to `recipient` using the\r allowance mechanism. `amount` is then deducted from the caller's\r allowance.\r      * Returns a boolean value indicating whether the operation succeeded.\r      * Emits a `Transfer` event.\r"
+>>>>>>> 283a3211d7450cf6cea5d2d46c96eff3160cfeb3
 				}
 			}
 		},
@@ -363,6 +397,7 @@
 	},
 	"sources": {
 		"contracts/Govern.sol": {
+<<<<<<< HEAD
 			"keccak256": "0x3a1f792b242a8629b7cf37dc95894c8dcc1ef52072f2c429af411f09836cb69b",
 			"urls": [
 				"bzzr://bc4cd9a202797e887a3680a70833e72492cf707fae9fe80b54ed7479928f991a"
@@ -384,6 +419,29 @@
 			"keccak256": "0x38db741ff3763cb57d6c429ac3838ab63b7e70b4aabeb414dcb583770bc1d622",
 			"urls": [
 				"bzzr://1ef9f5c1534dbdb1be33549b65c2156c3671d65673eba3de2a470babfdbf81ee"
+=======
+			"keccak256": "0x7d6b7f7b0804442e5c3415ad9d000fe266af39e9fa5d77e662e6b2b5e2c150b7",
+			"urls": [
+				"bzzr://90b4601172b523998ff90944c9791b69b162eb018b21f51ad45195f6c6f0d47b"
+			]
+		},
+		"contracts/IKIP13.sol": {
+			"keccak256": "0x624e9e6220f1fff9952491658bdb41e79a944d8577eb76fcecde2352c6678b51",
+			"urls": [
+				"bzzr://5f13484bb4220af06a02d5e683e0d5fa05804d6192cc8743c6e441728f964c6c"
+			]
+		},
+		"contracts/IKIP7.sol": {
+			"keccak256": "0xfb6a22cff7b038ce2ffa091072bdd3af2c323349b866e6e370289b540ef49f90",
+			"urls": [
+				"bzzr://6d44afffe1dc94f996db674bf9738fff161840a644d7818a0054738fc878a754"
+			]
+		},
+		"contracts/Ownable.sol": {
+			"keccak256": "0xf32a8f0d7542c0a05f19b49cbb0817124ab1b014a40e5816d71acb3523f77eeb",
+			"urls": [
+				"bzzr://94e9bdf06243f0c1893c1819fb6192c6b5446ec787e14da951667af790608315"
+>>>>>>> 283a3211d7450cf6cea5d2d46c96eff3160cfeb3
 			]
 		}
 	},
