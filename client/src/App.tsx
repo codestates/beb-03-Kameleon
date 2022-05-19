@@ -34,7 +34,7 @@ function App() {
               <Route path="/" element={<MainPage />} />
               <Route path="/swap" element={<SwapPage />} />
               <Route path="/pool" element={<PoolPage />} />
-              <Route path="/liquidity" element={<LiquidityPage />} />
+              <Route path="/liquidity/:id" element={<LiquidityPage />} />
               <Route path="/mint" element={<MintPage />} />
               <Route path="/mypage" element={<MyPage />} />
               <Route path="/govern" element={<GovernPage />} />

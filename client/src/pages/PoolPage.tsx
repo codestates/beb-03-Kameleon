@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import Caver from 'caver-js';
 
 import {
@@ -67,13 +68,15 @@ const PoolPage = () => {
           <div>수익률</div>
         </div>
         {poolList.map((el) => (
-          <PoolPageItem key={el.id}>
-            <div>{el.name}</div>
-            <div className="main__oracle">
-              {el.liquid.toLocaleString('ko-KR')}
-            </div>
-            <div>{el.change}%</div>
-          </PoolPageItem>
+          <Link to={`/liquidity/${el.name}`}>
+            <PoolPageItem key={el.id}>
+              <div>{el.name}</div>
+              <div className="main__oracle">
+                {el.liquid.toLocaleString('ko-KR')}
+              </div>
+              <div>{el.change}%</div>
+            </PoolPageItem>
+          </Link>
         ))}
       </PoolPageList>
     </PoolPageWrapper>
