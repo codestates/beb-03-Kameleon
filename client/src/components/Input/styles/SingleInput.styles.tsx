@@ -17,7 +17,12 @@ export const SingleInputContainer = styled.div<{
     padding: 1rem 1.5rem;
   }
 
-  & > div > label {
+  & > div > section {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  & > div > section > label {
     font-size: 0.8rem;
     font-weight: 600;
     color: var(--dark-green);
