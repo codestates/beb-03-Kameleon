@@ -1,4 +1,5 @@
 import React from 'react';
+import { useState, useEffect } from 'react';
 
 import {
   MyPageWrapper,
@@ -12,11 +13,61 @@ import {
   createMyPollList,
   createMyGovernList,
 } from '../utils/dummyCreator';
+import { callContract } from '../utils/KAS';
+import { contractAddressTable, kStockTokenAddressTable } from './../constants';
+
+interface TokenListProps {
+  id: number;
+  name: string;
+  balance: number;
+  value: number;
+}
 
 const MyPage = () => {
-  const myList = createMyList(5);
+  // const myList = createMyList(5);
+  const [myList, setMyList] = useState<Array<TokenListProps>>([]);
+
   const myPoolList = createMyPollList(5);
   const myGovernList = createMyGovernList(5);
+
+  useEffect(() => {
+    // let valueTemp: Array<String> = [];
+    const test = async () => {
+      const valueTemp: Array<string> = await callContract({
+        contractName: 'Oracle',
+        contractAddress: contractAddressTable.Oracle,
+        methodName: 'getOraclePrice',
+      });
+      const nameTable = Object.keys(kStockTokenAddressTable);
+      const tokenPriceList = [];
+      const myList: any = [];
+      for (let i = 0; i < nameTable.length; i++) {
+        tokenPriceList.push(
+          callContract({
+            contractName: 'KStockToken',
+            contractAddress: kStockTokenAddressTable[nameTable[i]],
+            methodName: 'balanceOf',
+            parameters: [window.klaytn.selectedAddress],
+          }).then((res) => {
+            myList.push({
+              id: i,
+              name: nameTable[i],
+              balance: res / 1000000000000000000,
+              value: Number(valueTemp[i]) / 1000000000000000000,
+            });
+          })
+        ); // array 삽입);
+      }
+      const res = await Promise.all(tokenPriceList);
+      console.log(res);
+      console.log(Object.entries(kStockTokenAddressTable));
+      // 위의 포문으로 배열 i개 삽입 후 setMyList
+      // Promise.all(p[1], p[2]);
+      console.log(myList);
+      setMyList(myList);
+    };
+    test();
+  }, []);
 
   return (
     <div>

@@ -31,14 +31,14 @@ export const byteCodeTable: byteCodeType = {
   Govern: Govern?.data?.bytecode?.object,
 };
 
-export const contractAddressTable = {
+export const contractAddressTable: { [x: string]: string } = {
   Oracle: '0xDD776448ded1cAc2108817bAe89fDc72c24474f1',
   Factory: '0xbD171B0509B88EF736Ab03865934cD900e1197a5',
   Kameleon: '0x48b19619273A96FFf8735a60D9A19924a5016E39',
   Govern: '0x8ff0B86c395b36Ac96E56E8248DCB6ae74201A2F',
 };
 
-export const exchangeAddressTable = {
+export const exchangeAddressTable: { [x: string]: string } = {
   kSSE: '0x5456540aabd10eb07b92af271072027f1f72b3dc',
   kLGE: '0x1478992b8d4ad729a1ed7b4f35ffbec328e4d671',
   kKKO: '0xcfa5a64b0cfa4b6aebac02a9c2d67723bccdf393',
