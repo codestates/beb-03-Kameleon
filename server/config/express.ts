@@ -22,7 +22,7 @@ const server = express();
 
 server.use(
   cors({
-    origin: "https://ngng2.shop",
+    origin: "http://localhost:3000",
     credentials: true,
   })
 );
