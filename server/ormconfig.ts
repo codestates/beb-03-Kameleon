@@ -22,18 +22,4 @@ module.exports = [
       subscribersDir: "typeorm/subscriber",
     },
   },
-  {
-    name: process.env.DATABASE_DEMON_NAME,
-    type: "mysql",
-    host: "localhost",
-    port: 3306,
-    username: process.env.DATABASE_ID,
-    password: process.env.DATABASE_PASSWORD,
-    database: process.env.DATABASE_DEMON_NAME,
-    entities: [
-      process.env.NODE_ENV === "production"
-        ? "build/typeorm/entity/demon/*{.ts,.js}"
-        : "typeorm/entity/demon/*{.ts,.js}",
-    ],
-  },
 ];

@@ -4,8 +4,8 @@ import { Model } from "./Models/Model";
 
 @Entity()
 export class PoolLiquidity extends Model {
-  @Column({ unique: true })
-  name!: string;
-  @Column({ unique: true })
-  pool!: string;
+  @Column()
+  address!: string;
+  @Column({ type: "bigint" })
+  poolSize!: number;
 }

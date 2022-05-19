@@ -13,6 +13,12 @@ import {
 import useInput from '../../hooks/useInput';
 
 import { createTokenList } from '../../utils/dummyCreator';
+// 임혁진 수정
+import { callContract, getBalance } from '../../utils/KAS';
+import {
+  contractAddressTable,
+  kStockTokenAddressTable,
+} from './../../constants';
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -46,9 +52,10 @@ const MultipleInput = ({
 }: LayoutProps) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   // 선택한 token의 이름, 가격, 수량
-  const [tokenName, setTokenName] = useState<string>('kSAMSUNG');
-  const [tokenPrice, setTokenPrice] = useState<number>(70000);
+  const [tokenName, setTokenName] = useState<string>('SELECT');
+  const [tokenPrice, setTokenPrice] = useState<number>(70000000000000000000000);
   const [tokenList, setTokenList] = useState<Array<TokenListProps>>([]);
+  const [maxValue, setMaxValue] = useState<number>(0);
   const {
     tokenBalance,
     isFocus,
@@ -63,8 +70,48 @@ const MultipleInput = ({
   } = useInput(6);
 
   useEffect(() => {
-    setTokenList(createTokenList(20));
+    // 임혁진 수정
+    callContract({
+      contractName: 'Oracle',
+      contractAddress: contractAddressTable.Oracle,
+      methodName: 'getOraclePrice',
+    })
+      .then((res) => {
+        const tList = new Array<TokenListProps>();
+        console.log(res);
+        const symbolTable = Object.keys(kStockTokenAddressTable);
+        for (let i = 0; i < res.length; i++) {
+          const token: TokenListProps = {
+            id: i,
+            name: symbolTable[i],
+            krwPrice: res[i] / 1000000000000000000,
+          };
+          console.log(typeof res[i]);
+          console.log(token);
+          tList.push(token);
+        }
+        console.log('%%%%%%%' + tList);
+        return tList;
+      })
+      .then((tList: Array<TokenListProps>) => {
+        console.log(tList);
+        setTokenList(tList);
+        setTokenName(tList[0].name);
+        setTokenPrice(tList[0].krwPrice);
+      });
+
+    // setTokenList(createTokenList(5));
   }, []);
+
+  // tokenName 변경에 따라 Max값 변경
+  useEffect(() => {
+    callContract({
+      contractName: 'KStockToken',
+      contractAddress: kStockTokenAddressTable[tokenName],
+      methodName: 'balanceOf',
+      parameters: [window.klaytn.selectedAddress],
+    }).then((res) => setMaxValue(res / 1000000000000000000));
+  }, [tokenName]);
 
   useEffect(() => {
     liftState(tokenBalance, tokenPrice, tokenName, isChange, isDecimalError);
@@ -121,7 +168,12 @@ const MultipleInput = ({
       isError={isBlankError || isDecimalError}
     >
       <div>
-        <label htmlFor="input">{children}</label>
+        <section>
+          <label htmlFor="input">{children}</label>
+          {children === 'INPUT' && (
+            <label htmlFor="input">Max {maxValue}</label>
+          )}
+        </section>
         <MultipleInputWrapper>
           <section>
             {/* temp */}

@@ -2,6 +2,7 @@ import { useState, useCallback, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
 import { faArrowDown } from '@fortawesome/free-solid-svg-icons';
+import Caver from 'caver-js';
 
 import {
   MintPageWrapper,
@@ -13,6 +14,11 @@ import {
 
 import SingleInput from '../components/Input/SingleInput';
 import MultipleInput from '../components/Input/MultipleInput';
+
+import { sendContract } from '../utils/KAS';
+import { kStockTokenAddressTable } from '../constants';
+
+const caver = new Caver();
 
 const arrowDown = faArrowDown as IconProp;
 
@@ -64,9 +70,32 @@ const MintPage = () => {
     []
   );
 
+  console.log(balanceA, balanceB);
+
   const clickButton = useCallback(() => {
-    console.log('button click', nameA, nameB);
-  }, [nameA, nameB]);
+    // 임혁진 수정
+    // 민트 클릭 시
+    if (tab == 'mint') {
+      // console.log(balanceA);
+      sendContract({
+        contractName: 'KStockToken',
+        contractAddress: kStockTokenAddressTable[nameB],
+        methodName: 'mint',
+        amount: balanceA, // klay
+      });
+      console.log('mint: mint 버튼 클릭' + balanceA);
+    } else {
+      // burn
+      sendContract({
+        contractName: 'KStockToken',
+        contractAddress: kStockTokenAddressTable[nameA],
+        methodName: 'burn',
+        parameters: [caver.utils.convertToPeb(balanceA, 'KLAY')], // * 1e18
+      });
+    }
+
+    console.log('button click', nameA, balanceA);
+  }, [nameA, nameB, balanceA, balanceB]);
 
   useEffect(() => {
     console.log(priceA / priceB);

@@ -1,7 +1,7 @@
 import server from "./config/express";
 import connection from "./typeorm/connection";
 import { startCron } from "./utilities/cron";
-import { checkPoolLiquidity } from "./utilities/interestCalculator";
+import { getPoolLiquidity } from "./utilities/interestCalculator";
 
 const port = process.env.PORT || 5000;
 
@@ -14,7 +14,9 @@ const Server = async () => {
     // cron 시작
     console.log("cron 시작");
     startCron();
-    checkPoolLiquidity();
+
+    const test = await getPoolLiquidity();
+    console.log(test);
     // 프론트 서버 시작
     server.listen(port, (err?: any) => {
       if (err) throw err;

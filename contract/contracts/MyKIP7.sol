@@ -22,7 +22,7 @@ contract MyKIP7 is KIP7, Ownable {
         return _symbol;
     }
 
-    function decimals() public pure returns (uint8) {
+    function decimals() public pure returns (uint8) {x
         return 18;
     }
 

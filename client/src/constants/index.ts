@@ -3,6 +3,7 @@ import Factory from './../contracts/artifacts/Factory.json';
 import Kameleon from './../contracts/artifacts/Kameleon.json';
 import KStockToken from './../contracts/artifacts/KStockToken.json';
 import Oracle from './../contracts/artifacts/Oracle.json';
+import Govern from './../contracts/artifacts/Govern.json';
 
 interface abiType {
   [key: string]: Array<any>;
@@ -18,7 +19,7 @@ export const abiTable: abiType = {
   Kameleon: Kameleon?.abi,
   KStockToken: KStockToken?.abi,
   Oracle: Oracle?.abi,
-  //   Govern: 'Govern.json',
+  Govern: Govern?.abi,
 };
 
 export const byteCodeTable: byteCodeType = {
@@ -27,7 +28,7 @@ export const byteCodeTable: byteCodeType = {
   Kameleon: Kameleon?.data?.bytecode?.object,
   KStockToken: KStockToken?.data?.bytecode?.object,
   Oracle: Oracle?.data?.bytecode?.object,
-  //   Govern: 'Govern.json',
+  Govern: Govern?.data?.bytecode?.object,
 };
 
 export const contractAddressTable = {
@@ -37,7 +38,7 @@ export const contractAddressTable = {
   Govern: '0x8ff0B86c395b36Ac96E56E8248DCB6ae74201A2F',
 };
 
-export const exchangeAddressTable = {
+export const exchangeAddressTable: { [x: string]: string } = {
   kSSE: '0x5456540aabd10eb07b92af271072027f1f72b3dc',
   kLGE: '0x1478992b8d4ad729a1ed7b4f35ffbec328e4d671',
   kKKO: '0xcfa5a64b0cfa4b6aebac02a9c2d67723bccdf393',
@@ -45,7 +46,7 @@ export const exchangeAddressTable = {
   kSSH: '0xbf02f6f1a75d2bdc2e2619b49a3e116e5e90e219',
 };
 
-export const kStockTokenAddressTable = {
+export const kStockTokenAddressTable: { [x: string]: string } = {
   kSSE: '0x58791638902535f1Cfc0004453B0A09bFC50B7bE',
   kLGE: '0x6727F8C740f5f3d3b58fc681fE32d3b9eC1D31Df',
   kKKO: '0x139B29164a11FD2AFBF772A761aC31B742C4C735',
