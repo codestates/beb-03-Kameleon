@@ -2,6 +2,7 @@ import Caver from 'caver-js';
 
 import { abiTable, byteCodeTable } from './../constants/index';
 
+const callCaver = new Caver('https://api.baobab.klaytn.net:8651');
 const caver = new Caver(window.klaytn);
 
 const callContract = async ({
@@ -28,11 +29,11 @@ const callContract = async ({
       methodName,
       abiTable[contractName]
     );
-    const contract = caver.contract.create(
+    const contract = callCaver.contract.create(
       abiTable[contractName],
       contractAddress
     );
-    console.log(contract);
+    // console.log(contract);
     const callResult = await contract.call(methodName, ...parameters);
     console.log(`Result of calling get function with key: ${callResult}`);
     return callResult;
@@ -95,7 +96,7 @@ const sendContract = async ({
 
 const getBalance = async ({ address }: { address: string }) => {
   try {
-    const balance = await caver.klay.getBalance(address);
+    const balance = await callCaver.klay.getBalance(address);
     return balance;
   } catch (error) {
     console.log(error);
