@@ -2,6 +2,7 @@
 
 import axios from "axios";
 import { callContract } from "./KAS";
+import iconv from "iconv-lite";
 
 const stockPrice = async () => {
   try {
@@ -11,19 +12,32 @@ const stockPrice = async () => {
       methodName: "getStockCodeList",
     });
     console.log(stocklist);
-    const res = await axios(
-      `https://polling.finance.naver.com/api/realtime?query=SERVICE_ITEM:${stocklist.join(
-        ","
-      )}`
-    );
-    const datas = res?.data?.result?.areas[0]?.datas;
+    const uri = `https://polling.finance.naver.com/api/realtime?query=SERVICE_ITEM:${stocklist.join(
+      ","
+    )}`;
+    const html = await axios.get(uri, {
+      responseType: "arraybuffer",
+    });
+    const result = iconv.decode(html.data, "EUC-KR").toString();
+    const datas = JSON.parse(result).result.areas[0].datas;
+    console.log(datas);
     if (datas !== undefined) {
       const result = datas.map(
-        ({ cd: codeNumber, nv: nowValue }: { cd: string; nv: number }) => ({
+        ({
+          cd: codeNumber,
+          nv: nowValue,
+          nm,
+        }: {
+          cd: string;
+          nv: number;
+          nm: string;
+        }) => ({
           codeNumber,
           nowValue,
+          stockName: nm,
         })
       );
+      console.log(result);
       return result;
     } else {
       return [];

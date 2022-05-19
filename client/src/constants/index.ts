@@ -3,6 +3,7 @@ import Factory from './../contracts/artifacts/Factory.json';
 import Kameleon from './../contracts/artifacts/Kameleon.json';
 import KStockToken from './../contracts/artifacts/KStockToken.json';
 import Oracle from './../contracts/artifacts/Oracle.json';
+import Govern from './../contracts/artifacts/Govern.json';
 
 interface abiType {
   [key: string]: Array<any>;
@@ -18,7 +19,7 @@ export const abiTable: abiType = {
   Kameleon: Kameleon?.abi,
   KStockToken: KStockToken?.abi,
   Oracle: Oracle?.abi,
-  //   Govern: 'Govern.json',
+  Govern: Govern?.abi,
 };
 
 export const byteCodeTable: byteCodeType = {
@@ -27,7 +28,7 @@ export const byteCodeTable: byteCodeType = {
   Kameleon: Kameleon?.data?.bytecode?.object,
   KStockToken: KStockToken?.data?.bytecode?.object,
   Oracle: Oracle?.data?.bytecode?.object,
-  //   Govern: 'Govern.json',
+  Govern: Govern?.data?.bytecode?.object,
 };
 
 export const contractAddressTable = {
