@@ -122,12 +122,18 @@ export const GovernPageBar = styled.div<{ yes: number; no: number }>`
 
   & > div {
     &:first-of-type {
-      width: ${(props) => `calc(100% / 100 * ${props.yes})`};
+      width: ${(props) => {
+        const calcPercent = (props.yes / (props.yes + props.no)) * 100;
+        return `${calcPercent}%`;
+      }};
       background-color: var(--blue);
     }
 
     &:last-of-type {
-      width: ${(props) => `calc(100% / 100 * ${props.no})`};
+      width: ${(props) => {
+        const calcPercent = (props.no / (props.yes + props.no)) * 100;
+        return `${calcPercent}%`;
+      }};
       background-color: var(--red);
     }
   }

@@ -4,8 +4,6 @@ import {
   GovernPageWrapper,
   GovernPageGovernList,
   GovernPagePollList,
-  GovernPagePollItem,
-  GovernPageBar,
   GovernPageModalContent,
 } from './styles/GovernPage.styles';
 
@@ -13,12 +11,22 @@ import Modal from '../components/modal/Modal';
 import useModal from '../hooks/useModal';
 
 import { createGovernList } from '../utils/dummyCreator';
+import Poll from '../components/Govern/Poll';
+import GovernQueryHooks from '../hooks/QueryHooks/Govern';
 
 const GovernPage = () => {
   const { isOpen, toggle } = useModal();
-
-  const governList = createGovernList(10);
-
+  const {
+    isLoading,
+    isError,
+    error,
+    data: governList,
+    isSuccess,
+  } = GovernQueryHooks({
+    key: 'test',
+  });
+  // const governList = createGovernList(10);
+  console.log(governList);
   const modalContent = (
     <GovernPageModalContent>
       <div>
@@ -32,6 +40,12 @@ const GovernPage = () => {
       <button>Create</button>
     </GovernPageModalContent>
   );
+  if (isLoading) {
+    return <div>isLoading</div>;
+  }
+  if (isError) {
+    return <div>isError</div>;
+  }
 
   return (
     <GovernPageWrapper>
@@ -59,25 +73,9 @@ const GovernPage = () => {
       </GovernPageGovernList>
       <h2>Polls</h2>
       <GovernPagePollList>
-        {governList.map((el) => (
-          <GovernPagePollItem key={el.id} yes={el.yes} no={el.no}>
-            <section>
-              <div>
-                {el.yes + el.no < 20
-                  ? 'IN PROGRESS'
-                  : el.yes > el.no
-                  ? 'EXECUTED'
-                  : 'REJECTED'}
-              </div>
-              <h2>{el.name}</h2>
-            </section>
-            <GovernPageBar yes={el.yes} no={el.no}>
-              <div></div>
-              <div></div>
-            </GovernPageBar>
-            <p>5 days left</p>
-          </GovernPagePollItem>
-        ))}
+        {governList.map((el: any, idx: number) => {
+          return <Poll key={idx} {...el} />;
+        })}
       </GovernPagePollList>
       <Modal
         isOpen={isOpen}
