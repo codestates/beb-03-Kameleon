@@ -31,7 +31,7 @@ export const byteCodeTable: byteCodeType = {
   Govern: Govern?.data?.bytecode?.object,
 };
 
-export const contractAddressTable = {
+export const contractAddressTable: { [x: string]: string } = {
   Oracle: '0xDD776448ded1cAc2108817bAe89fDc72c24474f1',
   Factory: '0xbD171B0509B88EF736Ab03865934cD900e1197a5',
   Kameleon: '0x48b19619273A96FFf8735a60D9A19924a5016E39',

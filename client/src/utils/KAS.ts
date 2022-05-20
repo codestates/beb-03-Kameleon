@@ -1,9 +1,39 @@
 import Caver from 'caver-js';
 
-import { abiTable, byteCodeTable } from './../constants/index';
+import {
+  abiTable,
+  byteCodeTable,
+  exchangeAddressTable,
+  kStockTokenAddressTable,
+} from './../constants/index';
 
 const callCaver = new Caver('https://api.baobab.klaytn.net:8651');
 const caver = new Caver(window.klaytn);
+
+const callIsApproved = async ({ stockName }: { stockName: string }) => {
+  const res = await callContract({
+    contractName: 'KStockToken',
+    contractAddress: kStockTokenAddressTable[stockName],
+    methodName: 'allowance',
+    parameters: [
+      window.klaytn.selectedAddress,
+      exchangeAddressTable[stockName],
+    ],
+  });
+  return res.length >= 76;
+};
+
+const sendApprove = async ({ stockName }: { stockName: string }) => {
+  sendContract({
+    contractName: 'KStockToken',
+    contractAddress: kStockTokenAddressTable[stockName],
+    methodName: 'approve',
+    parameters: [
+      exchangeAddressTable[stockName],
+      '115792089237316195423570985008687907853269984665640564039457584007913129639935', // maximum value
+    ],
+  });
+};
 
 const callContract = async ({
   contractName,
@@ -23,19 +53,19 @@ const callContract = async ({
       methodName === undefined
     )
       throw 'Not enough arguments';
-    console.log(
-      contractName,
-      contractAddress,
-      methodName,
-      abiTable[contractName]
-    );
+    // console.log(
+    //   contractName,
+    //   contractAddress,
+    //   methodName,
+    //   abiTable[contractName]
+    // );
     const contract = callCaver.contract.create(
       abiTable[contractName],
       contractAddress
     );
     // console.log(contract);
     const callResult = await contract.call(methodName, ...parameters);
-    console.log(`Result of calling get function with key: ${callResult}`);
+    // console.log(`Result of calling get function with key: ${callResult}`);
     return callResult;
   } catch (error) {
     console.log(error);
@@ -67,7 +97,7 @@ const sendContract = async ({
       gas: 300000,
       value: caver.utils.toPeb(amount, 'KLAY'),
     });
-    console.log(result);
+    // console.log(result);
     // if (
     //   contractName === undefined ||
     //   contractAddress === undefined ||
@@ -125,4 +155,4 @@ const getBalance = async ({ address }: { address: string }) => {
 
 // multiMint();
 
-export { callContract, sendContract, getBalance };
+export { callContract, sendContract, getBalance, callIsApproved, sendApprove };
