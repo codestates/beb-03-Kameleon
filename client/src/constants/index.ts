@@ -53,3 +53,11 @@ export const kStockTokenAddressTable: { [x: string]: string } = {
   kSSB: '0x2DE466829ac31Db937946365A9f8Aec86363120F',
   kSSH: '0xE90E363fD3FfdB1Aa8577c71EbBABd00d8c7aBea',
 };
+
+export const kStockTokenCodeTable = {
+  kSSE: '005930',
+  kLGE: '066570',
+  kKKO: '035720',
+  kSSB: '207940',
+  kSSH: '010140',
+};

@@ -63,7 +63,6 @@ const callContract = async ({
       abiTable[contractName],
       contractAddress
     );
-    // console.log(contract);
     const callResult = await contract.call(methodName, ...parameters);
     // console.log(`Result of calling get function with key: ${callResult}`);
     return callResult;
