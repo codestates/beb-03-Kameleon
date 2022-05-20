@@ -60,13 +60,15 @@ const MyPage = () => {
             methodName: 'balanceOf',
             parameters: [window.klaytn.selectedAddress],
           }).then((res) => {
-            console.log('nameTable', nameTable[i]);
-            myList.push({
-              id: i,
-              name: nameTable[i],
-              balance: res / 1000000000000000000,
-              value: Number(valueTemp[i]) / 1000000000000000000,
-            });
+            if (res > 0) {
+              console.log('nameTable', nameTable[i]);
+              myList.push({
+                id: i,
+                name: nameTable[i],
+                balance: res / 1000000000000000000,
+                value: Number(valueTemp[i]) / 1000000000000000000,
+              });
+            }
           })
         ); // array 삽입);
       }
@@ -89,7 +91,10 @@ const MyPage = () => {
             methodName: 'balanceOf',
             parameters: [window.klaytn.selectedAddress],
           }).then((res) => {
-            poolToSearch.push({ name: pair[0], lpAmount: res });
+            if (res > 0) {
+              poolToSearch.push({ name: pair[0], lpAmount: res });
+            }
+
             // console.log(pair[0], ' Exchange balance is ', res);
           })
         );
@@ -99,61 +104,72 @@ const MyPage = () => {
 
       // list 중 하나를 뽑아와 pool내 klay, pool내 kStock토큰수, total LP를 뽑은 후 {name: kSSE, lpAmount: 100, poolKlay: 10000, poolKStock: 200, totalSupply: 200}
       // poolToSearh :[{name: kSSE, lpAmount: lp토큰 수량}, ... ]
-      await poolToSearch.forEach((item: any, index: number) => {
-        const promiseTemp: Array<Promise<any>> = [];
+      const promiseList: any = [];
+      poolToSearch.forEach(async (item: any, index: number) => {
+        promiseList.push(
+          new Promise(() => {
+            const promiseTemp: Array<Promise<any>> = [];
 
-        // 1.pool내 klay
-        let poolKlay: string;
-        promiseTemp.push(
-          getBalance({
-            address: exchangeAddressTable[item.name],
-          }).then((res) => {
-            poolKlay = res;
+            // 1.pool내 klay
+            let poolKlay: string;
+            promiseTemp.push(
+              getBalance({
+                address: exchangeAddressTable[item.name],
+              }).then((res) => {
+                poolKlay = res;
+              })
+            );
+
+            // 2.pool내 kStock토큰 수
+            let poolKStock: string;
+            promiseTemp.push(
+              callContract({
+                contractName: 'KStockToken',
+                contractAddress: kStockTokenAddressTable[item.name],
+                methodName: 'balanceOf',
+                parameters: [exchangeAddressTable[item.name]],
+              }).then((res) => {
+                poolKStock = res;
+              })
+            );
+
+            // 3.totalLP
+            let totalLP: string;
+            promiseTemp.push(
+              callContract({
+                contractName: 'Exchange',
+                contractAddress: exchangeAddressTable[item.name],
+                methodName: 'totalSupply',
+              }).then((res) => {
+                totalLP = res;
+              })
+            );
+
+            // 모두 가져온 후 push
+            Promise.all(promiseTemp).then(() => {
+              console.log('Pool promise', promiseTemp);
+              const ratio = Number(item.lpAmount) / Number(totalLP);
+              myPoolList.push({
+                id: index,
+                name: item.name,
+                balance: `${(
+                  (Number(poolKlay) * ratio) /
+                  1000000000000000000
+                ).toLocaleString('ko-KR')}KLY + ${(
+                  (Number(poolKStock) * ratio) /
+                  1000000000000000000
+                ).toLocaleString('ko-KR')}${item.name} `,
+              });
+              console.log('Pool', myPoolList);
+              setMyPoolList(myPoolList);
+            });
           })
         );
-
-        // 2.pool내 kStock토큰 수
-        let poolKStock: string;
-        promiseTemp.push(
-          callContract({
-            contractName: 'KStockToken',
-            contractAddress: kStockTokenAddressTable[item.name],
-            methodName: 'balanceOf',
-            parameters: [exchangeAddressTable[item.name]],
-          }).then((res) => {
-            poolKStock = res;
-          })
-        );
-
-        // 3.totalLP
-        let totalLP: string;
-        promiseTemp.push(
-          callContract({
-            contractName: 'Exchange',
-            contractAddress: exchangeAddressTable[item.name],
-            methodName: 'totalSupply',
-          }).then((res) => {
-            totalLP = res;
-          })
-        );
-
-        // 모두 가져온 후 push
-        Promise.all(promiseTemp).then(() => {
-          const ratio = Number(item.lpAmount) / Number(totalLP);
-          myPoolList.push({
-            id: index,
-            name: item.name,
-            balance: `${(
-              (Number(poolKlay) * ratio) /
-              1000000000000000000
-            ).toLocaleString('ko-KR')}KLY + ${(
-              (Number(poolKStock) * ratio) /
-              1000000000000000000
-            ).toLocaleString('ko-KR')}${item.name} `,
-          });
-        });
       });
-      await setMyPoolList(myPoolList);
+
+      Promise.all(promiseList).then(() => {
+        console.log('dd Pool');
+      });
 
       // list 중 하나를 뽑아와 ROI 계산
       //     위의 데이터를 가지고 myPoolList에 push({id: , name:, value:(KLY + kSSE), ROI})
