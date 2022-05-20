@@ -51,19 +51,23 @@ const TabStyle = styled.span`
   top: 0;
   right: 0;
   background-color: var(--gray);
-  border-radius: 4rem;
+  border-radius: 0.25rem;
   overflow: hidden;
 
   & > button {
+    width: 3.5rem;
     padding: 0.3rem 0.6rem;
     color: var(--white);
     font-size: 0.7rem;
     border: 0;
-    border-radius: 4rem;
     background-color: transparent;
 
     &.on {
       background-color: var(--dark-green);
+    }
+
+    :hover {
+      cursor: pointer;
     }
   }
 `;
@@ -153,6 +157,13 @@ const DetailInfoStyle = styled.dl`
     font-weight: 700;
     text-align: right;
   }
+`;
+
+export const IconWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  padding: 1rem 0;
+  color: var(--blue);
 `;
 
 export { LiquidityPageWrapper, InputStyle, DetailInfoStyle, TabStyle };
