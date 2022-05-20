@@ -9,12 +9,12 @@ export const ModalBackDrop = styled.div`
   background-color: rgba(0, 0, 0, 0.5);
 `;
 
-export const ModalWrapper = styled.div`
+export const ModalWrapper = styled.div<{ width?: number }>`
   position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 400px;
+  width: ${(props) => (props.width === undefined ? '400' : props.width)}px;
   padding: 1rem;
   border-radius: 1rem;
   z-index: 999;

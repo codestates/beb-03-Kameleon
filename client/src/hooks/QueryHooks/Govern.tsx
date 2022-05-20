@@ -12,11 +12,32 @@ const GovernQueryHooks = ({ key, refetchInterval }: inputType) => {
     [key],
     async () => {
       try {
+        // const pollLength = await callContract({
+        //   contractName: 'Govern',
+        //   contractAddress: '0xb2E88b76B4Cb52cA5D655341E1c0626B49FAF3C2',
+        //   methodName: 'getPollsLength',
+        // });
+        // console.log('pollLength', typeof pollLength);
+        // // 0 이상인 시작 값 부터 10개 가져온다
+        // const startPollIndex = +pollLength > 10 ? +pollLength - 10 : 0;
+        // const callResult = await callContract({
+        //   contractName: 'Govern',
+        //   contractAddress: '0xb2E88b76B4Cb52cA5D655341E1c0626B49FAF3C2',
+        //   methodName: 'pollListPagenation',
+        //   parameters: [startPollIndex],
+        // });
         const callResult = await callContract({
           contractName: 'Govern',
-          contractAddress: '0xc4D89b7a642Fd54900106e6c9B00B59F0E24Dd6c',
+          contractAddress: '0x105FFb98CAA6436A753711D05FB2252Fc7d76620',
           methodName: 'pollList',
         });
+        console.log('callResult', callResult);
+        const totalSupplyResult = await callContract({
+          contractName: 'Govern',
+          contractAddress: '0x105FFb98CAA6436A753711D05FB2252Fc7d76620',
+          methodName: 'getTotalSupply',
+        });
+        console.log(totalSupplyResult);
         const pollListTypeArray = abiTable['Govern'].filter(
           (v) => v['name'] === 'pollList'
         )[0]['outputs'][0]['components'];
@@ -28,6 +49,7 @@ const GovernQueryHooks = ({ key, refetchInterval }: inputType) => {
               temp[value['name']] = v[idx];
             }
           );
+          temp['totalSupply'] = totalSupplyResult;
           return temp;
         });
         console.log(objResult);
@@ -42,4 +64,39 @@ const GovernQueryHooks = ({ key, refetchInterval }: inputType) => {
     }
   );
 };
-export default GovernQueryHooks;
+
+type WithdrawableBalanceType = {
+  key: string;
+  pollId: string;
+  refetchInterval?: number;
+};
+
+const WithdrawableBalanceQueryHooks = ({
+  key,
+  pollId,
+  refetchInterval,
+}: WithdrawableBalanceType) => {
+  return useQuery<any, Error>(
+    [key],
+    async () => {
+      try {
+        const callResult = await callContract({
+          contractName: 'Govern',
+          contractAddress: '0x105FFb98CAA6436A753711D05FB2252Fc7d76620',
+          methodName: 'withdrawableBalance',
+          parameters: [+pollId],
+        });
+        console.log('withdrawableBalance', callResult, pollId);
+        return callResult;
+      } catch (error) {
+        console.log(error);
+        return -1;
+      }
+    },
+    {
+      refetchInterval,
+    }
+  );
+};
+
+export { GovernQueryHooks, WithdrawableBalanceQueryHooks };

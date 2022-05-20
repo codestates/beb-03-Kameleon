@@ -15,15 +15,16 @@ interface ModalProps {
   isOpen: boolean;
   closeModal: () => void;
   modalContent: JSX.Element;
+  width?: number;
 }
 
 const xMark = faXmark as IconProp;
 
-const Modal = ({ isOpen, closeModal, modalContent }: ModalProps) => {
+const Modal = ({ isOpen, closeModal, width, modalContent }: ModalProps) => {
   const modal = (
     <>
       <ModalBackDrop onClick={closeModal} />
-      <ModalWrapper>
+      <ModalWrapper width={width}>
         <ModalHeader>
           <ModalCloseButton onClick={closeModal}>
             <FontAwesomeIcon icon={xMark} />
