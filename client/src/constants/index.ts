@@ -38,7 +38,7 @@ export const contractAddressTable = {
   Govern: '0x8ff0B86c395b36Ac96E56E8248DCB6ae74201A2F',
 };
 
-export const exchangeAddressTable = {
+export const exchangeAddressTable: { [prop: string]: string } = {
   kSSE: '0x5456540aabd10eb07b92af271072027f1f72b3dc',
   kLGE: '0x1478992b8d4ad729a1ed7b4f35ffbec328e4d671',
   kKKO: '0xcfa5a64b0cfa4b6aebac02a9c2d67723bccdf393',
@@ -52,4 +52,12 @@ export const kStockTokenAddressTable: { [x: string]: string } = {
   kKKO: '0x139B29164a11FD2AFBF772A761aC31B742C4C735',
   kSSB: '0x2DE466829ac31Db937946365A9f8Aec86363120F',
   kSSH: '0xE90E363fD3FfdB1Aa8577c71EbBABd00d8c7aBea',
+};
+
+export const kStockTokenCodeTable = {
+  kSSE: '005930',
+  kLGE: '066570',
+  kKKO: '035720',
+  kSSB: '207940',
+  kSSH: '010140',
 };
