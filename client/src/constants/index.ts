@@ -46,7 +46,7 @@ export const exchangeAddressTable = {
   kSSH: '0xbf02f6f1a75d2bdc2e2619b49a3e116e5e90e219',
 };
 
-export const kStockTokenAddressTable = {
+export const kStockTokenAddressTable: { [x: string]: string } = {
   kSSE: '0x58791638902535f1Cfc0004453B0A09bFC50B7bE',
   kLGE: '0x6727F8C740f5f3d3b58fc681fE32d3b9eC1D31Df',
   kKKO: '0x139B29164a11FD2AFBF772A761aC31B742C4C735',
