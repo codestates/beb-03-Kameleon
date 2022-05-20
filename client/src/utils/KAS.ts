@@ -53,19 +53,19 @@ const callContract = async ({
       methodName === undefined
     )
       throw 'Not enough arguments';
-    console.log(
-      contractName,
-      contractAddress,
-      methodName,
-      abiTable[contractName]
-    );
+    // console.log(
+    //   contractName,
+    //   contractAddress,
+    //   methodName,
+    //   abiTable[contractName]
+    // );
     const contract = callCaver.contract.create(
       abiTable[contractName],
       contractAddress
     );
     // console.log(contract);
     const callResult = await contract.call(methodName, ...parameters);
-    console.log(`Result of calling get function with key: ${callResult}`);
+    // console.log(`Result of calling get function with key: ${callResult}`);
     return callResult;
   } catch (error) {
     console.log(error);
@@ -97,7 +97,7 @@ const sendContract = async ({
       gas: 300000,
       value: caver.utils.toPeb(amount, 'KLAY'),
     });
-    console.log(result);
+    // console.log(result);
     // if (
     //   contractName === undefined ||
     //   contractAddress === undefined ||
