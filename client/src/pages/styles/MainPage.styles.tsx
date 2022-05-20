@@ -79,24 +79,27 @@ export const MainPageList = styled.ul`
 `;
 
 export const MainPageItem = styled.li`
-  display: flex;
-  margin: 0 2rem;
-  padding: 1rem 0;
-  border-bottom: 1px solid var(--white);
-  font-size: 1.2rem;
-  font-weight: 600;
+  & > a {
+    display: flex;
+    margin: 0 2rem;
+    padding: 1rem 0;
+    border-bottom: 1px solid var(--white);
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--white);
 
-  & > div {
-    flex: 1;
-    text-align: right;
+    & > div {
+      flex: 1;
+      text-align: right;
 
-    :first-of-type {
-      flex: 1.5;
-      text-align: left;
+      :first-of-type {
+        flex: 1.5;
+        text-align: left;
+      }
     }
-  }
 
-  :last-of-type {
-    border: 0;
+    :last-of-type {
+      border: 0;
+    }
   }
 `;
