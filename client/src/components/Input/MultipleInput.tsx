@@ -20,6 +20,9 @@ import {
   kStockTokenAddressTable,
 } from './../../constants';
 
+import Caver from 'caver-js';
+const caver = new Caver();
+
 interface LayoutProps {
   children: React.ReactNode;
   liftState: (
