@@ -54,11 +54,14 @@ const MainPage = () => {
       tempList.push({ id: i, token: String(keyArr[i]), code: valueArr[i] });
     }
 
+    // mapList에 각각의 속성값 넣기
     mapList = await Promise.all(
       tempList.map(async (item) => {
         let stockName = '';
         let oraclePrice = '';
         const token: any = item.token;
+
+        // name과 oraclePrice 값 넣기
         const idx: number = stockData.findIndex(
           (i: { codeNumber: string }) => i.codeNumber === item.code
         );
@@ -68,6 +71,7 @@ const MainPage = () => {
           oraclePrice = stockData[idx].nowValue;
         }
 
+        // krwPrice 값 구하기
         const klayAmount = await callContract({
           contractName: 'Exchange',
           contractAddress: `${exchangeAddressTable[token]}`,
@@ -77,6 +81,7 @@ const MainPage = () => {
 
         const krwPrice = +klayAmount * 1.003 * +currentKlayPrice;
 
+        // premium 값 구하기
         const premium = (+oraclePrice / krwPrice - 1) * 100;
 
         return {
@@ -89,19 +94,16 @@ const MainPage = () => {
         };
       })
     );
-    console.log('map', mapList);
     return setStockList(mapList);
   };
 
   useEffect(() => {
     const onLoadData = async () => {
       await updateList();
-      console.log('stockList1', stockList);
     };
     onLoadData();
   }, [currentKlayPrice]);
 
-  console.log('stockList', stockList);
   return (
     <MainPageWrapper>
       <h2>Stock List</h2>
