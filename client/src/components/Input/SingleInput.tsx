@@ -1,9 +1,11 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import {
   SingleInputContainer,
   SingleInputWrapper,
 } from './styles/SingleInput.styles';
+
+import { getBalance } from '../../utils/KAS';
 
 import useInput from '../../hooks/useInput';
 
@@ -28,9 +30,11 @@ const SingleInput = ({
   otherPrice,
   otherChange,
 }: LayoutProps) => {
-  const tokenPrice = 500;
+  // 임혁진 수정 tokenPrice = 1
+  const tokenPrice = 1;
   const tokenName = 'KLAY';
   const numberOfDecimal = 2;
+  const [maxValue, setMaxValue] = useState<number>(0);
   const {
     tokenBalance,
     isFocus,
@@ -43,6 +47,15 @@ const SingleInput = ({
     setIsFocus,
     changeInput,
   } = useInput(numberOfDecimal);
+
+  useEffect(() => {
+    // 임혁진 수정
+    getBalance({ address: window.klaytn.selectedAddress }).then((res) => {
+      console.log('&&&&&&&&&&&&&&&&&7' + res);
+      setMaxValue(Number(res) / 1000000000000000000);
+    });
+    // setTokenList(createTokenList(5));
+  }, []);
 
   useEffect(() => {
     liftState(tokenBalance, tokenPrice, tokenName, isChange, isDecimalError);
@@ -79,7 +92,12 @@ const SingleInput = ({
       isError={isBlankError || isDecimalError}
     >
       <div>
-        <label htmlFor="input">{children}</label>
+        <section>
+          <label htmlFor="input">{children}</label>
+          {children === 'INPUT' && (
+            <label htmlFor="input">Max {maxValue}</label>
+          )}
+        </section>
         <SingleInputWrapper>
           <section>
             {/* temp */}
