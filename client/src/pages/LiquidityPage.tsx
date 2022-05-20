@@ -45,10 +45,6 @@ const LiquidityPage = () => {
     }
   }, [id]);
 
-  // useEffect(() => {
-  //   console.log('1');
-  // }, []);
-
   const liftStateA = useCallback(
     (balance: string, isChange: boolean, isDecimalError: boolean) => {
       setBalanceA(balance);
@@ -72,21 +68,18 @@ const LiquidityPage = () => {
     console.log(window.klaytn.selectedAddress);
 
     const isApprove = await callIsApproved({ stockName: name });
-    console.log('첫번째', isApprove);
 
     if (!isApprove) {
       await sendApprove({ stockName: name });
-      console.log('두번째');
+    } else {
+      await sendContract({
+        contractName: 'Exchange',
+        contractAddress: exchangeAddressTable[name],
+        methodName: 'addLiquidity',
+        amount: balanceA, // klay
+        parameters: [caver.utils.toBN(Number(balanceB) * 1000000000000000000)],
+      });
     }
-
-    await sendContract({
-      contractName: 'Exchange',
-      contractAddress: '0x5456540aabd10eb07b92af271072027f1f72b3dc',
-      methodName: 'addLiquidity',
-      amount: balanceA, // klay
-      parameters: [caver.utils.toBN(Number(balanceB) * 1000000000000000000)],
-    });
-    console.log('세번째');
   }, [name, balanceA, balanceB]);
 
   const removeButton = useCallback(() => {
@@ -100,10 +93,16 @@ const LiquidityPage = () => {
         contractName: 'Exchange',
         contractAddress: exchangeAddressTable[name],
         methodName: 'getMinimumTokenAmountToAddLiquidity',
-        parameters: [caver.utils.toBN(Number(balanceA) * 1000000000000000000)],
+        // parameters: [caver.utils.toBN(0.001 * 1000000000000000000)],
+        parameters: [caver.utils.toBN(1000000000)],
       });
 
-      setRatio(result / 1000000000000000000 / Number(balanceA));
+      console.log('liquidity', name, balanceA);
+      console.log('TokenAmount', result);
+      // console.log(result / 1000000000000000000 / Number(balanceA));
+      // console.log(result / 1000000000000000000 / Number(balanceA));
+      setRatio(result / 1000000000);
+      // setRatio(result / 1000000000000000000 / Number(1));
     };
 
     if (name !== '') {

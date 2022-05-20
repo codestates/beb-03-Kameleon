@@ -107,49 +107,6 @@ const LiquidityInput = ({
 
   // console.log(ratio);
 
-  // useEffect(() => {
-  //   if (otherChange && (otherBalance * otherPrice) / tokenPrice !== 0) {
-  //     const [, decimal] = String(
-  //       (otherBalance * otherPrice) / tokenPrice
-  //     ).split('.');
-  //     if (decimal && decimal.length > numberOfDecimal) {
-  //       setTokenBalance(
-  //         String(
-  //           ((otherBalance * otherPrice) / tokenPrice).toFixed(numberOfDecimal)
-  //         )
-  //       );
-  //     } else {
-  //       setTokenBalance(String((otherBalance * otherPrice) / tokenPrice));
-  //     }
-  //     setIsChange(false);
-  //   }
-  // }, [
-  //   otherChange,
-  //   otherBalance,
-  //   otherPrice,
-  //   tokenPrice,
-  //   setTokenBalance,
-  //   setIsChange,
-  // ]);
-  // useEffect(() => {
-  //   const callAmount = async () => {
-  //     const result = await callContract({
-  //       contractName: 'Exchange',
-  //       contractAddress: exchangeAddressTable[name],
-  //       methodName: 'getMinimumTokenAmountToAddLiquidity',
-  //       parameters: [2],
-  //     });
-
-  //     console.log('result', result);
-  //   };
-
-  //   if (otherChange) {
-  //     // c;
-  //     console.log('1');
-  //     callAmount();
-  //   }
-  // }, [otherChange]);
-
   return (
     <SingleInputContainer
       isFocus={isFocus}
