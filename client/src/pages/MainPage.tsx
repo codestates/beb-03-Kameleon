@@ -19,10 +19,10 @@ import {
 } from '../constants/index';
 
 interface TokenList {
+  id?: number;
   name?: string;
-  oraclePrice?: string;
-  usdPrice?: string;
-  krwPrice?: string;
+  oraclePrice?: any;
+  krwPrice?: any;
   premium?: string;
   code?: string;
   token?: string;
@@ -36,142 +36,72 @@ const MainPage = () => {
     setInput(e.target.value);
   }, []);
 
-  // const onLoadData = async () => {
-  //   const tempList: Array<TokenList> = [];
+  const updateList = async () => {
+    const tempList: Array<TokenList> = [];
+    let mapList = [];
 
-  //   const stockAPI = await axios({
-  //     method: 'get',
-  //     url: `http://localhost:4001/api/stock/getStocks`,
-  //   });
-  //   const stockData = stockAPI.data.data;
+    // sever에서 naverAPI 데이터 가져옴
+    const stockAPI = await axios({
+      method: 'get',
+      url: `http://localhost:4001/api/stock/getStocks`,
+    });
+    const stockData = stockAPI.data.data;
 
-  //   //
-  //   const keyArr = Object.keys(kStockTokenCodeTable);
-  //   const valueArr = Object.values(kStockTokenCodeTable);
-  //   for (let i = 0; i < keyArr.length; i++) {
-  //     tempList.push({ token: String(keyArr[i]), code: valueArr[i] });
-  //   }
+    // tempList에 kStock symbal이랑 code 삽입
+    const keyArr = Object.keys(kStockTokenCodeTable);
+    const valueArr = Object.values(kStockTokenCodeTable);
+    for (let i = 0; i < keyArr.length; i++) {
+      tempList.push({ id: i, token: String(keyArr[i]), code: valueArr[i] });
+    }
 
-  //   try {
-  //     const list = await Promise.all(
-  //       tempList.map(async (item) => {
-  //         let stockName = '';
-  //         let oraclePrice = '';
-  //         const token: any = item.token;
-  //         const idx: number = stockData.findIndex(
-  //           (i: { codeNumber: string }) => i.codeNumber === item.code
-  //         );
+    mapList = await Promise.all(
+      tempList.map(async (item) => {
+        let stockName = '';
+        let oraclePrice = '';
+        const token: any = item.token;
+        const idx: number = stockData.findIndex(
+          (i: { codeNumber: string }) => i.codeNumber === item.code
+        );
 
-  //         if (idx !== -1) {
-  //           stockName = stockData[idx].stockName;
-  //           oraclePrice = stockData[idx].nowValue;
-  //         }
+        if (idx !== -1) {
+          stockName = stockData[idx].stockName;
+          oraclePrice = stockData[idx].nowValue;
+        }
 
-  //         const ktokenPrice: string = await callContract({
-  //           contractName: 'KStockToken',
-  //           contractAddress: `${kStockTokenAddressTable[token]}`,
-  //           methodName: 'balanceOf',
-  //           parameters: [`${exchangeAddressTable[token]}`],
-  //         }).then();
+        const klayAmount = await callContract({
+          contractName: 'Exchange',
+          contractAddress: `${exchangeAddressTable[token]}`,
+          methodName: 'getEthAmount',
+          parameters: [1],
+        });
 
-  //         const klayPrice = await getBalance({
-  //           address: `${exchangeAddressTable[token]}`,
-  //         });
+        const krwPrice = +klayAmount * 1.003 * +currentKlayPrice;
 
-  //         const krwPrice =
-  //           (Number(ktokenPrice) / Number(klayPrice)) *
-  //           Number(currentKlayPrice);
+        const premium = (+oraclePrice / krwPrice - 1) * 100;
 
-  //         // const premium = (Number(oraclePrice) / krwPrice - 1) * 100;
-
-  //         return {
-  //           name: stockName,
-  //           oraclePrice: oraclePrice,
-  //           krwPrice: String(krwPrice),
-  //           // premium: string,
-  //           code: item.code,
-  //           token: token,
-  //         };
-  //       })
-  //     );
-  //     console.log('list', list);
-  //   } catch (err) {
-  //     console.log(err);
-  //   }
-
-  //   return tempList;
-  // };
+        return {
+          name: stockName,
+          oraclePrice: oraclePrice,
+          krwPrice: String(Math.floor(krwPrice)),
+          premium: String(premium.toFixed(2)),
+          code: item.code,
+          token: token,
+        };
+      })
+    );
+    console.log('map', mapList);
+    return setStockList(mapList);
+  };
 
   useEffect(() => {
-    const callPoolList = async () => {
-      const tempList: Array<TokenList> = [];
-
-      const stockAPI = await axios({
-        method: 'get',
-        url: `http://localhost:4001/api/stock/getStocks`,
-      });
-      const stockData = stockAPI.data.data;
-
-      //
-      const keyArr = Object.keys(kStockTokenCodeTable);
-      const valueArr = Object.values(kStockTokenCodeTable);
-      for (let i = 0; i < keyArr.length; i++) {
-        tempList.push({ token: String(keyArr[i]), code: valueArr[i] });
-      }
-
-      try {
-        const list = await Promise.all(
-          tempList.map(async (item) => {
-            let stockName = '';
-            let oraclePrice = '';
-            const token: any = item.token;
-            const idx: number = stockData.findIndex(
-              (i: { codeNumber: string }) => i.codeNumber === item.code
-            );
-
-            if (idx !== -1) {
-              stockName = stockData[idx].stockName;
-              oraclePrice = stockData[idx].nowValue;
-            }
-
-            const ktokenPrice: string = await callContract({
-              contractName: 'KStockToken',
-              contractAddress: `${kStockTokenAddressTable[token]}`,
-              methodName: 'balanceOf',
-              parameters: [`${exchangeAddressTable[token]}`],
-            }).then();
-
-            const klayPrice = await getBalance({
-              address: `${exchangeAddressTable[token]}`,
-            });
-
-            const krwPrice =
-              (Number(ktokenPrice) / Number(klayPrice)) *
-              Number(currentKlayPrice);
-
-            // const premium = (Number(oraclePrice) / krwPrice - 1) * 100;
-
-            return {
-              name: stockName,
-              oraclePrice: oraclePrice,
-              krwPrice: String(krwPrice),
-              // premium: string,
-              code: item.code,
-              token: token,
-            };
-          })
-        );
-        console.log('list', list);
-      } catch (err) {
-        console.log(err);
-      }
-
-      return setStockList(tempList);
+    const onLoadData = async () => {
+      await updateList();
+      console.log('stockList1', stockList);
     };
-    console.log('callPoolList', callPoolList());
-    // setStockList(data);
-  }, []);
+    onLoadData();
+  }, [currentKlayPrice]);
 
+  console.log('stockList', stockList);
   return (
     <MainPageWrapper>
       <h2>Stock List</h2>
@@ -184,24 +114,22 @@ const MainPage = () => {
           <div>Name</div>
           <div className="main__oracle">Oracle price</div>
           <div>Price(KRW)</div>
-          <div className="main__usd">Price(USD)</div>
-          <div>Change</div>
+          <div>Premium(%)</div>
         </div>
-        {/* {stockList.map((el) => (
-          <MainPageItem key={el.id}>
-            <Link to={`/swap/${el.name}`}>
+        {stockList.map((el, index) => (
+          <MainPageItem key={index}>
+            <Link to={`/swap/${el.token}`}>
               <div>{el.name}</div>
               <div className="main__oracle">
                 {el.oraclePrice.toLocaleString('ko-KR')}
               </div>
-              <div>{el.usdPrice.toLocaleString('ko-KR')}</div>
               <div className="main__usd">
                 {el.krwPrice.toLocaleString('ko-KR')}
               </div>
-              <div>{el.change}%</div>
+              <div>{el.premium}%</div>
             </Link>
           </MainPageItem>
-        ))} */}
+        ))}
       </MainPageList>
     </MainPageWrapper>
   );
