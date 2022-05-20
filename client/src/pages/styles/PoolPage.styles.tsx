@@ -8,6 +8,10 @@ export const PoolPageWrapper = styled.div`
   & > h2 {
     margin: 1rem;
   }
+
+  & a {
+    color: var(--white);
+  }
 `;
 
 export const PoolPageList = styled.ul`
