@@ -13,8 +13,12 @@ import {
   createMyPollList,
   createMyGovernList,
 } from '../utils/dummyCreator';
-import { callContract } from '../utils/KAS';
-import { contractAddressTable, kStockTokenAddressTable } from './../constants';
+import { callContract, getBalance } from '../utils/KAS';
+import {
+  contractAddressTable,
+  kStockTokenAddressTable,
+  exchangeAddressTable,
+} from './../constants';
 
 interface TokenListProps {
   id: number;
@@ -23,16 +27,23 @@ interface TokenListProps {
   value: number;
 }
 
+interface PoolListProps {
+  id: number;
+  name: string;
+  balance: string;
+}
+
 const MyPage = () => {
   // const myList = createMyList(5);
   const [myList, setMyList] = useState<Array<TokenListProps>>([]);
 
-  const myPoolList = createMyPollList(5);
+  // const myPoolList = createMyPollList(5);
+  const [myPoolList, setMyPoolList] = useState<Array<PoolListProps>>([]);
   const myGovernList = createMyGovernList(5);
 
   useEffect(() => {
-    // let valueTemp: Array<String> = [];
-    const test = async () => {
+    // get myList
+    const getMyList = async () => {
       const valueTemp: Array<string> = await callContract({
         contractName: 'Oracle',
         contractAddress: contractAddressTable.Oracle,
@@ -49,6 +60,7 @@ const MyPage = () => {
             methodName: 'balanceOf',
             parameters: [window.klaytn.selectedAddress],
           }).then((res) => {
+            console.log('nameTable', nameTable[i]);
             myList.push({
               id: i,
               name: nameTable[i],
@@ -59,14 +71,96 @@ const MyPage = () => {
         ); // array 삽입);
       }
       const res = await Promise.all(tokenPriceList);
-      console.log(res);
-      console.log(Object.entries(kStockTokenAddressTable));
       // 위의 포문으로 배열 i개 삽입 후 setMyList
       // Promise.all(p[1], p[2]);
-      console.log(myList);
       setMyList(myList);
     };
-    test();
+    const getPoolList = async () => {
+      const myPoolList: any = [];
+      // 각 pool에 balanceOf를 통해 Lp토큰을 확인 후, 보유중인 list를 {name: kSSE, lpAmount: lp토큰 수량}의 list로 저장
+      const promiseGetEachBalance: Array<Promise<any>> = [];
+      const poolToSearch: any = [];
+      Object.entries(exchangeAddressTable).forEach((pair: Array<string>) => {
+        // pair[0] key, pair[1] value
+        promiseGetEachBalance.push(
+          callContract({
+            contractName: 'Exchange',
+            contractAddress: pair[1],
+            methodName: 'balanceOf',
+            parameters: [window.klaytn.selectedAddress],
+          }).then((res) => {
+            poolToSearch.push({ name: pair[0], lpAmount: res });
+            // console.log(pair[0], ' Exchange balance is ', res);
+          })
+        );
+      });
+      await Promise.all(promiseGetEachBalance);
+      console.log('Pool to search list :', poolToSearch);
+
+      // list 중 하나를 뽑아와 pool내 klay, pool내 kStock토큰수, total LP를 뽑은 후 {name: kSSE, lpAmount: 100, poolKlay: 10000, poolKStock: 200, totalSupply: 200}
+      // poolToSearh :[{name: kSSE, lpAmount: lp토큰 수량}, ... ]
+      await poolToSearch.forEach((item: any, index: number) => {
+        const promiseTemp: Array<Promise<any>> = [];
+
+        // 1.pool내 klay
+        let poolKlay: string;
+        promiseTemp.push(
+          getBalance({
+            address: exchangeAddressTable[item.name],
+          }).then((res) => {
+            poolKlay = res;
+          })
+        );
+
+        // 2.pool내 kStock토큰 수
+        let poolKStock: string;
+        promiseTemp.push(
+          callContract({
+            contractName: 'KStockToken',
+            contractAddress: kStockTokenAddressTable[item.name],
+            methodName: 'balanceOf',
+            parameters: [exchangeAddressTable[item.name]],
+          }).then((res) => {
+            poolKStock = res;
+          })
+        );
+
+        // 3.totalLP
+        let totalLP: string;
+        promiseTemp.push(
+          callContract({
+            contractName: 'Exchange',
+            contractAddress: exchangeAddressTable[item.name],
+            methodName: 'totalSupply',
+          }).then((res) => {
+            totalLP = res;
+          })
+        );
+
+        // 모두 가져온 후 push
+        Promise.all(promiseTemp).then(() => {
+          const ratio = Number(item.lpAmount) / Number(totalLP);
+          myPoolList.push({
+            id: index,
+            name: item.name,
+            balance: `${(
+              (Number(poolKlay) * ratio) /
+              1000000000000000000
+            ).toLocaleString('ko-KR')}KLY + ${(
+              (Number(poolKStock) * ratio) /
+              1000000000000000000
+            ).toLocaleString('ko-KR')}${item.name} `,
+          });
+        });
+      });
+      await setMyPoolList(myPoolList);
+
+      // list 중 하나를 뽑아와 ROI 계산
+      //     위의 데이터를 가지고 myPoolList에 push({id: , name:, value:(KLY + kSSE), ROI})
+    };
+
+    getMyList();
+    getPoolList();
   }, []);
 
   return (
@@ -96,16 +190,14 @@ const MyPage = () => {
           <div>
             <div>Pool ID</div>
             <div>Balance</div>
-            <div>Value</div>
+            <div>Value(KRW)</div>
             <div>ROI</div>
           </div>
           {myPoolList.map((el) => (
             <MyPageItem key={el.id}>
               <div>{el.name}</div>
-              <div className="main__oracle">
-                1KLY + {el.balance.toLocaleString('ko-KR')}KSE
-              </div>
-              <div>{el.value.toLocaleString('ko-KR')} KLY</div>
+              <div className="main__oracle">{el.balance}</div>
+              <div>no</div>
               <div>12.34%</div>
             </MyPageItem>
           ))}
