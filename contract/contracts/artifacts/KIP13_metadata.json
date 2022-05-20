@@ -47,7 +47,7 @@
 		"compilationTarget": {
 			"contracts/KIP13.sol": "KIP13"
 		},
-		"evmVersion": "petersburg",
+		"evmVersion": "byzantium",
 		"libraries": {},
 		"optimizer": {
 			"enabled": false,

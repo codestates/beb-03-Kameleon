@@ -59,7 +59,7 @@
 		"compilationTarget": {
 			"contracts/Migrations.sol": "Migrations"
 		},
-		"evmVersion": "petersburg",
+		"evmVersion": "byzantium",
 		"libraries": {},
 		"optimizer": {
 			"enabled": false,

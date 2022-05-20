@@ -553,7 +553,7 @@
 		"compilationTarget": {
 			"contracts/KStockToken.sol": "KStockToken"
 		},
-		"evmVersion": "petersburg",
+		"evmVersion": "byzantium",
 		"libraries": {},
 		"optimizer": {
 			"enabled": false,

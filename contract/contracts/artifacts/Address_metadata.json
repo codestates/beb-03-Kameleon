@@ -17,7 +17,7 @@
 		"compilationTarget": {
 			"contracts/Address.sol": "Address"
 		},
-		"evmVersion": "petersburg",
+		"evmVersion": "byzantium",
 		"libraries": {},
 		"optimizer": {
 			"enabled": false,

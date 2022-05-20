@@ -7,7 +7,7 @@
     "test": "test"
   },
   "scripts": {
-    "remixd": "remixd -s D:/codestates/section5/project3/beb-03-Kameleon/contract -u https://ide.klaytn.com",
+    "remixd": "remixd -s D:/codestates/section5/project3/beb-03-Kameleon/contract -u https://ide.klaytn.foundation",
     "test": "echo \"Error: no test specified\" && exit 1",
     "remixd2": "remixd -s /home/lim/Projects/beb-03-Kameleon/contract -u https://ide.klaytn.com",
     "deployDev": "truffle deploy",
