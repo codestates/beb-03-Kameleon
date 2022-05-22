@@ -9,7 +9,7 @@ export const ModalBackDrop = styled.div`
   background-color: rgba(0, 0, 0, 0.5);
 `;
 
-export const ModalWrapper = styled.div<{ width?: number }>`
+export const ModalWrapper = styled.div<{ width: number | undefined }>`
   position: fixed;
   top: 50%;
   left: 50%;

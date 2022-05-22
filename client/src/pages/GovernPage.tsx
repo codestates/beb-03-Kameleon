@@ -12,6 +12,7 @@ import useModal from '../hooks/useModal';
 
 import Poll from '../components/Govern/Poll';
 import { GovernQueryHooks } from '../hooks/QueryHooks/Govern';
+import CreatePoll from '../components/Govern/CreatePoll';
 
 const GovernPage = () => {
   const { isOpen, toggle } = useModal();
@@ -25,19 +26,6 @@ const GovernPage = () => {
     key: 'test',
   });
 
-  const modalContent = (
-    <GovernPageModalContent>
-      <div>
-        <label htmlFor="title">Title</label>
-        <input id="title" />
-      </div>
-      <div>
-        <label htmlFor="content">Content</label>
-        <input id="content" />
-      </div>
-      <button>Create</button>
-    </GovernPageModalContent>
-  );
   if (isLoading) {
     return <div>isLoading</div>;
   }
@@ -55,7 +43,7 @@ const GovernPage = () => {
             <p>TOTAL STAKED</p>
             <div>47.45M KMT</div>
           </div>
-          <button onClick={toggle}>Create Pool</button>
+          <button onClick={toggle}>Create Poll</button>
         </div>
         <div>
           <div>
@@ -78,7 +66,7 @@ const GovernPage = () => {
       <Modal
         isOpen={isOpen}
         closeModal={toggle}
-        modalContent={modalContent}
+        modalContent={<CreatePoll />}
       ></Modal>
     </GovernPageWrapper>
   );

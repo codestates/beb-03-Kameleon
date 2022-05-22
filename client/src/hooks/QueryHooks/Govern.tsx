@@ -76,18 +76,19 @@ const WithdrawableBalanceQueryHooks = ({
   pollId,
   refetchInterval,
 }: WithdrawableBalanceType) => {
-  return useQuery<any, Error>(
-    [key],
-    async () => {
+  return useQuery<number, Error>(
+    ['WithdrawableBalanceQueryHooks', key],
+    async (): Promise<number> => {
       try {
         const callResult = await callContract({
           contractName: 'Govern',
           contractAddress: '0x105FFb98CAA6436A753711D05FB2252Fc7d76620',
           methodName: 'withdrawableBalance',
           parameters: [+pollId],
+          kaikas: true,
         });
         console.log('withdrawableBalance', callResult, pollId);
-        return callResult;
+        return callResult / 10 ** 18;
       } catch (error) {
         console.log(error);
         return -1;

@@ -37,10 +37,11 @@ const PollModal = ({
 
   const isNotExpired = now < +endTime * 1000 || expired === false;
 
-  const { isSuccess, data } = WithdrawableBalanceQueryHooks({
-    key: `WithdrawableBalanceQueryHooks-${pollId}`,
-    pollId,
-  });
+  const { isSuccess, data }: { data: number | undefined; isSuccess: boolean } =
+    WithdrawableBalanceQueryHooks({
+      key: pollId,
+      pollId,
+    });
 
   const withdrawBalanceHander = async () => {
     const result = await sendContract({
