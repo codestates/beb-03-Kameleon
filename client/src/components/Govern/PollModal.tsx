@@ -1,11 +1,12 @@
-import React, { useState, useCallback, useEffect } from 'react';
+import React from 'react';
 import { WithdrawableBalanceQueryHooks } from '../../hooks/QueryHooks/Govern';
-import useModal from '../../hooks/useModal';
 import { GovernPageModalContent } from '../../pages/styles/GovernPage.styles';
 import { sendContract } from '../../utils/KAS';
 import GovernInput from '../Input/GovernInput';
+import Moment from 'react-moment';
+import 'moment/locale/ko';
+
 interface LayoutProps {
-  key: any;
   pollId: string;
   title: string;
   agree: number;
@@ -31,11 +32,9 @@ const PollModal = ({
   const [yes, no] = [+agree, +disagree];
   console.log('yes or no ', yes, no);
   const now = new Date().getTime();
-  const sTime = new Date(+createdTime * 1000).toISOString().slice(0, -5);
-  const eTime = new Date(+endTime * 1000).toISOString().slice(0, -5);
   console.log(expired, 'expired');
 
-  const isNotExpired = now < +endTime * 1000 || expired === false;
+  const isExpired = now > +endTime * 1000 || expired === true;
 
   const { isSuccess, data }: { data: number | undefined; isSuccess: boolean } =
     WithdrawableBalanceQueryHooks({
@@ -86,18 +85,29 @@ const PollModal = ({
         <div>
           <label htmlFor="time">time</label>
           <div>
-            {sTime} ~ {eTime}
+            {
+              <Moment format="YYYY-MM-DD HH:mm:ss">
+                {+createdTime * 1000}
+              </Moment>
+            }{' '}
+            ~ {<Moment format="YYYY-MM-DD HH:mm:ss">{+endTime * 1000}</Moment>}
+          </div>
+          <div>
+            투표 마감 시간 : <Moment fromNow>{+endTime * 1000}</Moment>
           </div>
         </div>
         <div>
           <label htmlFor="vote">투표하기</label>
           <GovernInput pollId={pollId}>AMOUNT</GovernInput>
         </div>
+        <br></br>
         {isSuccess && (
           <>
             <div>회수가능한 토큰: {data}</div>
             <div>
-              <button onClick={withdrawBalanceHander}>회수하기</button>
+              {isExpired && (
+                <button onClick={withdrawBalanceHander}>회수하기</button>
+              )}
             </div>
           </>
         )}

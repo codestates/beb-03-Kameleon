@@ -68,7 +68,6 @@ export const GovernPageGovernList = styled.div`
 
     &:hover {
       cursor: pointer;
-      opacity: 0.8;
     }
   }
 
@@ -82,19 +81,23 @@ export const GovernPagePollList = styled.div`
   flex-wrap: wrap;
   & > div:hover {
     cursor: pointer;
-    opacity: 0.8;
     border: solid 2px #66adff;
   }
 `;
 
-export const GovernPagePollItem = styled.div<{ yes: number; no: number }>`
+export const GovernPagePollItem = styled.div<{
+  isExpired?: boolean | undefined;
+  enoughQuorum?: boolean | undefined;
+  yes: number;
+  no: number;
+}>`
   width: calc(50% - 1rem);
   height: 12rem;
   margin: 0.5rem;
   padding: 2rem;
   border-radius: 0.5rem;
   background-color: var(--dark-green);
-  opacity: ${(props) => (props.yes + props.no < 20 ? '' : '0.7')};
+  opacity: ${(props) => (props.isExpired === true ? '0.7' : '1')};
 
   transition: border-color 0.2s;
   border: 2px solid transparent;
@@ -102,9 +105,9 @@ export const GovernPagePollItem = styled.div<{ yes: number; no: number }>`
   & > section > div {
     font-weight: 600;
     color: ${(props) =>
-      props.yes + props.no < 20
+      !props.isExpired
         ? 'var(--white)'
-        : props.yes > props.no
+        : props.enoughQuorum && props.yes > props.no
         ? 'var(--blue)'
         : 'var(--red)'};
   }
@@ -119,6 +122,14 @@ export const GovernPagePollItem = styled.div<{ yes: number; no: number }>`
 
   & ::hover {
     border: solid 1px #66adff;
+  }
+
+  & > div:last-child {
+    position: relative;
+    & > div {
+      position: absolute;
+      right: 0;
+    }
   }
 
   @media (max-width: 1023px) {
