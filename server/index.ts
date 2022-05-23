@@ -15,8 +15,6 @@ const Server = async () => {
     console.log("cron 시작");
     startCron();
 
-    const test = await getPoolLiquidity();
-    console.log(test);
     // 프론트 서버 시작
     server.listen(port, (err?: any) => {
       if (err) throw err;

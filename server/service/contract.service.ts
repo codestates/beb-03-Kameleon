@@ -15,7 +15,9 @@ interface insertType {
   poolSize: number;
 }
 
-const recordPoolLiquidity = async (data: insertType): Promise<boolean> => {
+const recordPoolLiquidity_service = async (
+  data: insertType
+): Promise<boolean> => {
   try {
     const { address, poolSize } = data;
     console.log(address, poolSize);
@@ -29,7 +31,7 @@ const recordPoolLiquidity = async (data: insertType): Promise<boolean> => {
     return false;
   }
 };
-const recordBulkPoolLiquidity = async (
+const recordBulkPoolLiquidity_service = async (
   data: Array<insertType>
 ): Promise<boolean> => {
   try {
@@ -45,7 +47,9 @@ const recordBulkPoolLiquidity = async (
   }
 };
 
-const getPoolLiquidity = async ({ exchangeAddress }): Promise<returnApi> => {
+const getPoolLiquidity_service = async ({
+  exchangeAddress,
+}): Promise<returnApi> => {
   try {
     const data = await getConnection()
       .getRepository(PoolLiquidity)
@@ -67,4 +71,38 @@ const getPoolLiquidity = async ({ exchangeAddress }): Promise<returnApi> => {
   }
 };
 
-export { recordPoolLiquidity, recordBulkPoolLiquidity, getPoolLiquidity };
+const getRoiList_service = async (): Promise<returnApi> => {
+  try {
+    const first = await getConnection()
+      .getRepository(PoolLiquidity)
+      .createQueryBuilder("poolLiquidity")
+      .orderBy("poolLiquidity.index", "ASC")
+      .limit(5)
+      .getMany();
+    const last = await getConnection()
+      .getRepository(PoolLiquidity)
+      .createQueryBuilder("poolLiquidity")
+      .orderBy("poolLiquidity.index", "DESC")
+      .limit(5)
+      .getMany();
+
+    console.log(first, last.reverse());
+    return {
+      success: true,
+      data: { first, last },
+    };
+  } catch (error) {
+    console.log(error);
+    return {
+      success: true,
+      data: null,
+    };
+  }
+};
+
+export {
+  recordPoolLiquidity_service,
+  recordBulkPoolLiquidity_service,
+  getPoolLiquidity_service,
+  getRoiList_service,
+};

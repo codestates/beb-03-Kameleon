@@ -1,5 +1,9 @@
 import { Request, Response } from "express";
-import { getPoolLiquidity } from "../../service/contract.service";
+import {
+  getPoolLiquidity_service,
+  getRoiList_service,
+} from "../../service/contract.service";
+import { calcPoolRoi } from "../../utilities/poolLiquidity";
 const mintStockToken_controller = async (req: Request, res: Response) => {
   try {
   } catch (err) {
@@ -25,7 +29,9 @@ const addressList_controller = async (req: Request, res: Response) => {
 const getPoolLiquidity_controller = async (req: Request, res: Response) => {
   try {
     const exchangeAddress = req.body.exchange as string;
-    const { success, data } = await getPoolLiquidity({ exchangeAddress });
+    const { success, data } = await getPoolLiquidity_service({
+      exchangeAddress,
+    });
     if (success) {
       return res.status(200).json({
         success,
@@ -41,9 +47,28 @@ const getPoolLiquidity_controller = async (req: Request, res: Response) => {
     });
   }
 };
+const getPoolRoi_controller = async (req: Request, res: Response) => {
+  try {
+    const { data } = await getRoiList_service();
+    const result = calcPoolRoi(data);
+    console.log(result);
+    return res.status(200).json({
+      success: true,
+      data: result,
+      error: null,
+    });
+  } catch (err) {
+    return res.status(500).json({
+      success: false,
+      data: null,
+      error: err,
+    });
+  }
+};
 
 export {
   mintStockToken_controller,
   addressList_controller,
   getPoolLiquidity_controller,
+  getPoolRoi_controller,
 };
