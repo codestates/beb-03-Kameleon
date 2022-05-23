@@ -1,44 +1,28 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-const initialUserInfo = {
-  email: '',
-  id: '',
-  imageUri: '',
-  isVerified: false,
-  role: '',
-  uuid: '',
-  tokenBalance: '',
+const initialState = {
+  isLogin: false as boolean,
+  account: '' as string,
+  klayPrice: 0 as number,
 };
 
 export const userSlice = createSlice({
   name: 'user',
-  initialState: {
-    accessToken: undefined,
-    userInfo: initialUserInfo,
-    klayPrice: undefined,
-  },
+  initialState,
   reducers: {
     login: (state, action) => {
-      state.accessToken = action.payload;
-      //console.log('⭐️⭐️⭐️---------------- dispatch: Login');
-    },
-    getUserInfo: (state, action) => {
-      state.userInfo = action.payload;
-      //console.log('⭐️⭐️⭐️---------------- dispatch: getUserInfo');
+      state.isLogin = true;
+      state.account = action.payload;
     },
     logout: (state) => {
-      state.accessToken = undefined;
-      state.userInfo = initialUserInfo;
-      //console.log('⭐️⭐️⭐️---------------- dispatch: Logout');
+      state.isLogin = false;
+      state.account = '';
     },
     getKlayPrice: (state, action) => {
       state.klayPrice = action.payload;
-      //console.log('⭐️⭐️⭐️---------------- dispatch: getKlayPrice');
     },
   },
 });
 
-export const { login } = userSlice.actions;
-export const { getUserInfo } = userSlice.actions;
-export const { logout } = userSlice.actions;
+export const { login, logout } = userSlice.actions;
 export default userSlice.reducer;
