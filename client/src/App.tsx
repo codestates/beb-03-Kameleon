@@ -33,6 +33,7 @@ function App() {
             <Routes>
               <Route path="/" element={<MainPage />} />
               <Route path="/swap" element={<SwapPage />} />
+              <Route path="/swap/:token" element={<SwapPage />} />
               <Route path="/pool" element={<PoolPage />} />
               <Route path="/liquidity/:id" element={<LiquidityPage />} />
               <Route path="/mint" element={<MintPage />} />

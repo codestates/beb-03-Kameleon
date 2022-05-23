@@ -65,7 +65,7 @@
 		"compilationTarget": {
 			"contracts/IKIP7Receiver.sol": "IKIP7Receiver"
 		},
-		"evmVersion": "petersburg",
+		"evmVersion": "byzantium",
 		"libraries": {},
 		"optimizer": {
 			"enabled": false,

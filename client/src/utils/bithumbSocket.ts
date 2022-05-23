@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 
 // WebSocket Ticker 데이터 가져오기
 // 사용되는 곳 CoinMarket
-export const useKlaySocket = (): any => {
+export const useKlaySocket = (): string => {
   const [wsInstance, setWsInstance] = useState('');
 
   let ws: any;
@@ -10,6 +10,7 @@ export const useKlaySocket = (): any => {
   useEffect(() => {
     ws = new WebSocket('wss://pubwss.bithumb.com/pub/ws');
 
+    let klaytnPrice = undefined;
     ws.onopen = () => {
       const request = {
         type: 'ticker',
@@ -21,7 +22,8 @@ export const useKlaySocket = (): any => {
 
     ws.onmessage = (e: { data: Iterable<number> }) => {
       const data = JSON.parse(e.data.toString());
-      setWsInstance(data.content.closePrice);
+      klaytnPrice = data?.content?.closePrice;
+      setWsInstance(klaytnPrice);
     };
 
     return () => {

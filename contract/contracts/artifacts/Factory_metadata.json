@@ -154,7 +154,7 @@
 		"compilationTarget": {
 			"contracts/Factory.sol": "Factory"
 		},
-		"evmVersion": "petersburg",
+		"evmVersion": "byzantium",
 		"libraries": {},
 		"optimizer": {
 			"enabled": false,
