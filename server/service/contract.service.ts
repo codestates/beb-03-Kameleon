@@ -71,22 +71,30 @@ const getPoolLiquidity_service = async ({
   }
 };
 
-const getRoiList_service = async (): Promise<returnApi> => {
+const getRoiList_service = async ({
+  limit = 1,
+  exchangeAddress,
+}: {
+  limit?: number;
+  exchangeAddress: string;
+}): Promise<returnApi> => {
   try {
     const first = await getConnection()
       .getRepository(PoolLiquidity)
       .createQueryBuilder("poolLiquidity")
+      .where("address = :exchangeAddress", { exchangeAddress })
       .orderBy("poolLiquidity.index", "ASC")
-      .limit(5)
-      .getMany();
+      .limit(limit)
+      .getOne();
     const last = await getConnection()
       .getRepository(PoolLiquidity)
       .createQueryBuilder("poolLiquidity")
+      .where("address = :exchangeAddress", { exchangeAddress })
       .orderBy("poolLiquidity.index", "DESC")
-      .limit(5)
-      .getMany();
+      .limit(limit)
+      .getOne();
 
-    console.log(first, last.reverse());
+    console.log(first, last);
     return {
       success: true,
       data: { first, last },

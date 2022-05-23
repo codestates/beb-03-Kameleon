@@ -49,7 +49,8 @@ const getPoolLiquidity_controller = async (req: Request, res: Response) => {
 };
 const getPoolRoi_controller = async (req: Request, res: Response) => {
   try {
-    const { data } = await getRoiList_service();
+    const exchangeAddress = req.query.exchangeAddress as string;
+    const { data } = await getRoiList_service({ exchangeAddress });
     const result = calcPoolRoi(data);
     console.log(result);
     return res.status(200).json({

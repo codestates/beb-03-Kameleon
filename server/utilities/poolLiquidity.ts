@@ -39,18 +39,14 @@ const checkBulkPoolLiquidity = async () => {
 };
 
 const calcPoolRoi = ({ first, last }) => {
-  const result = [];
-  for (let i = 0; i < first.length; i++) {
-    const firstPoolData = first[i];
-    const lastPoolData = last[i];
-    const firstDate = new Date(firstPoolData.createdAt).getDate;
-    const lastDate = new Date(lastPoolData.createdAt).getDate;
-    const ROI =
-      (lastPoolData.poolSize / firstPoolData.poolSize) ^
-      ((365 / (+lastDate - +firstDate) - 1) * 100);
-    result.push({ address: firstPoolData.address, roi: ROI });
-  }
-  console.log(result);
-  return result;
+  const firstPoolData = first;
+  const lastPoolData = last;
+  const firstDate = new Date(firstPoolData.createdAt).getDate;
+  const lastDate = new Date(lastPoolData.createdAt).getDate;
+  const ROI =
+    (lastPoolData.poolSize / firstPoolData.poolSize) ^
+    ((365 / (+lastDate - +firstDate) - 1) * 100);
+  console.log({ address: firstPoolData.address, roi: ROI });
+  return { address: firstPoolData.address, roi: ROI };
 };
 export { checkPoolLiquidity, checkBulkPoolLiquidity, calcPoolRoi };

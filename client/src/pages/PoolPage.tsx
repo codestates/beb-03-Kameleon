@@ -11,6 +11,7 @@ import {
 import { createPoolList } from '../utils/dummyCreator';
 import { callContract, sendContract, getBalance } from '../utils/KAS';
 import { exchangeAddressTable, kStockTokenAddressTable } from '../constants';
+import axios from 'axios';
 
 const caver = new Caver(window.klaytn);
 
@@ -28,28 +29,32 @@ const PoolPage = () => {
   useEffect(() => {
     const callPoolList = async () => {
       const tempList = [];
-      for (let i = 0; i < Object.keys(exchangeAddressTable).length; i++) {
+      const exchangeAddressList = Object.keys(exchangeAddressTable);
+      for (let i = 0; i < exchangeAddressList.length; i++) {
         const klayBalance = await getBalance({
-          address: exchangeAddressTable[Object.keys(exchangeAddressTable)[i]],
+          address: exchangeAddressTable[exchangeAddressList[i]],
         });
 
         const tokenBalance = await callContract({
           contractName: 'KStockToken',
-          contractAddress:
-            kStockTokenAddressTable[Object.keys(exchangeAddressTable)[i]], // 컨트랙트 배포주소
+          contractAddress: kStockTokenAddressTable[exchangeAddressList[i]], // 컨트랙트 배포주소
           methodName: 'balanceOf',
-          parameters: [
-            exchangeAddressTable[Object.keys(exchangeAddressTable)[i]],
-          ], // 인자값 balanceOf(address aacount)
+          parameters: [exchangeAddressTable[exchangeAddressList[i]]], // 인자값 balanceOf(address aacount)
         });
-
+        const {
+          data: { success, data },
+        } = await axios.get(`http://localhost:4001/api/contract/getPoolRoi`, {
+          params: {
+            exchangeAddress: exchangeAddressTable[exchangeAddressList[i]],
+          },
+        });
         const pool = {
           id: i,
-          name: Object.keys(exchangeAddressTable)[i],
+          name: exchangeAddressList[i],
           liquid:
             ((Number(klayBalance) / 1000000000000000000) * tokenBalance) /
             1000000000000000000,
-          change: 0, // temp Change
+          change: data.roi,
         };
         tempList.push(pool);
       }
@@ -65,7 +70,7 @@ const PoolPage = () => {
         <div>
           <div>Pair name</div>
           <div>유동성 규모</div>
-          <div>수익률</div>
+          <div>수익률(ROI)</div>
         </div>
         {poolList.map((el) => (
           <Link to={`/liquidity/${el.name}`}>
