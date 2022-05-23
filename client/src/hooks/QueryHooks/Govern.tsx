@@ -100,4 +100,38 @@ const WithdrawableBalanceQueryHooks = ({
   );
 };
 
-export { GovernQueryHooks, WithdrawableBalanceQueryHooks };
+const TotalStakedBalanceHooks = ({
+  key,
+  refetchInterval = undefined,
+}: {
+  key: number | string;
+  refetchInterval?: number | undefined;
+}) => {
+  return useQuery<number, Error>(
+    ['totalStakedBalanceHooks', key],
+    async (): Promise<number> => {
+      try {
+        const governAddress = '0x105ffb98caa6436a753711d05fb2252fc7d76620';
+        const result = await callContract({
+          contractName: 'Kameleon',
+          contractAddress: '0xd0a62633f9e77a5fe27ed733c4938fb38cfbeea1',
+          methodName: 'balanceOf',
+          parameters: [governAddress],
+        });
+        return +result / 10 ** 18;
+      } catch (error) {
+        console.log(error);
+        return 0;
+      }
+    },
+    {
+      refetchInterval,
+    }
+  );
+};
+
+export {
+  GovernQueryHooks,
+  WithdrawableBalanceQueryHooks,
+  TotalStakedBalanceHooks,
+};

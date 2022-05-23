@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import {
   GovernPageWrapper,
@@ -11,11 +11,17 @@ import Modal from '../components/modal/Modal';
 import useModal from '../hooks/useModal';
 
 import Poll from '../components/Govern/Poll';
-import { GovernQueryHooks } from '../hooks/QueryHooks/Govern';
+import {
+  GovernQueryHooks,
+  TotalStakedBalanceHooks,
+} from '../hooks/QueryHooks/Govern';
 import CreatePoll from '../components/Govern/CreatePoll';
 
 const GovernPage = () => {
   const { isOpen, toggle } = useModal();
+  const tokenState = TotalStakedBalanceHooks({
+    key: 'GovernPage',
+  });
   const {
     isLoading,
     isError,
@@ -23,7 +29,7 @@ const GovernPage = () => {
     data: governList,
     isSuccess,
   } = GovernQueryHooks({
-    key: 'test',
+    key: 'GovernPage',
   });
 
   if (isLoading) {
@@ -41,7 +47,7 @@ const GovernPage = () => {
           <h1>KMT</h1>
           <div>
             <p>TOTAL STAKED</p>
-            <div>47.45M KMT</div>
+            <div>{tokenState?.data} KMT</div>
           </div>
           <button onClick={toggle}>Create Poll</button>
         </div>
