@@ -24,15 +24,21 @@ const callIsApproved = async ({ stockName }: { stockName: string }) => {
 };
 
 const sendApprove = async ({ stockName }: { stockName: string }) => {
-  sendContract({
-    contractName: 'KStockToken',
-    contractAddress: kStockTokenAddressTable[stockName],
-    methodName: 'approve',
-    parameters: [
-      exchangeAddressTable[stockName],
-      '115792089237316195423570985008687907853269984665640564039457584007913129639935', // maximum value
-    ],
-  });
+  try {
+    const result: any = await sendContract({
+      contractName: 'KStockToken',
+      contractAddress: kStockTokenAddressTable[stockName],
+      methodName: 'approve',
+      parameters: [
+        exchangeAddressTable[stockName],
+        '115792089237316195423570985008687907853269984665640564039457584007913129639935', // maximum value
+      ],
+    });
+    return result;
+  } catch (error) {
+    console.log(error);
+    return error;
+  }
 };
 
 const callContract = async ({
@@ -116,7 +122,7 @@ const sendContract = async ({
     //   ...parameters
     // );
     // console.log(receipt?.blockHash);
-    // return receipt;
+    return result?.blockHash;
   } catch (error) {
     console.log(error);
     return error;

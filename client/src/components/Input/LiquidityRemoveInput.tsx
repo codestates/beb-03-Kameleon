@@ -53,19 +53,21 @@ const LiquidityRemoveInput = ({ children, liftState }: LayoutProps) => {
     // name을 확인 후 초기값 설정
     // maxBalance, numberofDecimal
     // 0. lpToken 보유량
-    callContract({
-      contractName: 'Exchange',
-      contractAddress: exchangeAddressTable[name],
-      methodName: 'balanceOf',
-      parameters: [window.klaytn.selectedAddress],
-    })
-      .then((res) => {
-        setMaxBalance(Number((Number(res) / 1000000000000000000).toFixed(6)));
+    if (window.klaytn.selectedAddress) {
+      callContract({
+        contractName: 'Exchange',
+        contractAddress: exchangeAddressTable[name],
+        methodName: 'balanceOf',
+        parameters: [window.klaytn.selectedAddress],
       })
-      .catch((e) => {
-        console.log(e);
-      });
-  });
+        .then((res) => {
+          setMaxBalance(Number((Number(res) / 1000000000000000000).toFixed(6)));
+        })
+        .catch((e) => {
+          console.log(e);
+        });
+    }
+  }, [name, window.klaytn.selectedAddress]);
 
   useEffect(() => {
     liftState(tokenBalance, isChange, isDecimalError);

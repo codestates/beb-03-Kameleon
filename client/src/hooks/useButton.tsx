@@ -28,12 +28,12 @@ const useButton = () => {
 
   // Remove Liquidity
   // (name: kStock 이름, Balance: LP 수량)
-  const removeButton = useCallback((name: string, balance: number) => {
+  const removeButton = useCallback((name: string, balance: string) => {
     sendContract({
       contractName: 'Exchange',
       contractAddress: exchangeAddressTable[name],
       methodName: 'removeLiquidity',
-      parameters: [caver.utils.convertToPeb(balance.toString(), 'KLAY')],
+      parameters: [caver.utils.convertToPeb(balance, 'KLAY')],
     });
   }, []);
 
@@ -55,7 +55,8 @@ const useButton = () => {
   // Apporve Token
   // (name: kStock 이름)
   const approveButton = useCallback(async (name: string) => {
-    await sendApprove({ stockName: name });
+    const result = await sendApprove({ stockName: name });
+    return result;
   }, []);
 
   return { addButton, removeButton, connectButton, approveButton };
