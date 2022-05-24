@@ -1,7 +1,7 @@
 import React, { useState, useCallback, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
-import { faArrowDown } from '@fortawesome/free-solid-svg-icons';
+import { faArrowDown, faVolumeHigh } from '@fortawesome/free-solid-svg-icons';
 import { useParams } from 'react-router-dom';
 import Caver from 'caver-js';
 
@@ -23,6 +23,7 @@ import {
 
 import { exchangeAddressTable } from '../constants/index';
 import useInput from '../hooks/useInput';
+import { isConditionalExpression } from 'typescript';
 
 const arrowDown = faArrowDown as IconProp;
 const callCaver = new Caver('https://api.baobab.klaytn.net:8651');
@@ -43,7 +44,6 @@ const amountToken = async (token: string, balance: string) => {
     contractName: 'Exchange',
     contractAddress: `${exchangeAddressTable[token]}`,
     methodName: 'getTokenAmount',
-    // parameters: [caver.utils.convertToPeb(balance, 'KLAY')],
     parameters: [balance],
   });
   return result;
@@ -51,12 +51,13 @@ const amountToken = async (token: string, balance: string) => {
 
 const SwapPage = () => {
   const params = useParams();
-  const setToken: any = params ? params : 'kSSE';
+  const setToken: any = params.token !== undefined ? params.token : 'kSSE';
   const [nameA, setNameA] = useState<string>(setToken);
   const [nameB, setNameB] = useState<string>(setToken);
   const [detailInfo, setDetailInfo] = useState<number>(0);
   const [isApproveA, setIsApproveA] = useState(false);
   const [isApproveB, setIsApproveB] = useState(false);
+  const [fee, setFee] = useState<string>('');
 
   const {
     tokenBalance: tokenBalanceA,
@@ -64,7 +65,7 @@ const SwapPage = () => {
     isBlankError: isBlankErrorA,
     isDecimalError: isDecimalErrorA,
     isChange: isChangeA,
-    setIsChange: setBalanceA,
+    setIsChange: setIsChangeA,
     setTokenBalance: setTokenBalanceA,
     setKey: setKeyA,
     setIsFocus: setIsFocusA,
@@ -79,7 +80,7 @@ const SwapPage = () => {
     isBlankError: isBlankErrorA,
     isDecimalError: isDecimalErrorA,
     isChange: isChangeA,
-    setIsChange: setBalanceA,
+    setIsChange: setIsChangeA,
     setTokenBalance: setTokenBalanceA,
     setKey: setKeyA,
     setIsFocus: setIsFocusA,
@@ -92,7 +93,7 @@ const SwapPage = () => {
     isBlankError: isBlankErrorB,
     isDecimalError: isDecimalErrorB,
     isChange: isChangeB,
-    setIsChange: setBalanceB,
+    setIsChange: setIsChangeB,
     setTokenBalance: setTokenBalanceB,
     setKey: setKeyB,
     setIsFocus: setIsFocusB,
@@ -107,7 +108,7 @@ const SwapPage = () => {
     isBlankError: isBlankErrorB,
     isDecimalError: isDecimalErrorB,
     isChange: isChangeB,
-    setIsChange: setBalanceB,
+    setIsChange: setIsChangeB,
     setTokenBalance: setTokenBalanceB,
     setKey: setKeyB,
     setIsFocus: setIsFocusB,
@@ -164,23 +165,66 @@ const SwapPage = () => {
     }
   };
 
+  const onCalcurlateInputA = async ({
+    tokenBalance,
+  }: {
+    tokenBalance: string;
+  }) => {
+    if (tokenBalance === '') {
+      tokenBalance = '0';
+    }
+    const changeTokenA: string = await amountKlay(nameA, tokenBalance);
+    console.log('1- tokenBalance : ', tokenBalance);
+    // const changeTokenB: string = await amountKlay(nameB, balanceB);
+    // console.log('changeTokenA', changeTokenA);
+    // console.log('changeKlay', changeKlay);
+    // const price = +currentKlayPrice * +changeTokenB;
+    // const fee = +balanceA * 0.00`3;
+    console.log(tokenBalance);
+    if (+tokenBalance > 0) {
+      const changeKlay: string = await amountToken(nameB, changeTokenA);
+      console.log('1- changeTokenA : ', changeTokenA);
+      console.log(tokenBalance);
+      // setTokenBalanceA(tokenBalance);
+      setTokenBalanceB((+changeKlay / 10 ** 18).toString());
+    } else if (+tokenBalance === 0) {
+      setTokenBalanceB('0');
+    }
+  };
+
+  const onCalcurlateInputB = async ({
+    tokenBalance,
+  }: {
+    tokenBalance: string;
+  }) => {
+    console.log('tokenBalance', tokenBalance);
+    const changeTokenB: string = await amountKlay(nameB, tokenBalance);
+    const changeKlay: string = await amountToken(nameA, changeTokenB);
+    // const changeTokenB: string = await amountKlay(nameB, balanceB);
+    // console.log('changeTokenA', changeTokenA);
+    // console.log('changeKlay', changeKlay);
+    // const price = +currentKlayPrice * +changeTokenB;
+    // const fee = +balanceA * 0.003;
+    if (+tokenBalance >= 0) {
+      setTokenBalanceA(
+        +tokenBalance === 0 ? '0' : (+changeKlay / 10 ** 18).toString()
+      );
+    }
+  };
+
   return (
     <SwapPageWrapper>
       <h2>Swap</h2>
       <form action="">
-        <SwapInput {...swapInputPropsA}>INPUT</SwapInput>
+        <SwapInput {...swapInputPropsA} onCalcurlateInput={onCalcurlateInputA}>
+          INPUT
+        </SwapInput>
         <IconWrapper>
           <FontAwesomeIcon icon={arrowDown} className="icon" />
         </IconWrapper>
-        {/* <SwapInput
-          liftState={liftStateB}
-          otherBalance={balanceB}
-          otherName={nameA}
-          otherChange={isChangeA}
-          myChange={setIsChangeB}
-        > */}
-        OUTPUT
-        {/* </SwapInput> */}
+        <SwapInput {...swapInputPropsB} onCalcurlateInput={onCalcurlateInputB}>
+          OUTPUT
+        </SwapInput>
         {tokenBalanceA && tokenBalanceB && (
           <DetailInfoStyle>
             <div>

@@ -23,9 +23,11 @@ interface TokenListProps {
 }
 
 interface ISwapInput extends IUseInput {
-  children: React.ReactNode;
+  children?: React.ReactNode;
   tokenName: string;
   setTokenName: React.Dispatch<React.SetStateAction<string>>;
+  // onCalcurlateInput: ({value: string}) => void;
+  onCalcurlateInput: any;
 }
 
 const angleUp = faAngleUp as IconProp;
@@ -45,6 +47,7 @@ const SwapInput = ({
   setKey,
   setIsFocus,
   changeInput,
+  onCalcurlateInput,
 }: ISwapInput) => {
   const params = useParams();
   const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -91,6 +94,7 @@ const SwapInput = ({
 
   // tokenName 변경에 따라 Max값 변경
   useEffect(() => {
+    console.log('tokenName', tokenName);
     callContract({
       contractName: 'KStockToken',
       contractAddress: kStockTokenAddressTable[tokenName],
@@ -113,6 +117,25 @@ const SwapInput = ({
     setTokenName(name);
   }, []);
 
+  const onChangeHandler = (e: any) => {
+    console.log('event value : ', e.keyCode);
+    const tokenBalance = e.target.value;
+    // if (tokenBalance === '') {
+    //   onCalcurlateInput({ tokenBalance: '0' });
+    // } else {
+    // console.log(tokenBalance);
+    // const [value, decimal] = String(tokenBalance).split('.');
+    // if (decimal && decimal.length > 6) {
+    //   tokenBalance = [value, decimal.slice(0, 6)].join('.');
+    // }
+    // if (decimal === undefined) {
+    //   tokenBalance = +tokenBalance.toString();
+    // }
+    changeInput(e);
+    onCalcurlateInput({ tokenBalance });
+    // }
+  };
+
   return (
     <MultipleInputContainer
       isFocus={isFocus}
@@ -127,8 +150,6 @@ const SwapInput = ({
         </section>
         <MultipleInputWrapper>
           <section>
-            {/* temp */}
-            {/* <img /> */}
             <div>{tokenName}</div>
             {isOpen ? (
               <FontAwesomeIcon
@@ -150,7 +171,7 @@ const SwapInput = ({
             autoComplete="off"
             value={tokenBalance}
             onKeyDown={(e) => setKey(e.key)}
-            onChange={(e) => changeInput(e)}
+            onChange={onChangeHandler}
             onFocus={() => setIsFocus(true)}
             onBlur={() => setIsFocus(false)}
           />
