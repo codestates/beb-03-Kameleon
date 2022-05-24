@@ -5,19 +5,8 @@ import { sendContract } from '../../utils/KAS';
 import GovernInput from '../Input/GovernInput';
 import Moment from 'react-moment';
 import 'moment/locale/ko';
+import { IGovernType } from '../../types/components/Govern.types';
 
-interface LayoutProps {
-  pollId: string;
-  title: string;
-  agree: number;
-  disagree: number;
-  createdTime: string;
-  content: string;
-  creator: string;
-  endTime: string;
-  expired: boolean;
-  totalSupply: string;
-}
 const PollModal = ({
   pollId,
   title,
@@ -28,7 +17,7 @@ const PollModal = ({
   createdTime,
   endTime,
   expired,
-}: LayoutProps) => {
+}: IGovernType) => {
   const [yes, no] = [+agree, +disagree];
   console.log('yes or no ', yes, no);
   const now = new Date().getTime();
@@ -45,7 +34,7 @@ const PollModal = ({
   const withdrawBalanceHander = async () => {
     const result = await sendContract({
       contractName: 'Govern',
-      contractAddress: '0x105FFb98CAA6436A753711D05FB2252Fc7d76620',
+      contractAddress: '0x27a6bC74934F7f57350eDF7eDacC59C9eE60F134',
       methodName: 'withdrawBalance',
       parameters: [+pollId],
     });

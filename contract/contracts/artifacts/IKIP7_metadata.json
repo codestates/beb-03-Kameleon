@@ -332,7 +332,7 @@
 		"compilationTarget": {
 			"contracts/IKIP7.sol": "IKIP7"
 		},
-		"evmVersion": "petersburg",
+		"evmVersion": "byzantium",
 		"libraries": {},
 		"optimizer": {
 			"enabled": false,

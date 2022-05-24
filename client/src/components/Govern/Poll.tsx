@@ -14,21 +14,10 @@ import {
   faCheck,
 } from '@fortawesome/free-solid-svg-icons';
 import Moment from 'react-moment';
+import { IGovernType } from '../../types/components/Govern.types';
 
-interface LayoutProps {
-  pollId: string;
-  title: string;
-  agree: number;
-  disagree: number;
-  createdTime: string;
-  content: string;
-  creator: string;
-  endTime: string;
-  expired: boolean;
-  totalSupply: string;
-}
-const Poll = (props: LayoutProps) => {
-  const { title, agree, disagree, totalSupply, endTime, expired }: LayoutProps =
+const Poll = (props: IGovernType) => {
+  const { title, agree, disagree, totalSupply, endTime, expired }: IGovernType =
     props;
 
   const { isOpen, toggle } = useModal();

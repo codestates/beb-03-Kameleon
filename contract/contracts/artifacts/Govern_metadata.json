@@ -288,6 +288,63 @@
 			},
 			{
 				"constant": true,
+				"inputs": [
+					{
+						"name": "pollIndex_",
+						"type": "uint256"
+					}
+				],
+				"name": "getPollState",
+				"outputs": [
+					{
+						"components": [
+							{
+								"name": "id",
+								"type": "uint256"
+							},
+							{
+								"name": "title",
+								"type": "string"
+							},
+							{
+								"name": "content",
+								"type": "string"
+							},
+							{
+								"name": "agree",
+								"type": "uint256"
+							},
+							{
+								"name": "disagree",
+								"type": "uint256"
+							},
+							{
+								"name": "creator",
+								"type": "address"
+							},
+							{
+								"name": "createdTime",
+								"type": "uint256"
+							},
+							{
+								"name": "endTime",
+								"type": "uint256"
+							},
+							{
+								"name": "expired",
+								"type": "bool"
+							}
+						],
+						"name": "",
+						"type": "tuple"
+					}
+				],
+				"payable": false,
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"constant": true,
 				"inputs": [],
 				"name": "getTotalSupply",
 				"outputs": [
@@ -453,9 +510,9 @@
 	},
 	"sources": {
 		"contracts/Govern.sol": {
-			"keccak256": "0x3e369c87b4bbb054fa7145b50bedb93a26d7e37c72c95aaa830e6a5aa3bb8279",
+			"keccak256": "0x4e8c2146957483322c13f070340313008de60385541e4e23933719400ecc0489",
 			"urls": [
-				"bzzr://63b4b4f8068a19c6e45ecfc66041e56b9b65c204a18e2f10abbb21ba8b3dd15e"
+				"bzzr://9cdf6cc97c8936afe4b4db3896105cc58046079dc977e27a548cb4cd941f6b47"
 			]
 		},
 		"contracts/IKIP13.sol": {

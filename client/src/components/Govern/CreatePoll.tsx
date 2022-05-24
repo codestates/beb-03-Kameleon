@@ -9,7 +9,7 @@ const CreatePoll = () => {
   const createPollHander = async () => {
     const result = await sendContract({
       contractName: 'Govern',
-      contractAddress: '0x105FFb98CAA6436A753711D05FB2252Fc7d76620',
+      contractAddress: '0x27a6bC74934F7f57350eDF7eDacC59C9eE60F134',
       methodName: 'createPoll',
       parameters: [title, content, +day],
     });

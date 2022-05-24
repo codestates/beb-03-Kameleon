@@ -57,19 +57,29 @@ export const MyPageItem = styled.li`
   }
 `;
 
-export const MyPageBar = styled.div<{ yes: number; no: number }>`
+export const MyPageBar = styled.div<{
+  yes: number;
+  no: number;
+  totalSupply: string;
+}>`
   display: flex;
   min-width: 600px;
   background-color: var(--white);
 
   & > div {
     &:first-of-type {
-      width: ${(props) => `calc(100% / 100 * ${props.yes})`};
+      width: ${(props) => {
+        const calcPercent = (props.yes / +props.totalSupply) * 100;
+        return `${calcPercent}%`;
+      }};
       background-color: var(--blue);
     }
 
     &:last-of-type {
-      width: ${(props) => `calc(100% / 100 * ${props.no})`};
+      width: ${(props) => {
+        const calcPercent = (props.no / +props.totalSupply) * 100;
+        return `${calcPercent}%`;
+      }};
       background-color: var(--red);
     }
   }
