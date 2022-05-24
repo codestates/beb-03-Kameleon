@@ -24,15 +24,21 @@ const callIsApproved = async ({ stockName }: { stockName: string }) => {
 };
 
 const sendApprove = async ({ stockName }: { stockName: string }) => {
-  sendContract({
-    contractName: 'KStockToken',
-    contractAddress: kStockTokenAddressTable[stockName],
-    methodName: 'approve',
-    parameters: [
-      exchangeAddressTable[stockName],
-      '115792089237316195423570985008687907853269984665640564039457584007913129639935', // maximum value
-    ],
-  });
+  try {
+    const result: any = await sendContract({
+      contractName: 'KStockToken',
+      contractAddress: kStockTokenAddressTable[stockName],
+      methodName: 'approve',
+      parameters: [
+        exchangeAddressTable[stockName],
+        '115792089237316195423570985008687907853269984665640564039457584007913129639935', // maximum value
+      ],
+    });
+    return result;
+  } catch (error) {
+    console.log(error);
+    return error;
+  }
 };
 
 const callContract = async ({
@@ -57,7 +63,6 @@ const callContract = async ({
       throw 'Not enough arguments';
     let contract = undefined;
     if (kaikas === true && window.klaytn !== undefined) {
-      console.log('asdf');
       contract = new caver.klay.Contract(
         abiTable[contractName],
         contractAddress
@@ -111,14 +116,13 @@ const sendContract = async ({
       abiTable[contractName],
       contractAddress
     );
-    const receipt = await myContract.methods[methodName](...parameters).send({
+    const result = await myContract.methods[methodName](...parameters).send({
       from: window.klaytn.selectedAddress,
       to: contractAddress,
       gas: 300000,
       value: caver.utils.toPeb(amount, 'KLAY'),
     });
-    console.log(receipt?.blockHash);
-    return receipt;
+    return result?.blockHash;
   } catch (error) {
     console.log(error);
     return error;

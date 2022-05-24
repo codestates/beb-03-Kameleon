@@ -63,23 +63,25 @@ const LiquidityInput = ({
   useEffect(() => {
     // name을 확인 후 초기값 설정
     // maxBalance, numberofDecimal
-    if (isKlay) {
-      getBalance({ address: window.klaytn.selectedAddress }).then((res) => {
-        setMaxBalance(Number((Number(res) / 1000000000000000000).toFixed(2)));
-      });
-      setNumberOfDecimal(2);
-    } else if (name !== undefined) {
-      callContract({
-        contractName: 'KStockToken',
-        contractAddress: kStockTokenAddressTable[name],
-        methodName: 'balanceOf',
-        parameters: [window.klaytn.selectedAddress],
-      }).then((res) =>
-        setMaxBalance(Number((res / 1000000000000000000).toFixed(6)))
-      );
-      setNumberOfDecimal(6);
+    if (window.klaytn.selectedAddress) {
+      if (isKlay) {
+        getBalance({ address: window.klaytn.selectedAddress }).then((res) => {
+          setMaxBalance(Number((Number(res) / 1000000000000000000).toFixed(2)));
+        });
+        setNumberOfDecimal(2);
+      } else if (name !== undefined) {
+        callContract({
+          contractName: 'KStockToken',
+          contractAddress: kStockTokenAddressTable[name],
+          methodName: 'balanceOf',
+          parameters: [window.klaytn.selectedAddress],
+        }).then((res) =>
+          setMaxBalance(Number((res / 1000000000000000000).toFixed(6)))
+        );
+        setNumberOfDecimal(6);
+      }
     }
-  }, [name]);
+  }, [name, window.klaytn.selectedAddress]);
 
   useEffect(() => {
     liftState(tokenBalance, isChange, isDecimalError);

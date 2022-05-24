@@ -8,7 +8,6 @@ import { useSelector, useDispatch } from 'react-redux';
 import { login, logout } from '../../store/user';
 
 interface RootState {
-  isOn: boolean;
   user: {
     isLogin: boolean;
     account: string;
