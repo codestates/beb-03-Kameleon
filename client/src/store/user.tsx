@@ -1,5 +1,14 @@
 import { createSlice } from '@reduxjs/toolkit';
 
+interface RootState {
+  user: {
+    isLogin: boolean;
+    account: string;
+  };
+}
+
+export const selectUser = (state: RootState) => state.user;
+
 const initialState = {
   isLogin: false as boolean,
   account: '' as string,
