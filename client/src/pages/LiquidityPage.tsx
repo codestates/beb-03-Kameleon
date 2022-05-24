@@ -1,15 +1,14 @@
-import React, { useEffect, useState, useCallback } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 import { useParams } from 'react-router-dom';
-import Caver from 'caver-js';
+import { useSelector, useDispatch } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
 import { faPlus, faArrowDown } from '@fortawesome/free-solid-svg-icons';
+import Caver from 'caver-js';
 
 import {
   LiquidityPageWrapper,
   TabStyle,
-  InputStyle,
-  DetailInfoStyle,
   IconWrapper,
   OutputWrapper,
 } from './styles/LiquidityPage.styles';
@@ -17,6 +16,8 @@ import {
 import LiquidityInput from '../components/Input/LiquidityInput';
 import LiquidityRemoveInput from '../components/Input/LiquidityRemoveInput';
 
+import useButton from '../hooks/useButton';
+import { login, logout } from '../store/user';
 import {
   sendContract,
   callContract,
@@ -29,6 +30,18 @@ import { exchangeAddressTable, kStockTokenAddressTable } from '../constants';
 const plus = faPlus as IconProp;
 const arrowDown = faArrowDown as IconProp;
 const caver = new Caver();
+
+interface RootState {
+  user: {
+    isLogin: boolean;
+  };
+}
+
+interface TokenType {
+  balance: string;
+  isChange: boolean;
+  isDecimalError: boolean;
+}
 
 const LiquidityPage = () => {
   const { id } = useParams();
@@ -46,18 +59,34 @@ const LiquidityPage = () => {
   const [ratio, setRatio] = useState<number>(0);
   const [output, setOutput] = useState<number>(0);
   const [output2, setOutput2] = useState<number>(0);
+  const [isApprove, setIsApprove] = useState<boolean>(false);
+  const [tokenA, setTokenA] = useState<TokenType>({
+    balance: '',
+    isChange: false,
+    isDecimalError: false,
+  });
+  const [tokenB, setTokenB] = useState<TokenType>({
+    balance: '',
+    isChange: false,
+    isDecimalError: false,
+  });
 
-  useEffect(() => {
-    if (id !== undefined) {
-      setName(id);
-    }
-  }, [id]);
+  const { addButton, removeButton, connectButton, approveButton } = useButton();
+
+  const dispatch = useDispatch();
+  const selectUser = (state: RootState) => state.user;
+  const user = useSelector(selectUser);
 
   const liftStateA = useCallback(
     (balance: string, isChange: boolean, isDecimalError: boolean) => {
       setBalanceA(balance);
       setIsChangeA(isChange);
       setIsDecimalErrorA(isDecimalError);
+      setTokenA({
+        balance,
+        isChange,
+        isDecimalError,
+      });
     },
     []
   );
@@ -67,6 +96,11 @@ const LiquidityPage = () => {
       setBalanceB(balance);
       setIsChangeB(isChange);
       setIsDecimalErrorB(isDecimalError);
+      setTokenB({
+        balance,
+        isChange,
+        isDecimalError,
+      });
     },
     []
   );
@@ -80,34 +114,26 @@ const LiquidityPage = () => {
     []
   );
 
-  const addButton = useCallback(async () => {
-    console.log(balanceA, balanceB);
-    console.log(window.klaytn.selectedAddress);
+  useEffect(() => {
+    const checkApprove = async () => {
+      const isApprove = await callIsApproved({ stockName: name });
 
-    const isApprove = await callIsApproved({ stockName: name });
+      if (!isApprove) {
+        setIsApprove(true);
+      } else {
+        setIsApprove(false);
+      }
+    };
 
-    if (!isApprove) {
-      await sendApprove({ stockName: name });
-    } else {
-      await sendContract({
-        contractName: 'Exchange',
-        contractAddress: exchangeAddressTable[name],
-        methodName: 'addLiquidity',
-        amount: balanceA, // klay
-        parameters: [caver.utils.toBN(Number(balanceB) * 1000000000000000000)],
-      });
+    checkApprove();
+  }, [name, user]);
+
+  useEffect(() => {
+    // paramsID 확인
+    if (id !== undefined) {
+      setName(id);
     }
-  }, [name, balanceA, balanceB]);
-
-  const removeButton = useCallback(() => {
-    sendContract({
-      contractName: 'Exchange',
-      contractAddress: exchangeAddressTable[name],
-      methodName: 'removeLiquidity',
-      parameters: [caver.utils.convertToPeb(balanceC.toString(), 'KLAY')],
-    });
-    console.log('remove', balanceC);
-  }, [balanceC]);
+  }, [id]);
 
   useEffect(() => {
     // KLAY 대 kSTOCKTOKEN 비율 확인
@@ -185,6 +211,9 @@ const LiquidityPage = () => {
     }
   }, [balanceC]);
 
+  console.log(tokenA);
+  console.log(tokenB);
+
   return (
     <LiquidityPageWrapper>
       <h2>Liquidity</h2>
@@ -210,7 +239,7 @@ const LiquidityPage = () => {
             <div>
               <LiquidityInput
                 liftState={liftStateA}
-                otherBalance={Number(balanceB)}
+                otherBalance={Number(tokenB.balance)}
                 otherChange={isChangeB}
                 isKlay={true}
                 ratio={ratio}
@@ -222,23 +251,30 @@ const LiquidityPage = () => {
               </IconWrapper>
               <LiquidityInput
                 liftState={liftStateB}
-                otherBalance={Number(balanceA)}
+                otherBalance={Number(tokenA.balance)}
                 otherChange={isChangeA}
                 isKlay={false}
                 ratio={ratio}
               >
                 INPUT
               </LiquidityInput>
-              <DetailInfoStyle>
-                <div>
-                  <dt>유동성 규모</dt>
-                  <dd>000000</dd>
-                </div>
-              </DetailInfoStyle>
             </div>
-            <button type="button" onClick={addButton}>
-              Add
-            </button>
+            {!user.isLogin ? (
+              <button type="button" onClick={connectButton}>
+                Connect
+              </button>
+            ) : isApprove ? (
+              <button type="button" onClick={() => approveButton(name)}>
+                Approve
+              </button>
+            ) : (
+              <button
+                type="button"
+                onClick={() => addButton(name, balanceA, balanceB)}
+              >
+                Add
+              </button>
+            )}
           </>
         ) : (
           <>
@@ -256,9 +292,18 @@ const LiquidityPage = () => {
                 </div>
               </OutputWrapper>
             </div>
-            <button type="button" onClick={removeButton}>
-              Remove
-            </button>
+            {!user.isLogin ? (
+              <button type="button" onClick={connectButton}>
+                Connect
+              </button>
+            ) : (
+              <button
+                type="button"
+                onClick={() => removeButton(name, balanceC)}
+              >
+                Remove
+              </button>
+            )}
           </>
         )}
       </form>

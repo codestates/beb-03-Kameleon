@@ -27,7 +27,7 @@ interface LayoutProps {
 const LiquidityRemoveInput = ({ children, liftState }: LayoutProps) => {
   const { id } = useParams();
   const [name, setName] = useState<string>('');
-  const [numberOfDecimal, setNumberOfDecimal] = useState<number>(0);
+  const [numberOfDecimal, setNumberOfDecimal] = useState<number>(6);
   const [maxBalance, setMaxBalance] = useState<number>(0);
   const {
     tokenBalance,
