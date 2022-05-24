@@ -35,6 +35,7 @@ interface TokenListProps {
 export interface PoolListProps {
   id: number;
   name: string;
+  lpToken: string;
   balance: string;
 }
 
@@ -156,6 +157,10 @@ const MyPage = () => {
           myTempPool.push({
             id: index,
             name: item.name,
+            lpToken: caver.utils.convertFromPeb(
+              item.lpAmount.slice(0, -15),
+              'kpeb'
+            ), // 소숫점 3개 버림
             balance: `${(
               (Number(poolKlay) * ratio) /
               1000000000000000000
@@ -210,8 +215,8 @@ const MyPage = () => {
         <MyPageList>
           <div>
             <div>Pool ID</div>
+            <div>LPToken</div>
             <div>Balance</div>
-            <div>Value(KRW)</div>
             <div>ROI</div>
           </div>
           {myPoolList

@@ -166,4 +166,24 @@ export const IconWrapper = styled.div`
   color: var(--blue);
 `;
 
+export const OutputWrapper = styled.div`
+  padding: 1rem 1.5rem;
+  border-radius: 1rem;
+  font-weight: 600;
+  color: var(--white);
+  background-color: var(--green);
+
+  & > label {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--dark-green);
+  }
+
+  & > div {
+    display: flex;
+    align-items: center;
+    height: 2rem;
+  }
+`;
+
 export { LiquidityPageWrapper, InputStyle, DetailInfoStyle, TabStyle };
