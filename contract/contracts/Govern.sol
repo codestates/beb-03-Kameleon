@@ -164,6 +164,20 @@ contract Govern is Ownable {
           );
     }
 
+     function getPollState(uint pollIndex_) public view returns(returnPoll memory){
+      returnPoll memory returnPollState; 
+      returnPollState.id = pollIndex_;
+      returnPollState.title = polls[pollIndex_].title;
+      returnPollState.content = polls[pollIndex_].content;
+      returnPollState.agree = polls[pollIndex_].agree;
+      returnPollState.disagree = polls[pollIndex_].disagree;
+      returnPollState.creator = polls[pollIndex_].creator;
+      returnPollState.createdTime = polls[pollIndex_].createdTime;
+      returnPollState.endTime = polls[pollIndex_].endTime;
+      returnPollState.expired = polls[pollIndex_].expired;
+      return returnPollState;
+    }
+
     function pollList() public view returns(returnPoll[] memory){
       returnPoll[] memory returnPollList = new returnPoll[](pollIndex);
       for(uint i = 0 ; i < pollIndex; i++){

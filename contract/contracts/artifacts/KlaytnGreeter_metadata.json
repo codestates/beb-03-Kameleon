@@ -1,15 +1,18 @@
 {
 	"compiler": {
-		"version": "0.5.17+commit.d19bba13"
+		"version": "0.5.6+commit.b259423e"
 	},
 	"language": "Solidity",
 	"output": {
 		"abi": [
 			{
+				"constant": false,
 				"inputs": [],
-				"payable": false,
-				"stateMutability": "nonpayable",
-				"type": "constructor"
+				"name": "kill",
+				"outputs": [],
+				"payable": true,
+				"stateMutability": "payable",
+				"type": "function"
 			},
 			{
 				"constant": true,
@@ -17,7 +20,6 @@
 				"name": "greet",
 				"outputs": [
 					{
-						"internalType": "string",
 						"name": "",
 						"type": "string"
 					}
@@ -27,13 +29,10 @@
 				"type": "function"
 			},
 			{
-				"constant": false,
 				"inputs": [],
-				"name": "kill",
-				"outputs": [],
-				"payable": true,
-				"stateMutability": "payable",
-				"type": "function"
+				"payable": false,
+				"stateMutability": "nonpayable",
+				"type": "constructor"
 			}
 		],
 		"devdoc": {
@@ -47,7 +46,7 @@
 		"compilationTarget": {
 			"contracts/KlaytnGreeter.sol": "KlaytnGreeter"
 		},
-		"evmVersion": "petersburg",
+		"evmVersion": "byzantium",
 		"libraries": {},
 		"optimizer": {
 			"enabled": false,
@@ -59,8 +58,7 @@
 		"contracts/KlaytnGreeter.sol": {
 			"keccak256": "0x24d68a1892e7421bfa9a25f67318f7c2508f30fab48d38e837232dd69fcabd0c",
 			"urls": [
-				"bzz-raw://d0050c13007f7ddaaf85def65896eebaff54c7c11b49d1baa5985cac86fa6a16",
-				"dweb:/ipfs/QmRPT6ipve2hxJXmL6aJ71RtfkuqS3k3d4vveDSX5NxH1i"
+				"bzzr://79a449799b7167cbc46924f10688b268f3dc437b99e52ed56449410629e45d71"
 			]
 		}
 	},

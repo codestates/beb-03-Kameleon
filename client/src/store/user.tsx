@@ -10,16 +10,22 @@ export const userSlice = createSlice({
   name: 'user',
   initialState,
   reducers: {
-    login: (state, action) => {
+    login: (
+      state: { isLogin: boolean; account: string },
+      action: { payload: string }
+    ) => {
       state.isLogin = true;
       state.account = action.payload;
     },
-    logout: (state) => {
+    logout: (state: { isLogin: boolean; account: string }) => {
       state.isLogin = false;
       state.account = '';
     },
-    getKlayPrice: (state, action) => {
-      state.klayPrice = action.payload;
+    getKlayPrice: (
+      state: { klayPrice: number },
+      action: { payload: string }
+    ) => {
+      state.klayPrice = +action.payload;
     },
   },
 });

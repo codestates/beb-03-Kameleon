@@ -21,6 +21,8 @@ import {
 } from './../constants';
 
 import Caver from 'caver-js';
+import MyPagePoolItem from '../components/MyPage/MyPagePoolItem';
+import MyPageGovern from '../components/MyPage/MyPageGovern';
 const caver = new Caver();
 
 interface TokenListProps {
@@ -30,7 +32,7 @@ interface TokenListProps {
   value: number;
 }
 
-interface PoolListProps {
+export interface PoolListProps {
   id: number;
   name: string;
   lpToken: string;
@@ -219,13 +221,8 @@ const MyPage = () => {
           </div>
           {myPoolList
             .sort((a, b) => a.id - b.id)
-            .map((el) => (
-              <MyPageItem key={el.id}>
-                <div>{el.name}</div>
-                <div className="main__oracle">{el.lpToken} LPT</div>
-                <div>{el.balance}</div>
-                <div>12.34%</div>
-              </MyPageItem>
+            .map(({ id, ...el }) => (
+              <MyPagePoolItem key={id} id={id} {...el} />
             ))}
         </MyPageList>
         <h2>Govern</h2>
@@ -234,16 +231,7 @@ const MyPage = () => {
             <div>Gover ID</div>
             <div>End Time</div>
           </div>
-          {myGovernList.map((el) => (
-            <MyPageItem>
-              <div>{el.name}</div>
-              <MyPageBar yes={el.yes} no={el.no}>
-                <div></div>
-                <div></div>
-              </MyPageBar>
-              <div>2022-05-20</div>
-            </MyPageItem>
-          ))}
+          <MyPageGovern />
         </MyPageList>
       </MyPageWrapper>
     </div>

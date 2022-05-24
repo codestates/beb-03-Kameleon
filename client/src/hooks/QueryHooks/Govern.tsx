@@ -1,6 +1,10 @@
 import { useQuery } from 'react-query';
 import { callContract } from '../../utils/KAS';
 import { abiTable } from '../../constants';
+import {
+  getMethodReturnStructType,
+  getParsedDataFromUsingMethodType,
+} from '../../utils/abiTypeFilter';
 
 type inputType = {
   key: string;
@@ -28,28 +32,24 @@ const GovernQueryHooks = ({ key, refetchInterval }: inputType) => {
         // });
         const callResult = await callContract({
           contractName: 'Govern',
-          contractAddress: '0x105FFb98CAA6436A753711D05FB2252Fc7d76620',
+          contractAddress: '0x27a6bC74934F7f57350eDF7eDacC59C9eE60F134',
           methodName: 'pollList',
         });
-        console.log('callResult', callResult);
         const totalSupplyResult = await callContract({
           contractName: 'Govern',
-          contractAddress: '0x105FFb98CAA6436A753711D05FB2252Fc7d76620',
+          contractAddress: '0x27a6bC74934F7f57350eDF7eDacC59C9eE60F134',
           methodName: 'getTotalSupply',
         });
-        console.log(totalSupplyResult);
-        const pollListTypeArray = abiTable['Govern'].filter(
-          (v) => v['name'] === 'pollList'
-        )[0]['outputs'][0]['components'];
-
+        const pollListTypeArray = getMethodReturnStructType({
+          contractName: 'Govern',
+          methodName: 'pollList',
+        });
         const objResult = callResult.map((v: string | boolean[]) => {
-          const temp: { [x: string]: string | boolean } = {};
-          pollListTypeArray.forEach(
-            (value: { [x: string]: string }, idx: number) => {
-              temp[value['name']] = v[idx];
-            }
-          );
-          temp['totalSupply'] = totalSupplyResult;
+          const temp = getParsedDataFromUsingMethodType({
+            type: pollListTypeArray,
+            value: v,
+            totalSupply: totalSupplyResult,
+          });
           return temp;
         });
         console.log(objResult);
@@ -76,18 +76,19 @@ const WithdrawableBalanceQueryHooks = ({
   pollId,
   refetchInterval,
 }: WithdrawableBalanceType) => {
-  return useQuery<any, Error>(
-    [key],
-    async () => {
+  return useQuery<number, Error>(
+    ['WithdrawableBalanceQueryHooks', key],
+    async (): Promise<number> => {
       try {
         const callResult = await callContract({
           contractName: 'Govern',
-          contractAddress: '0x105FFb98CAA6436A753711D05FB2252Fc7d76620',
+          contractAddress: '0x27a6bC74934F7f57350eDF7eDacC59C9eE60F134',
           methodName: 'withdrawableBalance',
           parameters: [+pollId],
+          kaikas: true,
         });
         console.log('withdrawableBalance', callResult, pollId);
-        return callResult;
+        return callResult / 10 ** 18;
       } catch (error) {
         console.log(error);
         return -1;
@@ -99,4 +100,38 @@ const WithdrawableBalanceQueryHooks = ({
   );
 };
 
-export { GovernQueryHooks, WithdrawableBalanceQueryHooks };
+const TotalStakedBalanceHooks = ({
+  key,
+  refetchInterval = undefined,
+}: {
+  key: number | string;
+  refetchInterval?: number | undefined;
+}) => {
+  return useQuery<number, Error>(
+    ['totalStakedBalanceHooks', key],
+    async (): Promise<number> => {
+      try {
+        const governAddress = '0x27a6bC74934F7f57350eDF7eDacC59C9eE60F134';
+        const result = await callContract({
+          contractName: 'Kameleon',
+          contractAddress: '0xd0a62633f9e77a5fe27ed733c4938fb38cfbeea1',
+          methodName: 'balanceOf',
+          parameters: [governAddress],
+        });
+        return +result / 10 ** 18;
+      } catch (error) {
+        console.log(error);
+        return 0;
+      }
+    },
+    {
+      refetchInterval,
+    }
+  );
+};
+
+export {
+  GovernQueryHooks,
+  WithdrawableBalanceQueryHooks,
+  TotalStakedBalanceHooks,
+};
