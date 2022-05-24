@@ -1,15 +1,14 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import { useParams } from 'react-router-dom';
-import Caver from 'caver-js';
+import { useSelector } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
 import { faPlus, faArrowDown } from '@fortawesome/free-solid-svg-icons';
+import Caver from 'caver-js';
 
 import {
   LiquidityPageWrapper,
   TabStyle,
-  InputStyle,
-  DetailInfoStyle,
   IconWrapper,
   OutputWrapper,
 } from './styles/LiquidityPage.styles';
@@ -17,97 +16,120 @@ import {
 import LiquidityInput from '../components/Input/LiquidityInput';
 import LiquidityRemoveInput from '../components/Input/LiquidityRemoveInput';
 
-import {
-  sendContract,
-  callContract,
-  callIsApproved,
-  sendApprove,
-  getBalance,
-} from '../utils/KAS';
+import useButton from '../hooks/useButton';
+import { callContract, callIsApproved, getBalance } from '../utils/KAS';
 import { exchangeAddressTable, kStockTokenAddressTable } from '../constants';
 
 const plus = faPlus as IconProp;
 const arrowDown = faArrowDown as IconProp;
 const caver = new Caver();
 
+interface RootState {
+  user: {
+    isLogin: boolean;
+  };
+}
+
+interface TokenType {
+  balance: string;
+  isChange: boolean;
+  isDecimalError: boolean;
+}
+
+interface RatioType {
+  klayRatio: number;
+  kStockRatio: number;
+}
+
 const LiquidityPage = () => {
   const { id } = useParams();
-  const [tab, setTab] = useState('deposit');
-  const [balanceA, setBalanceA] = useState<string>('');
-  const [balanceB, setBalanceB] = useState<string>('');
-  const [balanceC, setBalanceC] = useState<number>(0);
-  const [isChangeA, setIsChangeA] = useState<boolean>(false);
-  const [isChangeB, setIsChangeB] = useState<boolean>(false);
-  const [isChangeC, setIsChangeC] = useState<boolean>(false);
-  const [isDecimalErrorA, setIsDecimalErrorA] = useState<boolean>(false);
-  const [isDecimalErrorB, setIsDecimalErrorB] = useState<boolean>(false);
-  const [isDecimalErrorC, setIsDecimalErrorC] = useState<boolean>(false);
+  const [tab, setTab] = useState<string>('deposit');
   const [name, setName] = useState<string>('');
-  const [ratio, setRatio] = useState<number>(0);
-  const [output, setOutput] = useState<number>(0);
-  const [output2, setOutput2] = useState<number>(0);
+  const [isApprove, setIsApprove] = useState<boolean>(false);
+  const [addRatio, setAddRatio] = useState<number>(0);
+  const [removeRatio, setRemoveRatio] = useState<RatioType>({
+    klayRatio: 0,
+    kStockRatio: 0,
+  });
+  // const [output, setOutput] = useState<number>(0);
+  // const [output2, setOutput2] = useState<number>(0);
+  const [klayToken, setKlayToken] = useState<TokenType>({
+    balance: '',
+    isChange: false,
+    isDecimalError: false,
+  });
+  const [kStockToken, setKStockToken] = useState<TokenType>({
+    balance: '',
+    isChange: false,
+    isDecimalError: false,
+  });
+  const [lpToken, setLPToken] = useState<TokenType>({
+    balance: '',
+    isChange: false,
+    isDecimalError: false,
+  });
+
+  const { addButton, removeButton, connectButton, approveButton } = useButton();
+
+  const selectUser = (state: RootState) => state.user;
+  const user = useSelector(selectUser);
+
+  const liftKlayToken = useCallback(
+    (balance: string, isChange: boolean, isDecimalError: boolean) => {
+      setKlayToken({
+        balance,
+        isChange,
+        isDecimalError,
+      });
+    },
+    []
+  );
+
+  const liftKStockToken = useCallback(
+    (balance: string, isChange: boolean, isDecimalError: boolean) => {
+      setKStockToken({
+        balance,
+        isChange,
+        isDecimalError,
+      });
+    },
+    []
+  );
+
+  const liftLPToken = useCallback(
+    (balance: string, isChange: boolean, isDecimalError: boolean) => {
+      setLPToken({
+        balance,
+        isChange,
+        isDecimalError,
+      });
+    },
+    []
+  );
 
   useEffect(() => {
+    // paramsID 확인
     if (id !== undefined) {
       setName(id);
     }
   }, [id]);
 
-  const liftStateA = useCallback(
-    (balance: string, isChange: boolean, isDecimalError: boolean) => {
-      setBalanceA(balance);
-      setIsChangeA(isChange);
-      setIsDecimalErrorA(isDecimalError);
-    },
-    []
-  );
+  useEffect(() => {
+    // Approve 유무 확인
+    const checkApprove = async () => {
+      const isApprove = await callIsApproved({ stockName: name });
 
-  const liftStateB = useCallback(
-    (balance: string, isChange: boolean, isDecimalError: boolean) => {
-      setBalanceB(balance);
-      setIsChangeB(isChange);
-      setIsDecimalErrorB(isDecimalError);
-    },
-    []
-  );
+      if (!isApprove) {
+        setIsApprove(true);
+      } else {
+        setIsApprove(false);
+      }
+    };
 
-  const liftStateC = useCallback(
-    (balance: string, isChange: boolean, isDecimalError: boolean) => {
-      setBalanceC(Number(balance));
-      setIsChangeC(isChange);
-      setIsDecimalErrorC(isDecimalError);
-    },
-    []
-  );
-
-  const addButton = useCallback(async () => {
-    console.log(balanceA, balanceB);
-    console.log(window.klaytn.selectedAddress);
-
-    const isApprove = await callIsApproved({ stockName: name });
-
-    if (!isApprove) {
-      await sendApprove({ stockName: name });
-    } else {
-      await sendContract({
-        contractName: 'Exchange',
-        contractAddress: exchangeAddressTable[name],
-        methodName: 'addLiquidity',
-        amount: balanceA, // klay
-        parameters: [caver.utils.toBN(Number(balanceB) * 1000000000000000000)],
-      });
+    if (window.klaytn.selectedAddress) {
+      checkApprove();
     }
-  }, [name, balanceA, balanceB]);
-
-  const removeButton = useCallback(() => {
-    sendContract({
-      contractName: 'Exchange',
-      contractAddress: exchangeAddressTable[name],
-      methodName: 'removeLiquidity',
-      parameters: [caver.utils.convertToPeb(balanceC.toString(), 'KLAY')],
-    });
-    console.log('remove', balanceC);
-  }, [balanceC]);
+  }, [name, user, window.klaytn.selectedAddres]);
 
   useEffect(() => {
     // KLAY 대 kSTOCKTOKEN 비율 확인
@@ -118,13 +140,13 @@ const LiquidityPage = () => {
         methodName: 'getMinimumTokenAmountToAddLiquidity',
         parameters: [caver.utils.toBN(1000000000)],
       });
-      setRatio(result / 1000000000);
+      setAddRatio(result / 1000000000);
     };
 
     if (name !== '') {
       callAmount();
     }
-  }, [name, balanceA]);
+  }, [name, klayToken]);
 
   useEffect(() => {
     const calculateOutput = async (kStockName: string, lpAmount: number) => {
@@ -169,21 +191,21 @@ const LiquidityPage = () => {
       Promise.all(promiseTemp).then(() => {
         const ratio =
           (Number(lpAmount) * 1000000000000000000) / Number(totalLP);
-        setOutput(
-          Number(((Number(poolKlay) * ratio) / 1000000000000000000).toFixed(6))
-        );
-        setOutput2(
-          Number(
+        setRemoveRatio({
+          klayRatio: Number(
+            ((Number(poolKlay) * ratio) / 1000000000000000000).toFixed(6)
+          ),
+          kStockRatio: Number(
             ((Number(poolKStock) * ratio) / 1000000000000000000).toFixed(6)
-          )
-        );
+          ),
+        });
       });
     };
 
-    if (balanceC > 0) {
-      calculateOutput(name, balanceC);
+    if (Number(lpToken.balance) > 0) {
+      calculateOutput(name, Number(lpToken.balance));
     }
-  }, [balanceC]);
+  }, [lpToken.balance]);
 
   return (
     <LiquidityPageWrapper>
@@ -209,11 +231,11 @@ const LiquidityPage = () => {
           <>
             <div>
               <LiquidityInput
-                liftState={liftStateA}
-                otherBalance={Number(balanceB)}
-                otherChange={isChangeB}
+                liftState={liftKlayToken}
+                otherBalance={Number(kStockToken.balance)}
+                otherChange={kStockToken.isChange}
                 isKlay={true}
-                ratio={ratio}
+                ratio={addRatio}
               >
                 INPUT
               </LiquidityInput>
@@ -221,29 +243,46 @@ const LiquidityPage = () => {
                 <FontAwesomeIcon icon={plus} className="icon" />
               </IconWrapper>
               <LiquidityInput
-                liftState={liftStateB}
-                otherBalance={Number(balanceA)}
-                otherChange={isChangeA}
+                liftState={liftKStockToken}
+                otherBalance={Number(klayToken.balance)}
+                otherChange={klayToken.isChange}
                 isKlay={false}
-                ratio={ratio}
+                ratio={addRatio}
               >
                 INPUT
               </LiquidityInput>
-              <DetailInfoStyle>
-                <div>
-                  <dt>유동성 규모</dt>
-                  <dd>000000</dd>
-                </div>
-              </DetailInfoStyle>
             </div>
-            <button type="button" onClick={addButton}>
-              Add
-            </button>
+            {!user.isLogin ? (
+              <button type="button" onClick={connectButton}>
+                Connect
+              </button>
+            ) : isApprove ? (
+              <button
+                type="button"
+                onClick={async () => {
+                  const result = await approveButton(name);
+                  if (result instanceof Error === false) {
+                    setIsApprove(false);
+                  }
+                }}
+              >
+                Approve
+              </button>
+            ) : (
+              <button
+                type="button"
+                onClick={() =>
+                  addButton(name, klayToken.balance, kStockToken.balance)
+                }
+              >
+                Add
+              </button>
+            )}
           </>
         ) : (
           <>
             <div>
-              <LiquidityRemoveInput liftState={liftStateC}>
+              <LiquidityRemoveInput liftState={liftLPToken}>
                 INPUT
               </LiquidityRemoveInput>
               <IconWrapper>
@@ -252,13 +291,23 @@ const LiquidityPage = () => {
               <OutputWrapper>
                 <label>OUTPUT</label>
                 <div>
-                  {output} KLAY + {output2} {name}
+                  {removeRatio.klayRatio} KLAY + {removeRatio.kStockRatio}{' '}
+                  {name}
                 </div>
               </OutputWrapper>
             </div>
-            <button type="button" onClick={removeButton}>
-              Remove
-            </button>
+            {!user.isLogin ? (
+              <button type="button" onClick={connectButton}>
+                Connect
+              </button>
+            ) : (
+              <button
+                type="button"
+                onClick={() => removeButton(name, lpToken.balance)}
+              >
+                Remove
+              </button>
+            )}
           </>
         )}
       </form>

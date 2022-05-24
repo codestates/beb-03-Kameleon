@@ -91,7 +91,7 @@
 		"compilationTarget": {
 			"contracts/Ownable.sol": "Ownable"
 		},
-		"evmVersion": "petersburg",
+		"evmVersion": "byzantium",
 		"libraries": {},
 		"optimizer": {
 			"enabled": false,
