@@ -1,5 +1,18 @@
 import React, { useCallback, useState } from 'react';
 
+export interface IUseInput {
+  tokenBalance: string;
+  isFocus: boolean;
+  isBlankError: boolean;
+  isDecimalError: boolean;
+  isChange: boolean;
+  setIsChange: React.Dispatch<React.SetStateAction<boolean>>;
+  setTokenBalance: React.Dispatch<React.SetStateAction<string>>;
+  setKey: React.Dispatch<React.SetStateAction<string>>;
+  setIsFocus: React.Dispatch<React.SetStateAction<boolean>>;
+  changeInput: any;
+}
+
 const useInput = (decimal: number) => {
   const [isFocus, setIsFocus] = useState<boolean>(false);
   const [isBlankError, setIsBlankError] = useState<boolean>(false);
