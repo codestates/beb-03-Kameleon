@@ -10,9 +10,8 @@ import {
 import Modal from '../components/modal/Modal';
 import useModal from '../hooks/useModal';
 
-import { createGovernList } from '../utils/dummyCreator';
 import Poll from '../components/Govern/Poll';
-import GovernQueryHooks from '../hooks/QueryHooks/Govern';
+import { GovernQueryHooks } from '../hooks/QueryHooks/Govern';
 
 const GovernPage = () => {
   const { isOpen, toggle } = useModal();
@@ -25,8 +24,7 @@ const GovernPage = () => {
   } = GovernQueryHooks({
     key: 'test',
   });
-  // const governList = createGovernList(10);
-  console.log(governList);
+
   const modalContent = (
     <GovernPageModalContent>
       <div>
@@ -73,8 +71,8 @@ const GovernPage = () => {
       </GovernPageGovernList>
       <h2>Polls</h2>
       <GovernPagePollList>
-        {governList.map((el: any, idx: number) => {
-          return <Poll key={idx} {...el} />;
+        {governList.map(({ id, ...el }: any, idx: number) => {
+          return <Poll key={idx} pollId={id} {...el} />;
         })}
       </GovernPagePollList>
       <Modal

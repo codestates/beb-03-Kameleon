@@ -19,6 +19,7 @@ contract Govern is Ownable {
     uint _pollCreationFee;
 
     struct returnPoll{
+        uint id;
         string title;
         string content;
         uint agree;
@@ -146,7 +147,7 @@ contract Govern is Ownable {
     }
 
     // 카멜레온 토큰 총 발행량
-    function getTotalSupply () internal view returns (uint){
+    function getTotalSupply () public view returns (uint){
         return KameleonToken.totalSupply();
     }
     
@@ -164,31 +165,44 @@ contract Govern is Ownable {
     }
 
     function pollList() public view returns(returnPoll[] memory){
-      Poll[] memory _pollList = new Poll[](pollIndex);
-      uint newPollIndex = 0;
-      for(uint i = pollIndex-1; i >= 0; i--){
-          if(now < polls[i].endTime){
-              if(polls[i].expired == false){
-                _pollList[newPollIndex] = polls[i];
-                newPollIndex++;
-              }
-          }
-          else{
-              break;
-          }
-      }
-
-      returnPoll[] memory returnPollList = new returnPoll[](newPollIndex);
-      for(uint i = 0 ; i < newPollIndex; i++){
-          returnPollList[i].title = _pollList[i].title;
-          returnPollList[i].content = _pollList[i].content;
-          returnPollList[i].agree = _pollList[i].agree;
-          returnPollList[i].disagree = _pollList[i].disagree;
-          returnPollList[i].creator = _pollList[i].creator;
-          returnPollList[i].createdTime = _pollList[i].createdTime;
-          returnPollList[i].endTime = _pollList[i].endTime;
-          returnPollList[i].expired = _pollList[i].expired;
+      returnPoll[] memory returnPollList = new returnPoll[](pollIndex);
+      for(uint i = 0 ; i < pollIndex; i++){
+          returnPollList[pollIndex-1-i].id = i;
+          returnPollList[pollIndex-1-i].title = polls[i].title;
+          returnPollList[pollIndex-1-i].content = polls[i].content;
+          returnPollList[pollIndex-1-i].agree = polls[i].agree;
+          returnPollList[pollIndex-1-i].disagree = polls[i].disagree;
+          returnPollList[pollIndex-1-i].creator = polls[i].creator;
+          returnPollList[pollIndex-1-i].createdTime = polls[i].createdTime;
+          returnPollList[pollIndex-1-i].endTime = polls[i].endTime;
+          returnPollList[pollIndex-1-i].expired = polls[i].expired;
       }
       return returnPollList;
+    }
+
+
+    function pollListPagenation(uint pollIndex_) public view returns(returnPoll[] memory){
+      returnPoll[] memory returnPollList = new returnPoll[](10);
+      uint idx = 0;
+      for(uint i = pollIndex_ ; i < pollIndex; i++){
+          if(idx >= 10){
+              break;
+          }
+          returnPollList[idx].id = i;
+          returnPollList[idx].title = polls[i].title;
+          returnPollList[idx].content = polls[i].content;
+          returnPollList[idx].agree = polls[i].agree;
+          returnPollList[idx].disagree = polls[i].disagree;
+          returnPollList[idx].creator = polls[i].creator;
+          returnPollList[idx].createdTime = polls[i].createdTime;
+          returnPollList[idx].endTime = polls[i].endTime;
+          returnPollList[idx].expired = polls[i].expired;
+          idx++;
+      }
+      returnPoll[] memory newReturnPollList = new returnPoll[](idx);
+      for(uint i = 0 ; i < idx;i++){
+          newReturnPollList[idx-i-1] = returnPollList[i];
+      }
+      return newReturnPollList;
     }
 }

@@ -52,19 +52,19 @@
 		},
 		"gasEstimates": {
 			"creation": {
-				"codeDepositCost": "3270800",
-				"executionCost": "8641",
-				"totalCost": "3279441"
+				"codeDepositCost": "3381200",
+				"executionCost": "8777",
+				"totalCost": "3389977"
 			},
 			"external": {
 				"createExchange(address)": "infinite",
-				"exchangeCount()": "472",
-				"exchangeList(uint256)": "644",
+				"exchangeCount()": "477",
+				"exchangeList(uint256)": "649",
 				"getAllExchangeList()": "infinite",
-				"getExchange(address)": "645",
-				"getExchangeCount()": "458",
-				"getExchangeList(uint256)": "692",
-				"tokenToExchange(address)": "628"
+				"getExchange(address)": "650",
+				"getExchangeCount()": "463",
+				"getExchangeList(uint256)": "697",
+				"tokenToExchange(address)": "633"
 			}
 		},
 		"methodIdentifiers": {

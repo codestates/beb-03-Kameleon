@@ -1,11 +1,10 @@
-import { configureStore } from '@reduxjs/toolkit';
-import userReducer from './user';
-// import tagReducer from './tag';
-// import selectedTagReducer from './selectedTag';
-import storage from 'redux-persist/lib/storage';
 import { combineReducers } from 'redux';
+import { configureStore } from '@reduxjs/toolkit';
 import { persistReducer } from 'redux-persist';
+import storage from 'redux-persist/lib/storage';
 import thunk from 'redux-thunk';
+
+import userReducer from './user';
 
 const reducers = combineReducers({
   user: userReducer,

@@ -80,6 +80,11 @@ export const GovernPageGovernList = styled.div`
 export const GovernPagePollList = styled.div`
   display: flex;
   flex-wrap: wrap;
+  & > div:hover {
+    cursor: pointer;
+    opacity: 0.8;
+    border: solid 2px #66adff;
+  }
 `;
 
 export const GovernPagePollItem = styled.div<{ yes: number; no: number }>`
@@ -90,6 +95,9 @@ export const GovernPagePollItem = styled.div<{ yes: number; no: number }>`
   border-radius: 0.5rem;
   background-color: var(--dark-green);
   opacity: ${(props) => (props.yes + props.no < 20 ? '' : '0.7')};
+
+  transition: border-color 0.2s;
+  border: 2px solid transparent;
 
   & > section > div {
     font-weight: 600;
@@ -109,12 +117,20 @@ export const GovernPagePollItem = styled.div<{ yes: number; no: number }>`
     color: var(--deep-green);
   }
 
+  & ::hover {
+    border: solid 1px #66adff;
+  }
+
   @media (max-width: 1023px) {
     width: 100%;
   }
 `;
 
-export const GovernPageBar = styled.div<{ yes: number; no: number }>`
+export const GovernPageBar = styled.div<{
+  yes: number;
+  no: number;
+  totalSupply: string;
+}>`
   display: flex;
   min-width: 100%;
   height: 1rem;
@@ -123,7 +139,7 @@ export const GovernPageBar = styled.div<{ yes: number; no: number }>`
   & > div {
     &:first-of-type {
       width: ${(props) => {
-        const calcPercent = (props.yes / (props.yes + props.no)) * 100;
+        const calcPercent = (props.yes / +props.totalSupply) * 100;
         return `${calcPercent}%`;
       }};
       background-color: var(--blue);
@@ -131,11 +147,38 @@ export const GovernPageBar = styled.div<{ yes: number; no: number }>`
 
     &:last-of-type {
       width: ${(props) => {
-        const calcPercent = (props.no / (props.yes + props.no)) * 100;
+        const calcPercent = (props.no / +props.totalSupply) * 100;
         return `${calcPercent}%`;
       }};
       background-color: var(--red);
     }
+  }
+`;
+
+export const GoverQuorum = styled.div<{ percentage: string }>`
+  position: relative;
+  font-size: 12px;
+  height: 25px;
+
+  & > div {
+    left: ${(props) => `${props.percentage}%`};
+    position: absolute;
+    top: 0;
+    color: white;
+    font-size: inherit;
+    font-weight: 600;
+    height: 25px;
+    transform: translate(-50%);
+  }
+
+  & > div ::after {
+    content: '';
+    width: 2px;
+    height: 8px;
+    background: white;
+    position: absolute;
+    left: 50%;
+    bottom: 0;
   }
 `;
 

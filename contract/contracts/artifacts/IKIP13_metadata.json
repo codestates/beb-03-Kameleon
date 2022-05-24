@@ -41,7 +41,7 @@
 		"compilationTarget": {
 			"contracts/IKIP13.sol": "IKIP13"
 		},
-		"evmVersion": "petersburg",
+		"evmVersion": "byzantium",
 		"libraries": {},
 		"optimizer": {
 			"enabled": false,
