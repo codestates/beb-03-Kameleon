@@ -1,27 +1,55 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { HeaderStyle, LogoStyle, NavStyle } from './Layout.style';
 import logoImage from '../../assets/images/logo.png';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars, faXmark, faWallet } from '@fortawesome/free-solid-svg-icons';
+import { useSelector, useDispatch } from 'react-redux';
+import { login, logout } from '../../store/user';
+
+interface RootState {
+  isOn: boolean;
+  user: {
+    isLogin: boolean;
+    account: string;
+  };
+}
 
 const Header = () => {
-  const [isLogin, setIsLogin] = useState<boolean>(false);
-  const [account, setAccount] = useState<string>('');
   const [isNav, setIsNav] = useState<boolean>(false);
+  const dispatch = useDispatch();
+  const selectUser = (state: RootState) => state.user;
+  const user = useSelector(selectUser);
 
   const onConnectWallet = async () => {
     if (typeof window.klaytn !== 'undefined') {
       if (window.klaytn.isKaikas) {
         const accounts = await window.klaytn.enable();
-        setAccount(accounts[0]);
-
-        setIsLogin(true);
+        dispatch(login(accounts[0]));
+      } else {
+        dispatch(logout());
       }
     } else {
+      dispatch(logout());
       alert('Kaikas 설치하시기 바랍니다.');
     }
   };
+
+  useEffect(() => {
+    const checkUnlocked = async () => {
+      const isUnlokced = await window.klaytn._kaikas.isUnlocked();
+      if (!isUnlokced) {
+        dispatch(logout());
+      } else {
+        const address = await window.klaytn.selectedAddress;
+        if (address !== user.account) {
+          dispatch(logout());
+        }
+      }
+    };
+
+    checkUnlocked();
+  }, []);
 
   return (
     <HeaderStyle>
@@ -49,7 +77,7 @@ const Header = () => {
               <li>
                 <Link to="/govern">Govern</Link>
               </li>
-              {isLogin ? (
+              {user.isLogin ? (
                 <li>
                   <Link to="/mypage">MyPage</Link>
                 </li>
@@ -61,7 +89,7 @@ const Header = () => {
               <FontAwesomeIcon icon={faXmark} />
             </span>
             <span className="utils">
-              {!isLogin ? (
+              {!user.isLogin ? (
                 <button type="button" onClick={onConnectWallet}>
                   <em>
                     <FontAwesomeIcon icon={faWallet} />
@@ -69,7 +97,7 @@ const Header = () => {
                   Connect
                 </button>
               ) : (
-                <button type="button">{account.slice(0, 5)}...</button>
+                <button type="button">{user.account.slice(0, 5)}...</button>
               )}
             </span>
           </div>
