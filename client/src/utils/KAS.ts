@@ -46,11 +46,13 @@ const callContract = async ({
   contractAddress,
   methodName,
   parameters = [],
+  kaikas = false,
 }: {
   contractName: string;
   contractAddress: string;
   methodName: string;
-  parameters?: Array<any>;
+  parameters?: Array<string | number>;
+  kaikas?: boolean;
 }) => {
   try {
     if (
@@ -59,19 +61,31 @@ const callContract = async ({
       methodName === undefined
     )
       throw 'Not enough arguments';
-    // console.log(
-    //   contractName,
-    //   contractAddress,
-    //   methodName,
-    //   abiTable[contractName]
-    // );
-    const contract = callCaver.contract.create(
-      abiTable[contractName],
-      contractAddress
-    );
-    const callResult = await contract.call(methodName, ...parameters);
-    // console.log(`Result of calling get function with key: ${callResult}`);
-    return callResult;
+    let contract = undefined;
+    if (kaikas === true && window.klaytn !== undefined) {
+      contract = new caver.klay.Contract(
+        abiTable[contractName],
+        contractAddress
+      );
+      const receipt = await contract.call(
+        {
+          from: window.klaytn.selectedAddress,
+          gas: '300000',
+        },
+        methodName,
+        parameters
+      );
+      console.log(`call receipt: ${receipt}`);
+      return receipt;
+    } else {
+      contract = callCaver.contract.create(
+        abiTable[contractName],
+        contractAddress
+      );
+      const callResult = await contract.call(methodName, ...parameters);
+      console.log(`Result of calling get function with key: ${callResult}`);
+      return callResult;
+    }
   } catch (error) {
     console.log(error);
     return error;
@@ -92,6 +106,12 @@ const sendContract = async ({
   amount?: string;
 }) => {
   try {
+    if (
+      contractName === undefined ||
+      contractAddress === undefined ||
+      methodName === undefined
+    )
+      throw 'Not enough arguments';
     const myContract = new caver.klay.Contract(
       abiTable[contractName],
       contractAddress
@@ -102,26 +122,6 @@ const sendContract = async ({
       gas: 300000,
       value: caver.utils.toPeb(amount, 'KLAY'),
     });
-    // console.log(result);
-    // if (
-    //   contractName === undefined ||
-    //   contractAddress === undefined ||
-    //   methodName === undefined
-    // )
-    //   throw 'Not enough arguments';
-    // const contract = caver.contract.create(
-    //   abiTable[contractName],
-    //   contractAddress
-    // );
-    // const receipt = await contract.send(
-    //   {
-    //     from: window.klaytn.selectedAddress,
-    //     gas: 3000000,
-    //   },
-    //   methodName,
-    //   ...parameters
-    // );
-    // console.log(receipt?.blockHash);
     return result?.blockHash;
   } catch (error) {
     console.log(error);

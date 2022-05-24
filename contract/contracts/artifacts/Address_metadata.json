@@ -1,12 +1,12 @@
 {
 	"compiler": {
-		"version": "0.5.6+commit.b259423e"
+		"version": "0.5.17+commit.d19bba13"
 	},
 	"language": "Solidity",
 	"output": {
 		"abi": [],
 		"devdoc": {
-			"details": "Collection of functions related to the address type,\r",
+			"details": "Collection of functions related to the address type,",
 			"methods": {}
 		},
 		"userdoc": {
@@ -17,7 +17,7 @@
 		"compilationTarget": {
 			"contracts/Address.sol": "Address"
 		},
-		"evmVersion": "byzantium",
+		"evmVersion": "petersburg",
 		"libraries": {},
 		"optimizer": {
 			"enabled": false,
@@ -29,7 +29,8 @@
 		"contracts/Address.sol": {
 			"keccak256": "0x992bce8d5a6b643f20e352e55b07fe3affa771c8e921c4c1e5623c5d4ac3839b",
 			"urls": [
-				"bzzr://de0253e9fe9c33071e5cde96818b6904992585a2f320cb6821069280a7e894d1"
+				"bzz-raw://b1f673f597788d0dcbe8b25644c8fc602d3f902b78a25fad9352e667987be4e6",
+				"dweb:/ipfs/QmNcmAaFuCGTa27mwAgVCXoxSDz8tkCnRKLtjEmtad6hs9"
 			]
 		}
 	},
