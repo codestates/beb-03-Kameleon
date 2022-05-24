@@ -3,7 +3,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
 import { faAngleDown, faAngleUp } from '@fortawesome/free-solid-svg-icons';
 import { useParams } from 'react-router-dom';
-import Caver from 'caver-js';
+import { useSelector } from 'react-redux';
+import { selectUser } from '../../store/user';
 
 import {
   MultipleInputContainer,
@@ -15,7 +16,7 @@ import {
 import useInput, { IUseInput } from '../../hooks/useInput';
 
 import { callContract, getBalance } from '../../utils/KAS';
-import { kStockTokenAddressTable, exchangeAddressTable } from '../../constants';
+import { kStockTokenAddressTable } from '../../constants';
 
 interface TokenListProps {
   id: number;
@@ -26,8 +27,8 @@ interface ISwapInput extends IUseInput {
   children?: React.ReactNode;
   tokenName: string;
   setTokenName: React.Dispatch<React.SetStateAction<string>>;
-  // onCalcurlateInput: ({value: string}) => void;
-  onCalcurlateInput: any;
+  // onCalculateInput: ({value: string}) => void;
+  onCalculateInput: any;
 }
 
 const angleUp = faAngleUp as IconProp;
@@ -47,61 +48,53 @@ const SwapInput = ({
   setKey,
   setIsFocus,
   changeInput,
-  onCalcurlateInput,
+  onCalculateInput,
 }: ISwapInput) => {
   const params = useParams();
+  const user = useSelector(selectUser);
   const [isOpen, setIsOpen] = useState<boolean>(false);
   // 선택한 token의 이름, 가격, 수량
   const [tokenList, setTokenList] = useState<Array<TokenListProps>>([]);
   const [maxValue, setMaxValue] = useState<number>(0);
 
-  const caver = new Caver('https://api.baobab.klaytn.net:8651');
-
-  const amountKlay = async (token: string, balance: string) => {
-    const result = await callContract({
-      contractName: 'Exchange',
-      contractAddress: `${exchangeAddressTable[token]}`,
-      methodName: 'getEthAmount',
-      parameters: [caver.utils.convertToPeb(balance, 'KLAY')],
-    });
-    return result;
-  };
-
-  const amountToken = async (token: string, balance: string) => {
-    const result = await callContract({
-      contractName: 'Exchange',
-      contractAddress: `${exchangeAddressTable[token]}`,
-      methodName: 'getTokenAmount',
-      parameters: [caver.utils.convertToPeb(balance, 'KLAY')],
-    });
-    return result;
-  };
-
   // selected list 설정
   useEffect(() => {
     const tList = new Array<TokenListProps>();
     const symbolTable = Object.keys(kStockTokenAddressTable);
-    for (let i = 0; i < symbolTable.length; i++) {
+    let i = 0;
+    for (i; i < symbolTable.length; i++) {
       const token: TokenListProps = {
         id: i,
         name: symbolTable[i],
       };
       tList.push(token);
     }
+    tList.push({
+      id: i,
+      name: 'KLAY',
+    });
     setTokenList(tList);
-    setTokenName(params.token ? params.token : tList[0].name);
+    setTokenName(params.token ? params.token : tList[i].name);
+    console.log(i);
   }, []);
 
   // tokenName 변경에 따라 Max값 변경
   useEffect(() => {
-    console.log('tokenName', tokenName);
-    callContract({
-      contractName: 'KStockToken',
-      contractAddress: kStockTokenAddressTable[tokenName],
-      methodName: 'balanceOf',
-      parameters: [window.klaytn.selectedAddress],
-    }).then((res) => setMaxValue(res / 1000000000000000000));
-  }, [tokenName]);
+    // name을 확인 후 초기값 설정
+    // maxBalance, numberofDecimal
+    if (tokenName === 'KLAY') {
+      getBalance({ address: window.klaytn.selectedAddress }).then((res) => {
+        setMaxValue(Number((+res / 10 ** 18).toFixed(2)));
+      });
+    } else {
+      callContract({
+        contractName: 'KStockToken',
+        contractAddress: kStockTokenAddressTable[tokenName],
+        methodName: 'balanceOf',
+        parameters: [window.klaytn.selectedAddress],
+      }).then((res) => setMaxValue(Number((+res / 10 ** 18).toFixed(6))));
+    }
+  }, [tokenName, user]);
 
   const clickDownIcon = useCallback(() => {
     setIsOpen(true);
@@ -115,25 +108,14 @@ const SwapInput = ({
 
   const clickItem = useCallback((name: string) => {
     setTokenName(name);
+    onCalculateInput({ name, tokenBalance });
   }, []);
 
   const onChangeHandler = (e: any) => {
     console.log('event value : ', e.keyCode);
     const tokenBalance = e.target.value;
-    // if (tokenBalance === '') {
-    //   onCalcurlateInput({ tokenBalance: '0' });
-    // } else {
-    // console.log(tokenBalance);
-    // const [value, decimal] = String(tokenBalance).split('.');
-    // if (decimal && decimal.length > 6) {
-    //   tokenBalance = [value, decimal.slice(0, 6)].join('.');
-    // }
-    // if (decimal === undefined) {
-    //   tokenBalance = +tokenBalance.toString();
-    // }
     changeInput(e);
-    onCalcurlateInput({ tokenBalance });
-    // }
+    onCalculateInput({ tokenName, tokenBalance });
   };
 
   return (

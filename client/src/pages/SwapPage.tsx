@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useEffect } from 'react';
+import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
 import { faArrowDown, faVolumeHigh } from '@fortawesome/free-solid-svg-icons';
@@ -21,12 +21,13 @@ import {
   sendApprove,
 } from '../utils/KAS';
 
-import { exchangeAddressTable } from '../constants/index';
+import {
+  exchangeAddressTable,
+  kStockTokenAddressTable,
+} from '../constants/index';
 import useInput from '../hooks/useInput';
-import { isConditionalExpression } from 'typescript';
 
 const arrowDown = faArrowDown as IconProp;
-const callCaver = new Caver('https://api.baobab.klaytn.net:8651');
 const caver = new Caver(window.klaytn);
 
 const amountKlay = async (token: string, balance: string) => {
@@ -54,9 +55,8 @@ const SwapPage = () => {
   const setToken: any = params.token !== undefined ? params.token : 'kSSE';
   const [nameA, setNameA] = useState<string>(setToken);
   const [nameB, setNameB] = useState<string>(setToken);
-  const [detailInfo, setDetailInfo] = useState<number>(0);
+  // const [detailInfo, setDetailInfo] = useState<number>(0);
   const [isApproveA, setIsApproveA] = useState(false);
-  const [isApproveB, setIsApproveB] = useState(false);
   const [fee, setFee] = useState<string>('');
 
   const {
@@ -115,100 +115,186 @@ const SwapPage = () => {
     changeInput: changeInputB,
   };
 
-  const handler = async () => {
-    if (+tokenBalanceA > 0) {
-      const amountKlay = await callContract({
-        contractName: 'Exchange',
-        contractAddress: `${exchangeAddressTable[nameA]}`,
-        methodName: 'getEthAmount',
-        parameters: [
-          callCaver.utils.toBN(Number(tokenBalanceA) * 1000000000000000000),
-        ],
-      });
-      console.log('amountKlay', amountKlay);
+  /**
+   * swap type 에 따른 함수
+   */
 
-      const isApproved = await callIsApproved({ stockName: nameA });
-      if (isApproved) {
-        //   console.log('isApproved', isApproved);
-        const fee = amountKlay * 0.99;
-        await sendContract({
-          contractName: 'Exchange',
-          contractAddress: `${exchangeAddressTable[nameA]}`,
-          methodName: 'tokenToEthSwap',
-          parameters: [tokenBalanceA, fee],
-        });
-      } else {
-        console.log('1341234');
-        await sendApprove({ stockName: nameA });
+  const swapSelector = async ({
+    tokenName,
+    tokenBalance, // klayBalance
+  }: {
+    tokenName: string;
+    tokenBalance: string;
+  }) => {
+    // klay <> token
+    const klayToTokenInputA = async ({
+      tokenName,
+      tokenBalance, // klayBalance
+    }: {
+      tokenName: string;
+      tokenBalance: string;
+    }) => {
+      if (Number(tokenBalance) <= 0) {
+        setTokenBalanceB('0');
+        return;
+      }
+      const swapTokenAmount: string = await amountToken(
+        nameB,
+        caver.utils.convertToPeb(tokenBalance, 'KLAY')
+      );
+      setTokenBalanceB(Number(Number(swapTokenAmount) / 10 ** 18).toFixed(6));
+      // const approved = await callIsApproved({ stockName: tokenName });
+      setIsApproveA(true);
+      setFee(Number(+tokenBalance * 0.003).toFixed(3) + ' ' + nameA);
+    };
+
+    // token <> klay
+    const tokenToKlayInputA = async ({
+      tokenName,
+      tokenBalance,
+    }: {
+      tokenName: string;
+      tokenBalance: string;
+    }) => {
+      if (Number(tokenBalance) <= 0) {
+        setTokenBalanceB('0');
+        return;
+      }
+      const swapKlayAmount: string = await amountKlay(tokenName, tokenBalance);
+      setTokenBalanceB(Number(Number(swapKlayAmount) / 10 ** 18).toFixed(6));
+      const approved = await callIsApproved({ stockName: tokenName });
+      setIsApproveA(approved);
+      setIsApproveA(true);
+      setFee(Number(+tokenBalance * 0.003).toFixed(3) + ' ' + nameA);
+    };
+
+    const onCalculateInputA = async ({
+      tokenName,
+      tokenBalance,
+    }: {
+      tokenName: string;
+      tokenBalance: string;
+    }) => {
+      if (tokenBalance === '') {
+        tokenBalance = '0';
+      }
+      if (+tokenBalance > 0) {
+        const changeTokenA = await amountKlay(tokenName, tokenBalance);
+        const changeKlay: string = await amountToken(nameB, changeTokenA);
+        setTokenBalanceB((+changeKlay / 10 ** 18).toString());
+        const approvedA = await callIsApproved({ stockName: tokenName });
+        const approvedB = await callIsApproved({ stockName: nameB });
+
+        console.log('approvedA :', approvedA);
+        console.log('approvedB :', approvedB);
+        setIsApproveA(approvedA);
         setIsApproveA(true);
+        setFee(Number(+tokenBalance * 0.006).toFixed(3) + ' ' + nameA);
+      }
+    };
+
+    // main
+    if (nameA == 'KLAY') {
+      if (nameB == 'KLAY') {
+        return doNothing({ tokenName, tokenBalance });
+      } else {
+        return klayToTokenInputA({ tokenName, tokenBalance });
+      }
+    } else {
+      if (nameB == 'KLAY') {
+        return tokenToKlayInputA({ tokenName, tokenBalance });
+      } else {
+        return onCalculateInputA({ tokenName, tokenBalance });
       }
     }
+  };
+  const doNothing = async ({
+    tokenName,
+    tokenBalance,
+  }: {
+    tokenName: string;
+    tokenBalance: string;
+  }) => {
+    return;
+  };
 
-    const fee = +amountKlay * 0.99;
-    const swapTokenToKlay = await callContract({
-      contractName: 'Exchange',
-      contractAddress: `${exchangeAddressTable[nameA]}`,
-      methodName: 'tokenToEthSwap',
-      parameters: [tokenBalanceA, fee],
-    });
-    if (+tokenBalanceB > 0) {
-      await callIsApproved({ stockName: nameB });
-      await sendApprove({ stockName: nameB });
+  // const onCalculateInputB = async ({
+  //   tokenName,
+  //   tokenBalance,
+  // }: {
+  //   tokenName: string;
+  //   tokenBalance: string;
+  // }) => {
+  //   if (+tokenBalance > 0) {
+  //     const changeTokenB: string = await amountKlay(tokenName, tokenBalance);
+  //     const changeKlay: string = await amountToken(nameA, changeTokenB);
 
-      const onKlayToToken = await callContract({
-        contractName: 'Exchange',
-        contractAddress: `${exchangeAddressTable[nameB]}`,
-        methodName: 'getTokenAmount',
-        parameters: [tokenBalanceB],
-      });
-      console.log('2onKlayToToken', onKlayToToken);
+  //     setTokenBalanceA((+changeKlay / 10 ** 18).toString());
+
+  //     const approvedA = await callIsApproved({ stockName: tokenName });
+  //     const approvedB = await callIsApproved({ stockName: nameB });
+
+  //     setIsApproveA(approvedA);
+  //   }
+  // };
+
+  const onApprove = async () => {
+    if (!isApproveA) {
+      await sendApprove({ stockName: nameA });
+      setIsApproveA(true);
     }
   };
 
-  const onCalcurlateInputA = async ({
-    tokenBalance,
-  }: {
-    tokenBalance: string;
-  }) => {
-    if (tokenBalance === '') {
-      tokenBalance = '0';
-    }
-    const changeTokenA: string = await amountKlay(nameA, tokenBalance);
-    console.log('1- tokenBalance : ', tokenBalance);
-    // const changeTokenB: string = await amountKlay(nameB, balanceB);
-    // console.log('changeTokenA', changeTokenA);
-    // console.log('changeKlay', changeKlay);
-    // const price = +currentKlayPrice * +changeTokenB;
-    // const fee = +balanceA * 0.00`3;
-    console.log(tokenBalance);
-    if (+tokenBalance > 0) {
-      const changeKlay: string = await amountToken(nameB, changeTokenA);
-      console.log('1- changeTokenA : ', changeTokenA);
-      console.log(tokenBalance);
-      // setTokenBalanceA(tokenBalance);
-      setTokenBalanceB((+changeKlay / 10 ** 18).toString());
-    } else if (+tokenBalance === 0) {
-      setTokenBalanceB('0');
-    }
-  };
-
-  const onCalcurlateInputB = async ({
-    tokenBalance,
-  }: {
-    tokenBalance: string;
-  }) => {
-    console.log('tokenBalance', tokenBalance);
-    const changeTokenB: string = await amountKlay(nameB, tokenBalance);
-    const changeKlay: string = await amountToken(nameA, changeTokenB);
-    // const changeTokenB: string = await amountKlay(nameB, balanceB);
-    // console.log('changeTokenA', changeTokenA);
-    // console.log('changeKlay', changeKlay);
-    // const price = +currentKlayPrice * +changeTokenB;
-    // const fee = +balanceA * 0.003;
-    if (+tokenBalance >= 0) {
-      setTokenBalanceA(
-        +tokenBalance === 0 ? '0' : (+changeKlay / 10 ** 18).toString()
-      );
+  const onSwap = async () => {
+    if (nameA === 'KLAY') {
+      if (nameB === 'KLAY') {
+        return; // nothing
+      } else {
+        // klayToToken
+        await sendContract({
+          contractName: 'Exchange',
+          contractAddress: exchangeAddressTable[nameB],
+          methodName: 'ethToTokenSwap',
+          parameters: [
+            caver.utils.convertToPeb(
+              (+tokenBalanceB * 0.99).toFixed(15),
+              'KLAY'
+            ),
+          ],
+          amount: tokenBalanceA,
+        });
+      }
+    } else {
+      if (nameB === 'KLAY') {
+        // tokenToKlay
+        await sendContract({
+          contractName: 'Exchange',
+          contractAddress: exchangeAddressTable[nameA],
+          methodName: 'tokenToEthSwap',
+          parameters: [
+            caver.utils.convertToPeb(tokenBalanceA, 'KLAY'),
+            caver.utils.convertToPeb(
+              (+tokenBalanceB * 0.99).toFixed(15),
+              'KLAY'
+            ),
+          ],
+        });
+      } else {
+        // tokenTotoken
+        await sendContract({
+          contractName: 'Exchange',
+          contractAddress: exchangeAddressTable[nameA],
+          methodName: 'tokenToTokenSwap',
+          parameters: [
+            caver.utils.convertToPeb(tokenBalanceA, 'KLAY'),
+            caver.utils.convertToPeb(
+              (+tokenBalanceB * 0.99).toFixed(15),
+              'KLAY'
+            ),
+            kStockTokenAddressTable[nameB],
+          ],
+        });
+      }
     }
   };
 
@@ -216,37 +302,50 @@ const SwapPage = () => {
     <SwapPageWrapper>
       <h2>Swap</h2>
       <form action="">
-        <SwapInput {...swapInputPropsA} onCalcurlateInput={onCalcurlateInputA}>
+        <SwapInput {...swapInputPropsA} onCalculateInput={swapSelector}>
           INPUT
         </SwapInput>
         <IconWrapper>
           <FontAwesomeIcon icon={arrowDown} className="icon" />
         </IconWrapper>
-        <SwapInput {...swapInputPropsB} onCalcurlateInput={onCalcurlateInputB}>
+        <SwapInput {...swapInputPropsB} onCalculateInput={doNothing}>
           OUTPUT
         </SwapInput>
         {tokenBalanceA && tokenBalanceB && (
           <DetailInfoStyle>
-            <div>
+            {/* <div>
               <dt>현재 가격</dt>
               <dd>{detailInfo.toLocaleString('ko-KR')} KRW</dd>
-            </div>
+            </div> */}
             <div>
               <dt>수수료</dt>
-              <dd>5 KLAY</dd>
+              <dd>{fee}</dd>
             </div>
           </DetailInfoStyle>
         )}
-        <ButtonWrapper
-          numberA={Number(tokenBalanceA)}
-          numberB={Number(tokenBalanceB)}
-          isErrorA={isDecimalErrorA}
-          isErrorB={isDecimalErrorB}
-          type="button"
-          // onClick={clickButton}
-        >
-          스왑하기
-        </ButtonWrapper>
+        {isApproveA ? (
+          <ButtonWrapper
+            numberA={Number(tokenBalanceA)}
+            numberB={Number(tokenBalanceB)}
+            isErrorA={isDecimalErrorA}
+            isErrorB={isDecimalErrorB}
+            type="button"
+            onClick={onSwap}
+          >
+            SWAP
+          </ButtonWrapper>
+        ) : (
+          <ButtonWrapper
+            numberA={Number(tokenBalanceA)}
+            numberB={Number(tokenBalanceB)}
+            isErrorA={isDecimalErrorA}
+            isErrorB={isDecimalErrorB}
+            type="button"
+            onClick={onApprove}
+          >
+            APPROVE
+          </ButtonWrapper>
+        )}
       </form>
     </SwapPageWrapper>
   );
