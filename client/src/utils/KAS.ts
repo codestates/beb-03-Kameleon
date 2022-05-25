@@ -2,7 +2,6 @@ import Caver from 'caver-js';
 
 import {
   abiTable,
-  byteCodeTable,
   exchangeAddressTable,
   kStockTokenAddressTable,
 } from './../constants/index';
@@ -88,12 +87,12 @@ const callContract = async ({
   account?: string | undefined;
 }) => {
   try {
-    if (
-      contractName === undefined ||
-      contractAddress === undefined ||
-      methodName === undefined
-    )
-      throw 'Not enough arguments';
+    // if (
+    //   contractName === undefined ||
+    //   contractAddress === undefined ||
+    //   methodName === undefined
+    // )
+    //   throw 'Not enough arguments';
     let contract = undefined;
     // if (kaikas === true && window.klaytn !== undefined) {
     if (kaikas === true) {
@@ -152,12 +151,12 @@ const sendContract = async ({
   amount?: string;
 }) => {
   try {
-    if (
-      contractName === undefined ||
-      contractAddress === undefined ||
-      methodName === undefined
-    )
-      throw 'Not enough arguments';
+    // if (
+    //   contractName === undefined ||
+    //   contractAddress === undefined ||
+    //   methodName === undefined
+    // )
+    //   throw 'Not enough arguments';
     const myContract = new caver.klay.Contract(
       abiTable[contractName],
       contractAddress

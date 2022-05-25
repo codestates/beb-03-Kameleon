@@ -16,9 +16,7 @@ import {
   MyStakeBalanceHooks,
 } from '../hooks/QueryHooks/Govern';
 import CreatePoll from '../components/Govern/CreatePoll';
-import { callContract } from '../utils/KAS';
-import { contractAddressTable } from '../constants';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 interface RootState {
   user: {
@@ -28,8 +26,6 @@ interface RootState {
 }
 const GovernPage = () => {
   const { isOpen, toggle } = useModal();
-  const [myStaked, setMyStaked] = React.useState<number>(0);
-  const [myStakable, setMyStakable] = React.useState<string>('');
 
   const selectUser = (state: RootState) => state.user;
   const user = useSelector(selectUser);

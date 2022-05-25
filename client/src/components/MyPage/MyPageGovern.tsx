@@ -2,10 +2,7 @@ import React from 'react';
 import Moment from 'react-moment';
 import { contractAddressTable } from '../../constants';
 import { MyPageItem, MyPageBar } from '../../pages/styles/MyPage.styles';
-import {
-  IGovernType,
-  IGovernPropsType,
-} from '../../types/components/Govern.types';
+import { IGovernType } from '../../types/components/Govern.types';
 import {
   getMethodReturnStructType,
   getParsedDataFromUsingMethodType,
