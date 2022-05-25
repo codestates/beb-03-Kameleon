@@ -60,7 +60,7 @@ const PoolPage = () => {
 
   return (
     <PoolPageWrapper>
-      <h2>Pool</h2>
+      <h2 className="tit">Pool</h2>
       <PoolPageList>
         <div>
           <div>Pair name</div>

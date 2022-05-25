@@ -61,7 +61,10 @@ const Poll = (props: IGovernPropsType) => {
               </>
             )}
           </div>
-          <h2>{title}</h2>
+          <span>
+            <b>TITLE :</b>
+            <em>{title}</em>
+          </span>
         </section>
         <GoverQuorum
           percentage={process.env.REACT_APP_MINIMUM_VOTING_PERCENTAGE}
@@ -78,10 +81,11 @@ const Poll = (props: IGovernPropsType) => {
         </GovernPageBar>
 
         <div>
-          <div>
-            {`투표 마감 : ${eTime.toLocaleString('ko')} ( `}
-            <Moment fromNow>{+endTime * 1000}</Moment> {')'}
-          </div>
+          {`투표 마감 시간 : ${eTime.toLocaleString('ko')} ( `}
+          <Moment fromNow style={{ fontSize: '0.8rem' }}>
+            {+endTime * 1000}
+          </Moment>
+          {')'}
         </div>
       </GovernPagePollItem>
       <Modal

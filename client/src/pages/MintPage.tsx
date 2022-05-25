@@ -111,7 +111,7 @@ const MintPage = () => {
 
   return (
     <MintPageWrapper>
-      <h2>Mint & Burn</h2>
+      <h2 className="tit">Mint & Burn</h2>
       <TabStyle>
         <button
           type="button"

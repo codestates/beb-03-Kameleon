@@ -5,17 +5,7 @@ export const MainPageWrapper = styled.div`
   margin: 0 auto;
   color: var(--white);
 
-  & > h2 {
-    margin: 1rem;
-  }
-
   .main__oracle {
-    @media (max-width: 1023px) {
-      display: none;
-    }
-  }
-
-  .main__usd {
     @media (max-width: 1023px) {
       display: none;
     }
@@ -27,14 +17,14 @@ export const MainPageSearch = styled.div`
   margin-bottom: 1rem;
   padding: 1rem;
   border-radius: 0.5rem;
-  background-color: var(--dark-green);
+  background-color: var(--white);
 
   & > input {
     width: 100%;
     border: 0;
     font-size: 1rem;
     color: white;
-    background-color: var(--dark-green);
+    background-color: var(--white);
     outline: none;
   }
 
@@ -45,8 +35,8 @@ export const MainPageSearch = styled.div`
     border-radius: 0.5rem;
     font-size: 1rem;
     font-weight: 600;
-    color: var(--dark-green);
-    background-color: var(--white);
+    color: var(--white);
+    background-color: var(--green);
 
     :hover {
       cursor: pointer;
@@ -56,24 +46,25 @@ export const MainPageSearch = styled.div`
 
 export const MainPageList = styled.ul`
   border-radius: 0.5rem;
-  background-color: var(--dark-green);
+  /* background-color: var(--dark-green); */
+  background-color: var(--white);
 
   & > div {
     display: flex;
-    margin: 0 2rem;
-    padding: 1rem 0;
-    border-bottom: 1px solid var(--white);
-    font-size: 1.2rem;
-    font-weight: 600;
-  }
+    padding: 0 2rem;
+    border-bottom: 2px solid var(--green);
 
-  & > div > div {
-    flex: 1;
-    text-align: right;
+    span {
+      flex: 1;
+      padding: 1rem 0;
+      font-size: 1rem;
+      text-align: right;
+      color: var(--green);
 
-    :first-of-type {
-      flex: 1.5;
-      text-align: left;
+      &:nth-of-type(1) {
+        flex: 1.5;
+        text-align: left;
+      }
     }
   }
 `;
@@ -81,25 +72,42 @@ export const MainPageList = styled.ul`
 export const MainPageItem = styled.li`
   & > a {
     display: flex;
-    margin: 0 2rem;
-    padding: 1rem 0;
+    padding: 1rem 2rem;
     border-bottom: 1px solid var(--white);
     font-size: 1.2rem;
-    font-weight: 600;
     color: var(--white);
 
-    & > div {
+    & > span {
       flex: 1;
       text-align: right;
+      color: var(--dark-green);
 
       :first-of-type {
         flex: 1.5;
         text-align: left;
+      }
+
+      em {
+        font-style: normal;
+        font-size: 0.8rem;
+        color: var(--green);
       }
     }
 
     :last-of-type {
       border: 0;
     }
+
+    .main__name,
+    .main__price {
+      font-weight: 700;
+    }
+
+    /* 
+    .main__usd {
+      @media (max-width: 1023px) {
+        display: none;
+      }
+    } */
   }
 `;

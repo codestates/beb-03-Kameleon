@@ -58,10 +58,10 @@ const GovernPage = () => {
 
   return (
     <GovernPageWrapper>
-      <h2>Govern</h2>
+      <h2 className="tit">Govern</h2>
       <GovernPageGovernList>
         <div>
-          <h1>KMT</h1>
+          <h3>KMT</h3>
           <div>
             <p>TOTAL STAKED</p>
             <div>{tokenState?.data} KMT</div>
@@ -80,7 +80,7 @@ const GovernPage = () => {
           <button>Manage Stake</button>
         </div>
       </GovernPageGovernList>
-      <h2>Polls</h2>
+      <h4>Polls</h4>
       <GovernPagePollList>
         {governList.map(({ id, ...el }: any, idx: number) => {
           return <Poll key={idx} pollId={id} {...el} />;
