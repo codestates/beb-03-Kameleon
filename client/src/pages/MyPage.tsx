@@ -33,6 +33,7 @@ const MyPage = () => {
   const [myPoolList, setMyPoolList] = useState<Array<PoolListProps>>([]);
 
   useEffect(() => {
+    // console.log('window.klaytn.selectedAddress', window.klaytn.selectedAddress);
     // get myList
     const getMyList = async () => {
       const valueTemp: Array<string> = await callContract({
@@ -170,7 +171,7 @@ const MyPage = () => {
 
     getMyList();
     getPoolList();
-  }, [myPoolList]);
+  }, [window.klaytn.selectedAddress]);
 
   return (
     <div>
