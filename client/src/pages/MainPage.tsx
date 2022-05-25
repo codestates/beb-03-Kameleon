@@ -82,7 +82,7 @@ const MainPage = () => {
         const krwPrice = +klayAmount * 1.003 * +currentKlayPrice;
 
         // premium 값 구하기
-        const premium = (+oraclePrice / krwPrice - 1) * 100;
+        const premium = (krwPrice / +oraclePrice - 1) * 100;
 
         return {
           name: stockName,
