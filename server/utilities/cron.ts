@@ -16,8 +16,8 @@ const startCron = () => {
   mintToLPsCron.start();
 
   const checkPoolLiquidityCron = new CronJob(
-    // "0 0 */1 * * *",
-    "*/5 * * * * *",
+    "0 0 */1 * * *",
+    // "*/5 * * * * *",
     checkBulkPoolLiquidity
   );
   checkPoolLiquidityCron.start();
