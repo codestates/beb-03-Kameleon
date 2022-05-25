@@ -111,8 +111,8 @@ const SwapInput = ({
     onCalculateInput({ name, tokenBalance });
   }, []);
 
-  const onChangeHandler = (e: any) => {
-    console.log('event value : ', e.keyCode);
+  const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+    // console.log('event value : ', e.keyCode);
     const tokenBalance = e.target.value;
     changeInput(e);
     onCalculateInput({ tokenName, tokenBalance });
