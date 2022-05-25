@@ -9,12 +9,8 @@ import {
 } from '../../utils/abiTypeFilter';
 import { callContract } from '../../utils/KAS';
 
-interface newGovernType extends IGovernType {
-  withdrawableBalance: string;
-}
-
 const MyPageGovern = () => {
-  const [governList, setGovernList] = React.useState<newGovernType[]>([]);
+  const [governList, setGovernList] = React.useState<IGovernType[]>([]);
   React.useEffect(() => {
     const test = async () => {
       try {
@@ -24,7 +20,7 @@ const MyPageGovern = () => {
           methodName: 'getPollsLength',
         });
         console.log('getPollsLength : ', getPollsLength);
-        const result: Array<newGovernType> = [];
+        const result: Array<IGovernType> = [];
         const type = getMethodReturnStructType({
           contractName: 'Govern',
           methodName: 'getPollState',
@@ -51,7 +47,7 @@ const MyPageGovern = () => {
                 methodName: 'getTotalSupply',
               }),
             ]);
-          const pollStateObj: any = getParsedDataFromUsingMethodType({
+          const pollStateObj: IGovernType = getParsedDataFromUsingMethodType({
             type,
             value: pollState,
             totalSupply,
