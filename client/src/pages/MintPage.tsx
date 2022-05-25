@@ -35,6 +35,7 @@ const MintPage = () => {
   const [isDecimalErrorA, setIsDecimalErrorA] = useState<boolean>(false);
   const [isDecimalErrorB, setIsDecimalErrorB] = useState<boolean>(false);
   const [detailInfo, setDetailInfo] = useState<number>(0);
+  const [fee, setFee] = useState<number>(0);
 
   const liftStateA = useCallback(
     (
@@ -107,7 +108,8 @@ const MintPage = () => {
         setDetailInfo(priceB / priceA);
       }
     }
-  }, [tab, priceA, priceB]);
+    setFee(+balanceA * 0.01);
+  }, [tab, priceA, priceB, balanceA]);
 
   return (
     <MintPageWrapper>
@@ -159,8 +161,10 @@ const MintPage = () => {
                   </dd>
                 </div>
                 <div>
-                  <dt>Fee</dt>
-                  <dd>10KLAY</dd>
+                  <dt>Fee(1%)</dt>
+                  <dd>
+                    {fee} {nameA}
+                  </dd>
                 </div>
               </DetailInfoStyle>
             )}
