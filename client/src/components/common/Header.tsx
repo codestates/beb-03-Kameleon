@@ -10,21 +10,13 @@ import {
   faUser,
 } from '@fortawesome/free-solid-svg-icons';
 import { useSelector, useDispatch } from 'react-redux';
-import { login, logout } from '../../store/user';
-
-interface RootState {
-  user: {
-    isLogin: boolean;
-    account: string;
-  };
-}
+import { login, logout, onSelectNav, selectUser } from '../../store/user';
 
 const Header = () => {
   const [isNav, setIsNav] = useState<boolean>(false);
-  const [nav, setNav] = useState<string>('home');
   const dispatch = useDispatch();
-  const selectUser = (state: RootState) => state.user;
   const user = useSelector(selectUser);
+  const nav = user.nav;
 
   const onConnectWallet = async () => {
     if (typeof window.klaytn !== 'undefined') {
@@ -56,11 +48,14 @@ const Header = () => {
     checkUnlocked();
   }, []);
 
+  console.log('nav', nav);
   return (
     <HeaderStyle>
       <div className="layout">
         <LogoStyle>
-          <Link to="/">Kameleon</Link>
+          <Link to="/" onClick={() => dispatch(onSelectNav('home'))}>
+            Kameleon
+          </Link>
         </LogoStyle>
         <NavStyle>
           <span className="m-menu" onClick={() => setIsNav(true)}>
@@ -70,31 +65,31 @@ const Header = () => {
             <ul>
               <li
                 className={nav === 'home' ? 'on' : ''}
-                onClick={() => setNav('home')}
+                onClick={() => dispatch(onSelectNav('home'))}
               >
                 <Link to="/">Home</Link>
               </li>
               <li
                 className={nav === 'swap' ? 'on' : ''}
-                onClick={() => setNav('swap')}
+                onClick={() => dispatch(onSelectNav('swap'))}
               >
                 <Link to="/swap">Swap</Link>
               </li>
               <li
                 className={nav === 'pool' ? 'on' : ''}
-                onClick={() => setNav('pool')}
+                onClick={() => dispatch(onSelectNav('pool'))}
               >
                 <Link to="/pool">Pool</Link>
               </li>
               <li
                 className={nav === 'mint' ? 'on' : ''}
-                onClick={() => setNav('mint')}
+                onClick={() => dispatch(onSelectNav('mint'))}
               >
                 <Link to="/mint">Mint&Burn</Link>
               </li>
               <li
                 className={nav === 'govern' ? 'on' : ''}
-                onClick={() => setNav('govern')}
+                onClick={() => dispatch(onSelectNav('govern'))}
               >
                 <Link to="/govern">Govern</Link>
               </li>
@@ -112,7 +107,11 @@ const Header = () => {
                 </button>
               ) : (
                 <>
-                  <Link to="/mypage">
+                  <Link
+                    to="/mypage"
+                    className={nav === 'mypage' ? 'on' : ''}
+                    onClick={() => dispatch(onSelectNav('mypage'))}
+                  >
                     <em>
                       <FontAwesomeIcon icon={faUser} />
                     </em>
