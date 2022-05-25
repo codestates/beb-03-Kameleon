@@ -39,7 +39,7 @@ export const GlobalStyle = createGlobalStyle`
   }
   * { font-family: 'Spoqa Han Sans', 'Spoqa Han Sans JP', 'Sans-serif'; font-size: 18px;}
   a { cursor: pointer; text-decoration: none; }
-  h1, h2, h3, ol, ul, dl, dt, dd { margin: 0; padding: 0; }
+  h1, h2, h3, h4, ol, ul, dl, dt, dd { margin: 0; padding: 0; }
   ol, ul { list-style: none; }
 
   .layout {
