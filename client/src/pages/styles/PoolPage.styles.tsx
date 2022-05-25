@@ -5,10 +5,6 @@ export const PoolPageWrapper = styled.div`
   margin: 0 auto;
   color: var(--white);
 
-  & > h2 {
-    margin: 1rem;
-  }
-
   & a {
     color: var(--white);
   }

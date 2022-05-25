@@ -4,11 +4,6 @@ const SwapPageWrapper = styled.div`
   max-width: var(--s-width);
   margin: auto;
 
-  & > h2 {
-    margin: 1rem;
-    color: var(--white);
-  }
-
   & > form {
     padding: 1rem 2rem;
     background-color: var(--white);

@@ -4,10 +4,6 @@ export const MyPageWrapper = styled.div`
   max-width: var(--width);
   margin: 0 auto;
   color: var(--white);
-
-  & > h2 {
-    margin: 1rem;
-  }
 `;
 
 export const MyPageList = styled.ul`

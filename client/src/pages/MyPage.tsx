@@ -190,7 +190,7 @@ const MyPage = () => {
   return (
     <div>
       <MyPageWrapper>
-        <h2>자산</h2>
+        <h2 className="tit">자산</h2>
         <MyPageList>
           <div>
             <div>Ticker ID</div>

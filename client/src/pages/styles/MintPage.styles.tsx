@@ -5,11 +5,6 @@ const MintPageWrapper = styled.div`
   margin: auto;
   position: relative;
 
-  & > h2 {
-    margin: 1rem;
-    color: var(--white);
-  }
-
   & > form {
     padding: 1rem 2rem;
     background-color: var(--white);
@@ -19,7 +14,7 @@ const MintPageWrapper = styled.div`
 
 const TabStyle = styled.span`
   position: absolute;
-  top: 0;
+  top: 1.3rem;
   right: 0;
   background-color: var(--gray);
   border-radius: 0.25rem;
