@@ -1,6 +1,6 @@
 import { useQuery } from 'react-query';
 import { callContract } from '../../utils/KAS';
-import { abiTable, contractAddressTable } from '../../constants';
+import { contractAddressTable } from '../../constants';
 import {
   getMethodReturnStructType,
   getParsedDataFromUsingMethodType,

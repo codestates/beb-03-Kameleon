@@ -13,7 +13,7 @@ import {
   MultipleInputList,
 } from './styles/MultipleInput.styles';
 
-import useInput, { IUseInput } from '../../hooks/useInput';
+import { IUseInput } from '../../hooks/useInput';
 
 import { callContract, getBalance } from '../../utils/KAS';
 import { kStockTokenAddressTable } from '../../constants';
@@ -76,7 +76,7 @@ const SwapInput = ({
     setTokenList(tList);
     setTokenName(params.token ? params.token : tList[i].name);
     console.log(i);
-  }, []);
+  }, [params.token, setTokenName]);
 
   // tokenName 변경에 따라 Max값 변경
   useEffect(() => {
@@ -106,10 +106,13 @@ const SwapInput = ({
     setIsFocus(false);
   }, [setIsFocus]);
 
-  const clickItem = useCallback((name: string) => {
-    setTokenName(name);
-    onCalculateInput({ name, tokenBalance });
-  }, []);
+  const clickItem = useCallback(
+    (name: string) => {
+      setTokenName(name);
+      onCalculateInput({ name, tokenBalance });
+    },
+    [onCalculateInput, tokenBalance, setTokenName]
+  );
 
   const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     // console.log('event value : ', e.keyCode);
