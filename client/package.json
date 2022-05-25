@@ -63,5 +63,6 @@
     "react-router-dom": "^6.3.0",
     "redux-persist": "^6.0.0",
     "styled-components": "^5.3.5"
-  }
+  },
+  "proxy": "http://localhost:4001"
 }

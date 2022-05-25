@@ -43,7 +43,7 @@ const PoolPage = () => {
         });
         const {
           data: { success, data },
-        } = await axios.get(`http://localhost:4001/api/contract/getPoolRoi`, {
+        } = await axios.get(`/api/contract/getPoolRoi`, {
           params: {
             exchangeAddress: exchangeAddressTable[exchangeAddressList[i]],
           },

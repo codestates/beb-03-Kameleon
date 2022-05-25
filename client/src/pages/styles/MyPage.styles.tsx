@@ -44,7 +44,10 @@ export const MyPageItem = styled.li`
 
   & > div {
     flex: 1;
+    white-space: nowrap;
+    width: 1rem;
     text-align: right;
+    flex-basis: 1rem;
 
     :first-of-type {
       flex: 1.5;
@@ -62,8 +65,10 @@ export const MyPageBar = styled.div<{
   no: number;
   totalSupply: string;
 }>`
+  margin: 0 0.5rem 0 0.5rem;
   display: flex;
-  min-width: 600px;
+  flex: 4 !important;
+  margin-left: -2rem;
   background-color: var(--white);
 
   & > div {
@@ -82,9 +87,5 @@ export const MyPageBar = styled.div<{
       }};
       background-color: var(--red);
     }
-  }
-
-  @media (max-width: 1023px) {
-    display: none;
   }
 `;

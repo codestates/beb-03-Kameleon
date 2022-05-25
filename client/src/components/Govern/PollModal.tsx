@@ -6,6 +6,7 @@ import GovernInput from '../Input/GovernInput';
 import Moment from 'react-moment';
 import 'moment/locale/ko';
 import { IGovernType } from '../../types/components/Govern.types';
+import { contractAddressTable } from '../../constants';
 
 const PollModal = ({
   pollId,
@@ -34,7 +35,7 @@ const PollModal = ({
   const withdrawBalanceHander = async () => {
     const result = await sendContract({
       contractName: 'Govern',
-      contractAddress: '0x27a6bC74934F7f57350eDF7eDacC59C9eE60F134',
+      contractAddress: contractAddressTable['Govern'],
       methodName: 'withdrawBalance',
       parameters: [+pollId],
     });
@@ -82,7 +83,7 @@ const PollModal = ({
             ~ {<Moment format="YYYY-MM-DD HH:mm:ss">{+endTime * 1000}</Moment>}
           </div>
           <div>
-            투표 마감 시간 : <Moment fromNow>{+endTime * 1000}</Moment>
+            투표 마감 : <Moment fromNow>{+endTime * 1000}</Moment>
           </div>
         </div>
         <div>

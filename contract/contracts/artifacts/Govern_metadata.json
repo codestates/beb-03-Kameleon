@@ -6,22 +6,17 @@
 	"output": {
 		"abi": [
 			{
-				"constant": false,
-				"inputs": [
-					{
-						"name": "KameleonTokenAddress",
-						"type": "address"
-					}
-				],
-				"name": "setToken",
+				"constant": true,
+				"inputs": [],
+				"name": "getTokenAddress",
 				"outputs": [
 					{
 						"name": "",
-						"type": "bool"
+						"type": "address"
 					}
 				],
 				"payable": false,
-				"stateMutability": "nonpayable",
+				"stateMutability": "view",
 				"type": "function"
 			},
 			{
@@ -79,6 +74,25 @@
 				],
 				"payable": false,
 				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"constant": false,
+				"inputs": [
+					{
+						"name": "KameleonTokenAddress",
+						"type": "address"
+					}
+				],
+				"name": "setTokenAddress",
+				"outputs": [
+					{
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"payable": false,
+				"stateMutability": "nonpayable",
 				"type": "function"
 			},
 			{
@@ -436,6 +450,25 @@
 				"constant": false,
 				"inputs": [
 					{
+						"name": "pollCreationFee_",
+						"type": "uint256"
+					}
+				],
+				"name": "setPollCreationFee",
+				"outputs": [
+					{
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"payable": false,
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"constant": false,
+				"inputs": [
+					{
 						"name": "newOwner",
 						"type": "address"
 					}
@@ -510,9 +543,9 @@
 	},
 	"sources": {
 		"contracts/Govern.sol": {
-			"keccak256": "0x4e8c2146957483322c13f070340313008de60385541e4e23933719400ecc0489",
+			"keccak256": "0x0e787d018f2f81e33ef7bda33c6ea44c9124fd81c5ceb42f0f55deceab9d4965",
 			"urls": [
-				"bzzr://9cdf6cc97c8936afe4b4db3896105cc58046079dc977e27a548cb4cd941f6b47"
+				"bzzr://d60507e5b665798533394c81d63bb64b143d196eb8d2758cb1a29552eedca308"
 			]
 		},
 		"contracts/IKIP13.sol": {

@@ -52,14 +52,22 @@ contract Govern is Ownable {
         _pollCreationFee = pollCreationFee_;
     }
 
-    function setToken(address KameleonTokenAddress) public onlyOwner returns (bool) {
+    function setTokenAddress(address KameleonTokenAddress) public onlyOwner returns (bool) {
         require(KameleonTokenAddress != address(0x0), "setToken function : KameleonTokenAddress is empty "); 
         KameleonToken = IKameleonKIP7(KameleonTokenAddress);
         return true;
     }
 
+    function getTokenAddress() public view returns (address) {
+        return address(KameleonToken);
+    }
+
     function getPollCreationFee () public view returns(uint){
         return _pollCreationFee;
+    }
+
+    function setPollCreationFee (uint pollCreationFee_) public onlyOwner returns(uint){
+        _pollCreationFee = pollCreationFee_;
     }
 
     modifier _enoughTokenForCreatePoll(uint day_){

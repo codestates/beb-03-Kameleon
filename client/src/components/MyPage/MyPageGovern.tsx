@@ -1,5 +1,6 @@
 import React from 'react';
 import Moment from 'react-moment';
+import { contractAddressTable } from '../../constants';
 import { MyPageItem, MyPageBar } from '../../pages/styles/MyPage.styles';
 import { IGovernType } from '../../types/components/Govern.types';
 import {
@@ -19,8 +20,7 @@ const MyPageGovern = () => {
       try {
         const getPollsLength = await callContract({
           contractName: 'Govern',
-          contractAddress: '0x27a6bC74934F7f57350eDF7eDacC59C9eE60F134',
-          // contractAddress: contractAddressTable['Govern'],
+          contractAddress: contractAddressTable['Govern'],
           methodName: 'getPollsLength',
         });
         console.log('getPollsLength : ', getPollsLength);
@@ -34,22 +34,20 @@ const MyPageGovern = () => {
             await Promise.all([
               await callContract({
                 contractName: 'Govern',
-                contractAddress: '0x27a6bC74934F7f57350eDF7eDacC59C9eE60F134',
-                // contractAddress: contractAddressTable['Govern'],
+                contractAddress: contractAddressTable['Govern'],
                 methodName: 'getPollState',
                 parameters: [i],
               }),
               await callContract({
                 contractName: 'Govern',
-                contractAddress: '0x27a6bC74934F7f57350eDF7eDacC59C9eE60F134',
-                // contractAddress: contractAddressTable['Govern'],
+                contractAddress: contractAddressTable['Govern'],
                 methodName: 'withdrawableBalance',
                 parameters: [i],
                 kaikas: true,
               }),
               await callContract({
                 contractName: 'Govern',
-                contractAddress: '0x27a6bC74934F7f57350eDF7eDacC59C9eE60F134',
+                contractAddress: contractAddressTable['Govern'],
                 methodName: 'getTotalSupply',
               }),
             ]);

@@ -73,7 +73,7 @@ const Poll = (props: IGovernType) => {
 
         <div>
           <div>
-            {`투표 마감 시간 : ${eTime.toLocaleString('ko')} ( `}
+            {`투표 마감 : ${eTime.toLocaleString('ko')} ( `}
             <Moment fromNow>{+endTime * 1000}</Moment> {')'}
           </div>
         </div>
