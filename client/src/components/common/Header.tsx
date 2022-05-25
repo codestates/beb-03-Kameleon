@@ -1,9 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { HeaderStyle, LogoStyle, NavStyle } from './Layout.style';
-import logoImage from '../../assets/images/logo.png';
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBars, faXmark, faWallet } from '@fortawesome/free-solid-svg-icons';
+import {
+  faBars,
+  faXmark,
+  faWallet,
+  faUser,
+} from '@fortawesome/free-solid-svg-icons';
 import { useSelector, useDispatch } from 'react-redux';
 import { login, logout } from '../../store/user';
 
@@ -16,6 +21,7 @@ interface RootState {
 
 const Header = () => {
   const [isNav, setIsNav] = useState<boolean>(false);
+  const [nav, setNav] = useState<string>('home');
   const dispatch = useDispatch();
   const selectUser = (state: RootState) => state.user;
   const user = useSelector(selectUser);
@@ -54,9 +60,7 @@ const Header = () => {
     <HeaderStyle>
       <div className="layout">
         <LogoStyle>
-          <Link to="/">
-            <img src={logoImage} alt="logo" />
-          </Link>
+          <Link to="/">Kameleon</Link>
         </LogoStyle>
         <NavStyle>
           <span className="m-menu" onClick={() => setIsNav(true)}>
@@ -64,25 +68,36 @@ const Header = () => {
           </span>
           <div className={`menu-list ${isNav ? 'on' : ''}`}>
             <ul>
-              <li>
+              <li
+                className={nav === 'home' ? 'on' : ''}
+                onClick={() => setNav('home')}
+              >
+                <Link to="/">Home</Link>
+              </li>
+              <li
+                className={nav === 'swap' ? 'on' : ''}
+                onClick={() => setNav('swap')}
+              >
                 <Link to="/swap">Swap</Link>
               </li>
-              <li>
+              <li
+                className={nav === 'pool' ? 'on' : ''}
+                onClick={() => setNav('pool')}
+              >
                 <Link to="/pool">Pool</Link>
               </li>
-              <li>
+              <li
+                className={nav === 'mint' ? 'on' : ''}
+                onClick={() => setNav('mint')}
+              >
                 <Link to="/mint">Mint&Burn</Link>
               </li>
-              <li>
+              <li
+                className={nav === 'govern' ? 'on' : ''}
+                onClick={() => setNav('govern')}
+              >
                 <Link to="/govern">Govern</Link>
               </li>
-              {user.isLogin ? (
-                <li>
-                  <Link to="/mypage">MyPage</Link>
-                </li>
-              ) : (
-                ''
-              )}
             </ul>
             <span className="btn-close" onClick={() => setIsNav(false)}>
               <FontAwesomeIcon icon={faXmark} />
@@ -96,7 +111,14 @@ const Header = () => {
                   Connect
                 </button>
               ) : (
-                <button type="button">{user.account.slice(0, 5)}...</button>
+                <>
+                  <Link to="/mypage">
+                    <em>
+                      <FontAwesomeIcon icon={faUser} />
+                    </em>
+                    {user.account.slice(0, 5)}...
+                  </Link>
+                </>
               )}
             </span>
           </div>
