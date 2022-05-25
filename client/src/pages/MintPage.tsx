@@ -70,20 +70,16 @@ const MintPage = () => {
     []
   );
 
-  console.log(balanceA, balanceB);
-
   const clickButton = useCallback(() => {
     // 임혁진 수정
     // 민트 클릭 시
-    if (tab == 'mint') {
-      // console.log(balanceA);
+    if (tab === 'mint') {
       sendContract({
         contractName: 'KStockToken',
         contractAddress: kStockTokenAddressTable[nameB],
         methodName: 'mint',
         amount: balanceA, // klay
       });
-      console.log('mint: mint 버튼 클릭' + balanceA);
     } else {
       // burn
       sendContract({
@@ -93,12 +89,9 @@ const MintPage = () => {
         parameters: [caver.utils.convertToPeb(balanceA, 'KLAY')], // * 1e18
       });
     }
-
-    console.log('button click', nameA, balanceA);
-  }, [nameA, nameB, balanceA, balanceB]);
+  }, [tab, nameA, nameB, balanceA]);
 
   useEffect(() => {
-    console.log(priceA / priceB);
     if (priceA > 0 && priceB > 0 && tab === 'mint') {
       const [, decimal] = String(priceA / priceB).split('.');
       if (decimal && decimal.length > 6) {
@@ -114,7 +107,7 @@ const MintPage = () => {
         setDetailInfo(priceB / priceA);
       }
     }
-  }, [priceA, priceB]);
+  }, [tab, priceA, priceB]);
 
   return (
     <MintPageWrapper>
