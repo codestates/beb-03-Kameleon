@@ -4,7 +4,7 @@ import axios from 'axios';
 import { exchangeAddressTable } from '../../constants';
 import { PoolListProps } from '../../pages/MyPage';
 
-const MyPagePoolItem = ({ id, name, balance }: PoolListProps) => {
+const MyPagePoolItem = ({ id, name, lpToken, balance }: PoolListProps) => {
   const [roi, setRoi] = React.useState<number>(0);
   React.useEffect(() => {
     const getPoolRoi = async () => {
@@ -25,8 +25,8 @@ const MyPagePoolItem = ({ id, name, balance }: PoolListProps) => {
   return (
     <MyPageItem key={id}>
       <div>{name}</div>
-      <div className="main__oracle">{balance}</div>
-      <div>no</div>
+      <div className="main__oracle">{lpToken} LPT</div>
+      <div>{balance}</div>
       <div>{roi}%</div>
     </MyPageItem>
   );
