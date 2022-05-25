@@ -54,7 +54,7 @@ const Header = () => {
     };
 
     checkUnlocked();
-  }, []);
+  }, [dispatch, user.account]);
 
   return (
     <HeaderStyle>
