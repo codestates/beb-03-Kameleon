@@ -7,6 +7,7 @@ import Moment from 'react-moment';
 import 'moment/locale/ko';
 import { IGovernPropsType } from '../../types/components/Govern.types';
 import { contractAddressTable } from '../../constants';
+import DoughnutChart from '../Chart/DoughnutChart';
 
 const PollModal = ({
   pollId,
@@ -44,34 +45,29 @@ const PollModal = ({
   return (
     <>
       <GovernPageModalContent>
-        <div>
+        {/* <div>
           <label htmlFor="pollId">pollId</label>
           <div>{pollId}</div>
-        </div>
+        </div> */}
         <div>
           <label htmlFor="title">Title</label>
-          <div>{title}</div>
+          <input value={title}></input>
         </div>
         <div>
           <label htmlFor="content">Content</label>
-          <div>{content}</div>
+          <textarea value={content}></textarea>
         </div>
         <div>
-          <label htmlFor="agree">agree</label>
-          <div>{+agree / 10 ** 18}</div>
+          <DoughnutChart
+            agree={+agree / 10 ** 18}
+            disagree={+disagree / 10 ** 18}
+            totalSupply={+totalSupply / 10 ** 18}
+          />
         </div>
-        <div>
-          <label htmlFor="disagree">disagree</label>
-          <div>{+disagree / 10 ** 18}</div>
-        </div>
-        <div>
-          <label htmlFor="totalSupply">totalSupply</label>
-          <div>{+totalSupply / 10 ** 18}</div>
-        </div>
-        <div>
-          <label htmlFor="totalSupply">expired</label>
+        {/* <div>
+          <label htmlFor="expired">expired</label>
           <div>{expired.toString()}</div>
-        </div>
+        </div> */}
         <div>
           <label htmlFor="time">time</label>
           <div>
@@ -83,7 +79,7 @@ const PollModal = ({
             ~ {<Moment format="YYYY-MM-DD HH:mm:ss">{+endTime * 1000}</Moment>}
           </div>
           <div>
-            투표 마감 : <Moment fromNow>{+endTime * 1000}</Moment>
+            투표 마감 : <Moment fromNow>{+endTime * 1000}</Moment> {`마감됨`}
           </div>
         </div>
         <div>
