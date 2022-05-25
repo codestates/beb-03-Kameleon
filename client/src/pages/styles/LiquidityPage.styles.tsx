@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-const LiquidityPageWrapper = styled.div`
+export const LiquidityPageWrapper = styled.div`
   max-width: var(--s-width);
   margin: auto;
   position: relative;
@@ -14,39 +14,10 @@ const LiquidityPageWrapper = styled.div`
     padding: 1rem 2rem;
     background-color: var(--white);
     border-radius: 1rem;
-
-    & > button {
-      display: block;
-      padding: 1rem 2rem;
-      margin: auto;
-      margin-top: 1.5rem;
-      width: 100%;
-      color: var(--white);
-      font-weight: 700;
-      font-size: 1rem;
-      background-color: var(--dark-green);
-      border-radius: 1rem;
-      border: 0;
-    }
-
-    & .multi-inp {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-
-      & > div {
-        width: 45%;
-      }
-
-      & > span {
-        width: 10%;
-        text-align: center;
-      }
-    }
   }
 `;
 
-const TabStyle = styled.span`
+export const TabStyle = styled.span`
   position: absolute;
   top: 0;
   right: 0;
@@ -69,93 +40,6 @@ const TabStyle = styled.span`
     :hover {
       cursor: pointer;
     }
-  }
-`;
-
-const InputStyle = styled.div`
-  position: relative;
-  padding: 0.8rem 1.6rem;
-  background-color: var(--green);
-  border-radius: 0.5rem;
-
-  & > div {
-    padding: 0.5rem;
-    margin-top: 0.5rem;
-    background-color: var(--white);
-
-    &.single-inp {
-      width: 80%;
-    }
-
-    & > label {
-      display: block;
-      width: 100%;
-      color: var(--gray);
-      font-size: 0.8rem;
-      font-weight: 700;
-    }
-
-    & > span {
-      display: flex;
-
-      & em {
-        font-style: normal;
-        font-size: 0.8rem;
-        font-weight: 700;
-        color: var(--green);
-      }
-
-      & input {
-        width: 100%;
-        border: 0;
-        margin-top: 0.3rem;
-      }
-    }
-  }
-  & > button {
-    position: absolute;
-    top: 1.2rem;
-    right: 1.6rem;
-    width: 15%;
-  }
-
-  & > dl {
-    padding: 0.5rem;
-    margin-top: 2rem;
-    background-color: var(--white);
-    font-size: 0.8rem;
-    font-weight: 700;
-
-    & > dt {
-      color: var(--gray);
-    }
-    & > dd {
-      margin-top: 0.3rem;
-      color: var(--green);
-    }
-  }
-`;
-
-const DetailInfoStyle = styled.dl`
-  margin-top: 1.5rem;
-  padding: 1rem;
-  border-top: 1px solid var(--green);
-
-  & > div {
-    display: flex;
-    font-size: 0.8rem;
-  }
-
-  & dt {
-    width: 35%;
-    color: var(--gray);
-  }
-
-  & dd {
-    width: 65%;
-    color: var(--green);
-    font-weight: 700;
-    text-align: right;
   }
 `;
 
@@ -186,4 +70,58 @@ export const OutputWrapper = styled.div`
   }
 `;
 
-export { LiquidityPageWrapper, InputStyle, DetailInfoStyle, TabStyle };
+export const ButtonWrapper = styled.button<{
+  balanceA?: string;
+  balanceB?: string;
+  isErrorA?: boolean;
+  isErrorB?: boolean;
+}>`
+  display: block;
+  padding: 1rem 2rem;
+  margin: auto;
+  margin-top: 1.5rem;
+  width: 100%;
+  color: var(--white);
+  font-weight: 700;
+  font-size: 1rem;
+  background-color: var(--dark-green);
+  border-radius: 1rem;
+  border: 2px solid var(--dark-green);
+
+  :hover {
+    cursor: pointer;
+    border: 2px solid var(--blue);
+  }
+
+  &.liquidity__addbutton {
+    opacity: ${(props) =>
+      Number(props.balanceA) > 0 &&
+      Number(props.balanceB) > 0 &&
+      !props.isErrorA &&
+      !props.isErrorB
+        ? ''
+        : '0.7'};
+
+    :hover {
+      border: ${(props) =>
+        Number(props.balanceA) > 0 &&
+        Number(props.balanceB) > 0 &&
+        !props.isErrorA &&
+        !props.isErrorB
+          ? '2px solid var(--blue)'
+          : '2px solid var(--dark-green)'};
+    }
+  }
+
+  &.liquidity__removebutton {
+    opacity: ${(props) =>
+      Number(props.balanceA) > 0 && !props.isErrorA ? '' : '0.7'};
+
+    :hover {
+      border: ${(props) =>
+        Number(props.balanceA) > 0 && !props.isErrorA
+          ? '2px solid var(--blue)'
+          : '2px solid var(--dark-green)'};
+    }
+  }
+`;

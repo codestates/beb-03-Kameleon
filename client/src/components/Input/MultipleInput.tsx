@@ -11,17 +11,12 @@ import {
 } from './styles/MultipleInput.styles';
 
 import useInput from '../../hooks/useInput';
-
-import { createTokenList } from '../../utils/dummyCreator';
 // 임혁진 수정
-import { callContract, getBalance } from '../../utils/KAS';
+import { callContract } from '../../utils/KAS';
 import {
   contractAddressTable,
   kStockTokenAddressTable,
 } from './../../constants';
-
-import Caver from 'caver-js';
-const caver = new Caver();
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -81,7 +76,6 @@ const MultipleInput = ({
     })
       .then((res) => {
         const tList = new Array<TokenListProps>();
-        console.log(res);
         const symbolTable = Object.keys(kStockTokenAddressTable);
         for (let i = 0; i < res.length; i++) {
           const token: TokenListProps = {
@@ -89,21 +83,15 @@ const MultipleInput = ({
             name: symbolTable[i],
             krwPrice: res[i] / 1000000000000000000,
           };
-          console.log(typeof res[i]);
-          console.log(token);
           tList.push(token);
         }
-        console.log('%%%%%%%' + tList);
         return tList;
       })
       .then((tList: Array<TokenListProps>) => {
-        console.log(tList);
         setTokenList(tList);
         setTokenName(tList[0].name);
         setTokenPrice(tList[0].krwPrice);
       });
-
-    // setTokenList(createTokenList(5));
   }, []);
 
   // tokenName 변경에 따라 Max값 변경

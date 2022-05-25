@@ -1,3 +1,5 @@
+require("dotenv").config();
+
 export const OracleAddress = process.env.Oracle_CONTRACT_ADDRESS;
 export const FactoryAddress = process.env.Factory_CONTRACT_ADDRESS;
 export const kStockTokenAddress = process.env.KStockToken_CONTRACT_ADDRESS;
