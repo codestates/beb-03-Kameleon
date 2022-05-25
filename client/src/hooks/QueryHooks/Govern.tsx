@@ -129,9 +129,66 @@ const TotalStakedBalanceHooks = ({
     }
   );
 };
+const MyStakeBalanceHooks = ({
+  key,
+  account,
+  refetchInterval = undefined,
+}: {
+  key: number | string;
+  account: string;
+  refetchInterval?: number | undefined;
+}) => {
+  return useQuery<[number | string, number | string], Error>(
+    ['MyStakeBalanceHooks', key],
+    async (): Promise<any> => {
+      try {
+        const [staked, stakable] = await Promise.all([
+          (async () => {
+            const result = await callContract({
+              contractName: 'Govern',
+              contractAddress: contractAddressTable['Govern'],
+              methodName: 'getTotalHoldingBalance',
+              account,
+              kaikas: true,
+            });
+            if (result instanceof Error === false) {
+              return result / 10 ** 18;
+            } else {
+              return 0;
+            }
+          })(),
+          (async () => {
+            const result = await callContract({
+              contractName: 'Kameleon',
+              contractAddress: contractAddressTable['Kameleon'],
+              methodName: 'balanceOf',
+              parameters: [account],
+            });
+            if (result instanceof Error === false) {
+              return result / 10 ** 18;
+            } else {
+              return 0;
+            }
+          })(),
+        ]);
+        return {
+          staked,
+          stakable,
+        };
+      } catch (error) {
+        console.log(error);
+        return 0;
+      }
+    },
+    {
+      refetchInterval,
+    }
+  );
+};
 
 export {
   GovernQueryHooks,
   WithdrawableBalanceQueryHooks,
   TotalStakedBalanceHooks,
+  MyStakeBalanceHooks,
 };

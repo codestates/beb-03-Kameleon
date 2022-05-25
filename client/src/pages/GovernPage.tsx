@@ -1,10 +1,9 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 
 import {
   GovernPageWrapper,
   GovernPageGovernList,
   GovernPagePollList,
-  GovernPageModalContent,
 } from './styles/GovernPage.styles';
 
 import Modal from '../components/modal/Modal';
@@ -14,20 +13,38 @@ import Poll from '../components/Govern/Poll';
 import {
   GovernQueryHooks,
   TotalStakedBalanceHooks,
+  MyStakeBalanceHooks,
 } from '../hooks/QueryHooks/Govern';
 import CreatePoll from '../components/Govern/CreatePoll';
+import { callContract } from '../utils/KAS';
+import { contractAddressTable } from '../constants';
+import { useSelector, useDispatch } from 'react-redux';
 
+interface RootState {
+  user: {
+    isLogin: boolean;
+    account: string;
+  };
+}
 const GovernPage = () => {
   const { isOpen, toggle } = useModal();
-  const tokenState = TotalStakedBalanceHooks({
+  const [myStaked, setMyStaked] = React.useState<number>(0);
+  const [myStakable, setMyStakable] = React.useState<string>('');
+
+  const selectUser = (state: RootState) => state.user;
+  const user = useSelector(selectUser);
+
+  const tokenState: any = TotalStakedBalanceHooks({
     key: 'GovernPage',
+  });
+  const myStakeBalance: any = MyStakeBalanceHooks({
+    key: 'GovernPage',
+    account: user.account,
   });
   const {
     isLoading,
     isError,
-    error,
     data: governList,
-    isSuccess,
   } = GovernQueryHooks({
     key: 'GovernPage',
   });
@@ -53,12 +70,12 @@ const GovernPage = () => {
         </div>
         <div>
           <div>
-            <p>STAKED</p>
-            <div>75.25 KMT</div>
+            <p>MY STAKED</p>
+            <div>{myStakeBalance?.data?.staked} KMT</div>
           </div>
           <div>
-            <p>STAKABLE</p>
-            <div>56.65 KMT</div>
+            <p>MY STAKABLE</p>
+            <div>{myStakeBalance?.data?.stakable} KMT</div>
           </div>
           <button>Manage Stake</button>
         </div>

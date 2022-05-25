@@ -605,7 +605,7 @@
 		"compilationTarget": {
 			"contracts/Kameleon.sol": "Kameleon"
 		},
-		"evmVersion": "byzantium",
+		"evmVersion": "petersburg",
 		"libraries": {},
 		"optimizer": {
 			"enabled": false,

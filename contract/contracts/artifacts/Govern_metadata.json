@@ -246,6 +246,20 @@
 			{
 				"constant": true,
 				"inputs": [],
+				"name": "getTotalHoldingBalance",
+				"outputs": [
+					{
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"payable": false,
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"constant": true,
+				"inputs": [],
 				"name": "owner",
 				"outputs": [
 					{
@@ -543,9 +557,9 @@
 	},
 	"sources": {
 		"contracts/Govern.sol": {
-			"keccak256": "0x0e787d018f2f81e33ef7bda33c6ea44c9124fd81c5ceb42f0f55deceab9d4965",
+			"keccak256": "0xe47d48654ba4ad41b1234d8b5aec16ebfcaaca02c32a3281cfae07094e322b2e",
 			"urls": [
-				"bzzr://d60507e5b665798533394c81d63bb64b143d196eb8d2758cb1a29552eedca308"
+				"bzzr://9d3468185c74013cad8236908d766e39261bcc5368542de1c23e2775cc3e9b8c"
 			]
 		},
 		"contracts/IKIP13.sol": {

@@ -35,7 +35,7 @@ export const contractAddressTable: { [x: string]: string } = {
   Oracle: '0xDD776448ded1cAc2108817bAe89fDc72c24474f1',
   Factory: '0xbD171B0509B88EF736Ab03865934cD900e1197a5',
   Kameleon: '0x48b19619273A96FFf8735a60D9A19924a5016E39',
-  Govern: '0x597F767E02C8875756a5977aEfCA98aff23D13D4',
+  Govern: '0x9A6Fa5C372fC911867D928db45E4cA1eC3E38720',
 };
 
 export const exchangeAddressTable: { [x: string]: string } = {
