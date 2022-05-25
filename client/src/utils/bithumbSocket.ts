@@ -1,15 +1,12 @@
-import { useState, useEffect, useLayoutEffect } from 'react';
+import { useState, useEffect } from 'react';
 import axios from 'axios';
 // WebSocket Ticker 데이터 가져오기
 // 사용되는 곳 CoinMarket
 export const useKlaySocket = (): string => {
   const [wsInstance, setWsInstance] = useState('');
-  const [isLoading, setIsLoading] = useState(true);
-
-  let ws: any;
 
   useEffect(() => {
-    ws = new WebSocket('wss://pubwss.bithumb.com/pub/ws');
+    const ws = new WebSocket('wss://pubwss.bithumb.com/pub/ws');
 
     let klaytnPrice = undefined;
     const getDefaultPrice = async () => {
@@ -17,9 +14,7 @@ export const useKlaySocket = (): string => {
         'https://api.bithumb.com/public/ticker/KLAY_KRW'
       );
       klaytnPrice = result?.data?.data?.closing_price;
-      console.log('asdf', klaytnPrice);
       setWsInstance(klaytnPrice);
-      setIsLoading(false);
     };
     if (klaytnPrice === undefined) {
       getDefaultPrice();
@@ -37,9 +32,7 @@ export const useKlaySocket = (): string => {
     ws.onmessage = (e: { data: Iterable<number> }) => {
       const data = JSON.parse(e.data.toString());
       klaytnPrice = data?.content?.closePrice;
-      console.log('asdf', klaytnPrice);
       if (klaytnPrice !== undefined) {
-        setIsLoading(false);
         setWsInstance(klaytnPrice);
       }
     };

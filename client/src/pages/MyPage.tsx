@@ -1,18 +1,7 @@
-import React from 'react';
 import { useState, useEffect } from 'react';
 
-import {
-  MyPageWrapper,
-  MyPageList,
-  MyPageItem,
-  MyPageBar,
-} from './styles/MyPage.styles';
+import { MyPageWrapper, MyPageList, MyPageItem } from './styles/MyPage.styles';
 
-import {
-  createMyList,
-  createMyPollList,
-  createMyGovernList,
-} from '../utils/dummyCreator';
 import { callContract, getBalance } from '../utils/KAS';
 import {
   contractAddressTable,
@@ -40,12 +29,8 @@ export interface PoolListProps {
 }
 
 const MyPage = () => {
-  // const myList = createMyList(5);
   const [myList, setMyList] = useState<Array<TokenListProps>>([]);
-
-  // const myPoolList = createMyPollList(5);
   const [myPoolList, setMyPoolList] = useState<Array<PoolListProps>>([]);
-  const myGovernList = createMyGovernList(5);
 
   useEffect(() => {
     // get myList
@@ -78,7 +63,7 @@ const MyPage = () => {
           })
         ); // array 삽입);
       }
-      const res = await Promise.all(tokenPriceList);
+      // const res = await Promise.all(tokenPriceList);
       // 위의 포문으로 배열 i개 삽입 후 setMyList
       // Promise.all(p[1], p[2]);
       setMyList(myList);
@@ -109,7 +94,7 @@ const MyPage = () => {
 
       // list 중 하나를 뽑아와 pool내 klay, pool내 kStock토큰수, total LP를 뽑은 후 {name: kSSE, lpAmount: 100, poolKlay: 10000, poolKStock: 200, totalSupply: 200}
       // poolToSearh :[{name: kSSE, lpAmount: lp토큰 수량}, ... ]
-      const promiseList: any = [];
+      // const promiseList: any = [];
       const myTempPool: any = [];
 
       poolToSearch.forEach(async (item: any, index: number) => {
@@ -185,7 +170,7 @@ const MyPage = () => {
 
     getMyList();
     getPoolList();
-  }, []);
+  }, [myPoolList]);
 
   return (
     <div>

@@ -50,7 +50,7 @@ const useButton = () => {
       dispatch(logout());
       alert('Kaikas 설치하시기 바랍니다.');
     }
-  }, []);
+  }, [dispatch]);
 
   // Apporve Token
   // (name: kStock 이름)

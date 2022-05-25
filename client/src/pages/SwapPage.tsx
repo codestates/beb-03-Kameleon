@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
-import { faArrowDown, faVolumeHigh } from '@fortawesome/free-solid-svg-icons';
+import { faArrowDown } from '@fortawesome/free-solid-svg-icons';
 import { useParams } from 'react-router-dom';
 import Caver from 'caver-js';
 
@@ -52,7 +52,7 @@ const amountToken = async (token: string, balance: string) => {
 
 const SwapPage = () => {
   const params = useParams();
-  const setToken: any = params.token !== undefined ? params.token : 'kSSE';
+  const setToken = params.token !== undefined ? params.token : 'kSSE';
   const [nameA, setNameA] = useState<string>(setToken);
   const [nameB, setNameB] = useState<string>(setToken);
   // const [detailInfo, setDetailInfo] = useState<number>(0);
@@ -194,14 +194,14 @@ const SwapPage = () => {
     };
 
     // main
-    if (nameA == 'KLAY') {
-      if (nameB == 'KLAY') {
+    if (nameA === 'KLAY') {
+      if (nameB === 'KLAY') {
         return doNothing({ tokenName, tokenBalance });
       } else {
         return klayToTokenInputA({ tokenName, tokenBalance });
       }
     } else {
-      if (nameB == 'KLAY') {
+      if (nameB === 'KLAY') {
         return tokenToKlayInputA({ tokenName, tokenBalance });
       } else {
         return onCalculateInputA({ tokenName, tokenBalance });
