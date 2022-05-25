@@ -170,7 +170,7 @@ const MyPage = () => {
             ).toLocaleString('ko-KR')}${item.name} `,
           });
           console.log('myTempPool', myTempPool);
-          setMyPoolList(myTempPool);
+          setMyPoolList([...myTempPool]);
           console.log('myPoolList', myPoolList);
         });
       });
