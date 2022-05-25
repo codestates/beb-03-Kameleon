@@ -5,9 +5,8 @@ import {
   SingleInputWrapper,
 } from './styles/SingleInput.styles';
 
-import { getBalance } from '../../utils/KAS';
-
 import useInput from '../../hooks/useInput';
+import { getBalance } from '../../utils/KAS';
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -51,7 +50,6 @@ const SingleInput = ({
   useEffect(() => {
     // 임혁진 수정
     getBalance({ address: window.klaytn.selectedAddress }).then((res) => {
-      console.log('&&&&&&&&&&&&&&&&&7' + res);
       setMaxValue(Number(res) / 1000000000000000000);
     });
     // setTokenList(createTokenList(5));

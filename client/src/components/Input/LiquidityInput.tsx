@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import Caver from 'caver-js';
 
 import {
   SingleInputContainer,
@@ -13,8 +12,6 @@ import useInput from '../../hooks/useInput';
 import { callContract } from '../../utils/KAS';
 import { kStockTokenAddressTable } from '../../constants';
 
-const caver = new Caver(window.klaytn);
-
 interface LayoutProps {
   children: React.ReactNode;
   liftState: (
@@ -26,6 +23,7 @@ interface LayoutProps {
   otherChange: boolean;
   isKlay: boolean;
   ratio: number;
+  numberOfDecimal: number;
 }
 
 const LiquidityInput = ({
@@ -35,10 +33,10 @@ const LiquidityInput = ({
   otherChange,
   isKlay,
   ratio,
+  numberOfDecimal,
 }: LayoutProps) => {
   const { id } = useParams();
   const [name, setName] = useState<string>('');
-  const [numberOfDecimal, setNumberOfDecimal] = useState<number>(0);
   const [maxBalance, setMaxBalance] = useState<number>(0);
   const {
     tokenBalance,
@@ -68,7 +66,6 @@ const LiquidityInput = ({
         getBalance({ address: window.klaytn.selectedAddress }).then((res) => {
           setMaxBalance(Number((Number(res) / 1000000000000000000).toFixed(2)));
         });
-        setNumberOfDecimal(2);
       } else if (name !== undefined) {
         callContract({
           contractName: 'KStockToken',
@@ -78,10 +75,9 @@ const LiquidityInput = ({
         }).then((res) =>
           setMaxBalance(Number((res / 1000000000000000000).toFixed(6)))
         );
-        setNumberOfDecimal(6);
       }
     }
-  }, [name, window.klaytn.selectedAddress]);
+  }, [name, isKlay]);
 
   useEffect(() => {
     liftState(tokenBalance, isChange, isDecimalError);
@@ -105,9 +101,15 @@ const LiquidityInput = ({
       }
       setIsChange(false);
     }
-  }, [otherBalance, isKlay, ratio, setIsChange]);
-
-  // console.log(ratio);
+  }, [
+    otherChange,
+    otherBalance,
+    isKlay,
+    ratio,
+    numberOfDecimal,
+    setIsChange,
+    setTokenBalance,
+  ]);
 
   return (
     <SingleInputContainer
@@ -116,20 +118,18 @@ const LiquidityInput = ({
     >
       <div>
         <section>
-          <label htmlFor="input">{children}</label>
+          <label htmlFor={name + isKlay}>{children}</label>
           {children === 'INPUT' && (
-            <label htmlFor="input">Max {maxBalance}</label>
+            <label htmlFor={name + isKlay}>Max {maxBalance}</label>
           )}
         </section>
         <SingleInputWrapper>
           <section>
-            {/* temp */}
-            {/* <img /> */}
             <div>{isKlay ? 'KLAY' : name}</div>
           </section>
           <input
             placeholder="0.00"
-            id="input"
+            id={name + isKlay}
             autoComplete="off"
             value={tokenBalance}
             onKeyDown={(e) => setKey(e.key)}
