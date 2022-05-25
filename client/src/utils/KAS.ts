@@ -7,7 +7,7 @@ import {
   kStockTokenAddressTable,
 } from './../constants/index';
 
-const callCaver = new Caver('https://api.baobab.klaytn.net:8651');
+export const callCaver = new Caver('https://api.baobab.klaytn.net:8651');
 const caver = new Caver(window.klaytn);
 
 const callIsApproved = async ({ stockName }: { stockName: string }) => {
@@ -166,7 +166,7 @@ const sendContract = async ({
       from: window.klaytn.selectedAddress,
       to: contractAddress,
       gas: 300000,
-      value: caver.utils.toPeb(amount, 'KLAY'),
+      value: caver.utils.convertToPeb(amount, 'KLAY'),
     });
     return result?.blockHash;
   } catch (error) {

@@ -12,7 +12,7 @@ import {
   PollWrapper,
   PollLabel,
 } from './styles/GovernInput.styles';
-import { sendContract } from '../../utils/KAS';
+import { callCaver, sendContract } from '../../utils/KAS';
 import { contractAddressTable } from '../../constants';
 
 interface LayoutProps {
@@ -66,7 +66,11 @@ const GovernInput = ({ children, pollId }: LayoutProps) => {
         contractName: 'Govern',
         contractAddress: contractAddressTable['Govern'],
         methodName: 'vote',
-        parameters: [pollId, (+tokenBalance * 10 ** 18).toString(), isAgree],
+        parameters: [
+          pollId,
+          callCaver.utils.convertToPeb(tokenBalance, 'KLAY'),
+          isAgree,
+        ],
       });
       console.log(result);
     }
