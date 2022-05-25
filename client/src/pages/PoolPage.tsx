@@ -70,7 +70,9 @@ const PoolPage = () => {
         {poolList.map((el) => (
           <Link to={`/liquidity/${el.name}`} key={el.id}>
             <PoolPageItem>
-              <div>{el.name}</div>
+              <div>
+                {el.name} {'<-> KLAY'}
+              </div>
               <div className="main__oracle">
                 {el.liquid.toLocaleString('ko-KR')}
               </div>
