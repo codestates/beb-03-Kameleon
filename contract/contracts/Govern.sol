@@ -42,6 +42,7 @@ contract Govern is Ownable {
         mapping(address => uint) holdingBalance;
     }
     mapping(uint => Poll) private polls;
+    mapping(address => uint) private totalHoldingBalance;
 
     uint pollIndex = 0;
     uint period = (60*60*24);
@@ -52,14 +53,26 @@ contract Govern is Ownable {
         _pollCreationFee = pollCreationFee_;
     }
 
-    function setToken(address KameleonTokenAddress) public onlyOwner returns (bool) {
+    function setTokenAddress(address KameleonTokenAddress) public onlyOwner returns (bool) {
         require(KameleonTokenAddress != address(0x0), "setToken function : KameleonTokenAddress is empty "); 
         KameleonToken = IKameleonKIP7(KameleonTokenAddress);
         return true;
     }
 
+    function getTokenAddress() public view returns (address) {
+        return address(KameleonToken);
+    }
+
+    function getTotalHoldingBalance() public view returns (uint) {
+        return totalHoldingBalance[msg.sender];
+    }
+
     function getPollCreationFee () public view returns(uint){
         return _pollCreationFee;
+    }
+
+    function setPollCreationFee (uint pollCreationFee_) public onlyOwner returns(uint){
+        _pollCreationFee = pollCreationFee_;
     }
 
     modifier _enoughTokenForCreatePoll(uint day_){
@@ -95,6 +108,7 @@ contract Govern is Ownable {
 
         // tranfer 한 balance 만큼 mapping
         polls[pollIndex_].holdingBalance[msg.sender] += value_;
+        totalHoldingBalance[msg.sender] += value_;
     }
 
     // poll에서 회수 가능한 토큰
@@ -118,6 +132,7 @@ contract Govern is Ownable {
     // poll 에서 토큰 회수
     function withdrawBalance (uint pollIndex_) public _isExpired(pollIndex_) {
         KameleonToken.safeTransfer(msg.sender,polls[pollIndex_].holdingBalance[msg.sender]);
+        totalHoldingBalance[msg.sender] -= polls[pollIndex_].holdingBalance[msg.sender];
         polls[pollIndex_].holdingBalance[msg.sender] = 0;
     }
 

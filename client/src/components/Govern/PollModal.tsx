@@ -5,7 +5,9 @@ import { sendContract } from '../../utils/KAS';
 import GovernInput from '../Input/GovernInput';
 import Moment from 'react-moment';
 import 'moment/locale/ko';
-import { IGovernType } from '../../types/components/Govern.types';
+import { IGovernPropsType } from '../../types/components/Govern.types';
+import { contractAddressTable } from '../../constants';
+import DoughnutChart from '../Chart/DoughnutChart';
 
 const PollModal = ({
   pollId,
@@ -17,7 +19,7 @@ const PollModal = ({
   createdTime,
   endTime,
   expired,
-}: IGovernType) => {
+}: IGovernPropsType) => {
   const [yes, no] = [+agree, +disagree];
   console.log('yes or no ', yes, no);
   const now = new Date().getTime();
@@ -34,7 +36,7 @@ const PollModal = ({
   const withdrawBalanceHander = async () => {
     const result = await sendContract({
       contractName: 'Govern',
-      contractAddress: '0x27a6bC74934F7f57350eDF7eDacC59C9eE60F134',
+      contractAddress: contractAddressTable['Govern'],
       methodName: 'withdrawBalance',
       parameters: [+pollId],
     });
@@ -43,34 +45,29 @@ const PollModal = ({
   return (
     <>
       <GovernPageModalContent>
-        <div>
+        {/* <div>
           <label htmlFor="pollId">pollId</label>
           <div>{pollId}</div>
-        </div>
+        </div> */}
         <div>
           <label htmlFor="title">Title</label>
-          <div>{title}</div>
+          <input value={title}></input>
         </div>
         <div>
           <label htmlFor="content">Content</label>
-          <div>{content}</div>
+          <textarea value={content}></textarea>
         </div>
         <div>
-          <label htmlFor="agree">agree</label>
-          <div>{+agree / 10 ** 18}</div>
+          <DoughnutChart
+            agree={+agree / 10 ** 18}
+            disagree={+disagree / 10 ** 18}
+            totalSupply={+totalSupply / 10 ** 18}
+          />
         </div>
-        <div>
-          <label htmlFor="disagree">disagree</label>
-          <div>{+disagree / 10 ** 18}</div>
-        </div>
-        <div>
-          <label htmlFor="totalSupply">totalSupply</label>
-          <div>{+totalSupply / 10 ** 18}</div>
-        </div>
-        <div>
-          <label htmlFor="totalSupply">expired</label>
+        {/* <div>
+          <label htmlFor="expired">expired</label>
           <div>{expired.toString()}</div>
-        </div>
+        </div> */}
         <div>
           <label htmlFor="time">time</label>
           <div>
@@ -82,7 +79,7 @@ const PollModal = ({
             ~ {<Moment format="YYYY-MM-DD HH:mm:ss">{+endTime * 1000}</Moment>}
           </div>
           <div>
-            투표 마감 시간 : <Moment fromNow>{+endTime * 1000}</Moment>
+            투표 마감 : <Moment fromNow>{+endTime * 1000}</Moment> {`마감됨`}
           </div>
         </div>
         <div>

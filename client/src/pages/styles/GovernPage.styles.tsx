@@ -216,6 +216,20 @@ export const GovernPageModalContent = styled.div`
     margin-bottom: 0.25rem;
   }
 
+  & > div > textarea {
+    width: 100%;
+    height: 5rem;
+    margin-bottom: 1rem;
+    padding: 0.5rem;
+    border: 0;
+    border-radius: 0.5rem;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--white);
+    background-color: var(--green);
+    outline: none;
+  }
+
   & input {
     width: 100%;
     height: 2.5rem;

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { contractAddressTable } from '../../constants';
 import { GovernPageModalContent } from '../../pages/styles/GovernPage.styles';
 import { sendContract } from '../../utils/KAS';
 
@@ -9,7 +10,7 @@ const CreatePoll = () => {
   const createPollHander = async () => {
     const result = await sendContract({
       contractName: 'Govern',
-      contractAddress: '0x27a6bC74934F7f57350eDF7eDacC59C9eE60F134',
+      contractAddress: contractAddressTable['Govern'],
       methodName: 'createPoll',
       parameters: [title, content, +day],
     });

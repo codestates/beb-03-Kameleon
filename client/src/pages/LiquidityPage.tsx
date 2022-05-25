@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useCallback } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 import { useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -11,6 +11,7 @@ import {
   TabStyle,
   IconWrapper,
   OutputWrapper,
+  ButtonWrapper,
 } from './styles/LiquidityPage.styles';
 
 import LiquidityInput from '../components/Input/LiquidityInput';
@@ -37,8 +38,8 @@ interface TokenType {
 }
 
 interface RatioType {
-  klayRatio: number;
-  kStockRatio: number;
+  klayBalance: number;
+  kStockBalance: number;
 }
 
 const LiquidityPage = () => {
@@ -48,11 +49,9 @@ const LiquidityPage = () => {
   const [isApprove, setIsApprove] = useState<boolean>(false);
   const [addRatio, setAddRatio] = useState<number>(0);
   const [removeRatio, setRemoveRatio] = useState<RatioType>({
-    klayRatio: 0,
-    kStockRatio: 0,
+    klayBalance: 0,
+    kStockBalance: 0,
   });
-  // const [output, setOutput] = useState<number>(0);
-  // const [output2, setOutput2] = useState<number>(0);
   const [klayToken, setKlayToken] = useState<TokenType>({
     balance: '',
     isChange: false,
@@ -129,7 +128,7 @@ const LiquidityPage = () => {
     if (window.klaytn.selectedAddress) {
       checkApprove();
     }
-  }, [name, user, window.klaytn.selectedAddres]);
+  }, [name, user]);
 
   useEffect(() => {
     // KLAY 대 kSTOCKTOKEN 비율 확인
@@ -150,62 +149,42 @@ const LiquidityPage = () => {
 
   useEffect(() => {
     const calculateOutput = async (kStockName: string, lpAmount: number) => {
-      const promiseTemp: Array<Promise<any>> = [];
-
       // 1.pool내 klay
-      let poolKlay: string;
-      promiseTemp.push(
-        getBalance({
-          address: exchangeAddressTable[kStockName],
-        }).then((res) => {
-          poolKlay = res;
-        })
-      );
+      const poolKlay = await getBalance({
+        address: exchangeAddressTable[kStockName],
+      });
 
       // 2.pool내 kStock토큰 수
-      let poolKStock: string;
-      promiseTemp.push(
-        callContract({
-          contractName: 'KStockToken',
-          contractAddress: kStockTokenAddressTable[kStockName],
-          methodName: 'balanceOf',
-          parameters: [exchangeAddressTable[kStockName]],
-        }).then((res) => {
-          poolKStock = res;
-        })
-      );
+      const poolKStock = await callContract({
+        contractName: 'KStockToken',
+        contractAddress: kStockTokenAddressTable[kStockName],
+        methodName: 'balanceOf',
+        parameters: [exchangeAddressTable[kStockName]],
+      });
 
       // 3.totalLP
-      let totalLP: string;
-      promiseTemp.push(
-        callContract({
-          contractName: 'Exchange',
-          contractAddress: exchangeAddressTable[kStockName],
-          methodName: 'totalSupply',
-        }).then((res) => {
-          totalLP = res;
-        })
-      );
+      const totalLP = await callContract({
+        contractName: 'Exchange',
+        contractAddress: exchangeAddressTable[kStockName],
+        methodName: 'totalSupply',
+      });
 
       // 모두 가져온 후 push
-      Promise.all(promiseTemp).then(() => {
-        const ratio =
-          (Number(lpAmount) * 1000000000000000000) / Number(totalLP);
-        setRemoveRatio({
-          klayRatio: Number(
-            ((Number(poolKlay) * ratio) / 1000000000000000000).toFixed(6)
-          ),
-          kStockRatio: Number(
-            ((Number(poolKStock) * ratio) / 1000000000000000000).toFixed(6)
-          ),
-        });
+      const ratio = (Number(lpAmount) * 1000000000000000000) / Number(totalLP);
+      setRemoveRatio({
+        klayBalance: Number(
+          ((Number(poolKlay) * ratio) / 1000000000000000000).toFixed(2)
+        ),
+        kStockBalance: Number(
+          ((Number(poolKStock) * ratio) / 1000000000000000000).toFixed(6)
+        ),
       });
     };
 
     if (Number(lpToken.balance) > 0) {
       calculateOutput(name, Number(lpToken.balance));
     }
-  }, [lpToken.balance]);
+  }, [name, lpToken.balance]);
 
   return (
     <LiquidityPageWrapper>
@@ -236,6 +215,7 @@ const LiquidityPage = () => {
                 otherChange={kStockToken.isChange}
                 isKlay={true}
                 ratio={addRatio}
+                numberOfDecimal={2}
               >
                 INPUT
               </LiquidityInput>
@@ -248,16 +228,17 @@ const LiquidityPage = () => {
                 otherChange={klayToken.isChange}
                 isKlay={false}
                 ratio={addRatio}
+                numberOfDecimal={6}
               >
                 INPUT
               </LiquidityInput>
             </div>
             {!user.isLogin ? (
-              <button type="button" onClick={connectButton}>
+              <ButtonWrapper type="button" onClick={connectButton}>
                 Connect
-              </button>
+              </ButtonWrapper>
             ) : isApprove ? (
-              <button
+              <ButtonWrapper
                 type="button"
                 onClick={async () => {
                   const result = await approveButton(name);
@@ -267,22 +248,27 @@ const LiquidityPage = () => {
                 }}
               >
                 Approve
-              </button>
+              </ButtonWrapper>
             ) : (
-              <button
+              <ButtonWrapper
+                className="liquidity__addbutton"
                 type="button"
+                balanceA={klayToken.balance}
+                balanceB={kStockToken.balance}
+                isErrorA={klayToken.isDecimalError}
+                isErrorB={kStockToken.isDecimalError}
                 onClick={() =>
                   addButton(name, klayToken.balance, kStockToken.balance)
                 }
               >
                 Add
-              </button>
+              </ButtonWrapper>
             )}
           </>
         ) : (
           <>
             <div>
-              <LiquidityRemoveInput liftState={liftLPToken}>
+              <LiquidityRemoveInput liftState={liftLPToken} numberOfDecimal={6}>
                 INPUT
               </LiquidityRemoveInput>
               <IconWrapper>
@@ -291,22 +277,25 @@ const LiquidityPage = () => {
               <OutputWrapper>
                 <label>OUTPUT</label>
                 <div>
-                  {removeRatio.klayRatio} KLAY + {removeRatio.kStockRatio}{' '}
+                  {removeRatio.klayBalance} KLAY + {removeRatio.kStockBalance}{' '}
                   {name}
                 </div>
               </OutputWrapper>
             </div>
             {!user.isLogin ? (
-              <button type="button" onClick={connectButton}>
+              <ButtonWrapper onClick={connectButton} type="button">
                 Connect
-              </button>
+              </ButtonWrapper>
             ) : (
-              <button
+              <ButtonWrapper
+                className="liquidity__removebutton"
                 type="button"
+                balanceA={lpToken.balance}
+                isErrorA={lpToken.isDecimalError}
                 onClick={() => removeButton(name, lpToken.balance)}
               >
                 Remove
-              </button>
+              </ButtonWrapper>
             )}
           </>
         )}

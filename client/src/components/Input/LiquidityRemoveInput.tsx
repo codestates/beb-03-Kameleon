@@ -1,19 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import Caver from 'caver-js';
 
 import {
   SingleInputContainer,
   SingleInputWrapper,
 } from './styles/LiquidityRemoveInput.styles';
 
-import { getBalance } from '../../utils/KAS';
-
 import useInput from '../../hooks/useInput';
 import { callContract } from '../../utils/KAS';
-import { exchangeAddressTable, kStockTokenAddressTable } from '../../constants';
-
-const caver = new Caver(window.klaytn);
+import { exchangeAddressTable } from '../../constants';
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -22,12 +17,16 @@ interface LayoutProps {
     isChange: boolean,
     isDecimalError: boolean
   ) => void;
+  numberOfDecimal: number;
 }
 
-const LiquidityRemoveInput = ({ children, liftState }: LayoutProps) => {
+const LiquidityRemoveInput = ({
+  children,
+  liftState,
+  numberOfDecimal,
+}: LayoutProps) => {
   const { id } = useParams();
   const [name, setName] = useState<string>('');
-  const [numberOfDecimal, setNumberOfDecimal] = useState<number>(6);
   const [maxBalance, setMaxBalance] = useState<number>(0);
   const {
     tokenBalance,
@@ -35,8 +34,6 @@ const LiquidityRemoveInput = ({ children, liftState }: LayoutProps) => {
     isBlankError,
     isDecimalError,
     isChange,
-    setIsChange,
-    setTokenBalance,
     setKey,
     setIsFocus,
     changeInput,
@@ -67,7 +64,7 @@ const LiquidityRemoveInput = ({ children, liftState }: LayoutProps) => {
           console.log(e);
         });
     }
-  }, [name, window.klaytn.selectedAddress]);
+  }, [name]);
 
   useEffect(() => {
     liftState(tokenBalance, isChange, isDecimalError);

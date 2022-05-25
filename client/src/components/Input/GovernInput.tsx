@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 
 import {
   SingleInputContainer,
@@ -13,6 +13,7 @@ import {
   PollLabel,
 } from './styles/GovernInput.styles';
 import { sendContract } from '../../utils/KAS';
+import { contractAddressTable } from '../../constants';
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -63,7 +64,7 @@ const GovernInput = ({ children, pollId }: LayoutProps) => {
       console.log(pollId, isAgree, tokenBalance);
       const result = await sendContract({
         contractName: 'Govern',
-        contractAddress: '0x27a6bC74934F7f57350eDF7eDacC59C9eE60F134',
+        contractAddress: contractAddressTable['Govern'],
         methodName: 'vote',
         parameters: [pollId, (+tokenBalance * 10 ** 18).toString(), isAgree],
       });

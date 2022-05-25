@@ -41,11 +41,43 @@ const sendApprove = async ({ stockName }: { stockName: string }) => {
   }
 };
 
+// const testContract = async ({
+//   contractName,
+//   contractAddress,
+//   methodName,
+//   parameters = [],
+//   account = undefined,
+// }: {
+//   contractName: string;
+//   contractAddress: string;
+//   methodName: string;
+//   parameters?: Array<string | number>;
+//   kaikas?: boolean;
+//   account?: string | undefined;
+// }) => {
+//   console.log('?????', parameters);
+//   const contract = new callCaver.klay.Contract(
+//     abiTable[contractName],
+//     contractAddress
+//   );
+//   const receipt = await contract.call(
+//     {
+//       from: account,
+//       gas: '300000',
+//     },
+//     methodName,
+//     null
+//   );
+//   console.log(`call receipt: ${receipt}`);
+//   return receipt;
+// };
+
 const callContract = async ({
   contractName,
   contractAddress,
   methodName,
   parameters = [],
+  account = undefined,
   kaikas = false,
 }: {
   contractName: string;
@@ -53,6 +85,7 @@ const callContract = async ({
   methodName: string;
   parameters?: Array<string | number>;
   kaikas?: boolean;
+  account?: string | undefined;
 }) => {
   try {
     if (
@@ -62,21 +95,34 @@ const callContract = async ({
     )
       throw 'Not enough arguments';
     let contract = undefined;
-    if (kaikas === true && window.klaytn !== undefined) {
+    // if (kaikas === true && window.klaytn !== undefined) {
+    if (kaikas === true) {
       contract = new caver.klay.Contract(
         abiTable[contractName],
         contractAddress
       );
-      const receipt = await contract.call(
-        {
-          from: window.klaytn.selectedAddress,
-          gas: '300000',
-        },
-        methodName,
-        parameters
-      );
-      console.log(`call receipt: ${receipt}`);
-      return receipt;
+      if (parameters.length > 0) {
+        const receipt = await contract.call(
+          {
+            from: account || window.klaytn.selectedAddress,
+            gas: '300000',
+          },
+          methodName,
+          parameters
+        );
+        console.log(`call receipt: ${receipt}`);
+        return receipt;
+      } else {
+        const receipt = await contract.call(
+          {
+            from: account || window.klaytn.selectedAddress,
+            gas: '300000',
+          },
+          methodName
+        );
+        console.log(`call receipt: ${receipt}`);
+        return receipt;
+      }
     } else {
       contract = callCaver.contract.create(
         abiTable[contractName],

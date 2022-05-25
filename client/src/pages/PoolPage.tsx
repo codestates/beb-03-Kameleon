@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import Caver from 'caver-js';
+import axios from 'axios';
 
 import {
   PoolPageWrapper,
@@ -8,12 +8,8 @@ import {
   PoolPageItem,
 } from './styles/PoolPage.styles';
 
-import { createPoolList } from '../utils/dummyCreator';
-import { callContract, sendContract, getBalance } from '../utils/KAS';
+import { callContract, getBalance } from '../utils/KAS';
 import { exchangeAddressTable, kStockTokenAddressTable } from '../constants';
-import axios from 'axios';
-
-const caver = new Caver(window.klaytn);
 
 interface PoolListProps {
   id: number;
@@ -23,7 +19,6 @@ interface PoolListProps {
 }
 
 const PoolPage = () => {
-  // const poolList = createPoolList(20);
   const [poolList, setPoolList] = useState<Array<PoolListProps>>([]);
 
   useEffect(() => {
@@ -43,7 +38,7 @@ const PoolPage = () => {
         });
         const {
           data: { success, data },
-        } = await axios.get(`http://localhost:4001/api/contract/getPoolRoi`, {
+        } = await axios.get(`/api/contract/getPoolRoi`, {
           params: {
             exchangeAddress: exchangeAddressTable[exchangeAddressList[i]],
           },

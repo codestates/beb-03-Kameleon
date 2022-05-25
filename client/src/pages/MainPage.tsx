@@ -43,7 +43,7 @@ const MainPage = () => {
     // sever에서 naverAPI 데이터 가져옴
     const stockAPI = await axios({
       method: 'get',
-      url: `http://localhost:4001/api/stock/getStocks`,
+      url: `/api/stock/getStocks`,
     });
     const stockData = stockAPI.data.data;
 
@@ -82,7 +82,7 @@ const MainPage = () => {
         const krwPrice = +klayAmount * 1.003 * +currentKlayPrice;
 
         // premium 값 구하기
-        const premium = (+oraclePrice / krwPrice - 1) * 100;
+        const premium = (krwPrice / +oraclePrice - 1) * 100;
 
         return {
           name: stockName,
