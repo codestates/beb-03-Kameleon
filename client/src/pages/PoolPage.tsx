@@ -37,8 +37,8 @@ const PoolPage = () => {
           parameters: [exchangeAddressTable[exchangeAddressList[i]]], // 인자값 balanceOf(address aacount)
         });
         const {
-          data: { data },
-        } = await axios.get(`http://localhost:4001/api/contract/getPoolRoi`, {
+          data: { success, data },
+        } = await axios.get(`/api/contract/getPoolRoi`, {
           params: {
             exchangeAddress: exchangeAddressTable[exchangeAddressList[i]],
           },
@@ -60,7 +60,7 @@ const PoolPage = () => {
 
   return (
     <PoolPageWrapper>
-      <h2>Pool</h2>
+      <h2 className="tit">Pool</h2>
       <PoolPageList>
         <div>
           <div>Pair name</div>

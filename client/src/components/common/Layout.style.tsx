@@ -1,8 +1,11 @@
 import styled from 'styled-components';
+import mobLogoImage from '../../assets/images/m-logo.png';
+import logoImage from '../../assets/images/logo.png';
 
 const HeaderStyle = styled.header`
   width: 100%;
-  background-color: #276955;
+  background-color: var(--dark-green);
+  box-shadow: 0px 5px 5px rgba(19, 48, 39, 0.3);
 
   .layout {
     display: flex;
@@ -12,7 +15,10 @@ const HeaderStyle = styled.header`
     height: 80px;
   }
 
-  @media only screen and (max-width: 640px) {
+  @media only screen and (max-width: 760px) {
+    .layout {
+      height: 60px;
+    }
     .utils {
       display: none;
     }
@@ -23,11 +29,20 @@ const LogoStyle = styled.h1`
   width: 140px;
   a {
     display: block;
-    padding: 9px 0;
+    padding-top: 80px;
+    font-size: 0;
+    background-image: url(${logoImage});
+    background-repeat: no-repeat;
+    background-size: 100%;
+    background-position: center;
   }
-  img {
-    display: block;
-    width: 100%;
+
+  @media only screen and (max-width: 760px) {
+    width: 60px;
+    a {
+      background-image: url(${mobLogoImage});
+      background-size: 70%;
+    }
   }
 `;
 
@@ -51,8 +66,23 @@ const NavStyle = styled.nav`
       padding: 0 15px;
       a {
         display: block;
-        color: #fff;
+        color: #41a58d;
         font-size: 1.3rem;
+      }
+
+      transition: all 0.5s;
+
+      &:hover {
+        a {
+          color: #fff;
+        }
+      }
+
+      &.on {
+        a {
+          color: #fff;
+          font-weight: 700;
+        }
       }
     }
   }
@@ -61,18 +91,20 @@ const NavStyle = styled.nav`
     display: block;
     margin-left: auto;
 
+    & > a,
     & > button {
-      padding: 0.4rem 1.8rem;
-      min-width: 155px;
+      display: inline-block;
+      padding: 0.4rem 1.5rem;
+      min-width: 140px;
       background-color: transparent;
       border: 2px solid var(--green);
       border-radius: 4rem;
       color: var(--green);
-      font-size: 1rem;
+      font-size: 0.8rem;
       font-weight: 700;
 
       & em {
-        margin-right: 0.8rem;
+        margin-right: 0.6rem;
       }
     }
   }
@@ -97,7 +129,7 @@ const NavStyle = styled.nav`
     z-index: 1;
   }
 
-  @media only screen and (max-width: 640px) {
+  @media only screen and (max-width: 760px) {
     display: flex;
     align-items: center;
     margin-left: auto;
@@ -155,68 +187,14 @@ const NavStyle = styled.nav`
         padding: 1rem 0;
         text-align: left;
         border-bottom: 1px solid var(--white);
+
+        a {
+          font-size: 1rem;
+        }
       }
     }
   }
 `;
-
-// const MNavStyle = styled.div`
-//   display: none;
-
-//   @media only screen and (max-width: 600px) {
-//     display: block;
-//     margin-left: auto;
-
-//     .m-menu {
-//       padding: 0.4rem;
-//       font-size: 1.5rem;
-//       color: var(--white);
-//       cursor: pointer;
-//     }
-
-//     .m-menu-list {
-//       position: fixed;
-//       top: 0;
-//       left: 0;
-//       min-width: 100%;
-//       min-height: 100vh;
-//       background-color: rgba(0, 0, 0, 0.5);
-//       z-index: 1;
-
-//       & > ul {
-//         position: absolute;
-//         top: 0;
-//         right: 0;
-//         width: 50%;
-//         height: 100%;
-//         padding: 5rem 2rem 3rem;
-//         text-align: right;
-//         background-color: var(--deep-green);
-//       }
-
-//       & li {
-//         margin-top: 1.5rem;
-
-//         :first-child {
-//           margin-top: 0;
-//         }
-//       }
-
-//       & a {
-//         color: var(--white);
-//         font-size: 1.5rem;
-//       }
-
-//       .btn-close {
-//         position: absolute;
-//         top: 24px;
-//         right: 24px;
-//         color: var(--white);
-//         font-size: 1.5rem;
-//       }
-//     }
-//   }
-// `;
 
 const FooterStyle = styled.footer`
   padding: 12px 0;
@@ -227,6 +205,19 @@ const FooterStyle = styled.footer`
   a {
     color: #fff;
     margin-left: 5px;
+  }
+
+  .m-copyright {
+    display: none;
+  }
+
+  @media only screen and (max-width: 760px) {
+    .copyright {
+      display: none;
+    }
+    .m-copyright {
+      display: inline-block;
+    }
   }
 `;
 

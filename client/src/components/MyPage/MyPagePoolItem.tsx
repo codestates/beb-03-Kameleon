@@ -10,7 +10,7 @@ const MyPagePoolItem = ({ id, name, lpToken, balance }: PoolListProps) => {
     const getPoolRoi = async () => {
       const {
         data: { success, data },
-      } = await axios.get(`http://localhost:4001/api/contract/getPoolRoi`, {
+      } = await axios.get(`/api/contract/getPoolRoi`, {
         params: {
           exchangeAddress: exchangeAddressTable[name],
         },

@@ -6,22 +6,17 @@
 	"output": {
 		"abi": [
 			{
-				"constant": false,
-				"inputs": [
-					{
-						"name": "KameleonTokenAddress",
-						"type": "address"
-					}
-				],
-				"name": "setToken",
+				"constant": true,
+				"inputs": [],
+				"name": "getTokenAddress",
 				"outputs": [
 					{
 						"name": "",
-						"type": "bool"
+						"type": "address"
 					}
 				],
 				"payable": false,
-				"stateMutability": "nonpayable",
+				"stateMutability": "view",
 				"type": "function"
 			},
 			{
@@ -79,6 +74,25 @@
 				],
 				"payable": false,
 				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"constant": false,
+				"inputs": [
+					{
+						"name": "KameleonTokenAddress",
+						"type": "address"
+					}
+				],
+				"name": "setTokenAddress",
+				"outputs": [
+					{
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"payable": false,
+				"stateMutability": "nonpayable",
 				"type": "function"
 			},
 			{
@@ -223,6 +237,20 @@
 					{
 						"name": "",
 						"type": "bool"
+					}
+				],
+				"payable": false,
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"constant": true,
+				"inputs": [],
+				"name": "getTotalHoldingBalance",
+				"outputs": [
+					{
+						"name": "",
+						"type": "uint256"
 					}
 				],
 				"payable": false,
@@ -430,6 +458,25 @@
 				],
 				"payable": false,
 				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"constant": false,
+				"inputs": [
+					{
+						"name": "pollCreationFee_",
+						"type": "uint256"
+					}
+				],
+				"name": "setPollCreationFee",
+				"outputs": [
+					{
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"payable": false,
+				"stateMutability": "nonpayable",
 				"type": "function"
 			},
 			{

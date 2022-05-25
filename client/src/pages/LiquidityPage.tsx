@@ -188,7 +188,7 @@ const LiquidityPage = () => {
 
   return (
     <LiquidityPageWrapper>
-      <h2>Liquidity</h2>
+      <h2 className="tit">Liquidity</h2>
       <TabStyle>
         <button
           type="button"

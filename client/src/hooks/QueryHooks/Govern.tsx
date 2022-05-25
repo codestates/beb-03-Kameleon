@@ -1,6 +1,6 @@
 import { useQuery } from 'react-query';
 import { callContract } from '../../utils/KAS';
-import { abiTable } from '../../constants';
+import { abiTable, contractAddressTable } from '../../constants';
 import {
   getMethodReturnStructType,
   getParsedDataFromUsingMethodType,
@@ -32,12 +32,12 @@ const GovernQueryHooks = ({ key, refetchInterval }: inputType) => {
         // });
         const callResult = await callContract({
           contractName: 'Govern',
-          contractAddress: '0x27a6bC74934F7f57350eDF7eDacC59C9eE60F134',
+          contractAddress: contractAddressTable['Govern'],
           methodName: 'pollList',
         });
         const totalSupplyResult = await callContract({
           contractName: 'Govern',
-          contractAddress: '0x27a6bC74934F7f57350eDF7eDacC59C9eE60F134',
+          contractAddress: contractAddressTable['Govern'],
           methodName: 'getTotalSupply',
         });
         const pollListTypeArray = getMethodReturnStructType({
@@ -82,7 +82,7 @@ const WithdrawableBalanceQueryHooks = ({
       try {
         const callResult = await callContract({
           contractName: 'Govern',
-          contractAddress: '0x27a6bC74934F7f57350eDF7eDacC59C9eE60F134',
+          contractAddress: contractAddressTable['Govern'],
           methodName: 'withdrawableBalance',
           parameters: [+pollId],
           kaikas: true,
@@ -111,14 +111,70 @@ const TotalStakedBalanceHooks = ({
     ['totalStakedBalanceHooks', key],
     async (): Promise<number> => {
       try {
-        const governAddress = '0x27a6bC74934F7f57350eDF7eDacC59C9eE60F134';
+        const governAddress = contractAddressTable['Govern'];
         const result = await callContract({
           contractName: 'Kameleon',
-          contractAddress: '0xd0a62633f9e77a5fe27ed733c4938fb38cfbeea1',
+          contractAddress: contractAddressTable['Kameleon'],
           methodName: 'balanceOf',
           parameters: [governAddress],
         });
         return +result / 10 ** 18;
+      } catch (error) {
+        console.log(error);
+        return 0;
+      }
+    },
+    {
+      refetchInterval,
+    }
+  );
+};
+const MyStakeBalanceHooks = ({
+  key,
+  account,
+  refetchInterval = undefined,
+}: {
+  key: number | string;
+  account: string;
+  refetchInterval?: number | undefined;
+}) => {
+  return useQuery<[number | string, number | string], Error>(
+    ['MyStakeBalanceHooks', key],
+    async (): Promise<any> => {
+      try {
+        const [staked, stakable] = await Promise.all([
+          (async () => {
+            const result = await callContract({
+              contractName: 'Govern',
+              contractAddress: contractAddressTable['Govern'],
+              methodName: 'getTotalHoldingBalance',
+              account,
+              kaikas: true,
+            });
+            if (result instanceof Error === false) {
+              return result / 10 ** 18;
+            } else {
+              return 0;
+            }
+          })(),
+          (async () => {
+            const result = await callContract({
+              contractName: 'Kameleon',
+              contractAddress: contractAddressTable['Kameleon'],
+              methodName: 'balanceOf',
+              parameters: [account],
+            });
+            if (result instanceof Error === false) {
+              return result / 10 ** 18;
+            } else {
+              return 0;
+            }
+          })(),
+        ]);
+        return {
+          staked,
+          stakable,
+        };
       } catch (error) {
         console.log(error);
         return 0;
@@ -134,4 +190,5 @@ export {
   GovernQueryHooks,
   WithdrawableBalanceQueryHooks,
   TotalStakedBalanceHooks,
+  MyStakeBalanceHooks,
 };

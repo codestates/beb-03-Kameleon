@@ -43,7 +43,7 @@ const MainPage = () => {
     // sever에서 naverAPI 데이터 가져옴
     const stockAPI = await axios({
       method: 'get',
-      url: `http://localhost:4001/api/stock/getStocks`,
+      url: `/api/stock/getStocks`,
     });
     const stockData = stockAPI.data.data;
 
@@ -82,7 +82,7 @@ const MainPage = () => {
         const krwPrice = +klayAmount * 1.003 * +currentKlayPrice;
 
         // premium 값 구하기
-        const premium = (+oraclePrice / krwPrice - 1) * 100;
+        const premium = (krwPrice / +oraclePrice - 1) * 100;
 
         return {
           name: stockName,
@@ -106,29 +106,31 @@ const MainPage = () => {
 
   return (
     <MainPageWrapper>
-      <h2>Stock List</h2>
+      <h2 className="tit">Stock List</h2>
       <MainPageSearch>
         <input onChange={(e) => changeInput(e)} />
         <button>Search</button>
       </MainPageSearch>
       <MainPageList>
-        <div>
-          <div>Name</div>
-          <div className="main__oracle">Oracle price</div>
-          <div>Price(KRW)</div>
-          <div>Premium(%)</div>
+        <div className="table-header">
+          <span>Name</span>
+          <span className="main__oracle">Oracle price</span>
+          <span>Price(KRW)</span>
+          <span>Premium(%)</span>
         </div>
         {stockList.map((el, index) => (
           <MainPageItem key={index}>
             <Link to={`/swap/${el.token}`}>
-              <div>{el.name}</div>
-              <div className="main__oracle">
+              <span className="main__name">
+                {el.name} <em>({el.token})</em>
+              </span>
+              <span className="main__oracle">
                 {el.oraclePrice.toLocaleString('ko-KR')}
-              </div>
-              <div className="main__usd">
+              </span>
+              <span className="main__price">
                 {el.krwPrice.toLocaleString('ko-KR')}
-              </div>
-              <div>{el.premium}%</div>
+              </span>
+              <span>{el.premium}%</span>
             </Link>
           </MainPageItem>
         ))}

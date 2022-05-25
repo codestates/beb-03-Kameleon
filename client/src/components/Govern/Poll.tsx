@@ -14,11 +14,17 @@ import {
   faCheck,
 } from '@fortawesome/free-solid-svg-icons';
 import Moment from 'react-moment';
-import { IGovernType } from '../../types/components/Govern.types';
+import { IGovernPropsType } from '../../types/components/Govern.types';
 
-const Poll = (props: IGovernType) => {
-  const { title, agree, disagree, totalSupply, endTime, expired }: IGovernType =
-    props;
+const Poll = (props: IGovernPropsType) => {
+  const {
+    title,
+    agree,
+    disagree,
+    totalSupply,
+    endTime,
+    expired,
+  }: IGovernPropsType = props;
 
   const { isOpen, toggle } = useModal();
 
@@ -55,7 +61,10 @@ const Poll = (props: IGovernType) => {
               </>
             )}
           </div>
-          <h2>{title}</h2>
+          <span>
+            <b>TITLE :</b>
+            <em>{title}</em>
+          </span>
         </section>
         <GoverQuorum
           percentage={process.env.REACT_APP_MINIMUM_VOTING_PERCENTAGE}
@@ -72,10 +81,11 @@ const Poll = (props: IGovernType) => {
         </GovernPageBar>
 
         <div>
-          <div>
-            {`투표 마감 시간 : ${eTime.toLocaleString('ko')} ( `}
-            <Moment fromNow>{+endTime * 1000}</Moment> {')'}
-          </div>
+          {`투표 마감 시간 : ${eTime.toLocaleString('ko')} ( `}
+          <Moment fromNow style={{ fontSize: '0.8rem' }}>
+            {+endTime * 1000}
+          </Moment>
+          {')'}
         </div>
       </GovernPagePollItem>
       <Modal

@@ -300,7 +300,7 @@ const SwapPage = () => {
 
   return (
     <SwapPageWrapper>
-      <h2>Swap</h2>
+      <h2 className="tit">Swap</h2>
       <form action="">
         <SwapInput {...swapInputPropsA} onCalculateInput={swapSelector}>
           INPUT

@@ -3,15 +3,15 @@ import styled from 'styled-components';
 export const GovernPageWrapper = styled.div`
   max-width: var(--width);
   margin: 0 auto;
-  color: var(--white);
-
-  & > h2 {
-    margin: 1rem;
-  }
+  color: var(--dark-green);
 `;
 
 export const GovernPageGovernList = styled.div`
   display: flex;
+
+  & h3 {
+    font-size: 2rem;
+  }
 
   & > div {
     width: 100%;
@@ -19,7 +19,7 @@ export const GovernPageGovernList = styled.div`
     margin: 0.5rem;
     padding: 3rem;
     border-radius: 0.5rem;
-    background-color: var(--dark-green);
+    background-color: var(--white);
   }
 
   & > div {
@@ -64,7 +64,7 @@ export const GovernPageGovernList = styled.div`
     font-size: 1rem;
     font-weight: 600;
     color: var(--white);
-    background-color: var(--deep-green);
+    background-color: var(--dark-green);
 
     &:hover {
       cursor: pointer;
@@ -96,8 +96,8 @@ export const GovernPagePollItem = styled.div<{
   margin: 0.5rem;
   padding: 2rem;
   border-radius: 0.5rem;
-  background-color: var(--dark-green);
-  opacity: ${(props) => (props.isExpired === true ? '0.7' : '1')};
+  background-color: var(--white);
+  opacity: ${(props) => (props.isExpired === true ? '0.5' : '1')};
 
   transition: border-color 0.2s;
   border: 2px solid transparent;
@@ -106,14 +106,28 @@ export const GovernPagePollItem = styled.div<{
     font-weight: 600;
     color: ${(props) =>
       !props.isExpired
-        ? 'var(--white)'
+        ? 'var(--green)'
         : props.enoughQuorum && props.yes > props.no
         ? 'var(--blue)'
         : 'var(--red)'};
   }
 
-  & > section > h2 {
-    margin-bottom: 1rem;
+  & > section > span {
+    display: block;
+    margin-top: 1rem;
+
+    & b {
+      font-size: 1rem;
+      font-weight: 400;
+    }
+
+    & em {
+      margin-left: 0.2rem;
+      color: var(--deep-green);
+      font-weight: 700;
+      font-size: 1.3rem;
+      font-style: normal;
+    }
   }
 
   & > p {
@@ -125,11 +139,9 @@ export const GovernPagePollItem = styled.div<{
   }
 
   & > div:last-child {
-    position: relative;
-    & > div {
-      position: absolute;
-      right: 0;
-    }
+    margin-top: 0.6rem;
+    text-align: right;
+    font-size: 0.8rem;
   }
 
   @media (max-width: 1023px) {
@@ -145,7 +157,7 @@ export const GovernPageBar = styled.div<{
   display: flex;
   min-width: 100%;
   height: 1rem;
-  background-color: var(--white);
+  border: 1px solid var(--dark-green);
 
   & > div {
     &:first-of-type {
@@ -168,6 +180,7 @@ export const GovernPageBar = styled.div<{
 
 export const GoverQuorum = styled.div<{ percentage: string }>`
   position: relative;
+  margin-top: 1rem;
   font-size: 12px;
   height: 25px;
 
@@ -175,7 +188,7 @@ export const GoverQuorum = styled.div<{ percentage: string }>`
     left: ${(props) => `${props.percentage}%`};
     position: absolute;
     top: 0;
-    color: white;
+    color: var(--green);
     font-size: inherit;
     font-weight: 600;
     height: 25px;
@@ -186,7 +199,7 @@ export const GoverQuorum = styled.div<{ percentage: string }>`
     content: '';
     width: 2px;
     height: 8px;
-    background: white;
+    background: var(--green);
     position: absolute;
     left: 50%;
     bottom: 0;
@@ -201,6 +214,20 @@ export const GovernPageModalContent = styled.div`
     font-size: 1.2rem;
     font-weight: 600;
     margin-bottom: 0.25rem;
+  }
+
+  & > div > textarea {
+    width: 100%;
+    height: 5rem;
+    margin-bottom: 1rem;
+    padding: 0.5rem;
+    border: 0;
+    border-radius: 0.5rem;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--white);
+    background-color: var(--green);
+    outline: none;
   }
 
   & input {
