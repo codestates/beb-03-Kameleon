@@ -114,7 +114,7 @@ const TotalStakedBalanceHooks = ({
         const governAddress = contractAddressTable['Govern'];
         const result = await callContract({
           contractName: 'Kameleon',
-          contractAddress: '0xd0a62633f9e77a5fe27ed733c4938fb38cfbeea1',
+          contractAddress: contractAddressTable['Kameleon'],
           methodName: 'balanceOf',
           parameters: [governAddress],
         });

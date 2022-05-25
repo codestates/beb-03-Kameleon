@@ -2,7 +2,10 @@ import React from 'react';
 import Moment from 'react-moment';
 import { contractAddressTable } from '../../constants';
 import { MyPageItem, MyPageBar } from '../../pages/styles/MyPage.styles';
-import { IGovernType } from '../../types/components/Govern.types';
+import {
+  IGovernType,
+  IGovernPropsType,
+} from '../../types/components/Govern.types';
 import {
   getMethodReturnStructType,
   getParsedDataFromUsingMethodType,
@@ -68,16 +71,22 @@ const MyPageGovern = () => {
   return (
     <>
       {governList.map(
-        ({ title, agree, disagree, endTime, totalSupply }: newGovernType) => {
+        ({ title, agree, disagree, endTime, totalSupply }: IGovernType) => {
           return (
             <MyPageItem>
               <div>{title}</div>
-              <MyPageBar yes={+agree} no={+disagree} totalSupply={totalSupply}>
+              <MyPageBar
+                yes={agree as number}
+                no={disagree as number}
+                totalSupply={totalSupply as string}
+              >
                 <div></div>
                 <div></div>
               </MyPageBar>
               <div>
-                <Moment fromNow>{+endTime * 1000}</Moment>
+                <Moment fromNow>
+                  {+(endTime as unknown as number) * 1000}
+                </Moment>
               </div>
             </MyPageItem>
           );

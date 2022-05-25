@@ -5,7 +5,7 @@ import { sendContract } from '../../utils/KAS';
 import GovernInput from '../Input/GovernInput';
 import Moment from 'react-moment';
 import 'moment/locale/ko';
-import { IGovernType } from '../../types/components/Govern.types';
+import { IGovernPropsType } from '../../types/components/Govern.types';
 import { contractAddressTable } from '../../constants';
 
 const PollModal = ({
@@ -18,7 +18,7 @@ const PollModal = ({
   createdTime,
   endTime,
   expired,
-}: IGovernType) => {
+}: IGovernPropsType) => {
   const [yes, no] = [+agree, +disagree];
   console.log('yes or no ', yes, no);
   const now = new Date().getTime();
