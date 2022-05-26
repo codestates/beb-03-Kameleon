@@ -8,7 +8,7 @@ import {
   ModalWrapper,
   ModalHeader,
   ModalCloseButton,
-} from './Modal.styles';
+} from './ModalPortal.styles';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 interface ModalProps {
@@ -20,7 +20,12 @@ interface ModalProps {
 
 const xMark = faXmark as IconProp;
 
-const Modal = ({ isOpen, closeModal, width, modalContent }: ModalProps) => {
+const ModalPortal = ({
+  isOpen,
+  closeModal,
+  width,
+  modalContent,
+}: ModalProps) => {
   const modal = (
     <>
       <ModalBackDrop onClick={closeModal} />
@@ -38,4 +43,4 @@ const Modal = ({ isOpen, closeModal, width, modalContent }: ModalProps) => {
   return isOpen ? ReactDOM.createPortal(modal, document.body) : null;
 };
 
-export default Modal;
+export default ModalPortal;

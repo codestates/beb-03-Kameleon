@@ -1,7 +1,7 @@
 import { useEffect, useState, useCallback } from 'react';
 import { useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
 import { faPlus, faArrowDown } from '@fortawesome/free-solid-svg-icons';
@@ -16,6 +16,7 @@ import {
   ButtonWrapper,
 } from './styles/LiquidityPage.styles';
 
+import ToastPortal from '../components/portal/ToastPortal';
 import LiquidityInput from '../components/Input/LiquidityInput';
 import LiquidityRemoveInput from '../components/Input/LiquidityRemoveInput';
 
@@ -72,8 +73,8 @@ const LiquidityPage = () => {
   const { addButton, removeButton, connectButton, approveButton } = useButton();
   const selectUser = (state: RootState) => state.user;
   const user = useSelector(selectUser);
-  const successNotify = () => toast.success('Success!');
-  const failNotify = () => toast.error('fail!');
+  const successNotify = () => toast.success('SUCCESS!!!');
+  const failNotify = () => toast.error('FAIL!!!');
 
   const liftKlayToken = useCallback(
     (balance: string, isChange: boolean, isDecimalError: boolean) => {
@@ -321,7 +322,7 @@ const LiquidityPage = () => {
           </>
         )}
       </form>
-      <ToastContainer icon={false} />
+      <ToastPortal />
     </LiquidityPageWrapper>
   );
 };
