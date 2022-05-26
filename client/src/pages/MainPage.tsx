@@ -17,6 +17,9 @@ import { useDispatch } from 'react-redux';
 import { onSelectNav } from '../store/user';
 
 import StockLogo from './../components/StockLogo/StockLogo';
+import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
+import { IconProp } from '@fortawesome/fontawesome-svg-core';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 interface TokenList {
   id?: number;
@@ -111,27 +114,28 @@ const MainPage = () => {
 
   const filteredStockList = (lst: Array<TokenList>) => {
     const filterList = lst.filter((v: TokenList) => {
-      return v.name !== undefined && v.name.includes(inputString);
+      return v.name !== undefined && v.name.includes(inputString.trim());
     });
     console.log(filterList);
     return filterList;
   };
-
+  const magnifyingGlass = faMagnifyingGlass as IconProp;
   return (
     <MainPageWrapper>
       <h2 className="tit">Stock List</h2>
       <MainPageSearch>
+        <FontAwesomeIcon
+          icon={magnifyingGlass}
+          style={{ color: `var(--green)` }}
+          className="icon"
+        />
         <input onChange={(e) => changeInput(e)} value={inputString} />
-        <button>Search</button>
       </MainPageSearch>
       <MainPageList>
         <div className="table-header">
           <span>Name</span>
           <span className="main__oracle">Oracle price</span>
-          <span>
-            Price
-            <i>(KRW)</i>
-          </span>
+          <span>Pool Price</span>
           <span>
             Premium
             <i>(%)</i>

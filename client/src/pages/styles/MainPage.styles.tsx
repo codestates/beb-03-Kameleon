@@ -18,8 +18,10 @@ export const MainPageSearch = styled.div`
   padding: 1rem;
   border-radius: 0.5rem;
   background-color: var(--white);
+  align-items: center;
 
   & > input {
+    padding-left: 1rem;
     width: 100%;
     border: 0;
     font-size: 1rem;
