@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
+import { ToastContainer, toast } from 'react-toastify';
 import { contractAddressTable } from '../../constants';
+import 'react-toastify/dist/ReactToastify.css';
 import { GovernPageModalContent } from '../../pages/styles/GovernPage.styles';
 import { sendContract } from '../../utils/KAS';
 
@@ -7,6 +9,8 @@ const CreatePoll = () => {
   const [title, setTitle] = useState<string>('');
   const [content, setContent] = useState<string>('');
   const [day, setDay] = useState<string>('');
+  const successNotify = () => toast.success('Success!');
+  const failNotify = () => toast.error('fail!');
   const createPollHander = async () => {
     const result = await sendContract({
       contractName: 'Govern',
@@ -15,6 +19,11 @@ const CreatePoll = () => {
       parameters: [title, content, +day],
     });
     console.log(result);
+    if (result instanceof Error === false) {
+      successNotify();
+    } else {
+      failNotify();
+    }
   };
   return (
     <GovernPageModalContent>
@@ -31,6 +40,7 @@ const CreatePoll = () => {
         <input id="day" onChange={(e) => setDay(e.target.value)} />
       </div>
       <button onClick={createPollHander}>Create</button>
+      <ToastContainer icon={false} />
     </GovernPageModalContent>
   );
 };
