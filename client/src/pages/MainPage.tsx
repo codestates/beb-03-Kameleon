@@ -114,8 +114,14 @@ const MainPage = () => {
         <div className="table-header">
           <span>Name</span>
           <span className="main__oracle">Oracle price</span>
-          <span>Pool Price</span>
-          <span>Premium(%)</span>
+          <span>
+            Price
+            <i>(KRW)</i>
+          </span>
+          <span>
+            Premium
+            <i>(%)</i>
+          </span>
         </div>
         {stockList.map((el, index) => (
           <MainPageItem key={index}>
