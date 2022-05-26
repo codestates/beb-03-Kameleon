@@ -3,9 +3,12 @@ import { MyPageItem } from '../../pages/styles/MyPage.styles';
 import axios from 'axios';
 import { exchangeAddressTable } from '../../constants';
 import { PoolListProps } from '../../pages/MyPage';
+import { useNavigate } from 'react-router-dom';
 
 const MyPagePoolItem = ({ id, name, lpToken, balance }: PoolListProps) => {
   const [roi, setRoi] = React.useState<number>(0);
+  const navigate = useNavigate();
+
   React.useEffect(() => {
     const getPoolRoi = async () => {
       const {
@@ -21,9 +24,12 @@ const MyPagePoolItem = ({ id, name, lpToken, balance }: PoolListProps) => {
     };
     getPoolRoi();
   }, [name]);
+  const onClickHandler = () => {
+    navigate(`/liquidity/${name}`);
+  };
 
   return (
-    <MyPageItem key={id}>
+    <MyPageItem onClick={onClickHandler} key={id}>
       <div>{name}</div>
       <div className="main__oracle">{lpToken} LPT</div>
       <div>{balance}</div>

@@ -17,6 +17,7 @@ import {
 } from '../hooks/QueryHooks/Govern';
 import CreatePoll from '../components/Govern/CreatePoll';
 import { useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 interface RootState {
   user: {
@@ -73,7 +74,9 @@ const GovernPage = () => {
             <p>MY STAKABLE</p>
             <div>{myStakeBalance?.data?.stakable} KMT</div>
           </div>
-          <button>Manage Stake</button>
+          <Link to={`/myPage`}>
+            <button>Manage Stake</button>
+          </Link>
         </div>
       </GovernPageGovernList>
       <h4>Polls</h4>

@@ -72,7 +72,7 @@ export const AppStyle = styled.main`
     ),
     url(${bgImage});
   background-size: 50%;
-  z-index: 0;
+  z-index: 1;
   & > div {
     position: relative;
     z-index: 1;

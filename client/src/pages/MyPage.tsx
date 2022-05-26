@@ -12,6 +12,8 @@ import {
 import Caver from 'caver-js';
 import MyPagePoolItem from '../components/MyPage/MyPagePoolItem';
 import MyPageGovern from '../components/MyPage/MyPageGovern';
+import { useNavigate } from 'react-router-dom';
+
 const caver = new Caver();
 
 interface TokenListProps {
@@ -31,6 +33,7 @@ export interface PoolListProps {
 const MyPage = () => {
   const [myList, setMyList] = useState<Array<TokenListProps>>([]);
   const [myPoolList, setMyPoolList] = useState<Array<PoolListProps>>([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     // console.log('window.klaytn.selectedAddress', window.klaytn.selectedAddress);
@@ -173,6 +176,10 @@ const MyPage = () => {
     getPoolList();
   }, [window.klaytn.selectedAddress]);
 
+  const onClickMyListHandler = (name: string) => {
+    navigate(`/swap/${name}`);
+  };
+
   return (
     <div>
       <MyPageWrapper>
@@ -187,7 +194,7 @@ const MyPage = () => {
           {myList
             .sort((a, b) => a.id - b.id)
             .map((el) => (
-              <MyPageItem>
+              <MyPageItem onClick={() => onClickMyListHandler(el.name)}>
                 <div>{el.name}</div>
                 <div className="main__oracle">
                   {el.balance.toLocaleString('ko-KR')}
