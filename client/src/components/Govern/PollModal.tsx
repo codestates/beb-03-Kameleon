@@ -1,13 +1,17 @@
 import React from 'react';
-import { WithdrawableBalanceQueryHooks } from '../../hooks/QueryHooks/Govern';
-import { GovernPageModalContent } from '../../pages/styles/GovernPage.styles';
-import { sendContract } from '../../utils/KAS';
-import GovernInput from '../Input/GovernInput';
+import { ToastContainer, toast } from 'react-toastify';
 import Moment from 'react-moment';
+
 import 'moment/locale/ko';
+import 'react-toastify/dist/ReactToastify.css';
+import { GovernPageModalContent } from '../../pages/styles/GovernPage.styles';
+
+import GovernInput from '../Input/GovernInput';
+import DoughnutChart from '../Chart/DoughnutChart';
+import { WithdrawableBalanceQueryHooks } from '../../hooks/QueryHooks/Govern';
 import { IGovernPropsType } from '../../types/components/Govern.types';
 import { contractAddressTable } from '../../constants';
-import DoughnutChart from '../Chart/DoughnutChart';
+import { sendContract } from '../../utils/KAS';
 
 const PollModal = ({
   pollId,
@@ -24,6 +28,8 @@ const PollModal = ({
   console.log('yes or no ', yes, no);
   const now = new Date().getTime();
   console.log(expired, 'expired');
+  const successNotify = () => toast.success('Success!');
+  const failNotify = () => toast.error('fail!');
 
   const isExpired = now > +endTime * 1000 || expired === true;
 
@@ -41,6 +47,12 @@ const PollModal = ({
       parameters: [+pollId],
     });
     console.log(result);
+
+    if (result instanceof Error === false) {
+      successNotify();
+    } else {
+      failNotify();
+    }
   };
   return (
     <>
@@ -93,6 +105,7 @@ const PollModal = ({
             </div>
           </>
         )}
+        <ToastContainer icon={false} />
       </GovernPageModalContent>
     </>
   );

@@ -15,13 +15,14 @@ const useButton = () => {
   // (name: kStock 이름 BalanceA: KLAY 수량, BalanceB: kStock 수량)
   const addButton = useCallback(
     async (name: string, balanceA: string, balanceB: string) => {
-      await sendContract({
+      const result = await sendContract({
         contractName: 'Exchange',
         contractAddress: exchangeAddressTable[name],
         methodName: 'addLiquidity',
         amount: balanceA, // klay
         parameters: [caver.utils.toBN(Number(balanceB) * 1000000000000000000)],
       });
+      return result;
     },
     []
   );
@@ -29,12 +30,13 @@ const useButton = () => {
   // Remove Liquidity
   // (name: kStock 이름, Balance: LP 수량)
   const removeButton = useCallback((name: string, balance: string) => {
-    sendContract({
+    const result = sendContract({
       contractName: 'Exchange',
       contractAddress: exchangeAddressTable[name],
       methodName: 'removeLiquidity',
       parameters: [caver.utils.convertToPeb(balance, 'KLAY')],
     });
+    return result;
   }, []);
 
   // Connect Wallet

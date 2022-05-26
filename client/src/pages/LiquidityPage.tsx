@@ -1,11 +1,13 @@
 import { useEffect, useState, useCallback } from 'react';
 import { useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import { ToastContainer, toast } from 'react-toastify';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
 import { faPlus, faArrowDown } from '@fortawesome/free-solid-svg-icons';
 import Caver from 'caver-js';
 
+import 'react-toastify/dist/ReactToastify.css';
 import {
   LiquidityPageWrapper,
   TabStyle,
@@ -67,11 +69,11 @@ const LiquidityPage = () => {
     isChange: false,
     isDecimalError: false,
   });
-
   const { addButton, removeButton, connectButton, approveButton } = useButton();
-
   const selectUser = (state: RootState) => state.user;
   const user = useSelector(selectUser);
+  const successNotify = () => toast.success('Success!');
+  const failNotify = () => toast.error('fail!');
 
   const liftKlayToken = useCallback(
     (balance: string, isChange: boolean, isDecimalError: boolean) => {
@@ -116,9 +118,9 @@ const LiquidityPage = () => {
   useEffect(() => {
     // Approve 유무 확인
     const checkApprove = async () => {
-      const isApprove = await callIsApproved({ stockName: name });
+      const result = await callIsApproved({ stockName: name });
 
-      if (!isApprove) {
+      if (result) {
         setIsApprove(true);
       } else {
         setIsApprove(false);
@@ -239,29 +241,41 @@ const LiquidityPage = () => {
               </ButtonWrapper>
             ) : isApprove ? (
               <ButtonWrapper
-                type="button"
-                onClick={async () => {
-                  const result = await approveButton(name);
-                  if (result instanceof Error === false) {
-                    setIsApprove(false);
-                  }
-                }}
-              >
-                Approve
-              </ButtonWrapper>
-            ) : (
-              <ButtonWrapper
                 className="liquidity__addbutton"
                 type="button"
                 balanceA={klayToken.balance}
                 balanceB={kStockToken.balance}
                 isErrorA={klayToken.isDecimalError}
                 isErrorB={kStockToken.isDecimalError}
-                onClick={() =>
-                  addButton(name, klayToken.balance, kStockToken.balance)
-                }
+                onClick={async () => {
+                  const result = await addButton(
+                    name,
+                    klayToken.balance,
+                    kStockToken.balance
+                  );
+                  if (result instanceof Error === false) {
+                    successNotify();
+                  } else {
+                    failNotify();
+                  }
+                }}
               >
                 Add
+              </ButtonWrapper>
+            ) : (
+              <ButtonWrapper
+                type="button"
+                onClick={async () => {
+                  const result = await approveButton(name);
+                  if (result instanceof Error === false) {
+                    setIsApprove(true);
+                    successNotify();
+                  } else {
+                    failNotify();
+                  }
+                }}
+              >
+                Approve
               </ButtonWrapper>
             )}
           </>
@@ -292,7 +306,14 @@ const LiquidityPage = () => {
                 type="button"
                 balanceA={lpToken.balance}
                 isErrorA={lpToken.isDecimalError}
-                onClick={() => removeButton(name, lpToken.balance)}
+                onClick={async () => {
+                  const result = await removeButton(name, lpToken.balance);
+                  if (result instanceof Error === false) {
+                    successNotify();
+                  } else {
+                    failNotify();
+                  }
+                }}
               >
                 Remove
               </ButtonWrapper>
@@ -300,6 +321,7 @@ const LiquidityPage = () => {
           </>
         )}
       </form>
+      <ToastContainer icon={false} />
     </LiquidityPageWrapper>
   );
 };
