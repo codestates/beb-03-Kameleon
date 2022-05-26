@@ -178,11 +178,6 @@ const NavStyle = styled.nav`
         }
       }
 
-      & a {
-        color: var(--white);
-        font-size: 1.5rem;
-      }
-
       .utils {
         position: absolute;
         top: 8px;
@@ -194,6 +189,8 @@ const NavStyle = styled.nav`
         border-bottom: 1px solid var(--white);
 
         a {
+          min-width: 120px;
+          color: var(--white);
           font-size: 1rem;
         }
       }
