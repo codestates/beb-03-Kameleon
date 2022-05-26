@@ -67,6 +67,15 @@ export const MainPageList = styled.ul`
       }
     }
   }
+
+  & > div > span > i {
+    font-size: 0.9rem;
+    font-style: normal;
+
+    @media (max-width: 760px) {
+      display: none;
+    }
+  }
 `;
 
 export const MainPageItem = styled.li`

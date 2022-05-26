@@ -15,6 +15,8 @@ import { kStockTokenCodeTable, exchangeAddressTable } from '../constants/index';
 import { useDispatch } from 'react-redux';
 import { onSelectNav } from '../store/user';
 
+import StockLogo from './../components/StockLogo/StockLogo';
+
 interface TokenList {
   id?: number;
   name?: string;
@@ -112,8 +114,14 @@ const MainPage = () => {
         <div className="table-header">
           <span>Name</span>
           <span className="main__oracle">Oracle price</span>
-          <span>Price(KRW)</span>
-          <span>Premium(%)</span>
+          <span>
+            Price
+            <i>(KRW)</i>
+          </span>
+          <span>
+            Premium
+            <i>(%)</i>
+          </span>
         </div>
         {stockList.map((el, index) => (
           <MainPageItem key={index}>
@@ -122,13 +130,16 @@ const MainPage = () => {
               onClick={() => dispatch(onSelectNav('swap'))}
             >
               <span className="main__name">
-                {el.name} <em>({el.token})</em>
+                <StockLogo stockName={el.token} /> {el.name}{' '}
+                <em>({el.token})</em>
               </span>
               <span className="main__oracle">
-                {el.oraclePrice.toLocaleString('ko-KR')}
+                {el.oraclePrice.toLocaleString('ko-KR')}{' '}
+                {String.fromCharCode(0x20a9)}
               </span>
               <span className="main__price">
-                {el.krwPrice.toLocaleString('ko-KR')}
+                {Number(el.krwPrice).toLocaleString('ko-KR')}{' '}
+                {String.fromCharCode(0x20a9)}
               </span>
               <span>{el.premium}%</span>
             </Link>
