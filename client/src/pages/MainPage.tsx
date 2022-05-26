@@ -135,10 +135,7 @@ const MainPage = () => {
         <div className="table-header">
           <span>Name</span>
           <span className="main__oracle">Oracle price</span>
-          <span>
-            Price
-            <i>(KRW)</i>
-          </span>
+          <span>Pool Price</span>
           <span>
             Premium
             <i>(%)</i>
