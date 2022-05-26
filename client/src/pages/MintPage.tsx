@@ -1,9 +1,11 @@
 import { useState, useCallback, useEffect } from 'react';
+import { ToastContainer, toast } from 'react-toastify';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
 import { faArrowDown } from '@fortawesome/free-solid-svg-icons';
 import Caver from 'caver-js';
 
+import 'react-toastify/dist/ReactToastify.css';
 import {
   MintPageWrapper,
   TabStyle,
@@ -36,6 +38,8 @@ const MintPage = () => {
   const [isDecimalErrorB, setIsDecimalErrorB] = useState<boolean>(false);
   const [detailInfo, setDetailInfo] = useState<number>(0);
   const [fee, setFee] = useState<number>(0);
+  const successNotify = () => toast.success('Success!');
+  const failNotify = () => toast.error('fail!');
 
   const liftStateA = useCallback(
     (
@@ -71,24 +75,34 @@ const MintPage = () => {
     []
   );
 
-  const clickButton = useCallback(() => {
+  const clickButton = useCallback(async () => {
     // 임혁진 수정
     // 민트 클릭 시
     if (tab === 'mint') {
-      sendContract({
+      const result = await sendContract({
         contractName: 'KStockToken',
         contractAddress: kStockTokenAddressTable[nameB],
         methodName: 'mint',
         amount: balanceA, // klay
       });
+      if (result instanceof Error === false) {
+        successNotify();
+      } else {
+        failNotify();
+      }
     } else {
       // burn
-      sendContract({
+      const result = await sendContract({
         contractName: 'KStockToken',
         contractAddress: kStockTokenAddressTable[nameA],
         methodName: 'burn',
         parameters: [caver.utils.convertToPeb(balanceA, 'KLAY')], // * 1e18
       });
+      if (result instanceof Error === false) {
+        successNotify();
+      } else {
+        failNotify();
+      }
     }
   }, [tab, nameA, nameB, balanceA]);
 
@@ -227,6 +241,7 @@ const MintPage = () => {
           </>
         )}
       </form>
+      <ToastContainer icon={false} />
     </MintPageWrapper>
   );
 };

@@ -3,8 +3,10 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
 import { faArrowDown } from '@fortawesome/free-solid-svg-icons';
 import { useParams } from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
 import Caver from 'caver-js';
 
+import 'react-toastify/dist/ReactToastify.css';
 import {
   SwapPageWrapper,
   DetailInfoStyle,
@@ -58,6 +60,8 @@ const SwapPage = () => {
   // const [detailInfo, setDetailInfo] = useState<number>(0);
   const [isApproveA, setIsApproveA] = useState(false);
   const [fee, setFee] = useState<string>('');
+  const successNotify = () => toast.success('Success!');
+  const failNotify = () => toast.error('fail!');
 
   const {
     tokenBalance: tokenBalanceA,
@@ -240,8 +244,13 @@ const SwapPage = () => {
 
   const onApprove = async () => {
     if (!isApproveA) {
-      await sendApprove({ stockName: nameA });
-      setIsApproveA(true);
+      const result = await sendApprove({ stockName: nameA });
+      if (result instanceof Error === false) {
+        setIsApproveA(true);
+        successNotify();
+      } else {
+        failNotify();
+      }
     }
   };
 
@@ -251,7 +260,7 @@ const SwapPage = () => {
         return; // nothing
       } else {
         // klayToToken
-        await sendContract({
+        const result = await sendContract({
           contractName: 'Exchange',
           contractAddress: exchangeAddressTable[nameB],
           methodName: 'ethToTokenSwap',
@@ -263,11 +272,17 @@ const SwapPage = () => {
           ],
           amount: tokenBalanceA,
         });
+
+        if (result instanceof Error === false) {
+          successNotify();
+        } else {
+          failNotify();
+        }
       }
     } else {
       if (nameB === 'KLAY') {
         // tokenToKlay
-        await sendContract({
+        const result = await sendContract({
           contractName: 'Exchange',
           contractAddress: exchangeAddressTable[nameA],
           methodName: 'tokenToEthSwap',
@@ -279,9 +294,15 @@ const SwapPage = () => {
             ),
           ],
         });
+
+        if (result instanceof Error === false) {
+          successNotify();
+        } else {
+          failNotify();
+        }
       } else {
         // tokenTotoken
-        await sendContract({
+        const result = await sendContract({
           contractName: 'Exchange',
           contractAddress: exchangeAddressTable[nameA],
           methodName: 'tokenToTokenSwap',
@@ -294,6 +315,12 @@ const SwapPage = () => {
             kStockTokenAddressTable[nameB],
           ],
         });
+
+        if (result instanceof Error === false) {
+          successNotify();
+        } else {
+          failNotify();
+        }
       }
     }
   };
@@ -347,6 +374,7 @@ const SwapPage = () => {
           </ButtonWrapper>
         )}
       </form>
+      <ToastContainer icon={false} />
     </SwapPageWrapper>
   );
 };
