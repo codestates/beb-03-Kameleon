@@ -61,18 +61,22 @@ export const GlobalStyle = createGlobalStyle`
 
 export const AppStyle = styled.main`
   min-height: 100vh;
-  /* background-color: var(--dark-green); */
   background-image: url(${bgImage});
-  background-size: 50%;
+  background-size: 100%;
 
   & > div {
-    background-color: rgba(39, 105, 85, 0.7);
+    height: 100vh;
+    background-color: rgba(19, 48, 39, 0.8);
   }
 `;
 
 export const MainStyle = styled.main`
   min-height: calc(100vh - 125px);
   box-sizing: border-box;
+
+  &.layout {
+    padding-top: 1rem;
+  }
 
   @media (max-width: 760px) {
     min-height: calc(100vh - 105px);

@@ -4,7 +4,6 @@ import logoImage from '../../assets/images/logo.png';
 
 const HeaderStyle = styled.header`
   width: 100%;
-  background-color: var(--dark-green);
   box-shadow: 0px 5px 5px rgba(19, 48, 39, 0.3);
 
   .layout {
@@ -40,8 +39,9 @@ const LogoStyle = styled.h1`
   @media only screen and (max-width: 760px) {
     width: 60px;
     a {
+      padding-top: 60px;
       background-image: url(${mobLogoImage});
-      background-size: 70%;
+      background-size: 60%;
     }
   }
 `;
