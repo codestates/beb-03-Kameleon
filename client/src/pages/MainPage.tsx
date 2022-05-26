@@ -12,6 +12,7 @@ import {
 
 import { callContract } from '../utils/KAS';
 import { kStockTokenCodeTable, exchangeAddressTable } from '../constants/index';
+import { GovernPagePollList } from './styles/GovernPage.styles';
 
 interface TokenList {
   id?: number;
@@ -24,11 +25,11 @@ interface TokenList {
 }
 
 const MainPage = () => {
-  // const [input, setInput] = useState('');
+  const [inputString, setInputString] = useState('');
   const [stockList, setStockList] = useState<TokenList[]>([]);
   const currentKlayPrice = useKlaySocket();
   const changeInput = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
-    // setInput(e.target.value);
+    setInputString(e.target.value);
   }, []);
 
   useEffect(() => {
@@ -98,11 +99,24 @@ const MainPage = () => {
     onLoadData();
   }, [currentKlayPrice]);
 
+  // const onClickSearchHanler = (e) => {
+  //   const keyword = e.target.value;
+  //   // setStockList;
+  // };
+
+  const filteredStockList = (lst: Array<TokenList>) => {
+    const filterList = lst.filter((v: TokenList) => {
+      return v.name !== undefined && v.name.includes(inputString);
+    });
+    console.log(filterList);
+    return filterList;
+  };
+
   return (
     <MainPageWrapper>
       <h2 className="tit">Stock List</h2>
       <MainPageSearch>
-        <input onChange={(e) => changeInput(e)} />
+        <input onChange={(e) => changeInput(e)} value={inputString} />
         <button>Search</button>
       </MainPageSearch>
       <MainPageList>
@@ -112,7 +126,7 @@ const MainPage = () => {
           <span>Price(KRW)</span>
           <span>Premium(%)</span>
         </div>
-        {stockList.map((el, index) => (
+        {filteredStockList(stockList).map((el: TokenList, index: number) => (
           <MainPageItem key={index}>
             <Link to={`/swap/${el.token}`}>
               <span className="main__name">

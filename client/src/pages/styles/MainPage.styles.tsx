@@ -23,7 +23,8 @@ export const MainPageSearch = styled.div`
     width: 100%;
     border: 0;
     font-size: 1rem;
-    color: white;
+    font-weight: 700;
+    color: var(--dark-green);
     background-color: var(--white);
     outline: none;
   }
