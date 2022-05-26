@@ -3,6 +3,7 @@ import { MyPageItem } from '../../pages/styles/MyPage.styles';
 import axios from 'axios';
 import { exchangeAddressTable } from '../../constants';
 import { PoolListProps } from '../../pages/MyPage';
+import StockLogo from '../../components/StockLogo/StockLogo';
 
 const MyPagePoolItem = ({ id, name, lpToken, balance }: PoolListProps) => {
   const [roi, setRoi] = React.useState<number>(0);
@@ -25,7 +26,9 @@ const MyPagePoolItem = ({ id, name, lpToken, balance }: PoolListProps) => {
   return (
     <MyPageItem key={id}>
       <div>
-        {name} {'<-> KLAY'}
+        <StockLogo stockName={name} />
+        {name} {' <-> '} <StockLogo stockName={'KLAY'} />
+        {'KLAY'}
       </div>
       <div className="main__oracle">{lpToken} LPT</div>
       <div>{balance}</div>

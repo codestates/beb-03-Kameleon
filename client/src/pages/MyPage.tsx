@@ -12,6 +12,8 @@ import {
 import Caver from 'caver-js';
 import MyPagePoolItem from '../components/MyPage/MyPagePoolItem';
 import MyPageGovern from '../components/MyPage/MyPageGovern';
+import StockLogo from './../components/StockLogo/StockLogo';
+
 const caver = new Caver();
 
 interface TokenListProps {
@@ -179,7 +181,7 @@ const MyPage = () => {
         <h2 className="tit">자산</h2>
         <MyPageList>
           <div>
-            <div>Ticker ID</div>
+            <div>Token</div>
             <div>Balance</div>
             <div>Value</div>
             <div>Total</div>
@@ -188,7 +190,10 @@ const MyPage = () => {
             .sort((a, b) => a.id - b.id)
             .map((el) => (
               <MyPageItem>
-                <div>{el.name}</div>
+                <div>
+                  <StockLogo stockName={el.name} />
+                  {el.name}
+                </div>
                 <div className="main__oracle">
                   {el.balance.toLocaleString('ko-KR')}
                 </div>
@@ -200,7 +205,7 @@ const MyPage = () => {
         <h2>Pool</h2>
         <MyPageList>
           <div>
-            <div>Pool ID</div>
+            <div>Pool</div>
             <div>LPToken</div>
             <div>Balance</div>
             <div>ROI</div>
