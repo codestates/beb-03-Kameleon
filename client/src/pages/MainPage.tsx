@@ -12,6 +12,8 @@ import {
 
 import { callContract } from '../utils/KAS';
 import { kStockTokenCodeTable, exchangeAddressTable } from '../constants/index';
+import { useDispatch } from 'react-redux';
+import { onSelectNav } from '../store/user';
 
 import StockLogo from './../components/StockLogo/StockLogo';
 
@@ -28,6 +30,7 @@ interface TokenList {
 const MainPage = () => {
   // const [input, setInput] = useState('');
   const [stockList, setStockList] = useState<TokenList[]>([]);
+  const dispatch = useDispatch();
   const currentKlayPrice = useKlaySocket();
   const changeInput = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
     // setInput(e.target.value);
@@ -116,7 +119,10 @@ const MainPage = () => {
         </div>
         {stockList.map((el, index) => (
           <MainPageItem key={index}>
-            <Link to={`/swap/${el.token}`}>
+            <Link
+              to={`/swap/${el.token}`}
+              onClick={() => dispatch(onSelectNav('swap'))}
+            >
               <span className="main__name">
                 <StockLogo stockName={el.token} /> {el.name}{' '}
                 <em>({el.token})</em>

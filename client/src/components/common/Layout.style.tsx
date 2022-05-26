@@ -103,6 +103,11 @@ const NavStyle = styled.nav`
       font-size: 0.8rem;
       font-weight: 700;
 
+      &.on {
+        color: var(--white);
+        border: 2px solid var(--white);
+      }
+
       & em {
         margin-right: 0.6rem;
       }

@@ -3,28 +3,43 @@ import styled from 'styled-components';
 export const MyPageWrapper = styled.div`
   max-width: var(--width);
   margin: 0 auto;
-  color: var(--white);
+  color: var(--dark-green);
+
+  & > .subtit {
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+    color: var(--white);
+  }
+
+  .mypage__balance,
+  .mypage__value {
+    flex: 1.5;
+  }
+
+  .mypage__bar {
+    width: 80%;
+  }
 `;
 
 export const MyPageList = styled.ul`
   border-radius: 0.5rem;
-  background-color: var(--dark-green);
+  background-color: var(--white);
 
   & > div {
     display: flex;
-    margin: 0 2rem;
-    padding: 1rem 0;
-    border-bottom: 1px solid var(--white);
+    padding: 1rem 2rem;
+    border-bottom: 2px solid var(--green);
     font-size: 1.2rem;
     font-weight: 600;
   }
 
-  & > div > div {
+  & > div > span {
     flex: 1;
     text-align: right;
+    color: var(--green);
 
     :first-of-type {
-      flex: 1.5;
       text-align: left;
     }
   }
@@ -44,10 +59,14 @@ export const MyPageItem = styled.li`
     width: 1rem;
     text-align: right;
     flex-basis: 1rem;
+    overflow: auto;
 
     :first-of-type {
-      flex: 1.5;
       text-align: left;
+    }
+
+    &.mypage__bar {
+      padding: 0 24px;
     }
   }
 
