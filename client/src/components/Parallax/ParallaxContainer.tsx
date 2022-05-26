@@ -2,15 +2,19 @@ import React, { useEffect } from 'react';
 import Styled from 'styled-components';
 import Parallax from 'parallax-js';
 
-import astronautImage from './../../assets/astronaut.png';
-import planet1Image from './../../assets/planet1.png';
-import planet2Image from './../../assets/planet2.png';
-import rocketImage from './../../assets/rocket.png';
+import tree1 from './../../assets/tree1.svg';
+import tree2 from './../../assets/tree2.svg';
+import snake1 from './../../assets/snake1.svg';
+import snake2 from './../../assets/snake2.svg';
 import backgroundKameleon from './../../assets/backgroundKameleon.svg';
 import kameleon from './../../assets/Kameleon.svg';
 import line from './../../assets/Line.svg';
 import mosquito from './../../assets/Mosquito.svg';
-import { ParallaxContainerWrapper } from './styles/ParallaxContainer.styles';
+import {
+  ChameleonContainer,
+  ParallaxContainerWrapper,
+  SnakeContainer,
+} from './styles/ParallaxContainer.styles';
 
 const layers = [
   {
@@ -41,48 +45,56 @@ const layers = [
     width: '200px',
     height: '200px',
   },
-  // {
-  //   name: 'astronaut',
-  //   image: astronautImage,
-  //   dataDepth: '2',
-  // },
-  // {
-  //   name: 'planet1',
-  //   image: planet1Image,
-  //   dataDepth: '1',
-  // },
-  // {
-  //   name: 'planet2',
-  //   image: planet2Image,
-  //   dataDepth: '-1',
-  // },
-  // {
-  //   name: 'rocket',
-  //   image: rocketImage,
-  //   dataDepth: '10',
-  // },
+];
+
+const layers2 = [
+  {
+    name: 'snake2',
+    image: snake2,
+    dataDepth: '-1',
+    width: '200px',
+    height: '200px',
+  },
 ];
 
 const ParallaxImagesContainer = () => {
   useEffect(() => {
-    const scene = document.getElementById('scene') as HTMLElement;
-    new Parallax(scene);
+    const kameleon = document.getElementById('kameleon') as HTMLElement;
+    const snake = document.getElementById('snake') as HTMLElement;
+    new Parallax(kameleon);
+    new Parallax(snake);
   });
 
   return (
     <ParallaxContainerWrapper>
-      <span id="scene">
-        {layers.map((l, index) => (
-          <img
-            key={index}
-            data-depth={l.dataDepth}
-            src={l.image}
-            alt={l.name}
-            width={l.width}
-            height={l.height}
-          />
-        ))}
-      </span>
+      <ChameleonContainer>
+        <span id="kameleon">
+          {layers.map((l, index) => (
+            <img
+              key={index}
+              data-depth={l.dataDepth}
+              src={l.image}
+              alt={l.name}
+              width={l.width}
+              height={l.height}
+            />
+          ))}
+        </span>
+      </ChameleonContainer>
+      <SnakeContainer>
+        <span id="snake">
+          {layers2.map((l, index) => (
+            <img
+              key={index}
+              data-depth={l.dataDepth}
+              src={l.image}
+              alt={l.name}
+              width={l.width}
+              height={l.height}
+            />
+          ))}
+        </span>
+      </SnakeContainer>
     </ParallaxContainerWrapper>
   );
 };
