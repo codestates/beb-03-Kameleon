@@ -12,9 +12,15 @@ export const MyPageWrapper = styled.div`
     color: var(--white);
   }
 
-  .mypage__balance,
-  .mypage__value {
+  .pool__balance,
+  .asset__value {
     flex: 1.5;
+  }
+
+  .pool__balance {
+    @media (max-width: 760px) {
+      display: none;
+    }
   }
 
   .mypage__bar {
@@ -38,17 +44,24 @@ export const MyPageList = styled.ul`
     flex: 1;
     text-align: right;
     color: var(--green);
+    padding-left: 0.5rem;
 
     :first-of-type {
       text-align: left;
+      padding-left: 0;
+    }
+  }
+
+  @media (max-width: 760px) {
+    & > div {
+      padding: 0.6rem 0.8rem;
     }
   }
 `;
 
 export const MyPageItem = styled.li`
   display: flex;
-  margin: 0 2rem;
-  padding: 1rem 0;
+  padding: 1rem 2rem;
   border-bottom: 1px solid var(--white);
   font-size: 1.2rem;
   font-weight: 600;
@@ -57,11 +70,13 @@ export const MyPageItem = styled.li`
     flex: 1;
     white-space: nowrap;
     width: 1rem;
+    padding-left: 0.5rem;
     text-align: right;
     flex-basis: 1rem;
     overflow: auto;
 
     :first-of-type {
+      padding-left: 0;
       text-align: left;
     }
 
@@ -72,6 +87,10 @@ export const MyPageItem = styled.li`
 
   :last-of-type {
     border: 0;
+  }
+
+  @media (max-width: 760px) {
+    padding: 0.6rem 0.8rem;
   }
 `;
 

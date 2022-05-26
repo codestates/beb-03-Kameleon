@@ -10,6 +10,7 @@ import {
 
 import { callContract, getBalance } from '../utils/KAS';
 import { exchangeAddressTable, kStockTokenAddressTable } from '../constants';
+import StockLogo from '../components/StockLogo/StockLogo';
 
 interface PoolListProps {
   id: number;
@@ -64,14 +65,16 @@ const PoolPage = () => {
       <PoolPageList>
         <div>
           <span>Pair name</span>
-          <span>유동성 규모</span>
-          <span>수익률(ROI)</span>
+          <span>Pool Volume</span>
+          <span>ROI</span>
         </div>
         {poolList.map((el) => (
           <Link to={`/liquidity/${el.name}`} key={el.id}>
             <PoolPageItem>
               <div>
-                {el.name} {'<-> KLAY'}
+                <StockLogo stockName={el.name} /> {el.name} {'<->'}{' '}
+                <StockLogo stockName="KLAY" />
+                {'KLAY'}
               </div>
               <div className="main__oracle">
                 {el.liquid.toLocaleString('ko-KR')}
