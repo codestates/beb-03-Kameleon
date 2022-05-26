@@ -33,6 +33,7 @@ const MyPage = () => {
   const [myPoolList, setMyPoolList] = useState<Array<PoolListProps>>([]);
 
   useEffect(() => {
+    // console.log('window.klaytn.selectedAddress', window.klaytn.selectedAddress);
     // get myList
     const getMyList = async () => {
       const valueTemp: Array<string> = await callContract({
@@ -170,7 +171,7 @@ const MyPage = () => {
 
     getMyList();
     getPoolList();
-  }, [myPoolList]);
+  }, [window.klaytn.selectedAddress]);
 
   return (
     <div>
@@ -178,31 +179,31 @@ const MyPage = () => {
         <h2 className="tit">자산</h2>
         <MyPageList>
           <div>
-            <div>Ticker ID</div>
-            <div>Balance</div>
-            <div>Value</div>
-            <div>Total</div>
+            <span>Ticker ID</span>
+            <span>Balance</span>
+            <span className="mypage_value">Value</span>
+            <span>Total</span>
           </div>
           {myList
             .sort((a, b) => a.id - b.id)
             .map((el) => (
               <MyPageItem>
                 <div>{el.name}</div>
-                <div className="main__oracle">
-                  {el.balance.toLocaleString('ko-KR')}
+                <div>{el.balance.toLocaleString('ko-KR')}</div>
+                <div className="mypage_value">
+                  {el.value.toLocaleString('ko-KR')} KLY
                 </div>
-                <div>{el.value.toLocaleString('ko-KR')} KLY</div>
                 <div>{(el.balance * el.value).toLocaleString('ko-KR')} KLY</div>
               </MyPageItem>
             ))}
         </MyPageList>
-        <h2>Pool</h2>
+        <h2 className="subtit">Pool</h2>
         <MyPageList>
           <div>
-            <div>Pool ID</div>
-            <div>LPToken</div>
-            <div>Balance</div>
-            <div>ROI</div>
+            <span>Pool ID</span>
+            <span>LPToken</span>
+            <span className="mypage__balance">Balance</span>
+            <span>ROI</span>
           </div>
           {myPoolList
             .sort((a, b) => a.id - b.id)
@@ -210,11 +211,11 @@ const MyPage = () => {
               <MyPagePoolItem key={id} id={id} {...el} />
             ))}
         </MyPageList>
-        <h2>Govern</h2>
+        <h2 className="subtit">Govern</h2>
         <MyPageList>
           <div>
-            <div>Gover ID</div>
-            <div>End Time</div>
+            <span>Gover ID</span>
+            <span>End Time</span>
           </div>
           <MyPageGovern />
         </MyPageList>
