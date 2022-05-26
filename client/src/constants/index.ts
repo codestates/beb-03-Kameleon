@@ -61,3 +61,12 @@ export const kStockTokenCodeTable = {
   kSSB: '207940',
   kSSH: '010140',
 };
+
+export const logoTable: { [x: string]: string } = {
+  kSSE: 'kSSE.svg',
+  kLGE: 'kLGE.png',
+  kKKO: 'kKKO.png',
+  kSSB: 'kSSB.svg',
+  kSSH: 'kSSH.svg',
+  KLAY: 'KLAY.svg',
+};

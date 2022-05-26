@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import { MyPageWrapper, MyPageList, MyPageItem } from './styles/MyPage.styles';
 
 import { callContract, getBalance } from '../utils/KAS';
+
 import {
   contractAddressTable,
   kStockTokenAddressTable,
@@ -12,6 +13,8 @@ import {
 import Caver from 'caver-js';
 import MyPagePoolItem from '../components/MyPage/MyPagePoolItem';
 import MyPageGovern from '../components/MyPage/MyPageGovern';
+import StockLogo from './../components/StockLogo/StockLogo';
+
 const caver = new Caver();
 
 interface TokenListProps {
@@ -176,33 +179,40 @@ const MyPage = () => {
   return (
     <div>
       <MyPageWrapper>
-        <h2 className="tit">자산</h2>
+        <h2 className="tit">Asset</h2>
         <MyPageList>
           <div>
-            <span>Ticker ID</span>
-            <span>Balance</span>
-            <span className="mypage_value">Value</span>
+            <span>Token</span>
+            <span className="asset__balance">Balance</span>
+            <span className="asset__value">Value</span>
             <span>Total</span>
           </div>
           {myList
             .sort((a, b) => a.id - b.id)
             .map((el) => (
               <MyPageItem>
-                <div>{el.name}</div>
-                <div>{el.balance.toLocaleString('ko-KR')}</div>
-                <div className="mypage_value">
-                  {el.value.toLocaleString('ko-KR')} KLY
+                <div>
+                  <StockLogo stockName={el.name} />
+                  {el.name}
                 </div>
-                <div>{(el.balance * el.value).toLocaleString('ko-KR')} KLY</div>
+                <div>{el.balance.toLocaleString('ko-KR')}</div>
+                <div className="asset__value">
+                  {el.value.toLocaleString('ko-KR')}
+                  <StockLogo stockName={'KLAY'} />
+                </div>
+                <div>
+                  {(el.balance * el.value).toLocaleString('ko-KR')}
+                  <StockLogo stockName={'KLAY'} />
+                </div>
               </MyPageItem>
             ))}
         </MyPageList>
         <h2 className="subtit">Pool</h2>
         <MyPageList>
           <div>
-            <span>Pool ID</span>
+            <span>Pool</span>
             <span>LPToken</span>
-            <span className="mypage__balance">Balance</span>
+            <span className="pool__balance">Balance</span>
             <span>ROI</span>
           </div>
           {myPoolList
