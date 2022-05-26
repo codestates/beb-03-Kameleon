@@ -4,8 +4,6 @@ import logoImage from '../../assets/images/logo.png';
 
 const HeaderStyle = styled.header`
   width: 100%;
-  background-color: var(--dark-green);
-  box-shadow: 0px 5px 5px rgba(19, 48, 39, 0.3);
 
   .layout {
     display: flex;
@@ -40,8 +38,9 @@ const LogoStyle = styled.h1`
   @media only screen and (max-width: 760px) {
     width: 60px;
     a {
+      padding-top: 60px;
       background-image: url(${mobLogoImage});
-      background-size: 70%;
+      background-size: 60%;
     }
   }
 `;
@@ -102,6 +101,11 @@ const NavStyle = styled.nav`
       color: var(--green);
       font-size: 0.8rem;
       font-weight: 700;
+
+      &.on {
+        color: var(--white);
+        border: 2px solid var(--white);
+      }
 
       & em {
         margin-right: 0.6rem;
@@ -173,11 +177,6 @@ const NavStyle = styled.nav`
         }
       }
 
-      & a {
-        color: var(--white);
-        font-size: 1.5rem;
-      }
-
       .utils {
         position: absolute;
         top: 8px;
@@ -189,6 +188,8 @@ const NavStyle = styled.nav`
         border-bottom: 1px solid var(--white);
 
         a {
+          min-width: 120px;
+          color: var(--white);
           font-size: 1rem;
         }
       }

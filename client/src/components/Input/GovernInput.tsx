@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
+import { ToastContainer, toast } from 'react-toastify';
 
 import {
   SingleInputContainer,
   SingleInputWrapper,
 } from './styles/SingleInput.styles';
 
+import 'react-toastify/dist/ReactToastify.css';
 import useInput from '../../hooks/useInput';
 import {
   PollInput,
@@ -36,6 +38,9 @@ const GovernInput = ({ children, pollId }: LayoutProps) => {
   const [isAgree, setIsAgree] = useState<boolean | null>(null);
   const [yesFocus, setYesFocus] = useState<boolean>(false);
   const [noFocus, setNoFocus] = useState<boolean>(false);
+
+  const successNotify = () => toast.success('Success!');
+  const failNotify = () => toast.error('fail!');
 
   const yesOnClickHander = () => {
     if (yesFocus === true) {
@@ -73,6 +78,12 @@ const GovernInput = ({ children, pollId }: LayoutProps) => {
         ],
       });
       console.log(result);
+
+      if (result instanceof Error === false) {
+        successNotify();
+      } else {
+        failNotify();
+      }
     }
   };
 
@@ -139,6 +150,7 @@ const GovernInput = ({ children, pollId }: LayoutProps) => {
       <br></br>
       <button onClick={buttonOnClickHander}>vote</button>
       <br></br>
+      <ToastContainer icon={false} />
     </>
   );
 };

@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import { MyPageWrapper, MyPageList, MyPageItem } from './styles/MyPage.styles';
 
 import { callContract, getBalance } from '../utils/KAS';
+
 import {
   contractAddressTable,
   kStockTokenAddressTable,
@@ -13,6 +14,7 @@ import Caver from 'caver-js';
 import MyPagePoolItem from '../components/MyPage/MyPagePoolItem';
 import MyPageGovern from '../components/MyPage/MyPageGovern';
 import { useNavigate } from 'react-router-dom';
+import StockLogo from './../components/StockLogo/StockLogo';
 
 const caver = new Caver();
 
@@ -183,34 +185,41 @@ const MyPage = () => {
   return (
     <div>
       <MyPageWrapper>
-        <h2 className="tit">자산</h2>
+        <h2 className="tit">Asset</h2>
         <MyPageList>
           <div>
-            <div>Ticker ID</div>
-            <div>Balance</div>
-            <div>Value</div>
-            <div>Total</div>
+            <span>Token</span>
+            <span className="asset__balance">Balance</span>
+            <span className="asset__value">Value</span>
+            <span>Total</span>
           </div>
           {myList
             .sort((a, b) => a.id - b.id)
             .map((el) => (
               <MyPageItem onClick={() => onClickMyListHandler(el.name)}>
-                <div>{el.name}</div>
-                <div className="main__oracle">
-                  {el.balance.toLocaleString('ko-KR')}
+                <div>
+                  <StockLogo stockName={el.name} />
+                  {el.name}
                 </div>
-                <div>{el.value.toLocaleString('ko-KR')} KLY</div>
-                <div>{(el.balance * el.value).toLocaleString('ko-KR')} KLY</div>
+                <div>{el.balance.toLocaleString('ko-KR')}</div>
+                <div className="asset__value">
+                  {el.value.toLocaleString('ko-KR')}
+                  <StockLogo stockName={'KLAY'} />
+                </div>
+                <div>
+                  {(el.balance * el.value).toLocaleString('ko-KR')}
+                  <StockLogo stockName={'KLAY'} />
+                </div>
               </MyPageItem>
             ))}
         </MyPageList>
-        <h2>Pool</h2>
+        <h2 className="subtit">Pool</h2>
         <MyPageList>
           <div>
-            <div>Pool ID</div>
-            <div>LPToken</div>
-            <div>Balance</div>
-            <div>ROI</div>
+            <span>Pool</span>
+            <span>LPToken</span>
+            <span className="pool__balance">Balance</span>
+            <span>ROI</span>
           </div>
           {myPoolList
             .sort((a, b) => a.id - b.id)
@@ -218,11 +227,11 @@ const MyPage = () => {
               <MyPagePoolItem key={id} id={id} {...el} />
             ))}
         </MyPageList>
-        <h2>Govern</h2>
+        <h2 className="subtit">Govern</h2>
         <MyPageList>
           <div>
-            <div>Gover ID</div>
-            <div>End Time</div>
+            <span>Gover ID</span>
+            <span>End Time</span>
           </div>
           <MyPageGovern />
         </MyPageList>

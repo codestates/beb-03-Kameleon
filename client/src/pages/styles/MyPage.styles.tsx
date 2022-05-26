@@ -3,37 +3,65 @@ import styled from 'styled-components';
 export const MyPageWrapper = styled.div`
   max-width: var(--width);
   margin: 0 auto;
-  color: var(--white);
+  color: var(--dark-green);
+
+  & > .subtit {
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+    color: var(--white);
+  }
+
+  .pool__balance,
+  .asset__value {
+    flex: 1.5;
+  }
+
+  .pool__balance {
+    @media (max-width: 760px) {
+      display: none;
+    }
+  }
+
+  .mypage__bar {
+    width: 80%;
+  }
 `;
 
 export const MyPageList = styled.ul`
   border-radius: 0.5rem;
-  background-color: var(--dark-green);
+  background-color: var(--white);
 
   & > div {
     display: flex;
-    margin: 0 2rem;
-    padding: 1rem 0;
-    border-bottom: 1px solid var(--white);
+    padding: 1rem 2rem;
+    border-bottom: 2px solid var(--green);
     font-size: 1.2rem;
     font-weight: 600;
   }
 
-  & > div > div {
+  & > div > span {
     flex: 1;
     text-align: right;
+    color: var(--green);
+    padding-left: 0.5rem;
 
     :first-of-type {
-      flex: 1.5;
       text-align: left;
+      padding-left: 0;
+    }
+  }
+
+  @media (max-width: 760px) {
+    & > div {
+      padding: 0.6rem 0.8rem;
     }
   }
 `;
 
 export const MyPageItem = styled.li`
   display: flex;
-  margin: 0 2rem;
-  padding: 1rem 0;
+  padding: 1rem 2rem;
   border-bottom: 1px solid var(--white);
   font-size: 1.2rem;
   font-weight: 600;
@@ -44,17 +72,27 @@ export const MyPageItem = styled.li`
     text-overflow: ellipsis;
     overflow: hidden;
     width: 1rem;
+    padding-left: 0.5rem;
     text-align: right;
     flex-basis: 1rem;
+    overflow: auto;
 
     :first-of-type {
-      flex: 1.5;
+      padding-left: 0;
       text-align: left;
+    }
+
+    &.mypage__bar {
+      padding: 0 24px;
     }
   }
 
   :last-of-type {
     border: 0;
+  }
+
+  @media (max-width: 760px) {
+    padding: 0.6rem 0.8rem;
   }
 `;
 

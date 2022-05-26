@@ -29,7 +29,7 @@ export const GlobalStyle = createGlobalStyle`
 
   body {
     margin: 0;
-    min-width: 480px;
+    min-width: 320px;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
       'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
       sans-serif;
@@ -41,7 +41,7 @@ export const GlobalStyle = createGlobalStyle`
   *::after {
     box-sizing: inherit;
   }
-  * { font-family: 'Spoqa Han Sans', 'Spoqa Han Sans JP', 'Sans-serif'; font-size: 18px;}
+  * { font-family: 'Noto Sans', 'Noto Sans KR',sans-serif; font-size: 18px; }
   a { cursor: pointer; text-decoration: none; }
   h1, h2, h3, h4, ol, ul, dl, dt, dd { margin: 0; padding: 0; }
   ol, ul { list-style: none; }
@@ -106,12 +106,24 @@ export const AppStyle = styled.main`
       transform: translate(-20px, 0);
       opacity: 0;
     }
+    /* =======
+  background-image: url(${bgImage});
+  background-size: 100%;
+
+  & > div {
+    height: 100vh;
+    background-color: rgba(19, 48, 39, 0.8);
+>>>>>>> 1d9318704fc434344ed13957d598ebc71edc1a98 */
   }
 `;
 
 export const MainStyle = styled.main`
   min-height: calc(100vh - 125px);
   box-sizing: border-box;
+
+  &.layout {
+    padding-top: 1rem;
+  }
 
   @media (max-width: 760px) {
     min-height: calc(100vh - 105px);
