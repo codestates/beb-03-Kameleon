@@ -25,8 +25,8 @@ const MyPagePoolItem = ({ id, name, lpToken, balance }: PoolListProps) => {
   return (
     <MyPageItem key={id}>
       <div>{name}</div>
-      <div className="main__oracle">{lpToken} LPT</div>
-      <div>{balance}</div>
+      <div>{lpToken} LPT</div>
+      <div className="mypage__balance">{balance}</div>
       <div>{roi}%</div>
     </MyPageItem>
   );
