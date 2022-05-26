@@ -30,6 +30,15 @@ export const PoolPageList = styled.ul`
       text-align: left;
     }
   }
+
+  & > div > span > i {
+    font-size: 0.9rem;
+    font-style: normal;
+
+    @media (max-width: 760px) {
+      display: none;
+    }
+  }
 `;
 
 export const PoolPageItem = styled.li`

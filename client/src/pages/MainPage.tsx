@@ -112,8 +112,14 @@ const MainPage = () => {
         <div className="table-header">
           <span>Name</span>
           <span className="main__oracle">Oracle price</span>
-          <span>Price(KRW)</span>
-          <span>Premium(%)</span>
+          <span>
+            Price
+            <i>(KRW)</i>
+          </span>
+          <span>
+            Premium
+            <i>(%)</i>
+          </span>
         </div>
         {stockList.map((el, index) => (
           <MainPageItem key={index}>
@@ -128,7 +134,7 @@ const MainPage = () => {
                 {el.oraclePrice.toLocaleString('ko-KR')}
               </span>
               <span className="main__price">
-                {el.krwPrice.toLocaleString('ko-KR')}
+                {Number(el.krwPrice).toLocaleString('ko-KR')}
               </span>
               <span>{el.premium}%</span>
             </Link>
