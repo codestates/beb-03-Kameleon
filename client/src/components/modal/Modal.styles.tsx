@@ -21,7 +21,7 @@ export const ModalWrapper = styled.div<{ width: number | undefined }>`
   z-index: 999;
   background: var(--white);
   box-shadow: var(--shadowSharp);
-  /* overflow-y: scroll; */
+  overflow-y: scroll;
 
   ::-webkit-scrollbar {
     width: 10px;

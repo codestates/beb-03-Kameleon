@@ -41,6 +41,8 @@ export const MyPageItem = styled.li`
   & > div {
     flex: 1;
     white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
     width: 1rem;
     text-align: right;
     flex-basis: 1rem;
@@ -64,7 +66,7 @@ export const MyPageBar = styled.div<{
   margin: 0 0.5rem 0 0.5rem;
   display: flex;
   flex: 4 !important;
-  margin-left: -2rem;
+  /* margin-left: -2rem; */
   background-color: var(--white);
 
   & > div {
