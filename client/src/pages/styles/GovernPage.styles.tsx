@@ -115,6 +115,7 @@ export const GovernPagePollItem = styled.div<{
   & > section > span {
     display: block;
     margin-top: 1rem;
+    overflow: auto;
 
     & b {
       font-size: 1rem;
