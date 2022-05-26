@@ -76,6 +76,7 @@ const MyPageGovern = () => {
             <MyPageItem>
               <div>{title}</div>
               <MyPageBar
+                className="mypage__bar"
                 yes={agree as number}
                 no={disagree as number}
                 totalSupply={totalSupply as string}
