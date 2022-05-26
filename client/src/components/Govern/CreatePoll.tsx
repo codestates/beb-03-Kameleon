@@ -37,7 +37,11 @@ const CreatePoll = () => {
       </div>
       <div>
         <label htmlFor="day">Day</label>
-        <input id="day" onChange={(e) => setDay(e.target.value)} />
+        <input
+          id="day"
+          onChange={(e) => setDay(e.target.value)}
+          placeholder={'1day ~ 14day'}
+        />
       </div>
       <button onClick={createPollHander}>Create</button>
       <ToastContainer icon={false} />
