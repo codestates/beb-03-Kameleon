@@ -51,11 +51,11 @@ const PollModal = ({
         </div> */}
         <div>
           <label htmlFor="title">Title</label>
-          <input value={title}></input>
+          <input readOnly value={title}></input>
         </div>
         <div>
           <label htmlFor="content">Content</label>
-          <textarea value={content}></textarea>
+          <textarea readOnly value={content}></textarea>
         </div>
         <div>
           <DoughnutChart
@@ -64,12 +64,8 @@ const PollModal = ({
             totalSupply={+totalSupply / 10 ** 18}
           />
         </div>
-        {/* <div>
-          <label htmlFor="expired">expired</label>
-          <div>{expired.toString()}</div>
-        </div> */}
         <div>
-          <label htmlFor="time">time</label>
+          {/* <label htmlFor="time">time</label> */}
           <div>
             {
               <Moment format="YYYY-MM-DD HH:mm:ss">
@@ -83,7 +79,7 @@ const PollModal = ({
           </div>
         </div>
         <div>
-          <label htmlFor="vote">투표하기</label>
+          {/* <label htmlFor="vote">투표하기</label> */}
           <GovernInput pollId={pollId}>AMOUNT</GovernInput>
         </div>
         <br></br>

@@ -22,7 +22,7 @@ export const PollLabel = styled.label<{
   border-radius: 5px;
   border-width: 1px;
   border-style: solid;
-  height: 80px;
+  height: 50px;
   opacity: ${({ isAgree, value }) => {
     if (isAgree === true && value === 'yes') {
       return `1`;

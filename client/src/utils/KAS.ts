@@ -2,12 +2,11 @@ import Caver from 'caver-js';
 
 import {
   abiTable,
-  byteCodeTable,
   exchangeAddressTable,
   kStockTokenAddressTable,
 } from './../constants/index';
 
-const callCaver = new Caver('https://api.baobab.klaytn.net:8651');
+export const callCaver = new Caver('https://api.baobab.klaytn.net:8651');
 const caver = new Caver(window.klaytn);
 
 const callIsApproved = async ({ stockName }: { stockName: string }) => {
@@ -88,12 +87,12 @@ const callContract = async ({
   account?: string | undefined;
 }) => {
   try {
-    if (
-      contractName === undefined ||
-      contractAddress === undefined ||
-      methodName === undefined
-    )
-      throw 'Not enough arguments';
+    // if (
+    //   contractName === undefined ||
+    //   contractAddress === undefined ||
+    //   methodName === undefined
+    // )
+    //   throw 'Not enough arguments';
     let contract = undefined;
     // if (kaikas === true && window.klaytn !== undefined) {
     if (kaikas === true) {
@@ -152,12 +151,12 @@ const sendContract = async ({
   amount?: string;
 }) => {
   try {
-    if (
-      contractName === undefined ||
-      contractAddress === undefined ||
-      methodName === undefined
-    )
-      throw 'Not enough arguments';
+    // if (
+    //   contractName === undefined ||
+    //   contractAddress === undefined ||
+    //   methodName === undefined
+    // )
+    //   throw 'Not enough arguments';
     const myContract = new caver.klay.Contract(
       abiTable[contractName],
       contractAddress
@@ -166,7 +165,7 @@ const sendContract = async ({
       from: window.klaytn.selectedAddress,
       to: contractAddress,
       gas: 300000,
-      value: caver.utils.toPeb(amount, 'KLAY'),
+      value: caver.utils.convertToPeb(amount, 'KLAY'),
     });
     return result?.blockHash;
   } catch (error) {

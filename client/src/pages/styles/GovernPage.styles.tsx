@@ -115,7 +115,8 @@ export const GovernPagePollItem = styled.div<{
   & > section > span {
     display: block;
     margin-top: 1rem;
-    overflow: auto;
+    text-overflow: ellipsis;
+    overflow: hidden;
 
     & b {
       font-size: 1rem;
@@ -182,8 +183,7 @@ export const GovernPageBar = styled.div<{
 export const GoverQuorum = styled.div<{ percentage: string }>`
   position: relative;
   margin-top: 1rem;
-  font-size: 12px;
-  height: 25px;
+  height: 30px;
 
   & > div {
     left: ${(props) => `${props.percentage}%`};
@@ -192,7 +192,7 @@ export const GoverQuorum = styled.div<{ percentage: string }>`
     color: var(--green);
     font-size: inherit;
     font-weight: 600;
-    height: 25px;
+    height: 30px;
     transform: translate(-50%);
   }
 

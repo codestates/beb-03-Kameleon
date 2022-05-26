@@ -22,8 +22,10 @@ export const ModalWrapper = styled.div<{ width: number | undefined }>`
 `;
 
 export const ModalHeader = styled.div`
-  display: flex;
-  justify-content: flex-end;
+  margin: 15px;
+  position: fixed;
+  right: 0;
+  top: 0;
 `;
 
 export const ModalCloseButton = styled.button`

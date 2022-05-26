@@ -37,7 +37,7 @@ const PoolPage = () => {
           parameters: [exchangeAddressTable[exchangeAddressList[i]]], // 인자값 balanceOf(address aacount)
         });
         const {
-          data: { success, data },
+          data: { data },
         } = await axios.get(`/api/contract/getPoolRoi`, {
           params: {
             exchangeAddress: exchangeAddressTable[exchangeAddressList[i]],
@@ -70,7 +70,9 @@ const PoolPage = () => {
         {poolList.map((el) => (
           <Link to={`/liquidity/${el.name}`} key={el.id}>
             <PoolPageItem>
-              <div>{el.name}</div>
+              <div>
+                {el.name} {'<-> KLAY'}
+              </div>
               <div className="main__oracle">
                 {el.liquid.toLocaleString('ko-KR')}
               </div>
