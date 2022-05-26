@@ -178,7 +178,7 @@ const MyPage = () => {
   return (
     <div>
       <MyPageWrapper>
-        <h2 className="tit">자산</h2>
+        <h2 className="tit">My Assets</h2>
         <MyPageList>
           <div>
             <div>Token</div>

@@ -65,8 +65,8 @@ const PoolPage = () => {
       <PoolPageList>
         <div>
           <div>Pair name</div>
-          <div>유동성 규모</div>
-          <div>수익률(ROI)</div>
+          <div>Pool Size</div>
+          <div>ROI</div>
         </div>
         {poolList.map((el) => (
           <Link to={`/liquidity/${el.name}`} key={el.id}>
