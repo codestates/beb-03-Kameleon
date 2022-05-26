@@ -13,6 +13,7 @@ export const SingleInputContainer = styled.div<{
           ? 'var(--blue)'
           : 'var(--green)'};
     border-radius: 1rem;
+    box-shadow: var(--shadowSharp);
     background-color: var(--green);
     padding: 1rem 1.5rem;
   }

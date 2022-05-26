@@ -17,6 +17,10 @@ export const GlobalStyle = createGlobalStyle`
     --width: 1200px;
     --s-width: 640px;
     --m-size: 760px;
+
+    --shadowSharp: 0 1px 1px rgb(0 0 0 / 25%), 0 2px 2px rgb(0 0 0 / 20%),
+      0 4px 4px rgb(0 0 0 / 15%), 0 8px 8px rgb(0 0 0 / 10%),
+      0 16px 16px rgb(0 0 0 / 5%);
   }
 
   html {
@@ -62,11 +66,16 @@ export const GlobalStyle = createGlobalStyle`
 export const AppStyle = styled.main`
   min-height: 100vh;
   /* background-color: var(--dark-green); */
-  background-image: url(${bgImage});
+  background: linear-gradient(
+      rgba(39, 105, 85, 0.5) 100%,
+      rgba(39, 105, 85, 0.5) 100%
+    ),
+    url(${bgImage});
   background-size: 50%;
-
+  z-index: 0;
   & > div {
-    background-color: rgba(39, 105, 85, 0.7);
+    position: relative;
+    z-index: 1;
   }
 `;
 

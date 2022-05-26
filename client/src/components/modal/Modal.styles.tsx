@@ -15,10 +15,32 @@ export const ModalWrapper = styled.div<{ width: number | undefined }>`
   left: 50%;
   transform: translate(-50%, -50%);
   width: ${(props) => (props.width === undefined ? '400' : props.width)}px;
+  max-height: 700px;
   padding: 1rem;
   border-radius: 1rem;
   z-index: 999;
   background: var(--white);
+  box-shadow: var(--shadowSharp);
+  /* overflow-y: scroll; */
+
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1;
+  }
+
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #888;
+  }
+
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555;
+  }
 `;
 
 export const ModalHeader = styled.div`

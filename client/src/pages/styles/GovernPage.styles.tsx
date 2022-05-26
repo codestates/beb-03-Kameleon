@@ -20,6 +20,7 @@ export const GovernPageGovernList = styled.div`
     padding: 3rem;
     border-radius: 0.5rem;
     background-color: var(--white);
+    box-shadow: var(--shadowSharp);
   }
 
   & > div {
@@ -65,6 +66,10 @@ export const GovernPageGovernList = styled.div`
     font-weight: 600;
     color: var(--white);
     background-color: var(--dark-green);
+    /* box-shadow: 0 1px 1px rgb(0 0 0 / 25%), 0 2px 2px rgb(0 0 0 / 20%),
+      0 4px 4px rgb(0 0 0 / 15%), 0 8px 8px rgb(0 0 0 / 10%),
+      0 16px 16px rgb(0 0 0 / 5%); */
+    box-shadow: var(--shadowSharp);
 
     &:hover {
       cursor: pointer;
@@ -115,6 +120,7 @@ export const GovernPagePollItem = styled.div<{
   & > section > span {
     display: block;
     margin-top: 1rem;
+    white-space: nowrap;
     text-overflow: ellipsis;
     overflow: hidden;
 
@@ -212,6 +218,7 @@ export const GovernPageModalContent = styled.div`
 
   & label {
     display: block;
+    margin: 10px;
     font-size: 1.2rem;
     font-weight: 600;
     margin-bottom: 0.25rem;
@@ -224,11 +231,16 @@ export const GovernPageModalContent = styled.div`
     padding: 0.5rem;
     border: 0;
     border-radius: 0.5rem;
+    box-shadow: var(--shadowSharp);
     font-size: 1rem;
     font-weight: 600;
     color: var(--white);
     background-color: var(--green);
     outline: none;
+  }
+
+  & > div > input {
+    box-shadow: var(--shadowSharp);
   }
 
   & input {
@@ -254,7 +266,7 @@ export const GovernPageModalContent = styled.div`
     font-weight: 600;
     color: var(--white);
     background-color: var(--deep-green);
-
+    box-shadow: var(--shadowSharp);
     :hover {
       cursor: pointer;
     }
