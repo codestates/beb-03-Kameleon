@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import { MyPageWrapper, MyPageList, MyPageItem } from './styles/MyPage.styles';
 
 import { callContract, getBalance } from '../utils/KAS';
+
 import {
   contractAddressTable,
   kStockTokenAddressTable,
@@ -178,12 +179,12 @@ const MyPage = () => {
   return (
     <div>
       <MyPageWrapper>
-        <h2 className="tit">My Assets</h2>
+        <h2 className="tit">Asset</h2>
         <MyPageList>
           <div>
             <span>Token</span>
-            <span>Balance</span>
-            <span className="mypage_value">Value</span>
+            <span className="asset__balance">Balance</span>
+            <span className="asset__value">Value</span>
             <span>Total</span>
           </div>
           {myList
@@ -194,10 +195,15 @@ const MyPage = () => {
                   <StockLogo stockName={el.name} />
                   {el.name}
                 </div>
-                <div className="main__oracle">
-                  {el.balance.toLocaleString('ko-KR')}
+                <div>{el.balance.toLocaleString('ko-KR')}</div>
+                <div className="asset__value">
+                  {el.value.toLocaleString('ko-KR')}
+                  <StockLogo stockName={'KLAY'} />
                 </div>
-                <div>{(el.balance * el.value).toLocaleString('ko-KR')} KLY</div>
+                <div>
+                  {(el.balance * el.value).toLocaleString('ko-KR')}
+                  <StockLogo stockName={'KLAY'} />
+                </div>
               </MyPageItem>
             ))}
         </MyPageList>
@@ -206,7 +212,7 @@ const MyPage = () => {
           <div>
             <span>Pool</span>
             <span>LPToken</span>
-            <span className="mypage__balance">Balance</span>
+            <span className="pool__balance">Balance</span>
             <span>ROI</span>
           </div>
           {myPoolList

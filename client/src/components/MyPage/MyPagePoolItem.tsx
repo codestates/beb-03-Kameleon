@@ -30,8 +30,8 @@ const MyPagePoolItem = ({ id, name, lpToken, balance }: PoolListProps) => {
         {name} {' <-> '} <StockLogo stockName={'KLAY'} />
         {'KLAY'}
       </div>
-      <div className="main__oracle">{lpToken} LPT</div>
-      <div>{balance}</div>
+      <div>{lpToken} LPT</div>
+      <div className="pool__balance">{balance}</div>
       <div>{roi}%</div>
     </MyPageItem>
   );
