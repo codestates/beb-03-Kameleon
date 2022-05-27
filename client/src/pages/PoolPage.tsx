@@ -11,6 +11,8 @@ import {
 import { callContract, getBalance } from '../utils/KAS';
 import { exchangeAddressTable, kStockTokenAddressTable } from '../constants';
 import StockLogo from '../components/StockLogo/StockLogo';
+import Skeleton, { SkeletonTheme } from 'react-loading-skeleton';
+import 'react-loading-skeleton/dist/skeleton.css';
 
 interface PoolListProps {
   id: number;
@@ -20,7 +22,13 @@ interface PoolListProps {
 }
 
 const PoolPage = () => {
-  const [poolList, setPoolList] = useState<Array<PoolListProps>>([]);
+  const [poolList, setPoolList] = useState<{
+    poolList: Array<PoolListProps>;
+    isLoading: boolean;
+  }>({
+    poolList: [],
+    isLoading: true,
+  });
 
   useEffect(() => {
     const callPoolList = async () => {
@@ -54,7 +62,7 @@ const PoolPage = () => {
         };
         tempList.push(pool);
       }
-      setPoolList(tempList);
+      setPoolList({ poolList: tempList, isLoading: false });
     };
     callPoolList();
   }, []);
@@ -70,21 +78,29 @@ const PoolPage = () => {
             APY<i>(ROI)</i>
           </span>
         </div>
-        {poolList.map((el) => (
-          <Link to={`/liquidity/${el.name}`} key={el.id}>
-            <PoolPageItem>
-              <div>
-                <StockLogo stockName={el.name} /> {el.name} {'<->'}{' '}
-                <StockLogo stockName="KLAY" />
-                {'KLAY'}
-              </div>
-              <div className="main__oracle">
-                {el.liquid.toLocaleString('ko-KR')}
-              </div>
-              <div>{el.change}%</div>
-            </PoolPageItem>
-          </Link>
-        ))}
+        {poolList?.isLoading === true && (
+          <SkeletonTheme height={'50px'}>
+            <p>
+              <Skeleton count={5}></Skeleton>
+            </p>
+          </SkeletonTheme>
+        )}
+        {poolList?.isLoading === false &&
+          poolList?.poolList?.map((el) => (
+            <Link to={`/liquidity/${el.name}`} key={el.id}>
+              <PoolPageItem>
+                <div>
+                  <StockLogo stockName={el.name} /> {el.name} {'<->'}{' '}
+                  <StockLogo stockName="KLAY" />
+                  {'KLAY'}
+                </div>
+                <div className="main__oracle">
+                  {el.liquid.toLocaleString('ko-KR')}
+                </div>
+                <div>{el.change}%</div>
+              </PoolPageItem>
+            </Link>
+          ))}
       </PoolPageList>
     </PoolPageWrapper>
   );

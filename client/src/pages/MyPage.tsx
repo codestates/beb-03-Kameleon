@@ -72,7 +72,7 @@ const MyPage = () => {
           })
         ); // array 삽입);
       }
-      await Promise.all(tokenPriceList);
+      // const res = await Promise.all(tokenPriceList);
       // 위의 포문으로 배열 i개 삽입 후 setMyList
       // Promise.all(p[1], p[2]);
       await Promise.all(tokenPriceList);

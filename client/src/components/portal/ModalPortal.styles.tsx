@@ -18,7 +18,7 @@ export const ModalWrapper = styled.div<{ width: number | undefined }>`
   width: ${(props) => (props.width === undefined ? '400' : props.width)}px;
   max-height: 700px;
   padding: 1rem;
-  border-radius: 1rem;
+  border-radius: 1rem 0.5rem 0.5rem 1rem;
   z-index: 999;
   background: var(--white);
   box-shadow: var(--shadowSharp);
@@ -30,12 +30,17 @@ export const ModalWrapper = styled.div<{ width: number | undefined }>`
 
   /* Track */
   ::-webkit-scrollbar-track {
-    background: #f1f1f1;
+    background-color: grey;
+    border-radius: 10px;
+    box-shadow: inset 0px 0px 5px white;
   }
 
   /* Handle */
   ::-webkit-scrollbar-thumb {
-    background: #888;
+    background-color: #2f3542;
+    border-radius: 10px;
+    background-clip: padding-box;
+    border: 2px solid transparent;
   }
 
   /* Handle on hover */
