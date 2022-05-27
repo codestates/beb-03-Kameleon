@@ -56,7 +56,7 @@
 
 - **Stock List 제공**
 
-  ![메인페이지 가격정보](image/main.png)
+  ![메인페이지 가격정보](image/main1.png)
 
   - 각각의 주식 토큰의 실제 가격인 Oracle 가격과 풀 내의 가격을 제공하고 둘의 가격을 비교한 Premium 비율도 보여줍니다.
   - Premium 비율은 ‘현재 풀의 토큰 가격 / Oracle 가격’ 의 퍼센트 비율입니다.
