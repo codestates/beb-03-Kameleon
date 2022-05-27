@@ -15,6 +15,8 @@ import MyPagePoolItem from '../components/MyPage/MyPagePoolItem';
 import MyPageGovern from '../components/MyPage/MyPageGovern';
 import { useNavigate } from 'react-router-dom';
 import StockLogo from './../components/StockLogo/StockLogo';
+import { useDispatch } from 'react-redux';
+import { onSelectNav } from '../store/user';
 
 const caver = new Caver();
 
@@ -36,6 +38,7 @@ const MyPage = () => {
   const [myList, setMyList] = useState<Array<TokenListProps>>([]);
   const [myPoolList, setMyPoolList] = useState<Array<PoolListProps>>([]);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   useEffect(() => {
     // console.log('window.klaytn.selectedAddress', window.klaytn.selectedAddress);
@@ -72,6 +75,7 @@ const MyPage = () => {
       // const res = await Promise.all(tokenPriceList);
       // 위의 포문으로 배열 i개 삽입 후 setMyList
       // Promise.all(p[1], p[2]);
+      await Promise.all(tokenPriceList);
       setMyList(myList);
     };
     const getPoolList = async () => {
@@ -180,6 +184,7 @@ const MyPage = () => {
 
   const onClickMyListHandler = (name: string) => {
     navigate(`/swap/${name}`);
+    dispatch(onSelectNav('swap'));
   };
 
   return (

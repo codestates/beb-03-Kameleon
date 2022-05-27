@@ -16,8 +16,9 @@ import {
   MyStakeBalanceHooks,
 } from '../hooks/QueryHooks/Govern';
 import CreatePoll from '../components/Govern/CreatePoll';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { onSelectNav } from '../store/user';
 
 interface RootState {
   user: {
@@ -27,6 +28,7 @@ interface RootState {
 }
 const GovernPage = () => {
   const { isOpen, toggle } = useModal();
+  const dispatch = useDispatch();
 
   const selectUser = (state: RootState) => state.user;
   const user = useSelector(selectUser);
@@ -74,7 +76,7 @@ const GovernPage = () => {
             <p>MY STAKABLE</p>
             <div>{myStakeBalance?.data?.stakable} KMT</div>
           </div>
-          <Link to={`/myPage`}>
+          <Link to={`/myPage`} onClick={() => dispatch(onSelectNav('mypage'))}>
             <button>Manage Stake</button>
           </Link>
         </div>

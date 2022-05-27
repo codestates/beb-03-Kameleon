@@ -5,10 +5,13 @@ import { exchangeAddressTable } from '../../constants';
 import { PoolListProps } from '../../pages/MyPage';
 import { useNavigate } from 'react-router-dom';
 import StockLogo from '../../components/StockLogo/StockLogo';
+import { useDispatch } from 'react-redux';
+import { onSelectNav } from '../../store/user';
 
 const MyPagePoolItem = ({ id, name, lpToken, balance }: PoolListProps) => {
   const [roi, setRoi] = React.useState<number>(0);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   React.useEffect(() => {
     const getPoolRoi = async () => {
@@ -27,6 +30,7 @@ const MyPagePoolItem = ({ id, name, lpToken, balance }: PoolListProps) => {
   }, [name]);
   const onClickHandler = () => {
     navigate(`/liquidity/${name}`);
+    dispatch(onSelectNav('pool'));
   };
 
   return (
