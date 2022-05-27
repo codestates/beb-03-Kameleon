@@ -6,7 +6,7 @@ import {
   GovernPagePollList,
 } from './styles/GovernPage.styles';
 
-import Modal from '../components/modal/Modal';
+import ModalPortal from '../components/portal/ModalPortal';
 import useModal from '../hooks/useModal';
 
 import Poll from '../components/Govern/Poll';
@@ -87,11 +87,11 @@ const GovernPage = () => {
           return <Poll key={idx} pollId={id} {...el} />;
         })}
       </GovernPagePollList>
-      <Modal
+      <ModalPortal
         isOpen={isOpen}
         closeModal={toggle}
         modalContent={<CreatePoll />}
-      ></Modal>
+      ></ModalPortal>
     </GovernPageWrapper>
   );
 };

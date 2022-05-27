@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 
 import {
   SingleInputContainer,
@@ -7,13 +7,16 @@ import {
 } from './styles/SingleInput.styles';
 
 import 'react-toastify/dist/ReactToastify.css';
-import useInput from '../../hooks/useInput';
 import {
   PollInput,
   PollForm,
   PollWrapper,
   PollLabel,
 } from './styles/GovernInput.styles';
+
+import ToastPortal from '../portal/ToastPortal';
+import useInput from '../../hooks/useInput';
+
 import { callCaver, sendContract } from '../../utils/KAS';
 import { contractAddressTable } from '../../constants';
 
@@ -38,9 +41,8 @@ const GovernInput = ({ children, pollId }: LayoutProps) => {
   const [isAgree, setIsAgree] = useState<boolean | null>(null);
   const [yesFocus, setYesFocus] = useState<boolean>(false);
   const [noFocus, setNoFocus] = useState<boolean>(false);
-
-  const successNotify = () => toast.success('Success!');
-  const failNotify = () => toast.error('fail!');
+  const successNotify = () => toast.success('SUCCESS!!!');
+  const failNotify = () => toast.error('FAIL!!!');
 
   const yesOnClickHander = () => {
     if (yesFocus === true) {
@@ -150,7 +152,7 @@ const GovernInput = ({ children, pollId }: LayoutProps) => {
       <br></br>
       <button onClick={buttonOnClickHander}>vote</button>
       <br></br>
-      <ToastContainer icon={false} />
+      <ToastPortal />
     </>
   );
 };

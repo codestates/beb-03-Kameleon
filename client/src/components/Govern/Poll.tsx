@@ -1,6 +1,6 @@
 import React from 'react';
 import useModal from '../../hooks/useModal';
-import Modal from '../modal/Modal';
+import ModalPortal from '../portal/ModalPortal';
 import PollModal from './PollModal';
 import {
   GovernPagePollItem,
@@ -88,12 +88,12 @@ const Poll = (props: IGovernPropsType) => {
           {')'}
         </div>
       </GovernPagePollItem>
-      <Modal
+      <ModalPortal
         isOpen={isOpen}
         closeModal={toggle}
         width={400}
         modalContent={<PollModal {...props}></PollModal>}
-      ></Modal>
+      ></ModalPortal>
     </>
   );
 };

@@ -1,5 +1,5 @@
 import { useState, useCallback, useEffect } from 'react';
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
 import { faArrowDown } from '@fortawesome/free-solid-svg-icons';
@@ -14,6 +14,7 @@ import {
   ButtonWrapper,
 } from './styles/MintPage.styles';
 
+import ToastPortal from '../components/portal/ToastPortal';
 import SingleInput from '../components/Input/SingleInput';
 import MultipleInput from '../components/Input/MultipleInput';
 
@@ -38,8 +39,8 @@ const MintPage = () => {
   const [isDecimalErrorB, setIsDecimalErrorB] = useState<boolean>(false);
   const [detailInfo, setDetailInfo] = useState<number>(0);
   const [fee, setFee] = useState<number>(0);
-  const successNotify = () => toast.success('Success!');
-  const failNotify = () => toast.error('fail!');
+  const successNotify = () => toast.success('SUCCESS!!!');
+  const failNotify = () => toast.error('FAIL!!!');
 
   const liftStateA = useCallback(
     (
@@ -241,7 +242,7 @@ const MintPage = () => {
           </>
         )}
       </form>
-      <ToastContainer icon={false} />
+      <ToastPortal />
     </MintPageWrapper>
   );
 };

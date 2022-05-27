@@ -1,13 +1,15 @@
 import React from 'react';
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import Moment from 'react-moment';
 
 import 'moment/locale/ko';
 import 'react-toastify/dist/ReactToastify.css';
 import { GovernPageModalContent } from '../../pages/styles/GovernPage.styles';
 
+import ToastPortal from '../portal/ToastPortal';
 import GovernInput from '../Input/GovernInput';
 import DoughnutChart from '../Chart/DoughnutChart';
+
 import { WithdrawableBalanceQueryHooks } from '../../hooks/QueryHooks/Govern';
 import { IGovernPropsType } from '../../types/components/Govern.types';
 import { contractAddressTable } from '../../constants';
@@ -28,8 +30,8 @@ const PollModal = ({
   console.log('yes or no ', yes, no);
   const now = new Date().getTime();
   console.log(expired, 'expired');
-  const successNotify = () => toast.success('Success!');
-  const failNotify = () => toast.error('fail!');
+  const successNotify = () => toast.success('SUCCESS!!!');
+  const failNotify = () => toast.error('FAIL!!!');
 
   const isExpired = now > +endTime * 1000 || expired === true;
 
@@ -105,7 +107,6 @@ const PollModal = ({
             </div>
           </>
         )}
-        <ToastContainer icon={false} />
       </GovernPageModalContent>
     </>
   );

@@ -5,6 +5,7 @@ import {
   useLocation,
   Location,
 } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
 import { GlobalStyle, AppStyle, MainStyle } from './GlobalStyle';
 import Header from './components/common/Header';
 import Footer from './components/common/Footer';
@@ -28,6 +29,7 @@ const Animation = () => {
   React.useEffect(() => {
     if (location !== displayLocation) setTransistionStage('fadeOut');
   }, [location, displayLocation]);
+
   return (
     <>
       <div
@@ -50,6 +52,8 @@ const Animation = () => {
           <Route path="/govern" element={<GovernPage />} />
         </Routes>
       </div>
+
+      {/* <ToastContainer icon={false} /> */}
     </>
   );
 };

@@ -1,9 +1,9 @@
 import { useState } from 'react';
+import { toast } from 'react-toastify';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
 import { faArrowDown } from '@fortawesome/free-solid-svg-icons';
 import { useParams } from 'react-router-dom';
-import { ToastContainer, toast } from 'react-toastify';
 import Caver from 'caver-js';
 
 import 'react-toastify/dist/ReactToastify.css';
@@ -14,7 +14,9 @@ import {
   ButtonWrapper,
 } from './styles/SwapPage.styles';
 
+import ToastPortal from '../components/portal/ToastPortal';
 import SwapInput from '../components/Input/SwapInput';
+import useInput from '../hooks/useInput';
 
 import {
   callContract,
@@ -22,12 +24,10 @@ import {
   callIsApproved,
   sendApprove,
 } from '../utils/KAS';
-
 import {
   exchangeAddressTable,
   kStockTokenAddressTable,
 } from '../constants/index';
-import useInput from '../hooks/useInput';
 
 const arrowDown = faArrowDown as IconProp;
 const caver = new Caver(window.klaytn);
@@ -60,8 +60,8 @@ const SwapPage = () => {
   // const [detailInfo, setDetailInfo] = useState<number>(0);
   const [isApproveA, setIsApproveA] = useState(false);
   const [fee, setFee] = useState<string>('');
-  const successNotify = () => toast.success('Success!');
-  const failNotify = () => toast.error('fail!');
+  const successNotify = () => toast.success('SUCCESS!!!');
+  const failNotify = () => toast.error('FAIL!!!');
 
   const {
     tokenBalance: tokenBalanceA,
@@ -374,7 +374,7 @@ const SwapPage = () => {
           </ButtonWrapper>
         )}
       </form>
-      <ToastContainer icon={false} />
+      <ToastPortal />
     </SwapPageWrapper>
   );
 };
