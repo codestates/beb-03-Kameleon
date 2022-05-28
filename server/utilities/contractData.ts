@@ -2,7 +2,10 @@ import fs from "fs";
 import path from "path";
 
 // const contractPath = "./../../contract/contracts/artifacts";
-const contractPath = "./../../contract/contracts/artifacts";
+const contractPath =
+  process.env.NODE_ENV === "production"
+    ? "./../../../contract/contracts/artifacts"
+    : "./../../contract/contracts/artifacts";
 
 const abiList = {};
 const byteCodeList = {};

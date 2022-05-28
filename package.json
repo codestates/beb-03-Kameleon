@@ -1,0 +1,19 @@
+{
+  "name": "beb-03-kameleon",
+  "version": "1.0.0",
+  "description": "![m-logo.png](./image/m-logo.png)",
+  "main": "index.js",
+  "scripts": {
+    "heroku": "git subtree push --prefix server heroku master"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jsc7727/beb-03-Kameleon.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jsc7727/beb-03-Kameleon/issues"
+  },
+  "homepage": "https://github.com/jsc7727/beb-03-Kameleon#readme"
+}
