@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { toast } from 'react-toastify';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
@@ -148,7 +148,7 @@ const SwapPage = () => {
       );
       setTokenBalanceB(Number(Number(swapTokenAmount) / 10 ** 18).toFixed(6));
       // const approved = await callIsApproved({ stockName: tokenName });
-      setIsApproveA(true);
+      // setIsApproveA(true);
       setFee(Number(+tokenBalance * 0.003).toFixed(3) + ' ' + nameA);
     };
 
@@ -166,9 +166,9 @@ const SwapPage = () => {
       }
       const swapKlayAmount: string = await amountKlay(tokenName, tokenBalance);
       setTokenBalanceB(Number(Number(swapKlayAmount) / 10 ** 18).toFixed(6));
-      const approved = await callIsApproved({ stockName: tokenName });
-      setIsApproveA(approved);
-      setIsApproveA(true);
+      // const approved = await callIsApproved({ stockName: tokenName });
+      // setIsApproveA(approved);
+      // setIsApproveA(true);
       setFee(Number(+tokenBalance * 0.003).toFixed(3) + ' ' + nameA);
     };
 
@@ -191,8 +191,8 @@ const SwapPage = () => {
 
         console.log('approvedA :', approvedA);
         console.log('approvedB :', approvedB);
-        setIsApproveA(approvedA);
-        setIsApproveA(true);
+        // setIsApproveA(approvedA);
+        // setIsApproveA(true);
         setFee(Number(+tokenBalance * 0.006).toFixed(3) + ' ' + nameA);
       }
     };
@@ -221,6 +221,16 @@ const SwapPage = () => {
   }) => {
     return;
   };
+
+  useEffect(() => {
+    if (Object.keys(kStockTokenAddressTable).includes(nameA)) {
+      callIsApproved({ stockName: nameA }).then((res: boolean) =>
+        setIsApproveA(res)
+      );
+    } else {
+      setIsApproveA(true);
+    }
+  }, [nameA]);
 
   // const onCalculateInputB = async ({
   //   tokenName,
