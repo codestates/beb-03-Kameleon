@@ -1,6 +1,7 @@
 import Caver from "caver-js";
 require("dotenv").config();
-export const caver = new Caver(process.env.BAOBAB_NETWORK);
+// export const caver = new Caver(process.env.BAOBAB_NETWORK);
+export const caver = new Caver("https://api.baobab.klaytn.net:8651");
 
 import { abiList, byteCodeList } from "./contractData";
 

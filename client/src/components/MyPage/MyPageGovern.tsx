@@ -68,9 +68,16 @@ const MyPageGovern = () => {
   return (
     <>
       {governList.map(
-        ({ title, agree, disagree, endTime, totalSupply }: IGovernType) => {
+        ({
+          pollId,
+          title,
+          agree,
+          disagree,
+          endTime,
+          totalSupply,
+        }: IGovernType) => {
           return (
-            <MyPageItem>
+            <MyPageItem key={'myPageItem' + title}>
               <div>{title}</div>
               <MyPageBar
                 className="mypage__bar"

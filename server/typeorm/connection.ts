@@ -26,7 +26,6 @@ const connection = {
   async close() {
     // typerom 연결 삭제
     await getConnection().close();
-    await getConnection(process.env.DATABASE_DEMON_NAME).close();
   },
 
   async clear() {

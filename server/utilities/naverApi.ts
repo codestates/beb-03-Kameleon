@@ -3,12 +3,13 @@
 import axios from "axios";
 import { callContract } from "./KAS";
 import iconv from "iconv-lite";
+import { OracleAddress } from "../constants/contractAddress";
 
 const stockPrice = async () => {
   try {
     const stocklist: Array<string> = await callContract({
       contractName: "Oracle",
-      contractAddress: process.env.Oracle_CONTRACT_ADDRESS,
+      contractAddress: OracleAddress,
       methodName: "getStockCodeList",
     });
     console.log(stocklist);

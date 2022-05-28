@@ -200,8 +200,11 @@ const MyPage = () => {
           </div>
           {myList
             .sort((a, b) => a.id - b.id)
-            .map((el) => (
-              <MyPageItem onClick={() => onClickMyListHandler(el.name)}>
+            .map((el: TokenListProps) => (
+              <MyPageItem
+                key={el.id}
+                onClick={() => onClickMyListHandler(el.name)}
+              >
                 <div>
                   <StockLogo stockName={el.name} />
                   {el.name}
