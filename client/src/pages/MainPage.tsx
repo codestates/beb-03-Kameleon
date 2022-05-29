@@ -116,7 +116,7 @@ const MainPage = () => {
     const filterList = lst.filter((v: TokenList) => {
       return v.name !== undefined && v.name.includes(inputString.trim());
     });
-    console.log(filterList);
+    // console.log(filterList);
     return filterList;
   };
   const magnifyingGlass = faMagnifyingGlass as IconProp;

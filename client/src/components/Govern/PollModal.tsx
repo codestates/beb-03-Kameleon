@@ -27,9 +27,7 @@ const PollModal = ({
   expired,
 }: IGovernPropsType) => {
   const [yes, no] = [+agree, +disagree];
-  console.log('yes or no ', yes, no);
   const now = new Date().getTime();
-  console.log(expired, 'expired');
   const successNotify = () => toast.success('SUCCESS!!!');
   const failNotify = () => toast.error('FAIL!!!');
 
@@ -48,7 +46,6 @@ const PollModal = ({
       methodName: 'withdrawBalance',
       parameters: [+pollId],
     });
-    console.log(result);
 
     if (result instanceof Error === false) {
       successNotify();

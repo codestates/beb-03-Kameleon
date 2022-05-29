@@ -23,7 +23,6 @@ const CreatePoll = () => {
       methodName: 'createPoll',
       parameters: [title, content, +day],
     });
-    console.log(result);
     if (result instanceof Error === false) {
       successNotify();
     } else {

@@ -48,7 +48,6 @@ const Header = () => {
     checkUnlocked();
   }, [dispatch, user.account]);
 
-  console.log('nav', nav);
   return (
     <HeaderStyle>
       <div className="layout">

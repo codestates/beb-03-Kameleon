@@ -189,8 +189,8 @@ const SwapPage = () => {
         const approvedA = await callIsApproved({ stockName: tokenName });
         const approvedB = await callIsApproved({ stockName: nameB });
 
-        console.log('approvedA :', approvedA);
-        console.log('approvedB :', approvedB);
+        // console.log('approvedA :', approvedA);
+        // console.log('approvedB :', approvedB);
         // setIsApproveA(approvedA);
         // setIsApproveA(true);
         setFee(Number(+tokenBalance * 0.006).toFixed(3) + ' ' + nameA);

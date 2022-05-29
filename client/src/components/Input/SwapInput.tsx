@@ -75,7 +75,6 @@ const SwapInput = ({
     });
     setTokenList(tList);
     setTokenName(params.token ? params.token : tList[i].name);
-    console.log(i);
   }, [params.token, setTokenName]);
 
   // tokenName 변경에 따라 Max값 변경

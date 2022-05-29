@@ -11,7 +11,7 @@ const stockPrice = async () => {
       contractAddress: contractAddressTable.Oracle,
       methodName: 'getStockCodeList',
     });
-    console.log('stocklist : ', stocklist);
+    // console.log('stocklist : ', stocklist);
     const res = await axios(
       `https://polling.finance.naver.com/api/realtime?query=SERVICE_ITEM:${stocklist.join(
         ','
@@ -39,7 +39,7 @@ const stockPrice = async () => {
       return [];
     }
   } catch (error) {
-    console.log(error);
+    // console.log(error);
     return [];
   }
 };
