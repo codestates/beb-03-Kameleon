@@ -52,10 +52,10 @@ const GovernQueryHooks = ({ key, refetchInterval }: inputType) => {
           });
           return temp;
         });
-        console.log(objResult);
+        // console.log(objResult);
         return objResult;
       } catch (error) {
-        console.log(error);
+        // console.log(error);
         return [];
       }
     },
@@ -87,10 +87,10 @@ const WithdrawableBalanceQueryHooks = ({
           parameters: [+pollId],
           kaikas: true,
         });
-        console.log('withdrawableBalance', callResult, pollId);
+        // console.log('withdrawableBalance', callResult, pollId);
         return callResult / 10 ** 18;
       } catch (error) {
-        console.log(error);
+        // console.log(error);
         return -1;
       }
     },
@@ -120,7 +120,7 @@ const TotalStakedBalanceHooks = ({
         });
         return +result / 10 ** 18;
       } catch (error) {
-        console.log(error);
+        // console.log(error);
         return 0;
       }
     },
@@ -176,7 +176,7 @@ const MyStakeBalanceHooks = ({
           stakable,
         };
       } catch (error) {
-        console.log(error);
+        // console.log(error);
         return 0;
       }
     },

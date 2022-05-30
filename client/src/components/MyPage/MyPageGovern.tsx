@@ -19,7 +19,7 @@ const MyPageGovern = () => {
           contractAddress: contractAddressTable['Govern'],
           methodName: 'getPollsLength',
         });
-        console.log('getPollsLength : ', getPollsLength);
+        // console.log('getPollsLength : ', getPollsLength);
         const result: Array<IGovernType> = [];
         const type = getMethodReturnStructType({
           contractName: 'Govern',
@@ -53,14 +53,14 @@ const MyPageGovern = () => {
             totalSupply,
           });
           pollStateObj['withdrawableBalance'] = withdrawableBalance;
-          console.log('test : type', pollStateObj);
+          // console.log('test : type', pollStateObj);
           if (withdrawableBalance > 0) {
             result.push(pollStateObj);
           }
         }
         setGovernList(result);
       } catch (error) {
-        console.log(error);
+        // console.log(error);
       }
     };
     test();
@@ -68,9 +68,16 @@ const MyPageGovern = () => {
   return (
     <>
       {governList.map(
-        ({ title, agree, disagree, endTime, totalSupply }: IGovernType) => {
+        ({
+          pollId,
+          title,
+          agree,
+          disagree,
+          endTime,
+          totalSupply,
+        }: IGovernType) => {
           return (
-            <MyPageItem>
+            <MyPageItem key={'myPageItem' + title}>
               <div>{title}</div>
               <MyPageBar
                 className="mypage__bar"

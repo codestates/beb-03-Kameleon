@@ -61,7 +61,7 @@ const MyPage = () => {
             parameters: [window.klaytn.selectedAddress],
           }).then((res) => {
             if (res > 0) {
-              console.log('nameTable', nameTable[i]);
+              // console.log('nameTable', nameTable[i]);
               myList.push({
                 id: i,
                 name: nameTable[i],
@@ -100,7 +100,7 @@ const MyPage = () => {
         );
       });
       await Promise.all(promiseGetEachBalance);
-      console.log('Pool to search list :', poolToSearch);
+      // console.log('Pool to search list :', poolToSearch);
 
       // list 중 하나를 뽑아와 pool내 klay, pool내 kStock토큰수, total LP를 뽑은 후 {name: kSSE, lpAmount: 100, poolKlay: 10000, poolKStock: 200, totalSupply: 200}
       // poolToSearh :[{name: kSSE, lpAmount: lp토큰 수량}, ... ]
@@ -147,7 +147,7 @@ const MyPage = () => {
 
         // 모두 가져온 후 push
         Promise.all(promiseTemp).then(() => {
-          console.log('Pool promise', promiseTemp);
+          // console.log('Pool promise', promiseTemp);
           const ratio = Number(item.lpAmount) / Number(totalLP);
           myTempPool.push({
             id: index,
@@ -164,9 +164,9 @@ const MyPage = () => {
               1000000000000000000
             ).toLocaleString('ko-KR')}${item.name} `,
           });
-          console.log('myTempPool', myTempPool);
+          // console.log('myTempPool', myTempPool);
           setMyPoolList([...myTempPool]);
-          console.log('myPoolList', myPoolList);
+          // console.log('myPoolList', myPoolList);
         });
       });
     };
@@ -200,8 +200,11 @@ const MyPage = () => {
           </div>
           {myList
             .sort((a, b) => a.id - b.id)
-            .map((el) => (
-              <MyPageItem onClick={() => onClickMyListHandler(el.name)}>
+            .map((el: TokenListProps) => (
+              <MyPageItem
+                key={el.id}
+                onClick={() => onClickMyListHandler(el.name)}
+              >
                 <div>
                   <StockLogo stockName={el.name} />
                   {el.name}

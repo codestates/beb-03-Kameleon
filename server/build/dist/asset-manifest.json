@@ -1,0 +1,28 @@
+{
+  "files": {
+    "main.js": "/static/js/main.1e82ef30.chunk.js",
+    "main.js.map": "/static/js/main.1e82ef30.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.7451b9a1.js",
+    "runtime-main.js.map": "/static/js/runtime-main.7451b9a1.js.map",
+    "static/css/2.336dc8e9.chunk.css": "/static/css/2.336dc8e9.chunk.css",
+    "static/js/2.096959ab.chunk.js": "/static/js/2.096959ab.chunk.js",
+    "static/js/2.096959ab.chunk.js.map": "/static/js/2.096959ab.chunk.js.map",
+    "index.html": "/index.html",
+    "static/css/2.336dc8e9.chunk.css.map": "/static/css/2.336dc8e9.chunk.css.map",
+    "static/js/2.096959ab.chunk.js.LICENSE.txt": "/static/js/2.096959ab.chunk.js.LICENSE.txt",
+    "static/media/Kameleon.acabd1a0.svg": "/static/media/Kameleon.acabd1a0.svg",
+    "static/media/Line.ead42e53.svg": "/static/media/Line.ead42e53.svg",
+    "static/media/Mosquito.580b85c9.svg": "/static/media/Mosquito.580b85c9.svg",
+    "static/media/backgroundKameleon.e69351d9.svg": "/static/media/backgroundKameleon.e69351d9.svg",
+    "static/media/bg.0d4a9f2d.jpg": "/static/media/bg.0d4a9f2d.jpg",
+    "static/media/logo.9deaebdb.png": "/static/media/logo.9deaebdb.png",
+    "static/media/m-logo.8eefb56c.png": "/static/media/m-logo.8eefb56c.png",
+    "static/media/snake2.fa63d762.svg": "/static/media/snake2.fa63d762.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.7451b9a1.js",
+    "static/css/2.336dc8e9.chunk.css",
+    "static/js/2.096959ab.chunk.js",
+    "static/js/main.1e82ef30.chunk.js"
+  ]
+}

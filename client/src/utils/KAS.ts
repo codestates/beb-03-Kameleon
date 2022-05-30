@@ -35,7 +35,7 @@ const sendApprove = async ({ stockName }: { stockName: string }) => {
     });
     return result;
   } catch (error) {
-    console.log(error);
+    // console.log(error);
     return error;
   }
 };
@@ -109,7 +109,7 @@ const callContract = async ({
           methodName,
           parameters
         );
-        console.log(`call receipt: ${receipt}`);
+        // console.log(`call receipt: ${receipt}`);
         return receipt;
       } else {
         const receipt = await contract.call(
@@ -119,7 +119,7 @@ const callContract = async ({
           },
           methodName
         );
-        console.log(`call receipt: ${receipt}`);
+        // console.log(`call receipt: ${receipt}`);
         return receipt;
       }
     } else {
@@ -128,11 +128,11 @@ const callContract = async ({
         contractAddress
       );
       const callResult = await contract.call(methodName, ...parameters);
-      console.log(`Result of calling get function with key: ${callResult}`);
+      // console.log(`Result of calling get function with key: ${callResult}`);
       return callResult;
     }
   } catch (error) {
-    console.log(error);
+    // console.log(error);
     return error;
   }
 };
@@ -169,7 +169,7 @@ const sendContract = async ({
     });
     return result?.blockHash;
   } catch (error) {
-    console.log(error);
+    // console.log(error);
     return error;
   }
 };
@@ -179,7 +179,7 @@ const getBalance = async ({ address }: { address: string }) => {
     const balance = await callCaver.klay.getBalance(address);
     return balance;
   } catch (error) {
-    console.log(error);
+    // console.log(error);
     return '';
   }
 };
@@ -200,7 +200,7 @@ const getBalance = async ({ address }: { address: string }) => {
 //   contractName: "MyKIP7",
 //   contractAddress,
 //   methodName: "approve",
-//   parameters: [process.env.feeAddress, "1000000"],
+//   parameters: [process.env.FEE_ADDRESS, "1000000"],
 // });
 
 // multiMint();

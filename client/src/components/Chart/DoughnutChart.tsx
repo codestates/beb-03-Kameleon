@@ -9,7 +9,6 @@ const DoughnutChart = ({
 }: {
   [x: string]: number;
 }) => {
-  console.log(agree, disagree, totalSupply);
   const data = {
     labels: ['Agree', 'Disaggree', 'other'],
     datasets: [

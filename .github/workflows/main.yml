@@ -5,8 +5,19 @@ on:
     branches: [deploy]
 
 env:
-  DOCKER_IMAGE: ghcr.io/${{ github.actor }}/kameleon
+  DOCKER_IMAGE: ghcr.io/${{ github.actor }}/kameleonserver
   VERSION: ${{ github.sha }}
+  DATABASE_HOST: ${{ secrets.DATABASE_HOST }}
+  DATABASE_ID: ${{ secrets.DATABASE_ID }}
+  DATABASE_PASSWORD: ${{ secrets.DATABASE_PASSWORD }}
+  DATABASE_NAME: ${{ secrets.DATABASE_NAME }}
+  HOSTNAME: ${{ secrets.HOSTNAME }}
+  PORT: ${{ secrets.PORT }}
+  FEEADDRESS: ${{ secrets.FEEADDRESS }}
+  FEEPRIVATEKEY: ${{ secrets.FEEPRIVATEKEY }}
+  ORACLE_CONTRACT_ADDRESS: ${{ secrets.ORACLE_CONTRACT_ADDRESS }}
+  FACTORY_CONTRACT_ADDRESS: ${{ secrets.FACTORY_CONTRACT_ADDRESS }}
+  KAMELEON_CONTRACT_ADDRESS: ${{ secrets.KAMELEON_CONTRACT_ADDRESS }}
   NAME: go_cicd
 
 jobs:
@@ -34,7 +45,7 @@ jobs:
           password: ${{ secrets.GHCR_TOKEN }}
       - name: Build and push
         id: docker_build
-        uses: docker/build-push-action@v2
+        uses: docker/build-push-action@v3
         with:
           builder: ${{ steps.buildx.outputs.name }}
           push: true
@@ -43,7 +54,7 @@ jobs:
   deploy:
     needs: build
     name: Deploy
-    runs-on: [self-hosted, label-go]
+    runs-on: [self-hosted, kameleon]
     steps:
       - name: Login to ghcr
         uses: docker/login-action@v1
@@ -51,7 +62,20 @@ jobs:
           registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ secrets.GHCR_TOKEN }}
+
       - name: Docker run
         run: |
           docker stop ${{ env.NAME }} && docker rm ${{ env.NAME }} && docker rmi ${{ env.DOCKER_IMAGE }}:latest
-          docker run -d -p 4001:4001 --name go_cicd --restart always ${{ env.DOCKER_IMAGE }}:latest
+          docker run -d -p 4001:4001 \
+          -e DATABASE_HOST=${{ env.DATABASE_HOST }} \
+          -e DATABASE_ID=${{ env.DATABASE_ID }} \
+          -e DATABASE_PASSWORD=${{ env.DATABASE_PASSWORD }} \
+          -e DATABASE_NAME=${{ env.DATABASE_NAME }} \
+          -e HOSTNAME=${{ env.HOSTNAME }} \
+          -e PORT=${{ env.PORT }} \
+          -e FEEADDRESS=${{ env.FEEADDRESS }} \
+          -e FEEPRIVATEKEY=${{ env.FEEPRIVATEKEY }} \
+          -e ORACLE_CONTRACT_ADDRESS=${{ env.ORACLE_CONTRACT_ADDRESS }} \
+          -e FACTORY_CONTRACT_ADDRESS=${{ env.FACTORY_CONTRACT_ADDRESS }} \
+          -e KAMELEON_CONTRACT_ADDRESS=${{ env.KAMELEON_CONTRACT_ADDRESS }} \
+          --name go_cicd --restart always ${{ env.DOCKER_IMAGE }}:latest

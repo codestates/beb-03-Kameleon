@@ -1,0 +1,85 @@
+{
+	"compiler": {
+		"version": "0.5.6+commit.b259423e"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [
+			{
+				"constant": false,
+				"inputs": [
+					{
+						"name": "_operator",
+						"type": "address"
+					},
+					{
+						"name": "_from",
+						"type": "address"
+					},
+					{
+						"name": "_amount",
+						"type": "uint256"
+					},
+					{
+						"name": "_data",
+						"type": "bytes"
+					}
+				],
+				"name": "onKIP7Received",
+				"outputs": [
+					{
+						"name": "",
+						"type": "bytes4"
+					}
+				],
+				"payable": false,
+				"stateMutability": "nonpayable",
+				"type": "function"
+			}
+		],
+		"devdoc": {
+			"details": "Note: the KIP-13 identifier for this interface is 0x9d188c22.\r see http://kips.klaytn.com/KIPs/kip-7-fungible_token\r",
+			"methods": {
+				"onKIP7Received(address,address,uint256,bytes)": {
+					"details": "The KIP-7 smart contract calls this function on the recipient\r after a `safeTransfer`. This function MAY throw to revert and reject the\r transfer. Return of other than the magic value MUST result in the\r transaction being reverted.\r Note: the contract address is always the message sender.\r",
+					"params": {
+						"_amount": "The token amount which is being transferred.\r",
+						"_data": "Additional data with no specified format\r",
+						"_from": "The address which previously owned the token\r",
+						"_operator": "The address which called `safeTransferFrom` function\r"
+					},
+					"return": "`bytes4(keccak256(\"onKIP7Received(address,address,uint256,bytes)\"))`\r unless throwing\r"
+				}
+			},
+			"title": "KIP-7 Fungible Token Standard, optional wallet interface\r"
+		},
+		"userdoc": {
+			"methods": {
+				"onKIP7Received(address,address,uint256,bytes)": {
+					"notice": "Handle the receipt of KIP-7 token\r"
+				}
+			}
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"contracts/IKIP7Receiver.sol": "IKIP7Receiver"
+		},
+		"evmVersion": "byzantium",
+		"libraries": {},
+		"optimizer": {
+			"enabled": false,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"contracts/IKIP7Receiver.sol": {
+			"keccak256": "0x39db8ccb5de15df30c59d7fa1691a2fd6b3e9ef27503936034f1ae2d41397d22",
+			"urls": [
+				"bzzr://2514ee9bded2a034c07eba52881d1df7a965d673ba8a5bbae5fe847cf1e24a94"
+			]
+		}
+	},
+	"version": 1
+}

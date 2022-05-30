@@ -1,6 +1,7 @@
 import { klaytnPrice } from "./bithumbSocket";
 import { stockPrice } from "./naverApi";
 import { sendContract, caver } from "./KAS";
+import { OracleAddress } from "../constants/contractAddress";
 require("dotenv").config();
 
 const updateStockPrice = async () => {
@@ -10,7 +11,7 @@ const updateStockPrice = async () => {
     const price = +klaytnPrice;
     await sendContract({
       contractName: "Oracle",
-      contractAddress: process.env.Oracle_CONTRACT_ADDRESS,
+      contractAddress: OracleAddress,
       methodName: "setOraclePrice",
       parameters: [
         result.map(({ nowValue }) => {

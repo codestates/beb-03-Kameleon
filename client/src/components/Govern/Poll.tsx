@@ -29,7 +29,6 @@ const Poll = (props: IGovernPropsType) => {
   const { isOpen, toggle } = useModal();
 
   const [yes, no] = [+agree, +disagree];
-  console.log('yes or no ', yes, no);
   const now = new Date().getTime();
   const eTime = new Date(+endTime * 1000);
 

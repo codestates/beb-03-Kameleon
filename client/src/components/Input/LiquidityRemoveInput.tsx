@@ -61,7 +61,7 @@ const LiquidityRemoveInput = ({
           setMaxBalance(Number((Number(res) / 1000000000000000000).toFixed(6)));
         })
         .catch((e) => {
-          console.log(e);
+          // console.log(e);
         });
     }
   }, [name]);

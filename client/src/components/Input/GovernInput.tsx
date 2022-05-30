@@ -66,9 +66,7 @@ const GovernInput = ({ children, pollId }: LayoutProps) => {
   };
 
   const buttonOnClickHander = async () => {
-    console.log(typeof tokenBalance);
     if (isAgree !== null) {
-      console.log(pollId, isAgree, tokenBalance);
       const result = await sendContract({
         contractName: 'Govern',
         contractAddress: contractAddressTable['Govern'],
@@ -79,7 +77,6 @@ const GovernInput = ({ children, pollId }: LayoutProps) => {
           isAgree,
         ],
       });
-      console.log(result);
 
       if (result instanceof Error === false) {
         successNotify();
