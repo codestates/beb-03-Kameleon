@@ -51,10 +51,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.getBalance = exports.sendContract = exports.callContract = exports.deployContract = exports.caver = void 0;
 var caver_js_1 = __importDefault(require("caver-js"));
 require("dotenv").config();
-// export const caver = new Caver(process.env.BAOBAB_NETWORK);
 exports.caver = new caver_js_1.default("https://api.baobab.klaytn.net:8651");
 var contractData_1 = require("./contractData");
-var deployerKeyring = exports.caver.wallet.keyring.create(process.env.feeAddress, process.env.feePrivateKey);
+var deployerKeyring = exports.caver.wallet.keyring.create(process.env.FEE_ADDRESS, process.env.FEE_PRIVATEKEY);
 exports.caver.wallet.add(deployerKeyring);
 var deployContract = function (_a) {
     var contractName = _a.contractName, _b = _a.parameters, parameters = _b === void 0 ? [] : _b;

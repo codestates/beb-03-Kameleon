@@ -2,10 +2,10 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.exchangeToKStockTokenAddressTable = exports.exchangeTable = exports.KStockTokenTable = exports.KameleonAddress = exports.kStockTokenAddress = exports.FactoryAddress = exports.OracleAddress = void 0;
 require("dotenv").config();
-exports.OracleAddress = process.env.Oracle_CONTRACT_ADDRESS;
-exports.FactoryAddress = process.env.Factory_CONTRACT_ADDRESS;
+exports.OracleAddress = process.env.ORACLE_CONTRACT_ADDRESS;
+exports.FactoryAddress = process.env.FACTORY_CONTRACT_ADDRESS;
 exports.kStockTokenAddress = process.env.KStockToken_CONTRACT_ADDRESS;
-exports.KameleonAddress = process.env.Kameleon_CONTRACT_ADDRESS;
+exports.KameleonAddress = process.env.KAMELEON_CONTRACT_ADDRESS;
 exports.KStockTokenTable = {
     kSSE: "0x58791638902535f1cfc0004453b0a09bfc50b7be",
     kLGE: "0x6727f8c740f5f3d3b58fc681fe32d3b9ec1d31df",

@@ -200,7 +200,7 @@ const getBalance = async ({ address }: { address: string }) => {
 //   contractName: "MyKIP7",
 //   contractAddress,
 //   methodName: "approve",
-//   parameters: [process.env.feeAddress, "1000000"],
+//   parameters: [process.env.FEE_ADDRESS, "1000000"],
 // });
 
 // multiMint();

@@ -1,13 +1,12 @@
 import Caver from "caver-js";
 require("dotenv").config();
-// export const caver = new Caver(process.env.BAOBAB_NETWORK);
 export const caver = new Caver("https://api.baobab.klaytn.net:8651");
 
 import { abiList, byteCodeList } from "./contractData";
 
 const deployerKeyring = caver.wallet.keyring.create(
-  process.env.feeAddress,
-  process.env.feePrivateKey
+  process.env.FEE_ADDRESS,
+  process.env.FEE_PRIVATEKEY
 );
 caver.wallet.add(deployerKeyring);
 
@@ -149,7 +148,7 @@ const getBalance = async ({ address }: { address: string }) => {
 //   contractName: "MyKIP7",
 //   contractAddress,
 //   methodName: "approve",
-//   parameters: [process.env.feeAddress, "1000000"],
+//   parameters: [process.env.FEE_ADDRESS, "1000000"],
 // });
 
 // multiMint();

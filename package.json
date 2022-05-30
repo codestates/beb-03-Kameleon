@@ -4,7 +4,9 @@
   "description": "![m-logo.png](./image/m-logo.png)",
   "main": "index.js",
   "scripts": {
-    "heroku": "git subtree push --prefix server heroku master"
+    "heroku": "git subtree push --prefix server heroku master",
+    "dockerBuild": "docker build . -t kameleon",
+    "dockerRun": "docker run -p 7777:4001 -t kameleon"
   },
   "repository": {
     "type": "git",
