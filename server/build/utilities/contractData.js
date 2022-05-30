@@ -12,7 +12,7 @@ var path_1 = __importDefault(require("path"));
 //     : "./../../contract/contracts/artifacts";
 var contractPath = process.env.NODE_ENV === "production"
     ? "./../../contracts/artifacts"
-    : "./../contract/contracts/artifacts";
+    : "./../contracts/artifacts";
 var abiList = {};
 exports.abiList = abiList;
 var byteCodeList = {};
