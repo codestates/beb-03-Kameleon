@@ -2,7 +2,7 @@ name: CI/CD Docker
 
 on:
   push:
-    branches: [main]
+    branches: [deploy]
 
 env:
   DOCKER_IMAGE: ghcr.io/${{ github.actor }}/kameleonserver
@@ -27,7 +27,6 @@ jobs:
     steps:
       - name: Check out source code
         uses: actions/checkout@v2
-      - run: ls
       - name: Set up docker buildx
         id: buildx
         uses: docker/setup-buildx-action@v1
