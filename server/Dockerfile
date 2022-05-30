@@ -14,4 +14,7 @@ EXPOSE 4001
 
 #컨테이너가 켜지자마자 실행할 명령어 
 #npm start : package.json의 scripts에 있는 start 명령어를 실행
-CMD ["npm", "start"]
+
+RUN npm install pm2 -g
+
+CMD ["npm", "startPro"]

@@ -4,7 +4,6 @@ import {
 } from "./../types/utilities/interfaceInterestCalculator";
 import {
   FactoryAddress,
-  kStockTokenAddress,
   exchangeToKStockTokenAddressTable,
 } from "../constants/contractAddress";
 import { callContract, getBalance } from "./KAS";

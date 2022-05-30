@@ -2,7 +2,6 @@ require("dotenv").config();
 
 export const OracleAddress = process.env.ORACLE_CONTRACT_ADDRESS;
 export const FactoryAddress = process.env.FACTORY_CONTRACT_ADDRESS;
-export const kStockTokenAddress = process.env.KStockToken_CONTRACT_ADDRESS;
 export const KameleonAddress = process.env.KAMELEON_CONTRACT_ADDRESS;
 
 export const KStockTokenTable = {

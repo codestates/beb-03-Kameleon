@@ -13,8 +13,8 @@ env:
   DATABASE_NAME: ${{ secrets.DATABASE_NAME }}
   HOSTNAME: ${{ secrets.HOSTNAME }}
   PORT: ${{ secrets.PORT }}
-  FEEADDRESS: ${{ secrets.FEEADDRESS }}
-  FEEPRIVATEKEY: ${{ secrets.FEEPRIVATEKEY }}
+  FEE_ADDRESS: ${{ secrets.FEE_ADDRESS }}
+  FEE_PRIVATEKEY: ${{ secrets.FEE_PRIVATEKEY }}
   ORACLE_CONTRACT_ADDRESS: ${{ secrets.ORACLE_CONTRACT_ADDRESS }}
   FACTORY_CONTRACT_ADDRESS: ${{ secrets.FACTORY_CONTRACT_ADDRESS }}
   KAMELEON_CONTRACT_ADDRESS: ${{ secrets.KAMELEON_CONTRACT_ADDRESS }}
@@ -73,8 +73,8 @@ jobs:
           -e DATABASE_NAME=${{ env.DATABASE_NAME }} \
           -e HOSTNAME=${{ env.HOSTNAME }} \
           -e PORT=${{ env.PORT }} \
-          -e FEEADDRESS=${{ env.FEEADDRESS }} \
-          -e FEEPRIVATEKEY=${{ env.FEEPRIVATEKEY }} \
+          -e FEE_ADDRESS=${{ env.FEE_ADDRESS }} \
+          -e FEE_PRIVATEKEY=${{ env.FEE_PRIVATEKEY }} \
           -e ORACLE_CONTRACT_ADDRESS=${{ env.ORACLE_CONTRACT_ADDRESS }} \
           -e FACTORY_CONTRACT_ADDRESS=${{ env.FACTORY_CONTRACT_ADDRESS }} \
           -e KAMELEON_CONTRACT_ADDRESS=${{ env.KAMELEON_CONTRACT_ADDRESS }} \
