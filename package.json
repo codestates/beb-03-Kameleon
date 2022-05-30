@@ -6,7 +6,8 @@
   "scripts": {
     "heroku": "git subtree push --prefix server heroku master",
     "dockerBuild": "docker build . -t kameleon",
-    "dockerRun": "docker run -p 7777:4001 -t kameleon"
+    "dockerRun": "docker run -p 7777:4001 -t kameleon",
+    "build": "cd server && yarn build && cd ./../client && yarn build:pro",
   },
   "repository": {
     "type": "git",
