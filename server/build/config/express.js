@@ -31,7 +31,7 @@ var server = (0, express_1.default)();
 //     }));
 // }
 server.use((0, cors_1.default)({
-    origin: "http://localhost:3000",
+    origin: ["https://kameleon.site", "http://localhost:3000"],
     credentials: true,
 }));
 // const swaggerSpec = swaggerJsdoc(options);
