@@ -10,7 +10,7 @@
     "dev": "cross-env NODE_ENV=development nodemon",
     "build": "cross-env NODE_ENV=production tsc --project tsconfig.json",
     "start": "cross-env NODE_ENV=production node ./build/index.js",
-    "startPro": "cross-env NODE_ENV=production pm2 start ./build/index.js",
+    "startPro": "cross-env NODE_ENV=production pm2-runtime start ./build/index.js",
     "startProDev": "cross-env NODE_ENV=production NODE_ENV_DEV=true nodemon ./index.ts",
     "pro": "cross-env NODE_ENV=production tsc --project tsconfig.json && cross-env NODE_ENV=production node ./dist/index.js",
     "typeorm": "ts-node ./node_modules/typeorm/cli.js",

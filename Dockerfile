@@ -13,4 +13,6 @@ ENV PORT 4001
 
 EXPOSE $PORT
 
-CMD ["yarn", "start"]
+RUN yarn add pm2 -g
+
+CMD ["yarn", "startPro"]
