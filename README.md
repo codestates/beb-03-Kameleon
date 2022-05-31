@@ -194,6 +194,7 @@
   <img src="https://img.shields.io/badge/NGINX-009639?style=flat-square&logo=NGINX&logoColor=white"/></a>&nbsp 
   <img src="https://img.shields.io/badge/Amazon EC2-232F3E?style=flat-square&logo=AmazonAWS&logoColor=white"/></a>&nbsp 
   <img src="https://img.shields.io/badge/Docker-2496ED?style=flat-square&logo=Docker&logoColor=white"/></a>&nbsp 
+  <img src="https://img.shields.io/badge/PM2-2B037A?style=flat-square&logo=PM2&logoColor=white"/></a>&nbsp 
 </p>
 
 ### 🔗 [Mock Design](https://www.figma.com/file/25M4bMybMBN3HawiXaiy9h/kameleon?node-id=0%3A1)
