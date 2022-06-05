@@ -50,7 +50,7 @@ const Animation = () => {
         }}
       >
         <Suspense fallback={<div>Loading...</div>}>
-          <Routes location={displayLocation}></Routes>
+          <Routes location={displayLocation}>
             <Route path="/" element={<MainPage />} />
             <Route path="/swap" element={<SwapPage />} />
             <Route path="/swap/:token" element={<SwapPage />} />
@@ -62,7 +62,6 @@ const Animation = () => {
           </Routes>
         </Suspense>
       </div>
-
       {/* <ToastContainer icon={false} /> */}
     </>
   );
