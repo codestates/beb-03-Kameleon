@@ -5,7 +5,7 @@
     "static/css/2.ee464a27.chunk.css": "/static/css/2.ee464a27.chunk.css",
     "static/js/2.2888d211.chunk.js": "/static/js/2.2888d211.chunk.js",
     "static/js/3.c3b7d5c4.chunk.js": "/static/js/3.c3b7d5c4.chunk.js",
-    "main.js": "/static/js/main.57c32c48.chunk.js",
+    "main.js": "/static/js/main.5ecfd345.chunk.js",
     "runtime-main.js": "/static/js/runtime-main.297d3f52.js",
     "static/js/6.e38fb527.chunk.js": "/static/js/6.e38fb527.chunk.js",
     "static/js/7.e618b61b.chunk.js": "/static/js/7.e618b61b.chunk.js",
@@ -26,7 +26,7 @@
     "static/media/Line.ead42e53.svg": "/static/media/Line.ead42e53.svg",
     "static/media/Mosquito.580b85c9.svg": "/static/media/Mosquito.580b85c9.svg",
     "static/media/backgroundKameleon.e69351d9.svg": "/static/media/backgroundKameleon.e69351d9.svg",
-    "static/media/bg.0d4a9f2d.jpg": "/static/media/bg.0d4a9f2d.jpg",
+    "static/media/bg-min.bdae9f90.jpg": "/static/media/bg-min.bdae9f90.jpg",
     "static/media/logo.9deaebdb.png": "/static/media/logo.9deaebdb.png",
     "static/media/m-logo.8eefb56c.png": "/static/media/m-logo.8eefb56c.png",
     "static/media/snake2.fa63d762.svg": "/static/media/snake2.fa63d762.svg"
@@ -34,6 +34,6 @@
   "entrypoints": [
     "static/js/runtime-main.297d3f52.js",
     "static/js/6.e38fb527.chunk.js",
-    "static/js/main.57c32c48.chunk.js"
+    "static/js/main.5ecfd345.chunk.js"
   ]
 }

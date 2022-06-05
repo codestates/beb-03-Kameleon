@@ -1,6 +1,6 @@
 import { createGlobalStyle } from 'styled-components';
 import styled from 'styled-components';
-import bgImage from './assets/images/bg.jpg';
+import bgImage from './assets/images/bg-min.jpg';
 
 export const GlobalStyle = createGlobalStyle`
   :root {
