@@ -1,11 +1,27 @@
 {
   "files": {
-    "main.js": "/static/js/main.06a1bf56.chunk.js",
-    "runtime-main.js": "/static/js/runtime-main.7451b9a1.js",
-    "static/css/2.c539fbc3.chunk.css": "/static/css/2.c539fbc3.chunk.css",
-    "static/js/2.1f05f526.chunk.js": "/static/js/2.1f05f526.chunk.js",
+    "static/js/0.9a44fd21.chunk.js": "/static/js/0.9a44fd21.chunk.js",
+    "static/js/1.ac7652df.chunk.js": "/static/js/1.ac7652df.chunk.js",
+    "static/css/2.ee464a27.chunk.css": "/static/css/2.ee464a27.chunk.css",
+    "static/js/2.2888d211.chunk.js": "/static/js/2.2888d211.chunk.js",
+    "static/js/3.c3b7d5c4.chunk.js": "/static/js/3.c3b7d5c4.chunk.js",
+    "main.js": "/static/js/main.57c32c48.chunk.js",
+    "runtime-main.js": "/static/js/runtime-main.297d3f52.js",
+    "static/js/6.e38fb527.chunk.js": "/static/js/6.e38fb527.chunk.js",
+    "static/js/7.e618b61b.chunk.js": "/static/js/7.e618b61b.chunk.js",
+    "static/css/8.c53404ae.chunk.css": "/static/css/8.c53404ae.chunk.css",
+    "static/js/8.b6360d2b.chunk.js": "/static/js/8.b6360d2b.chunk.js",
+    "static/js/9.4b6376be.chunk.js": "/static/js/9.4b6376be.chunk.js",
+    "static/js/10.ad591535.chunk.js": "/static/js/10.ad591535.chunk.js",
+    "static/js/11.dc44b54c.chunk.js": "/static/js/11.dc44b54c.chunk.js",
+    "static/js/12.f4e5aa53.chunk.js": "/static/js/12.f4e5aa53.chunk.js",
+    "static/js/13.069b826c.chunk.js": "/static/js/13.069b826c.chunk.js",
+    "static/js/14.2a86b937.chunk.js": "/static/js/14.2a86b937.chunk.js",
     "index.html": "/index.html",
-    "static/js/2.1f05f526.chunk.js.LICENSE.txt": "/static/js/2.1f05f526.chunk.js.LICENSE.txt",
+    "static/js/0.9a44fd21.chunk.js.LICENSE.txt": "/static/js/0.9a44fd21.chunk.js.LICENSE.txt",
+    "static/js/12.f4e5aa53.chunk.js.LICENSE.txt": "/static/js/12.f4e5aa53.chunk.js.LICENSE.txt",
+    "static/js/3.c3b7d5c4.chunk.js.LICENSE.txt": "/static/js/3.c3b7d5c4.chunk.js.LICENSE.txt",
+    "static/js/6.e38fb527.chunk.js.LICENSE.txt": "/static/js/6.e38fb527.chunk.js.LICENSE.txt",
     "static/media/Kameleon.acabd1a0.svg": "/static/media/Kameleon.acabd1a0.svg",
     "static/media/Line.ead42e53.svg": "/static/media/Line.ead42e53.svg",
     "static/media/Mosquito.580b85c9.svg": "/static/media/Mosquito.580b85c9.svg",
@@ -16,9 +32,8 @@
     "static/media/snake2.fa63d762.svg": "/static/media/snake2.fa63d762.svg"
   },
   "entrypoints": [
-    "static/js/runtime-main.7451b9a1.js",
-    "static/css/2.c539fbc3.chunk.css",
-    "static/js/2.1f05f526.chunk.js",
-    "static/js/main.06a1bf56.chunk.js"
+    "static/js/runtime-main.297d3f52.js",
+    "static/js/6.e38fb527.chunk.js",
+    "static/js/main.57c32c48.chunk.js"
   ]
 }
