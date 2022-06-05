@@ -186,8 +186,8 @@ const SwapPage = () => {
         const changeTokenA = await amountKlay(tokenName, tokenBalance);
         const changeKlay: string = await amountToken(nameB, changeTokenA);
         setTokenBalanceB((+changeKlay / 10 ** 18).toString());
-        const approvedA = await callIsApproved({ stockName: tokenName });
-        const approvedB = await callIsApproved({ stockName: nameB });
+        await callIsApproved({ stockName: tokenName });
+        await callIsApproved({ stockName: nameB });
 
         // console.log('approvedA :', approvedA);
         // console.log('approvedB :', approvedB);

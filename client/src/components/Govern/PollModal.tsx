@@ -6,7 +6,6 @@ import 'moment/locale/ko';
 import 'react-toastify/dist/ReactToastify.css';
 import { GovernPageModalContent } from '../../pages/styles/GovernPage.styles';
 
-import ToastPortal from '../portal/ToastPortal';
 import GovernInput from '../Input/GovernInput';
 import DoughnutChart from '../Chart/DoughnutChart';
 
@@ -26,7 +25,7 @@ const PollModal = ({
   endTime,
   expired,
 }: IGovernPropsType) => {
-  const [yes, no] = [+agree, +disagree];
+  // const [yes, no] = [+agree, +disagree];
   const now = new Date().getTime();
   const successNotify = () => toast.success('SUCCESS!!!');
   const failNotify = () => toast.error('FAIL!!!');

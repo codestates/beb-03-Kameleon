@@ -1,10 +1,5 @@
 import React, { useEffect } from 'react';
-import Styled from 'styled-components';
 import Parallax from 'parallax-js';
-
-import tree1 from './../../assets/tree1.svg';
-import tree2 from './../../assets/tree2.svg';
-import snake1 from './../../assets/snake1.svg';
 import snake2 from './../../assets/snake2.svg';
 import backgroundKameleon from './../../assets/backgroundKameleon.svg';
 import kameleon from './../../assets/Kameleon.svg';

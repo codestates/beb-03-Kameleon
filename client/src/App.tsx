@@ -6,20 +6,11 @@ import {
   useLocation,
   Location,
 } from 'react-router-dom';
-import { ToastContainer } from 'react-toastify';
 import { GlobalStyle, AppStyle, MainStyle } from './GlobalStyle';
 import Header from './components/common/Header';
 import Footer from './components/common/Footer';
 import ParallaxContainer from './components/Parallax/ParallaxContainer';
 
-// import SwapPage from './pages/SwapPage';
-// import MainPage from './pages/MainPage';
-// import PoolPage from './pages/PoolPage';
-// import LiquidityPage from './pages/LiquidityPage';
-// import MintPage from './pages/MintPage';
-// import MyPage from './pages/MyPage';
-// import GovernPage from './pages/GovernPage';
-// const Home = lazy(() => import('./routes/Home'));
 const SwapPage = lazy(() => import('./pages/SwapPage'));
 const MainPage = lazy(() => import('./pages/MainPage'));
 const PoolPage = lazy(() => import('./pages/PoolPage'));
@@ -62,7 +53,6 @@ const Animation = () => {
           </Routes>
         </Suspense>
       </div>
-      {/* <ToastContainer icon={false} /> */}
     </>
   );
 };
